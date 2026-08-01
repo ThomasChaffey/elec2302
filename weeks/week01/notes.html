@@ -102,7 +102,7 @@ window.Quarto = {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -134,6 +134,12 @@ window.Quarto = {
  <span class="menu-text">Home</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 1 formula sheet</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -162,18 +168,7 @@ window.Quarto = {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul class="collapse">
-  <li><a href="#a-the-exponential-function" id="toc-a-the-exponential-function" class="nav-link active" data-scroll-target="#a-the-exponential-function">(a) The exponential function</a></li>
-  <li><a href="#b-eulers-formula" id="toc-b-eulers-formula" class="nav-link" data-scroll-target="#b-eulers-formula">(b) Euler’s formula</a></li>
-  <li><a href="#c-eulers-formula-differential-equations" id="toc-c-eulers-formula-differential-equations" class="nav-link" data-scroll-target="#c-eulers-formula-differential-equations">(c) Euler’s formula &amp; differential equations</a></li>
-  <li><a href="#d-what-has-this-got-to-do-with-electrical-engineering" id="toc-d-what-has-this-got-to-do-with-electrical-engineering" class="nav-link" data-scroll-target="#d-what-has-this-got-to-do-with-electrical-engineering">(d) What has this got to do with electrical engineering?</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -214,7 +209,7 @@ window.Quarto = {
 </span></p>
 <p>Combining the two properties:</p>
 <p><span class="math display"> \boxed{\,f(z) = f'(z), \qquad f(0) = 1\,} </span></p>
-<p>Turns out <span class="math inline">f(z) = e^{z}</span> is the unique solution to this differential equation (it is an alternative definition).</p>
+<p>It turns out <span class="math inline">f(z) = e^{z}</span> is the unique solution to this differential equation, and in fact the differential equation can be used as an alternative definition.</p>
 <p><strong>Extension of (2).</strong> By the chain rule,</p>
 <p><span class="math display">
 \frac{\mathrm{d}}{\mathrm{d}t}\,e^{zt}
@@ -224,7 +219,7 @@ window.Quarto = {
 </section>
 <section id="b-eulers-formula" class="level2">
 <h2 class="anchored" data-anchor-id="b-eulers-formula">(b) Euler’s formula</h2>
-<p>Why: let’s now represent sinusoids as complex numbers. Let</p>
+<p>Let’s now represent sinusoids as complex numbers. Let</p>
 <p><span class="math display"> g(\theta) = \frac{\cos\theta + j\sin\theta}{e^{j\theta}} . </span></p>
 <p>Then</p>
 <p><span class="math display">
@@ -246,7 +241,7 @@ g'(\theta)
 <p>In particular: <span class="math inline">\;e^{j\pi/2} = j, \qquad e^{j\pi} = -1.</span></p>
 <section id="manipulating-sinusoids-using-complex-numbers" class="level3">
 <h3 class="anchored" data-anchor-id="manipulating-sinusoids-using-complex-numbers">Manipulating sinusoids using complex numbers</h3>
-<p>Why use complex numbers to represent sinusoids? It makes the algebra easier. For example,</p>
+<p>Why use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,</p>
 <p><span class="math display"> x_1(t) = 3\cos\omega t, \qquad x_2(t) = 4\cos\!\big(\omega t + \tfrac{\pi}{2}\big),
    \qquad x_1(t) + x_2(t) = \;? </span></p>
 <p>The direct way uses the identity <span class="math inline">\cos(\theta + \tfrac{\pi}{2}) = -\sin\theta</span>, so <span class="math inline">x_2(t) = -4\sin\omega t</span>, giving</p>
@@ -267,7 +262,7 @@ x_1(t) + x_2(t)
 \end{aligned}
 </span></p>
 <div id="w-sum" class="widget"></div>
-<p>The triangle <span class="math inline">3 + 4j = 5\angle 53.1^{\circ}</span> simply rotates — that is the sum.</p>
+<p>The triangle <span class="math inline">3 + 4j = 5\angle 53.1^{\circ}</span> rotates.</p>
 </section>
 </section>
 <section id="c-eulers-formula-differential-equations" class="level2">
@@ -400,7 +395,7 @@ V e^{j\omega t}
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/ThomasChaffey\.github\.io\/elec2302\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }

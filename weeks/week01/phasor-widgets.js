@@ -301,7 +301,11 @@
     }
     function drawW() {
       gw.clearRect(0, 0, Ww, H);
-      const cy = H / 2, amp = H / 2 - 20, x0 = 30, span = Ww - 40;
+      // reserve a band at the top for the two curve labels and one at the bottom for
+      // the readout, so neither can land on the waveforms
+      const topPad = 48, botPad = 50;
+      const cy = (topPad + (H - botPad)) / 2, amp = (H - topPad - botPad) / 2;
+      const x0 = 30, span = Ww - 40;
       axes(gw, x0, cy, x0 - 6, x0 + span + 6, cy - amp - 8, cy + amp + 8, "\u03C9t", "");
       // v(t)=cos(ωt) navy ; i(t)=cos(ωt-∠Z) normalised (amplitude shown as text)
       for (const [ph, col, lw] of [[0, NAVY, 2.4], [-Zang(), OUT, 2.4]]) {
@@ -313,13 +317,15 @@
         }
         gw.stroke();
       }
+      // legend sits in the reserved top band, above the plot area
       gw.font = "13px Arial";
-      gw.fillStyle = NAVY; gw.fillText("v(t) = V cos \u03C9t", x0 + 6, cy - amp + 2);
-      gw.fillStyle = OUT; gw.fillText("i(t) = (V/|Z|) cos(\u03C9t \u2212 \u2220Z)", x0 + 6, cy - amp + 20);
+      gw.fillStyle = NAVY; gw.fillText("v(t) = V cos \u03C9t", x0, 16);
+      gw.fillStyle = OUT; gw.fillText("i(t) = (V/|Z|) cos(\u03C9t \u2212 \u2220Z)", x0, 34);
+      // readout sits in the reserved bottom band
       gw.fillStyle = INK;
-      gw.fillText("|Z| = " + Zmag().toFixed(1) + "   \u2220Z = " + Zang().toFixed(3) + " rad", x0 + 6, cy + amp + 4);
+      gw.fillText("|Z| = " + Zmag().toFixed(1) + "   \u2220Z = " + Zang().toFixed(3) + " rad", x0, H - 26);
       gw.fillStyle = "#666"; gw.font = "12px Arial";
-      gw.fillText("(waveforms normalised; true output amplitude = V/|Z|)", x0 + 6, cy + amp + 22);
+      gw.fillText("(waveforms normalised; true output amplitude = V/|Z|)", x0, H - 8);
     }
     function redraw() { drawP(); drawW(); }
     // reactance slider
