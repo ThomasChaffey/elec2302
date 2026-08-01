@@ -15,7 +15,7 @@
     "href": "weeks/week01/slides.html#classes",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Classes",
-    "text": "Classes\nLecture — two hours a week, Monday 15:00-17:00. Typeset notes go up a couple of days before.\nTutorials — two hours, Weeks 2–13. Ten tutorials (two weeks are labs). This is where every quiz happens.\nLabs — two practicals on the TIMS hardware, in Weeks 6 and 8 for half the tutorial groups and Weeks 7 and 9 for the other half. Attendance is mandatory.\n\nTimes, rooms and which lab weeks apply to you are on your timetable. There is no tutorial in Week 1.",
+    "text": "Classes\nLecture — two hours a week, Monday 15:00-17:00. Typeset notes go up a couple of days before.\nTutorials — two hours, Weeks 2–13. Ten tutorials (two weeks are labs). This is where the quizzes happen.\nLabs — two practicals on the TIMS hardware, in Weeks 6 and 8 for half the tutorial groups and Weeks 7 and 9 for the other half. Attendance is mandatory.\n\nTimes, rooms and which lab weeks apply to you are on your timetable. There is no tutorial in Week 1.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -26,7 +26,7 @@
     "href": "weeks/week01/slides.html#assessment",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Assessment",
-    "text": "Assessment\n\n\n\n\n\n\n\n\nComponent\nWeight\nWhen\n\n\n\n\nTutorial prework\n4%\nWeekly, from Week 2\n\n\nQuiz 1\n10%\nWeek 4 tutorial + two more attempts\n\n\nQuiz 2\n15%\nWeek 8 or 9 tutorial + two more attempts\n\n\nQuiz 3\n15%\nWeek 12 tutorial + one more attempt\n\n\nLab 1 milestones\n3%\nIn your lab\n\n\nLab 2 milestones\n3%\nIn your lab\n\n\nFinal exam\n50%\nFormal exam period\n\n\nBonus extension quizzes\n+5%\nafter quiz 2 and quiz 3 if you have an HD",
+    "text": "Assessment\n\n\n\n\n\n\n\n\nComponent\nWeight\nWhen\n\n\n\n\nTutorial prework\n4%\nWeekly, from Week 2\n\n\nQuiz 1\n10%\nWeek 4 tutorial + two more attempts\n\n\nQuiz 2\n15%\nWeek 8 or 9 tutorial + two more attempts\n\n\nQuiz 3\n15%\nWeek 12 tutorial + one more attempt\n\n\nLab 1 milestones\n3%\nIn your lab\n\n\nLab 2 milestones\n3%\nIn your lab\n\n\nFinal exam\n50%\nFormal exam period\n\n\nBonus extension quizzes\n+2.5% each\nafter quiz 2 and quiz 3 if you have an HD",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -48,7 +48,7 @@
     "href": "weeks/week01/slides.html#the-quizzes-are-hurdles",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "The quizzes are hurdles",
-    "text": "The quizzes are hurdles\nThree quizzes, each 30 minutes, in your tutorial.\n\nYou need 70% in each quiz to pass the unit.\n\n\nMore than one attempt at every quiz: three at Quizzes 1 and 2, two at Quiz 3.\nEach attempt is in a later tutorial, and your best mark is the one that counts.\nThe questions change between attempts but test the same material. You cannot look up last week’s answers.\n\n\nThe bar is high because you get more than one go at it. Needing a second attempt is normal — it is how these are designed to work, not a sign that you are behind.\n\n\nAn HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 5% top up marks.",
+    "text": "The quizzes are hurdles\nThree quizzes, each 30 minutes, in your tutorial.\n\nYou need 70% in each quiz to pass the unit.\n\n\nMore than one attempt at every quiz: three at Quizzes 1 and 2, two at Quiz 3.\nEach attempt is in a later tutorial, and your best mark is the one that counts.\nThe questions change between attempts but test the same material. You cannot look up last week’s answers.\n\n\nThe bar is high because you get more than one go at it. Needing a second attempt is normal!\n\n\nAn HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 2.5% top up marks (per quiz).",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -59,18 +59,18 @@
     "href": "weeks/week01/slides.html#when-your-quizzes-happen",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "When your quizzes happen",
-    "text": "When your quizzes happen\nQuizzes run in tutorials, so your attempts land in the weeks you have a tutorial rather than a lab. One rule covers all of it: your attempts are in your next tutorials.\n\n\nIf your labs are Weeks 6 and 8\n\nQuiz 1 — Weeks 4, 5, 7\nQuiz 2 — Weeks 9, 10, 11\nQuiz 3 — Weeks 12, 13\n\n\n\nIf your labs are Weeks 7 and 9\n\nQuiz 1 — Weeks 4, 5, 6\nQuiz 2 — Weeks 8, 10, 11\nQuiz 3 — Weeks 12, 13\n\n\n\n\nSome groups sit a quiz a week before others. Different groups get different versions, and every group gets the same number of attempts, so nobody is advantaged by the timetable. Your weeks are on your timetable — check them now.",
+    "text": "When your quizzes happen\nQuizzes run in tutorials. Your attempts are in your next tutorials, so if you have a lab, your quiz will be the week after.\n\n\nIf your labs are Weeks 6 and 8\n\nQuiz 1 — Weeks 4, 5, 7\nQuiz 2 — Weeks 9, 10, 11\nQuiz 3 — Weeks 12, 13\n\n\n\nIf your labs are Weeks 7 and 9\n\nQuiz 1 — Weeks 4, 5, 6\nQuiz 2 — Weeks 8, 10, 11\nQuiz 3 — Weeks 12, 13\n\n\n\n\nSome groups sit a quiz a week before others. Different groups get different versions, and every group gets the same number of attempts, so nobody is advantaged by the timetable. Your weeks are on your timetable.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
     ]
   },
   {
-    "objectID": "weeks/week01/slides.html#what-a-quiz-looks-like",
-    "href": "weeks/week01/slides.html#what-a-quiz-looks-like",
+    "objectID": "weeks/week01/slides.html#what-the-quizzes-look-like",
+    "href": "weeks/week01/slides.html#what-the-quizzes-look-like",
     "title": "ELEC2302/9302: Signals and Systems",
-    "section": "What a quiz looks like",
-    "text": "What a quiz looks like\nOn Canvas, locked-down browser\n\nShort numeric answers — calculations\nMultiple choice — concepts and reasoning\n\nYou get a formula sheet and can use a calculator. The formula sheet is on Canvas.",
+    "section": "What the quizzes look like",
+    "text": "What the quizzes look like\nOn Canvas, locked-down browser\n\nShort numeric answers — calculations\nMultiple choice — concepts and reasoning\n\nYou get a formula sheet and can use a calculator. The formula sheet is on Canvas.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -81,7 +81,7 @@
     "href": "weeks/week01/slides.html#where-to-find-help",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Where to find help",
-    "text": "Where to find help\nMe — straight after this lecture, and in office hours (email me to make an appointment: thomas.chaffey@sydney.edu.au).\nYour tutors — in tutorials and labs. They see your work every week and they are the fastest route to an answer.\nEd Discussion — ask and answer! Teaching staff will attempt to answer unanswered questions within a day.\nCanvas — notes, prework, quiz details, everything administrative.\n\nAsk early! This course builds: a gap in Week 3 is still a gap in Week 11.",
+    "text": "Where to find help\nMe — straight after this lecture, and in office hours (email me to make an appointment: thomas.chaffey@sydney.edu.au).\nYour tutors — in tutorials and labs. They see your work every week and they are the fastest route to an answer.\nEd Discussion — ask and answer! Teaching staff will attempt to answer unanswered questions within a day.\nCanvas — notes, prework, quiz details, everything administrative.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -158,29 +158,29 @@
     "href": "weeks/week01/slides.html#example-5-positioning-a-silicon-wafer",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Example 5: positioning a silicon wafer",
-    "text": "Example 5: positioning a silicon wafer\n\n\n\nA lithography machine prints circuit patterns onto a wafer that is being moved underneath the optics. The stage has to follow its trajectory to within nanometres while accelerating hard, so the position is measured continuously and fed back to the motors.\nSignals — the measured stage position, and the torque commanded to the motors. System — the wafer stage being positioned.\n\nCutaway of an extreme-ultraviolet lithography system. Image: ASML.",
+    "text": "Example 5: positioning a silicon wafer\n\n\n\nA lithography machine prints circuit patterns onto a wafer that is being moved underneath the optics. The stage has to follow its trajectory to within nanometres while accelerating hard to maximise throughput.\nSignals — the measured stage position, and the torque commanded to the motors. System — the wafer stage being positioned.\n\nCutaway of an extreme-ultraviolet lithography system. Image: ASML.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
     ]
   },
   {
-    "objectID": "weeks/week01/slides.html#example-6-the-fft-in-your-pocket",
-    "href": "weeks/week01/slides.html#example-6-the-fft-in-your-pocket",
+    "objectID": "weeks/week01/slides.html#example-6-the-fft-is-everywhere",
+    "href": "weeks/week01/slides.html#example-6-the-fft-is-everywhere",
     "title": "ELEC2302/9302: Signals and Systems",
-    "section": "Example 6: the FFT in your pocket",
-    "text": "Example 6: the FFT in your pocket\n\n\n\nWi-Fi and 5G do not use the Fourier transform because it is convenient. The standards define the transmitted signal as a sum of complex exponentials — an inverse Fourier transform.\nSo every phone ships an FFT engine in silicon. In Wi-Fi it runs a 64-point transform every 4 µs: a quarter of a million transforms a second, whenever the radio is on.\n\nLTE-FFT IP core, AMD. Waveform defined in IEEE Std 802.11a-1999 §17.3.5.9 and 3GPP TS 36.211 §6.12.",
+    "section": "Example 6: the FFT is everywhere!",
+    "text": "Example 6: the FFT is everywhere!\n\n\n\nWi-Fi and 5G rely on specialised chips that compute the Fast Fourier Transform of every incoming and outgoing signal. In Wi-Fi, a 64-point transform runs every 4 µs: a quarter of a million transforms a second.\n\nLTE-FFT IP core, AMD. Waveform defined in IEEE Std 802.11a-1999 §17.3.5.9 and 3GPP TS 36.211 §6.12.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
     ]
   },
   {
-    "objectID": "weeks/week01/slides.html#example-7-convolution-in-silicon",
-    "href": "weeks/week01/slides.html#example-7-convolution-in-silicon",
+    "objectID": "weeks/week01/slides.html#example-7-convolution-for-machine-learning",
+    "href": "weeks/week01/slides.html#example-7-convolution-for-machine-learning",
     "title": "ELEC2302/9302: Signals and Systems",
-    "section": "Example 7: convolution in silicon",
-    "text": "Example 7: convolution in silicon\n\n\n\nA neural network built from memristor crossbars. The convolution is not computed by a processor: it happens in the array itself, by Ohm’s law and Kirchhoff’s current law.\nTwo orders of magnitude more energy-efficient than a GPU.\n\nYao, P., Wu, H., Gao, B., Tang, J., Zhang, Q., Zhang, W., Yang, J. J., & Qian, H. (2020). Fully hardware-implemented memristor convolutional neural network. Nature, 577, 641–646.",
+    "section": "Example 7: convolution for machine learning",
+    "text": "Example 7: convolution for machine learning\n\n\n\nA neural network built from memristor crossbars. The convolution (an operation we will learn in Week 3) is the foundation of Convolutional Neural Networks. The figure shows an experimental design for computing the convolution in the array itself, by Ohm’s law and Kirchhoff’s current law. This is two orders of magnitude more energy-efficient than a GPU.\n\nYao, P., Wu, H., Gao, B., Tang, J., Zhang, Q., Zhang, W., Yang, J. J., & Qian, H. (2020). Fully hardware-implemented memristor convolutional neural network. Nature, 577, 641–646.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -299,7 +299,7 @@
     "href": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
     "title": "Week 1 — Lecture notes",
     "section": "(d) What has this got to do with electrical engineering?",
-    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit (drawn with circuitikz).\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t}.\n\\end{aligned}\n\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nDrag the reactance to watch the input and output phasors and waveforms:\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
+    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit.\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t}.\n\\end{aligned}\n\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nDrag the reactance to watch the input and output phasors and waveforms:\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
     "crumbs": [
       "Week 1 — Introduction",
       "Notes"
