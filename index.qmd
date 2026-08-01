@@ -1,11 +1,10 @@
 ---
-title: "ELEC2302 / 9302 — Signals and Systems"
+title: "ELEC2302/9302 — Signals and Systems"
 subtitle: "Semester 2, 2026"
 toc: false
 ---
 
-Lecture notes, tutorials and lab sheets for ELEC2302/9302: Signals and Systems. Notes will be up a couple of days
-before each lecture.
+Lecture notes, tutorials and lab sheets will be posted here each week.
 
 ## Lectures
 

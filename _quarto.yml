@@ -8,8 +8,8 @@ project:
     - "weeks/*.pdf"
 
 website:
-  title: "ELEC2302/9302"
-  description: "Signals and Systems: lecture notes"
+  title: ""
+  description: "ELEC2302/9302 Signals and Systems: lecture notes"
   page-navigation: true
   search: false
   sidebar:
@@ -30,7 +30,7 @@ website:
         href: weeks/formula-sheet.pdf
         target: _blank
   page-footer:
-    center: "ELEC2302/9302 Signals and Systems · School of Electrical and Computer Engineering, University of Sydney"
+    center: "Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney"
 
 format:
   html:
