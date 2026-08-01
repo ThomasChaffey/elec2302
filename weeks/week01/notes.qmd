@@ -4,8 +4,7 @@ subtitle: "The core: exponentials, Euler's formula and the complex plane"
 ---
 
 Signals &amp; Systems lives at the intersection of **differential equations**, **linear
-algebra**, **complex numbers** and **trigonometry**. This lecture revises the core of
-that intersection — the material everything else is built on.
+algebra**, **complex numbers** and **trigonometry**.
 
 ## (a) The exponential function
 
