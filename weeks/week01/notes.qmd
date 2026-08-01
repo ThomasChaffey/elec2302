@@ -144,7 +144,7 @@ The position of $z$ determines the behaviour: oscillations, decay, growth.
 Example: an RLC circuit (the **system**) with a sinusoidal voltage input (the **signal**).
 
 ::: {style="text-align:center"}
-![Series RLC circuit (drawn with circuitikz).](circuit-rlc.svg){width=540}
+![Series RLC circuit.](circuit-rlc.svg){width=540}
 :::
 
 KVL around the loop:

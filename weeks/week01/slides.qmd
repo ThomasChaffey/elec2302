@@ -67,7 +67,7 @@ time-invariant system.
 **Lecture** — two hours a week, Monday 15:00-17:00. Typeset notes go up a couple of days before.
 
 **Tutorials** — two hours, Weeks 2--13. Ten tutorials (two weeks are labs).
-This is where every quiz happens.
+This is where the quizzes happen.
 
 **Labs** — two practicals on the TIMS hardware, in Weeks 6 and 8 for half the tutorial
 groups and Weeks 7 and 9 for the other half. Attendance is mandatory.
@@ -88,7 +88,7 @@ There is no tutorial in Week 1.
 | Lab 1 milestones | 3% | In your lab |
 | Lab 2 milestones | 3% | In your lab |
 | Final exam | 50% | Formal exam period |
-| Bonus extension quizzes | +5% | after quiz 2 and quiz 3 if you have an HD |
+| Bonus extension quizzes | +2.5% each | after quiz 2 and quiz 3 if you have an HD |
 
 ## Prework {.smaller}
 
@@ -111,15 +111,14 @@ Three quizzes, each 30 minutes, in your tutorial.
 
 ::: {.note}
 The bar is high [because]{.navy} you get more than one go at it. Needing a second
-attempt is normal — it is how these are designed to work, not a sign that you are behind.
+attempt is normal!
 :::
 
-- An HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 5% top up marks.
+- An HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 2.5% top up marks (per quiz).
 
 ## When your quizzes happen {.smaller}
 
-Quizzes run in tutorials, so your attempts land in the weeks you have a tutorial rather
-than a lab. One rule covers all of it: [your attempts are in your next tutorials.]{.navy}
+Quizzes run in tutorials. [Your attempts are in your next tutorials,]{.navy} so if you have a lab, your quiz will be the week after.
 
 ::: {.duo}
 ::: {.col}
@@ -142,14 +141,14 @@ than a lab. One rule covers all of it: [your attempts are in your next tutorials
 ::: {.note}
 Some groups sit a quiz a week before others. Different groups get [different versions]{.navy},
 and every group gets the [same number of attempts]{.navy}, so nobody is advantaged by the
-timetable. Your weeks are on your timetable — check them now.
+timetable. Your weeks are on your timetable.
 :::
 
 <!-- CHECK: attempt weeks derived from the lab pattern on the Classes slide (labs 6 & 8
      / 7 & 9, tutorials Weeks 2-13). Both groups get 3 + 3 + 2 attempts and Quiz 2's last
      attempt (Wk 11) clears Quiz 3's first (Wk 12). Confirm against the final timetable. -->
 
-## What a quiz looks like {.smaller}
+## What the quizzes look like {.smaller}
 
 [On Canvas, locked-down browser]{.bh}
 
@@ -173,10 +172,6 @@ fastest route to an answer.
 **Ed Discussion** — ask and answer!  Teaching staff will attempt to answer unanswered questions within a day.
 
 **Canvas** — notes, prework, quiz details, everything administrative.
-
-::: {.note}
-Ask early! This course builds: a gap in Week 3 is still a gap in Week 11.
-:::
 
 ## Expectations
 
@@ -263,7 +258,7 @@ harmonics disappear one at a time.
 
 A lithography machine prints circuit patterns onto a wafer that is being moved underneath
 the optics. The stage has to follow its trajectory to within [nanometres]{.navy} while
-accelerating hard, so the position is measured continuously and fed back to the motors.
+accelerating hard to maximise throughput.
 
 **Signals** — the measured stage position, and the torque commanded to the motors.
 **System** — the wafer stage being positioned.
@@ -272,33 +267,28 @@ accelerating hard, so the position is measured continuously and fed back to the 
 Cutaway of an extreme-ultraviolet lithography system. Image: ASML.
 :::
 
-## Example 6: the FFT in your pocket {.smaller}
+## Example 6: the FFT is everywhere! {.smaller}
 
 ::: {.shot}
 ![](FFT.png)
 :::
 
-Wi-Fi and 5G do not use the Fourier transform because it is convenient. The standards
-[define]{.navy} the transmitted signal as a sum of complex exponentials — an inverse
-Fourier transform.
-
-So every phone ships an FFT engine in silicon. In Wi-Fi it runs a 64-point transform every
-4 µs: [a quarter of a million transforms a second]{.navy}, whenever the radio is on.
+Wi-Fi and 5G rely on specialised chips that compute the Fast Fourier Transform of every incoming and outgoing signal. 
+In Wi-Fi, a 64-point transform runs every
+4 µs: [a quarter of a million transforms a second]{.navy}.
 
 ::: {.credit}
 LTE-FFT IP core, AMD. Waveform defined in IEEE Std 802.11a-1999 §17.3.5.9 and 3GPP TS 36.211 §6.12.
 :::
 
-## Example 7: convolution in silicon {.smaller}
+## Example 7: convolution for machine learning {.smaller}
 
 ::: {.shot}
 ![](convolution.png)
 :::
 
-A neural network built from memristor crossbars. The convolution is not computed by a
-processor: it happens in the array itself, by [Ohm's law and Kirchhoff's current law]{.navy}.
-
-Two orders of magnitude more energy-efficient than a GPU.
+A neural network built from memristor crossbars. The convolution (an operation we will learn in Week 3) is the foundation of Convolutional Neural Networks.  The figure shows an experimental design for computing the convolution in the array itself, by [Ohm's law and Kirchhoff's current law]{.navy}.
+This is two orders of magnitude more energy-efficient than a GPU.
 
 ::: {.credit}
 Yao, P., Wu, H., Gao, B., Tang, J., Zhang, Q., Zhang, W., Yang, J. J., &amp; Qian, H. (2020).
