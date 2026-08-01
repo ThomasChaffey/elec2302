@@ -128,7 +128,7 @@ $$ z = -1:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{-t} = -e^{-t}. \qquad\text{No
 
 $$ z = -1 + j:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{(-1+j)t} = (-1+j)\,e^{(-1+j)t}. $$
 
-Drag $z$ around the plane and watch the trajectory of $e^{zt}$ and its real part respond:
+The widget below plots the trajectory of  $e^{zt}$ for several values of $z$.
 
 ```{=html}
 <div id="w-ezt" class="widget"></div>
@@ -179,7 +179,7 @@ $$ Z = 30 + 40j = 50\,e^{j0.927}, \qquad I = \frac{V}{50\,e^{j0.927}}, $$
 
 $$ i(t) = \operatorname{Re}(I e^{j\omega t}) = \frac{V}{50}\cos(\omega t - 0.927). $$
 
-Drag the reactance to watch the input and output phasors and waveforms:
+The widget below plots input and output sinusoids for several values of the reactance $Z$.  For some values, the output lags the input, while for others, the output leads.
 
 ```{=html}
 <div id="w-rlc" class="widget"></div>

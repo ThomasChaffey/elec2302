@@ -8,8 +8,8 @@ project:
     - "weeks/*.pdf"
 
 website:
-  title: "ELEC2302 / 9302"
-  description: "Signals and Systems — lecture slides and notes"
+  title: "ELEC2302/9302"
+  description: "Signals and Systems: lecture notes"
   page-navigation: true
   search: false
   sidebar:
@@ -19,9 +19,6 @@ website:
     contents:
       - text: "Home"
         href: index.qmd
-      - text: "Quiz 1 formula sheet"
-        href: weeks/formula-sheet.pdf
-        target: _blank
       - section: "Week 1 — Introduction"
         contents:
           - text: "Slides"
@@ -29,6 +26,9 @@ website:
             target: _blank
           - text: "Notes"
             href: weeks/week01/notes.qmd
+      - text: "Quiz 1 formula sheet"
+        href: weeks/formula-sheet.pdf
+        target: _blank
   page-footer:
     center: "ELEC2302/9302 Signals and Systems · School of Electrical and Computer Engineering, University of Sydney"
 
