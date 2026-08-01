@@ -1,0 +1,19 @@
+---
+title: "ELEC2302 / 9302 — Signals and Systems"
+subtitle: "Semester 2, 2026"
+toc: false
+---
+
+Lecture slides and typeset notes for Signals and Systems. Notes go up a couple of days
+before each lecture.
+
+Everything else for the unit — announcements, tutorial sheets, quizzes, lab material and
+marks — is on **Canvas**.
+
+## Lectures
+
+| Week | Topic | Material |
+|:--|:--|:--|
+| 1 | Introduction; exponentials, Euler's formula and the complex plane | [Slides](weeks/week01/slides.qmd) · [Notes](weeks/week01/notes.qmd) |
+
+: {tbl-colwidths="[8,57,35]"}

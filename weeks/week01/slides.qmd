@@ -1,0 +1,396 @@
+---
+title: "ELEC2302/9302: Signals and Systems"
+subtitle: "Week 1: Introduction &nbsp;&middot;&nbsp; Semester 2, 2026"
+author: "Dr Tom Chaffey"
+format:
+  revealjs:
+    theme: [default, ../../slides.scss]
+    width: 1280
+    height: 720
+    margin: 0.04
+    html-math-method: katex
+    slide-number: c/t
+    transition: none
+    progress: true
+    fig-cap-location: bottom
+engine: markdown
+---
+
+## Course outline
+
+::: {.blocks}
+::: {.block}
+[Foundations]{.bh}
+[Weeks 1–3]{.wk}
+
+- Signals, systems, differential equations, Euler's formula
+- Signals as vectors, systems as maps
+- LTI systems, impulse response, convolution
+:::
+
+::: {.block}
+[Frequency domain]{.bh}
+[Weeks 4–6]{.wk}
+
+- Periodic signals and the Fourier series
+- Aperiodic signals and the Fourier transform
+- Frequency response
+:::
+
+::: {.block}
+[Systems and Laplace]{.bh}
+[Weeks 7–9]{.wk}
+
+- System response and stability
+- The Laplace transform
+- System analysis with the Laplace transform
+:::
+
+::: {.block}
+[Applications]{.bh}
+[Weeks 10–13]{.wk}
+
+- Filter design
+- Signal modulation
+- System identification
+- Advanced topics
+:::
+:::
+
+::: {.note}
+Everything is a different way of looking at the same object: a linear,
+time-invariant system.
+:::
+
+## Classes
+
+**Lecture** — two hours a week, Monday 15:00-17:00. Typeset notes go up a couple of days before.
+
+**Tutorials** — two hours, Weeks 2--13. Ten tutorials (two weeks are labs).
+This is where every quiz happens.
+
+**Labs** — two practicals on the TIMS hardware, in Weeks 6 and 8 for half the tutorial
+groups and Weeks 7 and 9 for the other half. Attendance is mandatory.
+
+::: {.note}
+Times, rooms and which lab weeks apply to you are on your timetable.
+There is no tutorial in Week 1.
+:::
+
+## Assessment
+
+| Component | Weight | When |
+|:---|---:|:---|
+| Tutorial prework | 4% | Weekly, from Week 2 |
+| Quiz 1 | 10% | Week 4 tutorial + two more attempts |
+| Quiz 2 | 15% | Week 8 or 9 tutorial + two more attempts |
+| Quiz 3 | 15% | Week 12 tutorial + one more attempt |
+| Lab 1 milestones | 3% | In your lab |
+| Lab 2 milestones | 3% | In your lab |
+| Final exam | 50% | Formal exam period |
+| Bonus extension quizzes | +5% | after quiz 2 and quiz 3 if you have an HD |
+
+## Prework {.smaller}
+
+Prework is marked for a genuine attempt, not for being right: 0.5% each, capped at 4%.
+That is eight of the ten tutorials, so [you can miss two without losing anything]{.navy}.
+
+Prework must be [handwritten]{.navy}.  Take a photo before you hand it in.
+
+## The quizzes are hurdles {.smaller}
+
+Three quizzes, each 30 minutes, in your tutorial.
+
+::: {.note}
+**You need 70% in each quiz to pass the unit.**
+:::
+
+- [More than one attempt]{.navy} at every quiz: three at Quizzes 1 and 2, two at Quiz 3.
+- Each attempt is in a later tutorial, and your [best mark]{.navy} is the one that counts.
+- The questions change between attempts but test the same material. You cannot look up last week's answers.
+
+::: {.note}
+The bar is high [because]{.navy} you get more than one go at it. Needing a second
+attempt is normal — it is how these are designed to work, not a sign that you are behind.
+:::
+
+- An HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 5% top up marks.
+
+## When your quizzes happen {.smaller}
+
+Quizzes run in tutorials, so your attempts land in the weeks you have a tutorial rather
+than a lab. One rule covers all of it: [your attempts are in your next tutorials.]{.navy}
+
+::: {.duo}
+::: {.col}
+[If your labs are Weeks 6 and 8]{.bh}
+
+- Quiz 1 — Weeks 4, 5, 7
+- Quiz 2 — Weeks 9, 10, 11
+- Quiz 3 — Weeks 12, 13
+:::
+
+::: {.col}
+[If your labs are Weeks 7 and 9]{.bh}
+
+- Quiz 1 — Weeks 4, 5, 6
+- Quiz 2 — Weeks 8, 10, 11
+- Quiz 3 — Weeks 12, 13
+:::
+:::
+
+::: {.note}
+Some groups sit a quiz a week before others. Different groups get [different versions]{.navy},
+and every group gets the [same number of attempts]{.navy}, so nobody is advantaged by the
+timetable. Your weeks are on your timetable — check them now.
+:::
+
+<!-- CHECK: attempt weeks derived from the lab pattern on the Classes slide (labs 6 & 8
+     / 7 & 9, tutorials Weeks 2-13). Both groups get 3 + 3 + 2 attempts and Quiz 2's last
+     attempt (Wk 11) clears Quiz 3's first (Wk 12). Confirm against the final timetable. -->
+
+## What a quiz looks like {.smaller}
+
+[On Canvas, locked-down browser]{.bh}
+
+- Short numeric answers — calculations
+- Multiple choice — concepts and reasoning
+
+
+You get a [formula sheet]{.navy} and can use a calculator. The formula sheet is on Canvas.
+
+<!-- CHECK: does the paper component get re-sat with the Canvas part, or is it sat once
+     and carried forward? Slide is written to work either way; add a line if you want the
+     rule stated up front. -->
+
+## Where to find help
+
+**Me** — straight after this lecture, and in office hours (email me to make an appointment: thomas.chaffey@sydney.edu.au).
+
+**Your tutors** — in tutorials and labs. They see your work every week and they are the
+fastest route to an answer.
+
+**Ed Discussion** — ask and answer!  Teaching staff will attempt to answer unanswered questions within a day.
+
+**Canvas** — notes, prework, quiz details, everything administrative.
+
+::: {.note}
+Ask early! This course builds: a gap in Week 3 is still a gap in Week 11.
+:::
+
+## Expectations
+
+::: {.duo}
+::: {.col}
+[What you can expect of us]{.bh}
+
+* Quiz and prework marks within one week
+* Answering emails and Ed posts within two working days (aiming for one)
+* Answering questions during tutorials, after lecture
+* Clear guidelines for quizzes and the exam
+:::
+
+::: {.col}
+[What we expect of you]{.bh}
+
+* Attend your tutorials and labs
+* Attempt prework before the tutorial
+* Attend or read lecture before the tutorial
+* Ask questions
+* Have fun!
+:::
+:::
+
+# What is this course about?
+
+## Signals and systems
+
+A **signal** carries information: a voltage on a wire, the price of a barrel of oil, the
+brightness of a pixel, the pressure of the air in this room.
+
+A **system** takes a signal in and puts a signal out: an amplifier, a filter, a circuit,
+a trading algorithm, a lens.
+
+## Example 1: seeing through cloud
+
+::: {.shot}
+![](image_filtering.png)
+:::
+
+::: {.credit}
+Thin cloud removal from satellite imagery. Left of each pair: the observed scene.
+Right: the recovered surface. The cloud is separated from the ground by filtering.
+
+Lei, M., Li, H., Xu, L., &amp; Shen, H. (2025). Diffusion generation with homomorphic
+filtering for remote sensing thin cloud removal. *Geo-Spatial Information Science*, 1–14.
+:::
+
+## Example 2: the price of oil
+
+::: {.shot}
+![](Oil_prices.png)
+:::
+
+::: {.credit}
+West Texas Intermediate crude, April 2022 to July 2026. One price per trading day.
+:::
+
+## Example 3: algorithmic trading
+
+::: {.shot}
+![](Knights_headline.png)
+:::
+
+Knight Capital, 1 August 2012. A trading system went live, ran for 45 minutes, and lost
+[US\$440 million]{.out} — about \$10 million a minute.
+
+::: {.credit}
+Knight Capital Group. Headline: BBC News, 11 August 2012.
+:::
+
+## Example 4: filtering sound {.smaller}
+
+<iframe src="resonant-lowpass.html" class="widget-frame"></iframe>
+
+A 100 Hz square wave through a resonant low-pass filter. Move the cutoff and listen to the
+harmonics disappear one at a time.
+
+## Example 5: positioning a silicon wafer {.smaller}
+
+::: {.shot}
+![](asml.png)
+:::
+
+A lithography machine prints circuit patterns onto a wafer that is being moved underneath
+the optics. The stage has to follow its trajectory to within [nanometres]{.navy} while
+accelerating hard, so the position is measured continuously and fed back to the motors.
+
+**Signals** — the measured stage position, and the torque commanded to the motors.
+**System** — the wafer stage being positioned.
+
+::: {.credit}
+Cutaway of an extreme-ultraviolet lithography system. Image: ASML.
+:::
+
+## Example 6: the FFT in your pocket {.smaller}
+
+::: {.shot}
+![](FFT.png)
+:::
+
+Wi-Fi and 5G do not use the Fourier transform because it is convenient. The standards
+[define]{.navy} the transmitted signal as a sum of complex exponentials — an inverse
+Fourier transform.
+
+So every phone ships an FFT engine in silicon. In Wi-Fi it runs a 64-point transform every
+4 µs: [a quarter of a million transforms a second]{.navy}, whenever the radio is on.
+
+::: {.credit}
+LTE-FFT IP core, AMD. Waveform defined in IEEE Std 802.11a-1999 §17.3.5.9 and 3GPP TS 36.211 §6.12.
+:::
+
+## Example 7: convolution in silicon {.smaller}
+
+::: {.shot}
+![](convolution.png)
+:::
+
+A neural network built from memristor crossbars. The convolution is not computed by a
+processor: it happens in the array itself, by [Ohm's law and Kirchhoff's current law]{.navy}.
+
+Two orders of magnitude more energy-efficient than a GPU.
+
+::: {.credit}
+Yao, P., Wu, H., Gao, B., Tang, J., Zhang, Q., Zhang, W., Yang, J. J., &amp; Qian, H. (2020).
+Fully hardware-implemented memristor convolutional neural network. *Nature*, 577, 641–646.
+:::
+
+## Types of signals {.smaller}
+
+::: {.duo}
+::: {.col}
+A **continuous-time** signal has a value at every instant: the air pressure at your ear,
+the voltage across a capacitor, the current in a circuit.
+
+$$ x(t), \qquad t \in \mathbb{R} $$
+
+![](ct-signal.svg){.diagram}
+:::
+
+::: {.col}
+A **discrete-time** signal has a value only at particular instants: the closing price each
+day, the samples in an audio file, the pixels in an image.
+
+$$ x[n], \qquad n \in \mathbb{Z} $$
+
+![](dt-signal.svg){.diagram}
+:::
+:::
+
+::: {.note}
+Of the examples so far: the sound and the wafer stage were continuous, the oil price and the
+radio samples were discrete, and the satellite image was discrete in two spatial dimensions
+rather than in time.
+:::
+
+## What will we learn in this course?
+
+**Continuous-time signals** and **linear, time-invariant systems**.
+
+Two views of the same system, and the translation between them:
+
+- **Time domain** — differential equations, impulse response, convolution.
+- **Frequency domain** — Fourier series, Fourier transform, Laplace transform.
+
+::: {.note}
+Linear and time-invariant are strong assumptions. They are also the assumptions that make
+the problem solvable, and they hold well enough to have built most of the twentieth century.
+:::
+
+## Why is this useful?
+
+These are the foundations of:
+
+::: {.blocks}
+::: {.block}
+[Systems]{.bh}
+
+- Control
+- Stability analysis
+- System identification
+:::
+
+::: {.block}
+[Communications]{.bh}
+
+- Modulation
+- Filtering
+- Sampling
+:::
+
+::: {.block}
+[Devices]{.bh}
+
+- Analogue electronics
+- Photonics
+- Power systems
+:::
+
+::: {.block}
+[Computation]{.bh}
+
+- Signal processing
+- Convolutional neural networks
+- Imaging
+:::
+:::
+
+## Where we start
+
+::: {.handover}
+Signals and systems sits at the intersection of **differential equations**,
+**linear algebra**, **complex numbers** and **trigonometry**.
+
+Today's lecture: the exponential function, Euler's formula,
+and the complex plane.
+:::

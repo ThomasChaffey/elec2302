@@ -1,0 +1,46 @@
+/*-- scss:defaults --*/
+// ELEC2302 house style for HTML lecture notes — navy accent, Arial-type sans.
+$primary:                  #00468C !default;
+$link-color:               #00468C !default;
+$font-family-sans-serif:   "Helvetica Neue", Arial, sans-serif !default;
+$body-color:               #222 !default;
+$headings-font-weight:     700 !default;
+$toc-color:                #00468C !default;
+
+/*-- scss:rules --*/
+h1, h2, h3, h4 { color: #00468C; font-family: "Helvetica Neue", Arial, sans-serif; }
+
+// thin accent rule under the top-level part headings, echoing the tutorial sheet
+h1, h2 {
+  border-bottom: 1.5px solid #00468C;
+  padding-bottom: 0.15em;
+  margin-top: 1.1em;
+}
+
+body { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.5; }
+
+.navy { color: #00468C; }
+.out  { color: #C0392B; }
+
+// interactive widgets sit on white with a hairline frame
+.widget {
+  background: #fff;
+  border: 1px solid #e2e2e6;
+  border-radius: 6px;
+  padding: 10px 12px;
+  display: inline-block;
+  margin: 0.7em 0;
+}
+.widget canvas { display: block; }
+
+// margin note / key-idea callout
+.note {
+  border-left: 3px solid #00468C;
+  background: rgba(0, 70, 140, 0.05);
+  padding: 8px 16px;
+  margin: 0.8em 0;
+  border-radius: 0 4px 4px 0;
+}
+
+// display equations a touch roomier
+.katex-display { margin: 0.7em 0; }

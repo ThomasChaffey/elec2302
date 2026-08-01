@@ -1,0 +1,203 @@
+/*-- scss:defaults --*/
+// ELEC2302 house style for reveal.js slides.
+// Mirrors notes.scss: navy accent, brick red for outputs, Arial-type sans.
+
+$navy:  #00468C;
+$brick: #C0392B;
+$grey:  #8a8a8a;
+
+$font-family-sans-serif:           "Helvetica Neue", Arial, sans-serif !default;
+$presentation-font-family:         "Helvetica Neue", Arial, sans-serif !default;
+$presentation-heading-font:        "Helvetica Neue", Arial, sans-serif !default;
+$presentation-heading-color:       $navy !default;
+$presentation-heading-font-weight: 700 !default;
+$presentation-font-size-root:      32px !default;
+
+$body-bg:    #ffffff !default;
+$body-color: #222222 !default;
+$link-color: $navy !default;
+$selection-bg: rgba(0, 70, 140, 0.25) !default;
+
+$presentation-h1-font-size: 1.9em !default;
+$presentation-h2-font-size: 1.35em !default;
+$presentation-h3-font-size: 1.1em !default;
+
+/*-- scss:rules --*/
+
+.reveal { line-height: 1.5; }
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+  color: $navy;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+// thin accent rule under slide headings, echoing the notes and tutorial sheets
+.reveal .slides section > h2 {
+  border-bottom: 1.5px solid $navy;
+  padding-bottom: 0.12em;
+  margin-bottom: 0.5em;
+}
+
+.reveal .slides section > h1 { border-bottom: none; }
+
+// section-break slides use a navy background, so the navy heading colour
+// set above has to be overridden or the title disappears into it.
+//
+// These must be scoped to top-level slide sections. Pandoc renders `#### x`
+// inside a div as a nested <section>, and reveal's background-contrast check
+// then tags any such section that has a tinted background (e.g. .block) as
+// .has-dark-background — which used to turn its text white on near-white.
+.reveal .slides > section.has-dark-background,
+.reveal .slides > section > section.has-dark-background {
+  h1, h2, h3, p, li { color: #ffffff; }
+  h2 { border-bottom-color: rgba(255, 255, 255, 0.55); }
+  a  { color: #cfe0f2; }
+}
+
+// title slide
+.reveal .title-slide h1,
+#title-slide .title { border-bottom: none; color: $navy; }
+#title-slide .subtitle { color: #333; font-size: 0.85em; }
+#title-slide .author,
+#title-slide .quarto-title-affiliation { color: $grey; font-size: 0.7em; }
+
+.navy { color: $navy; }
+.out  { color: $brick; }
+.dim  { color: $grey; }
+
+// key-idea callout, same treatment as the notes
+.reveal .note {
+  border-left: 3px solid $navy;
+  background: rgba(0, 70, 140, 0.05);
+  padding: 10px 20px;
+  margin: 0.7em 0;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.85em;
+}
+
+// interactive widgets sit on white with a hairline frame
+.reveal .widget {
+  background: #fff;
+  border: 1px solid #e2e2e6;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.reveal .widget canvas { display: block; }
+
+// tables: quiet lines, navy header, no zebra
+.reveal table {
+  font-size: 0.72em;
+  border-collapse: collapse;
+  margin: 0.3em auto;
+}
+.reveal table th {
+  color: $navy;
+  border-bottom: 1.5px solid $navy;
+  text-align: left;
+  padding: 0.28em 0.7em;
+}
+.reveal table td {
+  border-bottom: 1px solid #e4e4e4;
+  padding: 0.26em 0.7em;
+}
+.reveal table tr:last-child td { border-bottom: none; }
+.reveal table .w { text-align: right; white-space: nowrap; }
+
+// hurdle rows pick up the brick red
+.reveal table tr.hurdle td { color: $brick; font-weight: 600; }
+
+.reveal ul, .reveal ol { margin-left: 0.6em; }
+.reveal li { margin-bottom: 0.28em; }
+
+// figure captions and source credits
+.reveal figcaption,
+.reveal .credit {
+  font-size: 0.5em;
+  color: $grey;
+  line-height: 1.35;
+  margin-top: 0.5em;
+}
+
+// full-width screenshots on the example slides
+.reveal .shot img {
+  display: block;
+  margin: 0.2em auto;
+  max-height: 62vh;
+  max-width: 100%;
+  width: auto;
+  border: 1px solid #e2e2e6;
+  border-radius: 4px;
+}
+
+// the four-block course map
+.reveal .blocks { display: flex; gap: 14px; margin-top: 0.3em; }
+.reveal .block {
+  flex: 1 1 0;
+  border-top: 3px solid $navy;
+  padding: 8px 10px 4px;
+  font-size: 0.62em;
+  // solid, not rgba: an alpha-tinted navy reads as "dark" to reveal's
+  // contrast check and gets tagged .has-dark-background
+  background: #f2f6fa;
+}
+// belt and braces: pin the body colour inside blocks whatever reveal decides
+.reveal .block,
+.reveal .block p,
+.reveal .block ul,
+.reveal .block li { color: #222222; }
+// Sub-headings inside a div are spans, not `####`: a real heading inside a div
+// makes pandoc emit a nested <section>, which reveal counts as a slide and
+// which breaks navigation to this slide and the ones after it.
+.reveal .bh {
+  display: block;
+  margin: 0 0 0.3em;
+  font-size: 1.05em;
+  font-weight: 700;
+  line-height: 1.25;
+  color: $navy;
+}
+.reveal .block .wk { color: $grey; font-size: 0.85em; display: block; margin-bottom: 0.4em; }
+.reveal .block > p { margin: 0; }
+.reveal .block ul { margin: 0; padding-left: 1em; }
+.reveal .block li { margin-bottom: 0.2em; }
+
+// two side-by-side columns, e.g. continuous vs discrete
+.reveal .duo {
+  display: flex;
+  gap: 34px;
+  align-items: flex-start;
+  margin-top: 0.2em;
+}
+.reveal .duo .col { flex: 1 1 0; min-width: 0; }
+.reveal .duo .col p { margin-top: 0; }
+
+// line-art diagrams: no frame, unlike the .shot screenshots
+.reveal .diagram,
+.reveal .duo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 30vh;
+  margin: 0.2em auto 0;
+  border: none;
+}
+
+// slide that hands the lecture over to the iPad
+.reveal .handover {
+  text-align: center;
+  font-size: 1.15em;
+  color: $navy;
+  margin-top: 1.2em;
+}
+
+.reveal .widget-frame {
+  width: 100%;
+  height: 620px;
+  border: 0;
+  display: block;
+}

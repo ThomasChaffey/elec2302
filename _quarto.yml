@@ -1,0 +1,39 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "weeks/**/*.qmd"
+
+website:
+  title: "ELEC2302 / 9302"
+  description: "Signals and Systems — lecture slides and notes"
+  page-navigation: true
+  search: false
+  sidebar:
+    style: floating
+    search: false
+    collapse-level: 2
+    contents:
+      - text: "Home"
+        href: index.qmd
+      - section: "Week 1 — Introduction"
+        contents:
+          - text: "Slides"
+            href: weeks/week01/slides.qmd
+            target: _blank
+          - text: "Notes"
+            href: weeks/week01/notes.qmd
+  page-footer:
+    center: "ELEC2302/9302 Signals and Systems · School of Electrical and Computer Engineering, University of Sydney"
+
+format:
+  html:
+    theme: [cosmo, theme.scss]
+    toc: true
+    toc-depth: 2
+    html-math-method: katex
+    fig-cap-location: bottom
+    link-external-newwindow: true
+
+engine: markdown

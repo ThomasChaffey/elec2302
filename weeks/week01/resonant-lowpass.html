@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resonant low-pass filter</title>
+<style>
+  :root {
+    --navy:  #00468C;
+    --red:   #C0392B;
+    --grey:  #8a8a8a;
+    --rule:  #d8d8d8;
+    --panel: #ffffff;
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #222;
+  }
+  #rlp-widget {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 10px 12px 14px;
+    box-sizing: border-box;
+  }
+  .rlp-plots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .rlp-panel {
+    flex: 1 1 420px;
+    min-width: 340px;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 8px 10px 6px;
+    box-sizing: border-box;
+  }
+  .rlp-panel h3 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+  }
+  .rlp-panel canvas {
+    display: block;
+    width: 100%;
+    height: 300px;
+  }
+  .rlp-legend {
+    font-size: 12.5px;
+    color: #444;
+    margin: 2px 0 0;
+  }
+  .rlp-swatch {
+    display: inline-block;
+    width: 22px;
+    height: 3px;
+    vertical-align: middle;
+    margin: 0 5px 3px 0;
+  }
+  .rlp-controls {
+    margin-top: 14px;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 12px 16px 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 34px;
+    align-items: flex-start;
+  }
+  .rlp-ctrl { flex: 1 1 300px; }
+  .rlp-ctrl label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #222;
+  }
+  .rlp-ctrl label b { color: var(--navy); font-variant-numeric: tabular-nums; }
+  .rlp-ctrl input[type=range] {
+    width: 100%;
+    accent-color: #00468C;
+    margin: 0;
+  }
+  .rlp-readout {
+    flex: 1 1 100%;
+    font-size: 13.5px;
+    color: #444;
+    border-top: 1px solid var(--rule);
+    padding-top: 10px;
+    line-height: 1.5;
+  }
+  .rlp-readout b { color: var(--navy); font-variant-numeric: tabular-nums; }
+  .rlp-eq {
+    text-align: center;
+    font-size: 15px;
+    color: #222;
+    margin: 0 0 10px;
+    font-style: italic;
+  }
+  .rlp-eq .frac {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+  }
+  .rlp-eq .num { display: block; padding: 0 6px; }
+  .rlp-eq .den { display: block; padding: 0 6px; border-top: 1px solid #222; }
+
+  .rlp-audio { margin-top: 10px; align-items: center; gap: 14px 26px; }
+  .rlp-audio-buttons { display: flex; gap: 10px; flex: 0 0 auto; }
+  .rlp-btn {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 9px 16px;
+    border: 1px solid var(--navy);
+    border-radius: 3px;
+    background: #fff;
+    color: var(--navy);
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .rlp-btn:hover { background: #eef3f9; }
+  .rlp-btn-main { background: var(--navy); color: #fff; min-width: 108px; }
+  .rlp-btn-main:hover { background: #003a75; }
+  .rlp-btn.rlp-active { background: var(--red); border-color: var(--red); color: #fff; }
+  .rlp-ab { flex: 0 1 260px; }
+  .rlp-vol { flex: 1 1 220px; }
+  .rlp-seg { display: inline-flex; border: 1px solid var(--navy); border-radius: 3px; overflow: hidden; }
+  .rlp-seg button {
+    font-family: inherit;
+    font-size: 13.5px;
+    padding: 7px 13px;
+    border: 0;
+    background: #fff;
+    color: var(--navy);
+    cursor: pointer;
+  }
+  .rlp-seg button + button { border-left: 1px solid var(--navy); }
+  .rlp-seg button.rlp-on { background: var(--navy); color: #fff; }
+  #rlp-audio-note { font-size: 12.5px; color: #555; }
+</style>
+</head>
+<body>
+
+<div id="rlp-widget">
+
+  <div class="rlp-plots">
+    <div class="rlp-panel">
+      <h3>Time domain</h3>
+      <canvas id="rlp-time"></canvas>
+      <p class="rlp-legend">
+        <span class="rlp-swatch" style="background:#8a8a8a"></span>input&nbsp;<i>u</i>(<i>t</i>) &nbsp;&nbsp;
+        <span class="rlp-swatch" style="background:#00468C"></span>output&nbsp;<i>y</i>(<i>t</i>)
+      </p>
+    </div>
+    <div class="rlp-panel">
+      <h3>Bode magnitude</h3>
+      <canvas id="rlp-bode"></canvas>
+      <p class="rlp-legend">
+        <span class="rlp-swatch" style="background:#00468C"></span>|<i>H</i>(<i>j&omega;</i>)| &nbsp;&nbsp;
+        <span class="rlp-swatch" style="background:#C0392B"></span>odd harmonics of the square wave
+      </p>
+    </div>
+  </div>
+
+  <div class="rlp-controls">
+    <div class="rlp-ctrl">
+      <label for="rlp-f0">Cutoff&nbsp;&nbsp;<i>f</i><sub>0</sub> = <b><span id="rlp-f0-val">500 Hz</span></b></label>
+      <input type="range" id="rlp-f0" min="0" max="1000" value="500">
+    </div>
+    <div class="rlp-ctrl">
+      <label for="rlp-q">Resonance&nbsp;&nbsp;<i>Q</i> = <b><span id="rlp-q-val">0.71</span></b></label>
+      <input type="range" id="rlp-q" min="0" max="1000" value="325">
+    </div>
+    <div class="rlp-readout" id="rlp-readout"></div>
+  </div>
+
+  <div class="rlp-controls rlp-audio">
+    <div class="rlp-audio-buttons">
+      <button type="button" id="rlp-play" class="rlp-btn rlp-btn-main">▶&nbsp;&nbsp;Play</button>
+      <button type="button" id="rlp-sweep" class="rlp-btn">Sweep&nbsp;<i>f</i><sub>0</sub></button>
+    </div>
+
+    <div class="rlp-ctrl rlp-ab">
+      <label>Listening to</label>
+      <div class="rlp-seg" id="rlp-ab">
+        <button type="button" data-ab="out" class="rlp-on">output&nbsp;<i>y</i>(<i>t</i>)</button><button
+                type="button" data-ab="in">input&nbsp;<i>u</i>(<i>t</i>)</button>
+      </div>
+    </div>
+
+    <div class="rlp-ctrl rlp-vol">
+      <label for="rlp-vol">Volume&nbsp;&nbsp;<b><span id="rlp-vol-val">50</span>%</b></label>
+      <input type="range" id="rlp-vol" min="0" max="100" value="50">
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var NAVY = '#00468C',
+      RED  = '#C0392B',
+      GREY = '#8a8a8a',
+      GRID = '#e6e6e6',
+      AXIS = '#555';
+
+  // ---- fixed parameters -------------------------------------------------
+  var F1     = 100,      // square-wave fundamental, Hz
+      NHARM  = 199,      // highest odd harmonic used in the synthesis
+      NSTEM  = 13,       // number of odd harmonics marked on the Bode plot
+      L      = 1e-3,     // inductance used for the R, C readout, henries
+      NT     = 900,      // samples across the time window
+      NPERD  = 2,        // periods shown
+      FMIN   = 20,       // Bode axis lower limit, Hz
+      FMAX   = 20000,    // Bode axis upper limit, Hz
+      DBMIN  = -60,
+      DBMAX  = 30;
+
+  // slider mappings (both logarithmic)
+  var F0MIN = 30,  F0MAX = 4000,
+      QMIN  = 0.2, QMAX  = 20;
+
+  function logMap(t, lo, hi) { return lo * Math.pow(hi / lo, t); }
+  function logUnmap(v, lo, hi) { return Math.log(v / lo) / Math.log(hi / lo); }
+
+  // ---- odd harmonic list ------------------------------------------------
+  var HARM = [];
+  for (var n = 1; n <= NHARM; n += 2) HARM.push(n);
+
+  // ---- canvas helpers ---------------------------------------------------
+  function fitCanvas(cv) {
+    var dpr = window.devicePixelRatio || 1,
+        r   = cv.getBoundingClientRect();
+    cv.width  = Math.max(1, Math.round(r.width  * dpr));
+    cv.height = Math.max(1, Math.round(r.height * dpr));
+    var ctx = cv.getContext('2d');
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, r.width, r.height);
+    return { ctx: ctx, w: r.width, h: r.height };
+  }
+
+  function line(ctx, colour, width, dash) {
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = width;
+    ctx.setLineDash(dash || []);
+  }
+
+  // ---- transfer function ------------------------------------------------
+  // H(jw) = w0^2 / (w0^2 - w^2 + j*w0*w/Q)
+  function response(f, f0, Q) {
+    var w  = 2 * Math.PI * f,
+        w0 = 2 * Math.PI * f0,
+        re = w0 * w0 - w * w,
+        im = w0 * w / Q,
+        d2 = re * re + im * im;
+    return {
+      mag: w0 * w0 / Math.sqrt(d2),
+      // angle of 1/(re + j im) is -atan2(im, re)
+      phase: -Math.atan2(im, re)
+    };
+  }
+
+  // Amplitude and phase of every odd harmonic of the square wave after filtering.
+  // Shared by the time-domain plot and the audio wavetable, so the picture and
+  // the sound are built from exactly the same numbers.
+  function harmonics(f0, Q) {
+    var amp = new Float64Array(HARM.length),
+        mag = new Float64Array(HARM.length),
+        pha = new Float64Array(HARM.length);
+    for (var k = 0; k < HARM.length; k++) {
+      var nh = HARM[k], r = response(nh * F1, f0, Q);
+      amp[k] = 4 / (Math.PI * nh);
+      mag[k] = r.mag;
+      pha[k] = r.phase;
+    }
+    return { amp: amp, mag: mag, pha: pha };
+  }
+
+  // ---------------------------------------------------------------- TIME --
+  function drawTime(cv, f0, Q) {
+    var f = fitCanvas(cv), ctx = f.ctx, W = f.w, H = f.h;
+    var mL = 52, mR = 12, mT = 12, mB = 34;
+    var pw = W - mL - mR, ph = H - mT - mB;
+
+    var T = 1 / F1, tmax = NPERD * T;
+
+    // steady-state output by superposition of the harmonic responses
+    var ys = new Float64Array(NT);
+    var hh = harmonics(f0, Q), amp = hh.amp, mag = hh.mag, pha = hh.pha;
+    var ymax = 0;
+    for (var i = 0; i < NT; i++) {
+      var t = tmax * i / (NT - 1), sy = 0;
+      for (var j = 0; j < HARM.length; j++) {
+        sy += amp[j] * mag[j] * Math.sin(2 * Math.PI * HARM[j] * F1 * t + pha[j]);
+      }
+      ys[i] = sy;
+      if (Math.abs(sy) > ymax) ymax = Math.abs(sy);
+    }
+
+    var ylim = Math.max(1.35, 1.12 * ymax);
+
+    function X(t) { return mL + pw * t / tmax; }
+    function Y(v) { return mT + ph * (1 - (v + ylim) / (2 * ylim)); }
+
+    // grid
+    line(ctx, GRID, 1);
+    ctx.beginPath();
+    for (var g = 0; g <= NPERD * 4; g++) {
+      var xg = mL + pw * g / (NPERD * 4);
+      ctx.moveTo(xg, mT); ctx.lineTo(xg, mT + ph);
+    }
+    ctx.stroke();
+
+    // reference lines at +/-1
+    line(ctx, '#cfcfcf', 1, [4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(mL, Y(1));  ctx.lineTo(mL + pw, Y(1));
+    ctx.moveTo(mL, Y(-1)); ctx.lineTo(mL + pw, Y(-1));
+    ctx.stroke();
+
+    // axes
+    line(ctx, AXIS, 1.2, []);
+    ctx.beginPath();
+    ctx.moveTo(mL, mT); ctx.lineTo(mL, mT + ph); ctx.lineTo(mL + pw, mT + ph);
+    ctx.moveTo(mL, Y(0)); ctx.lineTo(mL + pw, Y(0));
+    ctx.stroke();
+
+    // input: the ideal square wave, +1 on the first half of each period
+    line(ctx, GREY, 1.6, []);
+    ctx.beginPath();
+    ctx.moveTo(X(0), Y(1));
+    for (var a = 0; a < NPERD; a++) {
+      var t0 = a * T;
+      ctx.lineTo(X(t0 + T / 2), Y(1));
+      ctx.lineTo(X(t0 + T / 2), Y(-1));
+      ctx.lineTo(X(t0 + T), Y(-1));
+      if (a < NPERD - 1) ctx.lineTo(X(t0 + T), Y(1));
+    }
+    ctx.stroke();
+
+    // output
+    line(ctx, NAVY, 2.4, []);
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (var b = 0; b < NT; b++) {
+      var t3 = tmax * b / (NT - 1);
+      if (b === 0) ctx.moveTo(X(t3), Y(ys[b])); else ctx.lineTo(X(t3), Y(ys[b]));
+    }
+    ctx.stroke();
+
+    // labels
+    ctx.fillStyle = '#333';
+    ctx.font = '12px Arial, Helvetica, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    for (var m = 0; m <= NPERD * 2; m++) {
+      var tt = tmax * m / (NPERD * 2);
+      ctx.fillText((tt * 1000).toFixed(1), mL + pw * m / (NPERD * 2), mT + ph + 6);
+    }
+    ctx.fillText('t  (ms)', mL + pw / 2, mT + ph + 20);
+
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('0', mL - 6, Y(0));
+    ctx.fillText('+1', mL - 6, Y(1));
+    ctx.fillText('−1', mL - 6, Y(-1));
+    if (ylim > 1.6) {
+      ctx.fillStyle = NAVY;
+      ctx.fillText('±' + ylim.toFixed(1), mL - 6, Y(ylim) + 8);
+    }
+
+    return { peak: ymax };
+  }
+
+  // ---------------------------------------------------------------- BODE --
+  function drawBode(cv, f0, Q) {
+    var f = fitCanvas(cv), ctx = f.ctx, W = f.w, H = f.h;
+    var mL = 52, mR = 12, mT = 12, mB = 34;
+    var pw = W - mL - mR, ph = H - mT - mB;
+
+    function X(fr) { return mL + pw * Math.log(fr / FMIN) / Math.log(FMAX / FMIN); }
+    function Y(db) { return mT + ph * (1 - (db - DBMIN) / (DBMAX - DBMIN)); }
+
+    // decade / octave grid
+    line(ctx, GRID, 1);
+    ctx.beginPath();
+    for (var dec = 1; dec <= 5; dec++) {
+      var base = Math.pow(10, dec);
+      for (var mlt = 1; mlt <= 9; mlt++) {
+        var fr = base * mlt;
+        if (fr < FMIN || fr > FMAX) continue;
+        ctx.moveTo(X(fr), mT); ctx.lineTo(X(fr), mT + ph);
+      }
+    }
+    for (var db = DBMIN; db <= DBMAX; db += 10) {
+      ctx.moveTo(mL, Y(db)); ctx.lineTo(mL + pw, Y(db));
+    }
+    ctx.stroke();
+
+    // 0 dB line
+    line(ctx, '#bbb', 1, [4, 4]);
+    ctx.beginPath();
+    ctx.moveTo(mL, Y(0)); ctx.lineTo(mL + pw, Y(0));
+    ctx.stroke();
+
+    // cutoff marker
+    if (f0 >= FMIN && f0 <= FMAX) {
+      line(ctx, RED, 1.2, [5, 4]);
+      ctx.beginPath();
+      ctx.moveTo(X(f0), mT); ctx.lineTo(X(f0), mT + ph);
+      ctx.stroke();
+      ctx.fillStyle = RED;
+      ctx.font = '12px Arial, Helvetica, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(' f₀', X(f0), mT + ph - 3);
+    }
+
+    // magnitude curve
+    line(ctx, NAVY, 2.4, []);
+    ctx.lineJoin = 'round';
+    var NP = 500;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(mL, mT, pw, ph);
+    ctx.clip();
+    ctx.beginPath();
+    for (var i2 = 0; i2 <= NP; i2++) {
+      var fr3 = FMIN * Math.pow(FMAX / FMIN, i2 / NP),
+          db3 = 20 * Math.log10(response(fr3, f0, Q).mag),
+          y3  = Y(Math.max(DBMIN - 20, Math.min(DBMAX + 20, db3)));
+      if (i2 === 0) ctx.moveTo(X(fr3), y3); else ctx.lineTo(X(fr3), y3);
+    }
+    ctx.stroke();
+    ctx.restore();
+
+    // harmonic stems
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(mL, mT, pw, ph);
+    ctx.clip();
+    ctx.font = '11px Arial, Helvetica, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'bottom';
+    for (var k = 0; k < NSTEM; k++) {
+      var nh = HARM[k], fh = nh * F1;
+      if (fh > FMAX) break;
+      if (fh < FMIN) continue;
+      var dbh = 20 * Math.log10(response(fh, f0, Q).mag);
+      if (dbh < DBMIN - 2) continue;
+      var xh = X(fh), yh = Y(Math.min(DBMAX, dbh));
+      line(ctx, 'rgba(192,57,43,0.40)', 1.2, []);
+      ctx.beginPath();
+      ctx.moveTo(xh, mT + ph); ctx.lineTo(xh, yh);
+      ctx.stroke();
+      ctx.fillStyle = RED;
+      ctx.beginPath();
+      ctx.arc(xh, yh, 4.6 / Math.sqrt(nh) + 1.4, 0, 2 * Math.PI);
+      ctx.fill();
+      if (nh <= 9) ctx.fillText(nh === 1 ? 'f₁' : nh + 'f₁', xh, yh - 7);
+    }
+    ctx.restore();
+
+    // axes
+    line(ctx, AXIS, 1.2, []);
+    ctx.beginPath();
+    ctx.moveTo(mL, mT); ctx.lineTo(mL, mT + ph); ctx.lineTo(mL + pw, mT + ph);
+    ctx.stroke();
+
+    // labels
+    ctx.fillStyle = '#333';
+    ctx.font = '12px Arial, Helvetica, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    var ticks = [20, 100, 1000, 10000], names = ['20', '100', '1k', '10k'];
+    for (var p = 0; p < ticks.length; p++) {
+      ctx.fillText(names[p], X(ticks[p]), mT + ph + 6);
+    }
+    ctx.fillText('frequency  (Hz)', mL + pw / 2, mT + ph + 20);
+
+    ctx.textAlign = 'right';
+    ctx.textBaseline = 'middle';
+    for (var db2 = DBMIN; db2 <= DBMAX; db2 += 20) {
+      ctx.fillText(db2 + '', mL - 6, Y(db2));
+    }
+    ctx.save();
+    ctx.translate(14, mT + ph / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = 'center';
+    ctx.fillText('|H|  (dB)', 0, 0);
+    ctx.restore();
+  }
+
+  // ---------------------------------------------------------------- WIRE --
+  var elF0   = document.getElementById('rlp-f0'),
+      elQ    = document.getElementById('rlp-q'),
+      outF0  = document.getElementById('rlp-f0-val'),
+      outQ   = document.getElementById('rlp-q-val'),
+      readout = document.getElementById('rlp-readout'),
+      cvT    = document.getElementById('rlp-time'),
+      cvB    = document.getElementById('rlp-bode');
+
+  function fmtC(C) {
+    if (C >= 1e-6) return (C * 1e6).toPrecision(3) + ' µF';
+    if (C >= 1e-9) return (C * 1e9).toPrecision(3) + ' nF';
+    return (C * 1e12).toPrecision(3) + ' pF';
+  }
+
+  function currentF0() { return logMap(elF0.value / 1000, F0MIN, F0MAX); }
+  function currentQ()  { return logMap(elQ.value  / 1000, QMIN,  QMAX);  }
+
+  function render() {
+    var f0 = currentF0(), Q = currentQ();
+
+    outF0.textContent = f0 >= 1000 ? (f0 / 1000).toFixed(2) + ' kHz' : f0.toFixed(0) + ' Hz';
+    outQ.textContent  = Q < 1 ? Q.toFixed(2) : Q.toFixed(1);
+
+    var res = drawTime(cvT, f0, Q);
+    drawBode(cvB, f0, Q);
+
+    // derived quantities
+    var w0 = 2 * Math.PI * f0,
+        C  = 1 / (w0 * w0 * L),
+        R  = w0 * L / Q,
+        zeta = 1 / (2 * Q);
+
+    var peakTxt;
+    if (Q > 1 / Math.SQRT2) {
+      var Mp = Q / Math.sqrt(1 - 1 / (4 * Q * Q));           // peak of |H|
+      var fp = f0 * Math.sqrt(1 - 1 / (2 * Q * Q));           // peak frequency
+      peakTxt = 'peak |H| = <b>' + (20 * Math.log10(Mp)).toFixed(1) +
+                ' dB</b> at <b>' + fp.toFixed(0) + ' Hz</b>';
+    } else {
+      peakTxt = 'no peak (<i>Q</i> ≤ 1/&radic;2, monotonic roll-off)';
+    }
+
+    readout.innerHTML =
+      '&omega;<sub>0</sub> = <b>' + (w0 / 1000).toFixed(2) + '×10³ rad/s</b> &nbsp;&middot;&nbsp; ' +
+      '&zeta; = 1/(2<i>Q</i>) = <b>' + zeta.toFixed(3) + '</b> &nbsp;&middot;&nbsp; ' +
+      peakTxt + ' &nbsp;&middot;&nbsp; ' +
+      'output swing = <b>±' + res.peak.toFixed(2) + '</b><br>' +
+      'Realisation with <i>L</i> = 1 mH: &nbsp;<i>C</i> = 1/(&omega;<sub>0</sub><sup>2</sup><i>L</i>) = <b>' +
+      fmtC(C) + '</b>, &nbsp;<i>R</i> = &omega;<sub>0</sub><i>L</i>/<i>Q</i> = <b>' +
+      R.toPrecision(3) + ' Ω</b> &nbsp;&middot;&nbsp; drive: 100 Hz square wave, ' +
+      'harmonics to ' + NHARM + 'f₁';
+
+    updateAudio(f0, Q, false);
+  }
+
+  // --------------------------------------------------------------- AUDIO --
+  // An OscillatorNode running at F1 with a wavetable built from the same
+  // harmonic amplitudes and phases as the navy curve. Changing a slider only
+  // swaps the wavetable, so the tone never clicks or restarts.
+  var elPlay  = document.getElementById('rlp-play'),
+      elSweep = document.getElementById('rlp-sweep'),
+      elAB    = document.getElementById('rlp-ab'),
+      elVol   = document.getElementById('rlp-vol'),
+      outVol  = document.getElementById('rlp-vol-val');
+
+  var BASEGAIN = 0.25,   // level for an output that swings +/-1
+      CEILING  = 0.85;   // never let the waveform peak above this
+
+  var audio = { ctx: null, osc: null, gain: null, on: false, listen: 'out' };
+
+  function makeWave(f0, Q) {
+    var N = NHARM + 1,
+        real = new Float32Array(N),
+        imag = new Float32Array(N);
+    var h = harmonics(f0, Q), bypass = (audio.listen === 'in');
+    for (var k = 0; k < HARM.length; k++) {
+      var n = HARM[k];
+      if (n >= N) break;
+      var A   = h.amp[k] * (bypass ? 1 : h.mag[k]),
+          phi = bypass ? 0 : h.pha[k];
+      // A sin(nθ + φ) = (A sin φ) cos nθ + (A cos φ) sin nθ
+      // real[] holds the cosine terms, imag[] the sine terms
+      real[n] = A * Math.sin(phi);
+      imag[n] = A * Math.cos(phi);
+    }
+    return audio.ctx.createPeriodicWave(real, imag, { disableNormalization: true });
+  }
+
+  // peak of the waveform actually being sent to the speakers
+  function wavePeak(f0, Q) {
+    if (audio.listen === 'in') return 1;
+    var h = harmonics(f0, Q), peak = 0, M = 600;
+    for (var i = 0; i < M; i++) {
+      var th = 2 * Math.PI * i / M, s = 0;
+      for (var k = 0; k < HARM.length; k++) {
+        s += h.amp[k] * h.mag[k] * Math.sin(HARM[k] * th + h.pha[k]);
+      }
+      if (Math.abs(s) > peak) peak = Math.abs(s);
+    }
+    return Math.max(peak, 1e-6);
+  }
+
+  var lastAudioUpdate = 0;
+  function updateAudio(f0, Q, force) {
+    if (!audio.ctx || !audio.on) return;
+    var now = audio.ctx.currentTime;
+    if (!force && now - lastAudioUpdate < 0.04) return;   // cap rebuilds at 25 Hz
+    lastAudioUpdate = now;
+    if (audio.osc) audio.osc.setPeriodicWave(makeWave(f0, Q));
+    if (audio.gain) {
+      var vol = elVol.value / 100,
+          g   = Math.min(BASEGAIN, CEILING / wavePeak(f0, Q)) * vol;
+      audio.gain.gain.setTargetAtTime(g, now, 0.02);
+    }
+  }
+
+  function startAudio() {
+    if (!audio.ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext;
+      if (!AC) { elPlay.textContent = 'no audio'; elPlay.disabled = true; return; }
+      audio.ctx = new AC();
+      audio.gain = audio.ctx.createGain();
+      audio.gain.gain.value = 0;
+      audio.gain.connect(audio.ctx.destination);
+    }
+    if (audio.ctx.state === 'suspended') audio.ctx.resume();
+    audio.osc = audio.ctx.createOscillator();
+    audio.osc.frequency.value = F1;
+    audio.osc.connect(audio.gain);
+    audio.gain.gain.cancelScheduledValues(audio.ctx.currentTime);
+    audio.gain.gain.setValueAtTime(0, audio.ctx.currentTime);
+    audio.on = true;
+    audio.osc.start();
+    elPlay.textContent = '■  Stop';
+    elPlay.classList.add('rlp-active');
+    updateAudio(currentF0(), currentQ(), true);  // installs wavetable and level
+  }
+
+  function stopAudio() {
+    audio.on = false;
+    elPlay.textContent = '▶  Play';
+    elPlay.classList.remove('rlp-active');
+    if (!audio.ctx || !audio.osc) return;
+    var t = audio.ctx.currentTime, osc = audio.osc;
+    audio.gain.gain.cancelScheduledValues(t);
+    audio.gain.gain.setValueAtTime(audio.gain.gain.value, t);
+    audio.gain.gain.linearRampToValueAtTime(0, t + 0.04);
+    osc.stop(t + 0.06);                         // fade out, then release
+    audio.osc = null;
+  }
+
+  elPlay.addEventListener('click', function () {
+    if (audio.on) stopAudio(); else startAudio();
+  });
+
+  elAB.addEventListener('click', function (ev) {
+    var b = ev.target.closest ? ev.target.closest('button') : null;
+    if (!b || !b.getAttribute('data-ab')) return;
+    audio.listen = b.getAttribute('data-ab');
+    var all = elAB.getElementsByTagName('button');
+    for (var i = 0; i < all.length; i++) {
+      if (all[i] === b) all[i].className = 'rlp-on'; else all[i].className = '';
+    }
+    updateAudio(currentF0(), currentQ(), true);
+  });
+
+  elVol.addEventListener('input', function () {
+    outVol.textContent = elVol.value;
+    updateAudio(currentF0(), currentQ(), true);
+  });
+
+  // slow automatic sweep of the cutoff, for demonstrating from the front
+  var sweep = { on: false, dir: -1, t0: 0, raf: 0 };
+  function stepSweep(now) {
+    if (!sweep.on) return;
+    var dt = (now - sweep.t0) / 1000;
+    sweep.t0 = now;
+    var v = Number(elF0.value) + sweep.dir * 1000 * dt / 11;   // 11 s end to end
+    if (v <= 0)    { v = 0;    sweep.dir = 1; }
+    if (v >= 1000) { v = 1000; sweep.dir = -1; }
+    elF0.value = v;
+    render();
+    sweep.raf = window.requestAnimationFrame(stepSweep);
+  }
+  elSweep.addEventListener('click', function () {
+    sweep.on = !sweep.on;
+    elSweep.classList.toggle('rlp-active', sweep.on);
+    if (sweep.on) {
+      sweep.t0 = (window.performance ? performance.now() : Date.now());
+      sweep.raf = window.requestAnimationFrame(stepSweep);
+    } else if (sweep.raf) {
+      window.cancelAnimationFrame(sweep.raf);
+    }
+  });
+
+  elF0.addEventListener('input', render);
+  elQ.addEventListener('input', render);
+  window.addEventListener('resize', render);
+
+  // sensible starting point: f0 = 500 Hz, Q = 1/sqrt(2)
+  elF0.value = Math.round(1000 * logUnmap(500, F0MIN, F0MAX));
+  elQ.value  = Math.round(1000 * logUnmap(Math.SQRT1_2, QMIN, QMAX));
+
+  render();
+  window.setTimeout(render, 60);   // re-fit once layout has settled
+})();
+</script>
+</body>
+</html>
