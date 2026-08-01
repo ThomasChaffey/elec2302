@@ -119,12 +119,15 @@
     function draw(th) {
       ctx.clearRect(0, 0, W, H);
       axes(ctx, cx, cy, cx - 7 * S, cx + 7 * S, cy - 6 * S, cy + 6 * S, "Re", "Im");
-      // P1 = 3 at angle th
-      const p1x = cx + S * A1 * Math.cos(th), p1y = cy - S * A1 * Math.sin(th);
-      // P2 = 4 at angle th+90, drawn tip-to-tail from P1
-      const p2x = p1x + S * A2 * Math.cos(th + ph2), p2y = p1y - S * A2 * Math.sin(th + ph2);
-      // resultant = 5 at angle th+phr
-      const rx = cx + S * Ar * Math.cos(th + phr), ry = cy - S * Ar * Math.sin(th + phr);
+      // Rotate the diagram by +90° so the tip's on-screen HEIGHT equals the
+      // waveform value cos(θ+φ); the resultant tip then tracks the black dot.
+      const a = th + Math.PI / 2;
+      // P1 = 3 at angle a
+      const p1x = cx + S * A1 * Math.cos(a), p1y = cy - S * A1 * Math.sin(a);
+      // P2 = 4 at angle a+90, drawn tip-to-tail from P1
+      const p2x = p1x + S * A2 * Math.cos(a + ph2), p2y = p1y - S * A2 * Math.sin(a + ph2);
+      // resultant = 5 at angle a+phr
+      const rx = cx + S * Ar * Math.cos(a + phr), ry = cy - S * Ar * Math.sin(a + phr);
       arrow(ctx, cx, cy, p1x, p1y, NAVY, 2);
       arrow(ctx, p1x, p1y, p2x, p2y, OUT, 2);
       arrow(ctx, cx, cy, rx, ry, "#111", 3);
@@ -138,10 +141,10 @@
       }
       ctx.stroke();
       ctx.strokeStyle = GREY; ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(x0, cy - S * Ar * Math.sin(th + phr)); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(x0, cy - S * Ar * Math.cos(th + phr)); ctx.stroke();
       ctx.setLineDash([]);
       ctx.fillStyle = "#111";
-      ctx.beginPath(); ctx.arc(x0, cy - S * Ar * Math.sin(th + phr), 4, 0, 2 * Math.PI); ctx.fill();
+      ctx.beginPath(); ctx.arc(x0, cy - S * Ar * Math.cos(th + phr), 4, 0, 2 * Math.PI); ctx.fill();
       ctx.font = "13px Arial";
       ctx.fillStyle = NAVY; ctx.fillText("3", cx + 6, cy + 16);
       ctx.fillStyle = OUT; ctx.fillText("4j", p1x + 8, (p1y + p2y) / 2);

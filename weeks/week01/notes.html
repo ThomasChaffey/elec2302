@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 1 — Lecture notes – ELEC2302 / 9302</title>
+<title>Week 1 — Lecture notes – ELEC2302/9302</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,6 +28,7 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../weeks/formula-sheet.pdf" rel="next">
 <link href="../../weeks/week01/slides.html" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -123,7 +124,7 @@ window.Quarto = {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="../../">ELEC2302 / 9302</a> 
+      <a href="../../">ELEC2302/9302</a> 
     </div>
       </div>
     <div class="sidebar-menu-container"> 
@@ -132,12 +133,6 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
- <span class="menu-text">Quiz 1 formula sheet</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -163,6 +158,12 @@ window.Quarto = {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 1 formula sheet</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -274,7 +275,7 @@ x_1(t) + x_2(t)
 <p>This solves (3). What does it look like in <span class="math inline">\mathbb{C}</span>, and what does the real part look like? What about other choices of <span class="math inline">z</span>?</p>
 <p><span class="math display"> z = -1:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{-t} = -e^{-t}. \qquad\text{No imaginary component.} </span></p>
 <p><span class="math display"> z = -1 + j:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{(-1+j)t} = (-1+j)\,e^{(-1+j)t}. </span></p>
-<p>Drag <span class="math inline">z</span> around the plane and watch the trajectory of <span class="math inline">e^{zt}</span> and its real part respond:</p>
+<p>The widget below plots the trajectory of <span class="math inline">e^{zt}</span> for several values of <span class="math inline">z</span>.</p>
 <div id="w-ezt" class="widget"></div>
 <div class="note">
 <p>The position of <span class="math inline">z</span> determines the behaviour: oscillations, decay, growth.</p>
@@ -311,7 +312,7 @@ V e^{j\omega t}
 <p>Suppose <span class="math inline">R = 30\,\Omega</span> and <span class="math inline">\omega L - \tfrac{1}{\omega C} = 40\,\Omega</span>. Then</p>
 <p><span class="math display"> Z = 30 + 40j = 50\,e^{j0.927}, \qquad I = \frac{V}{50\,e^{j0.927}}, </span></p>
 <p><span class="math display"> i(t) = \operatorname{Re}(I e^{j\omega t}) = \frac{V}{50}\cos(\omega t - 0.927). </span></p>
-<p>Drag the reactance to watch the input and output phasors and waveforms:</p>
+<p>The widget below plots input and output sinusoids for several values of the reactance <span class="math inline">Z</span>. For some values, the output lags the input, while for others, the output leads.</p>
 <div id="w-rlc" class="widget"></div>
 <div class="note">
 <p>The RLC circuit maps a sinusoid to a sinusoid with the <strong>same frequency</strong>. This is the foundation of the rest of the course.</p>
@@ -734,6 +735,9 @@ V e^{j\omega t}
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../weeks/formula-sheet.pdf" class="pagination-link" aria-label="Quiz 1 formula sheet">
+        <span class="nav-page-text">Quiz 1 formula sheet</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
