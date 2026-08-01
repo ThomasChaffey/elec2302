@@ -1,0 +1,308 @@
+[
+  {
+    "objectID": "weeks/week01/slides.html#course-outline",
+    "href": "weeks/week01/slides.html#course-outline",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Course outline",
+    "text": "Course outline\n\n\nFoundations Weeks 1–3\n\nSignals, systems, differential equations, Euler’s formula\nSignals as vectors, systems as maps\nLTI systems, impulse response, convolution\n\n\n\nFrequency domain Weeks 4–6\n\nPeriodic signals and the Fourier series\nAperiodic signals and the Fourier transform\nFrequency response\n\n\n\nSystems and Laplace Weeks 7–9\n\nSystem response and stability\nThe Laplace transform\nSystem analysis with the Laplace transform\n\n\n\nApplications Weeks 10–13\n\nFilter design\nSignal modulation\nSystem identification\nAdvanced topics\n\n\n\n\nEverything is a different way of looking at the same object: a linear, time-invariant system.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#classes",
+    "href": "weeks/week01/slides.html#classes",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Classes",
+    "text": "Classes\nLecture — two hours a week, Monday 15:00-17:00. Typeset notes go up a couple of days before.\nTutorials — two hours, Weeks 2–13. Ten tutorials (two weeks are labs). This is where every quiz happens.\nLabs — two practicals on the TIMS hardware, in Weeks 6 and 8 for half the tutorial groups and Weeks 7 and 9 for the other half. Attendance is mandatory.\n\nTimes, rooms and which lab weeks apply to you are on your timetable. There is no tutorial in Week 1.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#assessment",
+    "href": "weeks/week01/slides.html#assessment",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Assessment",
+    "text": "Assessment\n\n\n\n\n\n\n\n\nComponent\nWeight\nWhen\n\n\n\n\nTutorial prework\n4%\nWeekly, from Week 2\n\n\nQuiz 1\n10%\nWeek 4 tutorial + two more attempts\n\n\nQuiz 2\n15%\nWeek 8 or 9 tutorial + two more attempts\n\n\nQuiz 3\n15%\nWeek 12 tutorial + one more attempt\n\n\nLab 1 milestones\n3%\nIn your lab\n\n\nLab 2 milestones\n3%\nIn your lab\n\n\nFinal exam\n50%\nFormal exam period\n\n\nBonus extension quizzes\n+5%\nafter quiz 2 and quiz 3 if you have an HD",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#prework",
+    "href": "weeks/week01/slides.html#prework",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Prework",
+    "text": "Prework\nPrework is marked for a genuine attempt, not for being right: 0.5% each, capped at 4%. That is eight of the ten tutorials, so you can miss two without losing anything.\nPrework must be handwritten. Take a photo before you hand it in.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#the-quizzes-are-hurdles",
+    "href": "weeks/week01/slides.html#the-quizzes-are-hurdles",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "The quizzes are hurdles",
+    "text": "The quizzes are hurdles\nThree quizzes, each 30 minutes, in your tutorial.\n\nYou need 70% in each quiz to pass the unit.\n\n\nMore than one attempt at every quiz: three at Quizzes 1 and 2, two at Quiz 3.\nEach attempt is in a later tutorial, and your best mark is the one that counts.\nThe questions change between attempts but test the same material. You cannot look up last week’s answers.\n\n\nThe bar is high because you get more than one go at it. Needing a second attempt is normal — it is how these are designed to work, not a sign that you are behind.\n\n\nAn HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 5% top up marks.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#when-your-quizzes-happen",
+    "href": "weeks/week01/slides.html#when-your-quizzes-happen",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "When your quizzes happen",
+    "text": "When your quizzes happen\nQuizzes run in tutorials, so your attempts land in the weeks you have a tutorial rather than a lab. One rule covers all of it: your attempts are in your next tutorials.\n\n\nIf your labs are Weeks 6 and 8\n\nQuiz 1 — Weeks 4, 5, 7\nQuiz 2 — Weeks 9, 10, 11\nQuiz 3 — Weeks 12, 13\n\n\n\nIf your labs are Weeks 7 and 9\n\nQuiz 1 — Weeks 4, 5, 6\nQuiz 2 — Weeks 8, 10, 11\nQuiz 3 — Weeks 12, 13\n\n\n\n\nSome groups sit a quiz a week before others. Different groups get different versions, and every group gets the same number of attempts, so nobody is advantaged by the timetable. Your weeks are on your timetable — check them now.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#what-a-quiz-looks-like",
+    "href": "weeks/week01/slides.html#what-a-quiz-looks-like",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "What a quiz looks like",
+    "text": "What a quiz looks like\nOn Canvas, locked-down browser\n\nShort numeric answers — calculations\nMultiple choice — concepts and reasoning\n\nYou get a formula sheet and can use a calculator. The formula sheet is on Canvas.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#where-to-find-help",
+    "href": "weeks/week01/slides.html#where-to-find-help",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Where to find help",
+    "text": "Where to find help\nMe — straight after this lecture, and in office hours (email me to make an appointment: thomas.chaffey@sydney.edu.au).\nYour tutors — in tutorials and labs. They see your work every week and they are the fastest route to an answer.\nEd Discussion — ask and answer! Teaching staff will attempt to answer unanswered questions within a day.\nCanvas — notes, prework, quiz details, everything administrative.\n\nAsk early! This course builds: a gap in Week 3 is still a gap in Week 11.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#expectations",
+    "href": "weeks/week01/slides.html#expectations",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Expectations",
+    "text": "Expectations\n\n\nWhat you can expect of us\n\nQuiz and prework marks within one week\nAnswering emails and Ed posts within two working days (aiming for one)\nAnswering questions during tutorials, after lecture\nClear guidelines for quizzes and the exam\n\n\n\nWhat we expect of you\n\nAttend your tutorials and labs\nAttempt prework before the tutorial\nAttend or read lecture before the tutorial\nAsk questions\nHave fun!",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#signals-and-systems",
+    "href": "weeks/week01/slides.html#signals-and-systems",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Signals and systems",
+    "text": "Signals and systems\nA signal carries information: a voltage on a wire, the price of a barrel of oil, the brightness of a pixel, the pressure of the air in this room.\nA system takes a signal in and puts a signal out: an amplifier, a filter, a circuit, a trading algorithm, a lens.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#example-1-seeing-through-cloud",
+    "href": "weeks/week01/slides.html#example-1-seeing-through-cloud",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Example 1: seeing through cloud",
+    "text": "Example 1: seeing through cloud\n\n\n\n\nThin cloud removal from satellite imagery. Left of each pair: the observed scene. Right: the recovered surface. The cloud is separated from the ground by filtering.\nLei, M., Li, H., Xu, L., & Shen, H. (2025). Diffusion generation with homomorphic filtering for remote sensing thin cloud removal. Geo-Spatial Information Science, 1–14.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#example-2-the-price-of-oil",
+    "href": "weeks/week01/slides.html#example-2-the-price-of-oil",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Example 2: the price of oil",
+    "text": "Example 2: the price of oil\n\n\n\n\nWest Texas Intermediate crude, April 2022 to July 2026. One price per trading day.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#example-3-algorithmic-trading",
+    "href": "weeks/week01/slides.html#example-3-algorithmic-trading",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Example 3: algorithmic trading",
+    "text": "Example 3: algorithmic trading\n\n\n\nKnight Capital, 1 August 2012. A trading system went live, ran for 45 minutes, and lost US$440 million — about $10 million a minute.\n\nKnight Capital Group. Headline: BBC News, 11 August 2012.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#example-4-filtering-sound",
+    "href": "weeks/week01/slides.html#example-4-filtering-sound",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Example 4: filtering sound",
+    "text": "Example 4: filtering sound\n\n\nA 100 Hz square wave through a resonant low-pass filter. Move the cutoff and listen to the harmonics disappear one at a time.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#example-5-positioning-a-silicon-wafer",
+    "href": "weeks/week01/slides.html#example-5-positioning-a-silicon-wafer",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Example 5: positioning a silicon wafer",
+    "text": "Example 5: positioning a silicon wafer\n\n\n\nA lithography machine prints circuit patterns onto a wafer that is being moved underneath the optics. The stage has to follow its trajectory to within nanometres while accelerating hard, so the position is measured continuously and fed back to the motors.\nSignals — the measured stage position, and the torque commanded to the motors. System — the wafer stage being positioned.\n\nCutaway of an extreme-ultraviolet lithography system. Image: ASML.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#example-6-the-fft-in-your-pocket",
+    "href": "weeks/week01/slides.html#example-6-the-fft-in-your-pocket",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Example 6: the FFT in your pocket",
+    "text": "Example 6: the FFT in your pocket\n\n\n\nWi-Fi and 5G do not use the Fourier transform because it is convenient. The standards define the transmitted signal as a sum of complex exponentials — an inverse Fourier transform.\nSo every phone ships an FFT engine in silicon. In Wi-Fi it runs a 64-point transform every 4 µs: a quarter of a million transforms a second, whenever the radio is on.\n\nLTE-FFT IP core, AMD. Waveform defined in IEEE Std 802.11a-1999 §17.3.5.9 and 3GPP TS 36.211 §6.12.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#example-7-convolution-in-silicon",
+    "href": "weeks/week01/slides.html#example-7-convolution-in-silicon",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Example 7: convolution in silicon",
+    "text": "Example 7: convolution in silicon\n\n\n\nA neural network built from memristor crossbars. The convolution is not computed by a processor: it happens in the array itself, by Ohm’s law and Kirchhoff’s current law.\nTwo orders of magnitude more energy-efficient than a GPU.\n\nYao, P., Wu, H., Gao, B., Tang, J., Zhang, Q., Zhang, W., Yang, J. J., & Qian, H. (2020). Fully hardware-implemented memristor convolutional neural network. Nature, 577, 641–646.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#types-of-signals",
+    "href": "weeks/week01/slides.html#types-of-signals",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Types of signals",
+    "text": "Types of signals\n\n\nA continuous-time signal has a value at every instant: the air pressure at your ear, the voltage across a capacitor, the current in a circuit.\n x(t), \\qquad t \\in \\mathbb{R} \n\n\n\nA discrete-time signal has a value only at particular instants: the closing price each day, the samples in an audio file, the pixels in an image.\n x[n], \\qquad n \\in \\mathbb{Z} \n\n\n\n\nOf the examples so far: the sound and the wafer stage were continuous, the oil price and the radio samples were discrete, and the satellite image was discrete in two spatial dimensions rather than in time.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#what-will-we-learn-in-this-course",
+    "href": "weeks/week01/slides.html#what-will-we-learn-in-this-course",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "What will we learn in this course?",
+    "text": "What will we learn in this course?\nContinuous-time signals and linear, time-invariant systems.\nTwo views of the same system, and the translation between them:\n\nTime domain — differential equations, impulse response, convolution.\nFrequency domain — Fourier series, Fourier transform, Laplace transform.\n\n\nLinear and time-invariant are strong assumptions. They are also the assumptions that make the problem solvable, and they hold well enough to have built most of the twentieth century.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#why-is-this-useful",
+    "href": "weeks/week01/slides.html#why-is-this-useful",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Why is this useful?",
+    "text": "Why is this useful?\nThese are the foundations of:\n\n\nSystems\n\nControl\nStability analysis\nSystem identification\n\n\n\nCommunications\n\nModulation\nFiltering\nSampling\n\n\n\nDevices\n\nAnalogue electronics\nPhotonics\nPower systems\n\n\n\nComputation\n\nSignal processing\nConvolutional neural networks\nImaging",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#where-we-start",
+    "href": "weeks/week01/slides.html#where-we-start",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Where we start",
+    "text": "Where we start\n\nSignals and systems sits at the intersection of differential equations, linear algebra, complex numbers and trigonometry.\nToday’s lecture: the exponential function, Euler’s formula, and the complex plane.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ELEC2302 / 9302 — Signals and Systems",
+    "section": "",
+    "text": "Lecture slides and typeset notes for Signals and Systems. Notes go up a couple of days before each lecture.\nEverything else for the unit — announcements, tutorial sheets, quizzes, lab material and marks — is on Canvas.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#lectures",
+    "href": "index.html#lectures",
+    "title": "ELEC2302 / 9302 — Signals and Systems",
+    "section": "Lectures",
+    "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html",
+    "href": "weeks/week01/notes.html",
+    "title": "Week 1 — Lecture notes",
+    "section": "",
+    "text": "Signals & Systems lives at the intersection of differential equations, linear algebra, complex numbers and trigonometry. This lecture revises the core of that intersection — the material everything else is built on.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#a-the-exponential-function",
+    "href": "weeks/week01/notes.html#a-the-exponential-function",
+    "title": "Week 1 — Lecture notes",
+    "section": "(a) The exponential function",
+    "text": "(a) The exponential function\nFor z \\in \\mathbb{C}, define the exponential by its power series:\n e^{z} := 1 + z + \\frac{z^{2}}{2!} + \\frac{z^{3}}{3!} + \\cdots \nProperties. First, e^{0} = 1 (straight from the definition) \\qquad(1)\n\n\\begin{aligned}\n\\frac{\\mathrm{d}}{\\mathrm{d}z}\\,e^{z}\n&= 0 + 1 + \\frac{2z}{2!} + \\frac{3z^{2}}{3!} + \\cdots \\\\[2pt]\n&= 1 + z + \\frac{z^{2}}{2!} + \\cdots \\\\[2pt]\n&= e^{z}\n\\end{aligned}\n\\qquad(2)\n\nCombining the two properties:\n \\boxed{\\,f(z) = f'(z), \\qquad f(0) = 1\\,} \nTurns out f(z) = e^{z} is the unique solution to this differential equation (it is an alternative definition).\nExtension of (2). By the chain rule,\n\n\\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{zt}\n= 0 + z + \\frac{2t\\,z^{2}}{2!} + \\frac{3t^{2}z^{3}}{3!} + \\cdots\n= z\\,e^{zt}.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#b-eulers-formula",
+    "href": "weeks/week01/notes.html#b-eulers-formula",
+    "title": "Week 1 — Lecture notes",
+    "section": "(b) Euler’s formula",
+    "text": "(b) Euler’s formula\nWhy: let’s now represent sinusoids as complex numbers. Let\n g(\\theta) = \\frac{\\cos\\theta + j\\sin\\theta}{e^{j\\theta}} . \nThen\n\n\\begin{aligned}\ng'(\\theta)\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(\\cos\\theta + j\\sin\\theta\\big)\\,j\\,e^{-j\\theta} \\\\[2pt]\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta} \\\\[2pt]\n&= 0 .\n\\end{aligned}\n\nSo g(\\theta) = C (a constant):\n C\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta . \nSet \\theta = 0. Then C = 1, so we have\n \\boxed{\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta\\,} \nWhat does this mean graphically? e^{j\\theta} is the unit vector at angle \\theta; its real part is \\cos\\theta and its imaginary part is \\sin\\theta. Advance \\theta and the vector rotates, its shadow tracing a sinusoid.\n\nIn particular: \\;e^{j\\pi/2} = j, \\qquad e^{j\\pi} = -1.\n\nManipulating sinusoids using complex numbers\nWhy use complex numbers to represent sinusoids? It makes the algebra easier. For example,\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\big(\\omega t + \\tfrac{\\pi}{2}\\big),\n   \\qquad x_1(t) + x_2(t) = \\;? \nThe direct way uses the identity \\cos(\\theta + \\tfrac{\\pi}{2}) = -\\sin\\theta, so x_2(t) = -4\\sin\\omega t, giving\n 3\\cos\\omega t - 4\\sin\\omega t \\;\\equiv\\; A\\cos(\\omega t + \\varphi)\n   \\quad\\longrightarrow\\quad \\text{match coefficients} \\dots \nWith complex numbers:\n\n\\begin{aligned}\nx_1(t) &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_2(t) &= \\operatorname{Re}\\!\\big(4\\,e^{\\,j\\omega t + j\\pi/2}\\big)\n        = \\operatorname{Re}\\!\\big(4\\,e^{j\\pi/2}\\,e^{j\\omega t}\\big)\n        = \\operatorname{Re}\\!\\big(4j\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_1(t) + x_2(t)\n        &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t} + 4j\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big((3 + 4j)\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big(5\\,e^{j0.927}\\,e^{j\\omega t}\\big)\n        = 5\\cos(\\omega t + 0.927).\n\\end{aligned}\n\n\nThe triangle 3 + 4j = 5\\angle 53.1^{\\circ} simply rotates — that is the sum.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
+    "href": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
+    "title": "Week 1 — Lecture notes",
+    "section": "(c) Euler’s formula & differential equations",
+    "text": "(c) Euler’s formula & differential equations\nAnother differential equation:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,x(t) = j\\,x(t) \\qquad(3) \nWe’ve already seen \\dfrac{\\mathrm{d}}{\\mathrm{d}t}e^{zt} = z\\,e^{zt}. Set z = j:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{jt} = j\\,e^{jt}. \nThis solves (3). What does it look like in \\mathbb{C}, and what does the real part look like? What about other choices of z?\n z = -1:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{-t} = -e^{-t}. \\qquad\\text{No imaginary component.} \n z = -1 + j:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{(-1+j)t} = (-1+j)\\,e^{(-1+j)t}. \nDrag z around the plane and watch the trajectory of e^{zt} and its real part respond:\n\n\nThe position of z determines the behaviour: oscillations, decay, growth.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
+    "href": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
+    "title": "Week 1 — Lecture notes",
+    "section": "(d) What has this got to do with electrical engineering?",
+    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit (drawn with circuitikz).\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t}.\n\\end{aligned}\n\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nDrag the reactance to watch the input and output phasors and waveforms:\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  }
+]
