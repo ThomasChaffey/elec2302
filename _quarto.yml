@@ -4,6 +4,8 @@ project:
   render:
     - "*.qmd"
     - "weeks/**/*.qmd"
+  resources:
+    - "weeks/*.pdf"
 
 website:
   title: "ELEC2302 / 9302"
@@ -17,6 +19,9 @@ website:
     contents:
       - text: "Home"
         href: index.qmd
+      - text: "Quiz 1 formula sheet"
+        href: weeks/formula-sheet.pdf
+        target: _blank
       - section: "Week 1 — Introduction"
         contents:
           - text: "Slides"
@@ -30,8 +35,7 @@ website:
 format:
   html:
     theme: [cosmo, theme.scss]
-    toc: true
-    toc-depth: 2
+    toc: false
     html-math-method: katex
     fig-cap-location: bottom
     link-external-newwindow: true

@@ -29,8 +29,8 @@ Combining the two properties:
 
 $$ \boxed{\,f(z) = f'(z), \qquad f(0) = 1\,} $$
 
-Turns out $f(z) = e^{z}$ is the unique solution to this differential equation (it is an
-alternative definition).
+It turns out $f(z) = e^{z}$ is the unique solution to this differential equation, and in fact the differential equation can be used as an
+alternative definition.
 
 **Extension of (2).** By the chain rule,
 
@@ -42,7 +42,7 @@ $$
 
 ## (b) Euler's formula
 
-Why: let's now represent sinusoids as complex numbers. Let
+Let's now represent sinusoids as complex numbers. Let
 
 $$ g(\theta) = \frac{\cos\theta + j\sin\theta}{e^{j\theta}} . $$
 
@@ -79,7 +79,7 @@ In particular: $\;e^{j\pi/2} = j, \qquad e^{j\pi} = -1.$
 
 ### Manipulating sinusoids using complex numbers
 
-Why use complex numbers to represent sinusoids? It makes the algebra easier. For example,
+Why use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,
 
 $$ x_1(t) = 3\cos\omega t, \qquad x_2(t) = 4\cos\!\big(\omega t + \tfrac{\pi}{2}\big),
    \qquad x_1(t) + x_2(t) = \;? $$
@@ -110,7 +110,7 @@ $$
 <div id="w-sum" class="widget"></div>
 ```
 
-The triangle $3 + 4j = 5\angle 53.1^{\circ}$ simply rotates — that is the sum.
+The triangle $3 + 4j = 5\angle 53.1^{\circ}$ rotates.
 
 ## (c) Euler's formula &amp; differential equations
 
