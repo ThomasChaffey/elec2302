@@ -233,9 +233,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "ELEC2302 / 9302 — Signals and Systems",
+    "title": "ELEC2302/9302 — Signals and Systems",
     "section": "",
-    "text": "Lecture notes, tutorials and lab sheets for ELEC2302/9302: Signals and Systems. Notes will be up a couple of days before each lecture.",
+    "text": "Lecture notes, tutorials and lab sheets will be posted here each week.",
     "crumbs": [
       "Home"
     ]
@@ -243,7 +243,7 @@
   {
     "objectID": "index.html#lectures",
     "href": "index.html#lectures",
-    "title": "ELEC2302 / 9302 — Signals and Systems",
+    "title": "ELEC2302/9302 — Signals and Systems",
     "section": "Lectures",
     "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes",
     "crumbs": [
