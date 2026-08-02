@@ -98,7 +98,7 @@ There is no tutorial in Week 1.
 | Final exam | 50% | Formal exam period |
 | Bonus extension quizzes | +2.5% each | after quiz 2 and quiz 3 if you have an HD |
 
-## Prework {.smaller}
+## Prework
 
 Prework is marked for a genuine attempt, not for being right: 0.5% each, capped at 4%.
 That is eight of the ten tutorials, so [you can miss two without losing anything]{.navy}.
@@ -156,7 +156,7 @@ timetable. Your weeks are on your timetable.
      / 7 & 9, tutorials Weeks 2-13). Both groups get 3 + 3 + 2 attempts and Quiz 2's last
      attempt (Wk 11) clears Quiz 3's first (Wk 12). Confirm against the final timetable. -->
 
-## What the quizzes look like {.smaller}
+## What the quizzes look like
 
 [On Canvas, locked-down browser]{.bh}
 
@@ -164,19 +164,19 @@ timetable. Your weeks are on your timetable.
 - Multiple choice — concepts and reasoning
 
 
-You get a [formula sheet]{.navy} and can use a calculator. The formula sheet is on Canvas.
+You get a [formula sheet]{.navy} and can use a calculator. The formula sheet is on the course website [tchaffey.com/elec2302]{.navy}.
 
 <!-- CHECK: does the paper component get re-sat with the Canvas part, or is it sat once
      and carried forward? Slide is written to work either way; add a line if you want the
      rule stated up front. -->
 
-## Tutorials and exam {.smaller}
+## Tutorials and exam
 
 In the tutorials, you will work through practice problems.  These are designed to develop and extend the concepts in the lectures and give you *practical experience* analysing signals and systems.
 
 **The exam will be closely modelled on the tutorial problems**.
 
-## Where to find help{.smaller}
+## Where to find help
 
 **Me** — straight after this lecture, and in office hours (email me to make an appointment: thomas.chaffey@sydney.edu.au).
 
@@ -218,7 +218,7 @@ fastest route to an answer.
 
 # What is this course about?
 
-## Signals and systems{.smaller}
+## Signals and systems
 
 A **signal** carries information: a voltage on a wire, the price of a barrel of oil, the
 brightness of a pixel, the pressure of the air in this room.
@@ -260,7 +260,7 @@ Knight Capital, 1 August 2012. A rogue trading system ran for 45 minutes and los
 [US\$440 million]{.out} (about \$10 million a minute).
 
 ::: {.credit}
-Knight Capital Group. Headline: BBC News, 11 August 2012.
+Headline: BBC News, 11 August 2012.
 :::
 
 ## Example 4: filtering sound {.smaller}
@@ -304,7 +304,10 @@ LTE-FFT IP core, AMD. Waveform defined in IEEE Std 802.11a-1999 §17.3.5.9 and 3
 ## Example 7: convolution for machine learning {.smaller}
 
 ::: {.shot}
-![](convolution.png)
+![](convolution.png){width=50%}
+:::
+::: {.shot}
+![](memristor.png)
 :::
 
 A neural network built from memristor crossbars. The convolution (an operation we will learn in Week 3) is the foundation of Convolutional Neural Networks.  The figure shows an experimental design for computing the convolution in the array itself, by [Ohm's law and Kirchhoff's current law]{.navy}.
@@ -404,3 +407,29 @@ Signals and systems sits at the intersection of **differential equations**,
 Rest of today's lecture: the exponential function, Euler's formula,
 and the complex plane.
 :::
+
+## Euler's formula {.smaller}
+
+$$ e^{j\theta} = \cos\theta + j\sin\theta $$
+
+::: {style="display:flex;justify-content:center"}
+```{=html}
+<div id="w-euler" class="widget"></div>
+```
+:::
+
+## Adding sinusoids {.smaller}
+
+$$ 3\,e^{j\omega t} + 4j\,e^{j\omega t} = 5\,e^{j0.927}e^{j\omega t} $$
+
+::: {style="display:flex;justify-content:center"}
+::: {style="transform-origin:top center;height:490px"}
+```{=html}
+<div id="w-sum" class="widget"></div>
+```
+:::
+:::
+
+```{=html}
+<script src="phasor-widgets.js"></script>
+```
