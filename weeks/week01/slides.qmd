@@ -59,7 +59,7 @@ engine: markdown
 
 ::: {.note}
 Everything is a different way of looking at the same object: a linear,
-time-invariant system.
+time-invariant system.  Both mathematically elegant and **extremely useful**: the core of electrical engineering.
 :::
 
 ## Classes
@@ -97,7 +97,7 @@ That is eight of the ten tutorials, so [you can miss two without losing anything
 
 Prework must be [handwritten]{.navy}.  Take a photo before you hand it in.
 
-## The quizzes are hurdles {.smaller}
+## Quizzes {.smaller}
 
 Three quizzes, each 30 minutes, in your tutorial.
 
@@ -162,7 +162,13 @@ You get a [formula sheet]{.navy} and can use a calculator. The formula sheet is 
      and carried forward? Slide is written to work either way; add a line if you want the
      rule stated up front. -->
 
-## Where to find help
+## Tutorials and exam {.smaller}
+
+In the tutorials, you will work through practice problems.  These are designed to develop and extend the concepts in the lectures and give you *practical experience* analysing signals and systems.
+
+**The exam will be closely modelled on the tutorial problems**.
+
+## Where to find help{.smaller}
 
 **Me** — straight after this lecture, and in office hours (email me to make an appointment: thomas.chaffey@sydney.edu.au).
 
@@ -173,7 +179,7 @@ fastest route to an answer.
 
 **Canvas** — notes, prework, quiz details, everything administrative.
 
-## Expectations
+## Expectations{.smaller}
 
 ::: {.duo}
 ::: {.col}
@@ -188,17 +194,23 @@ fastest route to an answer.
 ::: {.col}
 [What we expect of you]{.bh}
 
+* About **6hrs independent study** per week, as well as tutorial and lecture
 * Attend your tutorials and labs
 * Attempt prework before the tutorial
 * Attend or read lecture before the tutorial
+* Complete the tutorial problems after the tutorial
 * Ask questions
 * Have fun!
 :::
+
+**Pass/credit standard:** able perform calculations and system analysis to a sufficient standard for third year courses.
+
+**D/HD standard:** understand the underlying concepts and structures, perform analysis beyond the example problems.
 :::
 
 # What is this course about?
 
-## Signals and systems
+## Signals and systems{.smaller}
 
 A **signal** carries information: a voltage on a wire, the price of a barrel of oil, the
 brightness of a pixel, the pressure of the air in this room.
@@ -236,8 +248,8 @@ West Texas Intermediate crude, April 2022 to July 2026. One price per trading da
 ![](Knights_headline.png)
 :::
 
-Knight Capital, 1 August 2012. A trading system went live, ran for 45 minutes, and lost
-[US\$440 million]{.out} — about \$10 million a minute.
+Knight Capital, 1 August 2012. A rogue trading system ran for 45 minutes and lost
+[US\$440 million]{.out} (about \$10 million a minute).
 
 ::: {.credit}
 Knight Capital Group. Headline: BBC News, 11 August 2012.
@@ -323,7 +335,7 @@ radio samples were discrete, and the satellite image was discrete in two spatial
 rather than in time.
 :::
 
-## What will we learn in this course?
+## What will we learn in this course?{.smaller}
 
 **Continuous-time signals** and **linear, time-invariant systems**.
 
@@ -381,6 +393,6 @@ These are the foundations of:
 Signals and systems sits at the intersection of **differential equations**,
 **linear algebra**, **complex numbers** and **trigonometry**.
 
-Today's lecture: the exponential function, Euler's formula,
+Rest of today's lecture: the exponential function, Euler's formula,
 and the complex plane.
 :::
