@@ -34,7 +34,7 @@
     if (xl) ctx.fillText(xl, x1 - 14, cy - 6);
     if (yl) ctx.fillText(yl, cx + 6, y0 + 12);
   }
-  function ctrlRow(host) {
+  function ctrlRow(host, label) {
     const bar = document.createElement("div");
     bar.style.cssText = "display:flex;align-items:center;gap:10px;margin-top:8px;font:14px Arial;color:" + INK;
     const btn = document.createElement("button");
@@ -44,7 +44,14 @@
     const sl = document.createElement("input");
     sl.type = "range";
     sl.style.cssText = "flex:1;accent-color:" + NAVY + ";";
-    bar.appendChild(btn); bar.appendChild(sl);
+    bar.appendChild(btn);
+    if (label) {
+      const lb = document.createElement("span");
+      lb.textContent = label;
+      lb.style.cssText = "white-space:nowrap;color:" + INK + ";";
+      bar.appendChild(lb);
+    }
+    bar.appendChild(sl);
     host.appendChild(bar);
     return { btn, sl };
   }
@@ -97,7 +104,7 @@
       ctx.fillStyle = INK; ctx.font = "14px Arial";
       ctx.fillText("e^{j\u03B8} = cos\u03B8 + j sin\u03B8", cx - 78, cy + R + 42);
     }
-    const { btn, sl } = ctrlRow(host);
+    const { btn, sl } = ctrlRow(host, "θ");
     sl.min = 0; sl.max = MAXT; sl.step = 0.01; sl.value = 0.9;
     sl.addEventListener("input", () => draw(parseFloat(sl.value)));
     looper(btn, dt => {
@@ -109,50 +116,67 @@
  
   // ========================================================================
   // (b) Phasor sum:  3e^{jωt} + 4je^{jωt} = 5e^{j0.927}e^{jωt}
+  //     Stacked layout: phasor diagram on top, x(t) = Re(...) unrolling
+  //     downwards beneath it, sharing the same horizontal Re axis. The real
+  //     part is therefore read off VERTICALLY: a plumb line dropped from the
+  //     tip of the resultant lands exactly on the pen of the waveform.
   // ========================================================================
   function sum() {
     const host = document.getElementById("w-sum"); if (!host) return;
-    const W = 720, H = 340, cv = document.createElement("canvas");
+    const W = 460, H = 640, cv = document.createElement("canvas");
     host.appendChild(cv); const ctx = dpiCanvas(cv, W, H);
-    const cx = 160, cy = H / 2, S = 26, x0 = 320, xspan = 360, MAXT = 4 * Math.PI;
+    const cx = W / 2, cy = 175, S = 26;                    // phasor origin, px per unit
+    const yTop = 330, yBot = 620, tspan = yBot - yTop;     // t = 0 at yTop, increasing down
+    const MAXT = 4 * Math.PI;
     const A1 = 3, A2 = 4, ph2 = Math.PI / 2, Ar = 5, phr = Math.atan2(4, 3);
+    // label at the midpoint of a segment, offset perpendicular to it
+    function segLabel(text, ax, ay, bx, by, color, off) {
+      const dx = bx - ax, dy = by - ay, L = Math.hypot(dx, dy) || 1;
+      ctx.fillStyle = color;
+      ctx.fillText(text,
+        (ax + bx) / 2 - dy / L * off - ctx.measureText(text).width / 2,
+        (ay + by) / 2 + dx / L * off + 4);
+    }
     function draw(th) {
       ctx.clearRect(0, 0, W, H);
-      axes(ctx, cx, cy, cx - 7 * S, cx + 7 * S, cy - 6 * S, cy + 6 * S, "Re", "Im");
-      // Rotate the diagram by +90° so the tip's on-screen HEIGHT equals the
-      // waveform value cos(θ+φ); the resultant tip then tracks the black dot.
-      const a = th + Math.PI / 2;
-      // P1 = 3 at angle a
-      const p1x = cx + S * A1 * Math.cos(a), p1y = cy - S * A1 * Math.sin(a);
-      // P2 = 4 at angle a+90, drawn tip-to-tail from P1
-      const p2x = p1x + S * A2 * Math.cos(a + ph2), p2y = p1y - S * A2 * Math.sin(a + ph2);
-      // resultant = 5 at angle a+phr
-      const rx = cx + S * Ar * Math.cos(a + phr), ry = cy - S * Ar * Math.sin(a + phr);
+      axes(ctx, cx, cy, cx - 6 * S, cx + 6 * S, cy - 5.6 * S, cy + 5.6 * S, "Re", "Im");
+      // P1 = 3 at angle th
+      const p1x = cx + S * A1 * Math.cos(th), p1y = cy - S * A1 * Math.sin(th);
+      // P2 = 4 at angle th+90, drawn tip-to-tail from P1
+      const p2x = p1x + S * A2 * Math.cos(th + ph2), p2y = p1y - S * A2 * Math.sin(th + ph2);
+      // resultant = 5 at angle th+phr (coincides with the tip of P2)
+      const rx = cx + S * Ar * Math.cos(th + phr), ry = cy - S * Ar * Math.sin(th + phr);
       arrow(ctx, cx, cy, p1x, p1y, NAVY, 2);
       arrow(ctx, p1x, p1y, p2x, p2y, OUT, 2);
       arrow(ctx, cx, cy, rx, ry, "#111", 3);
-      // waveform of Re(resultant) = 5 cos(ωt + 0.927)
-      axes(ctx, x0, cy, x0 - 6, x0 + xspan, cy - 6 * S, cy + 6 * S, "\u03C9t", "");
+      ctx.font = "13px Arial";
+      segLabel("3", cx, cy, p1x, p1y, NAVY, 14);
+      segLabel("4j", p1x, p1y, p2x, p2y, OUT, 14);
+      segLabel("5∠ 0.927", cx, cy, rx, ry, "#111", -18);
+      // read-off: plumb line from the tip of the resultant straight down to the trace
+      ctx.strokeStyle = GREY; ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(rx, yTop); ctx.stroke();
+      ctx.setLineDash([]);
+      // waveform of Re(resultant) = 5 cos(ωt + 0.927): value horizontal, time downwards
+      arrow(ctx, cx - 6 * S, yTop, cx + 6 * S, yTop, GREY, 1);   // x axis, shares Re
+      arrow(ctx, cx, yTop, cx, yBot, GREY, 1);                   // t axis, downwards
+      ctx.fillStyle = GREY; ctx.font = "13px Arial";
+      ctx.fillText("x", cx + 6 * S - 18, yTop - 8);
+      ctx.fillText("ωt", cx + 8, yBot - 4);
       ctx.strokeStyle = "#111"; ctx.lineWidth = 2; ctx.beginPath();
-      for (let u = 0; u <= xspan; u++) {
-        const val = Ar * Math.cos(th - u / xspan * MAXT + phr);
-        const px = x0 + u, py = cy - S * val;
-        u ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+      for (let v = 0; v <= tspan; v++) {
+        const val = Ar * Math.cos(th - v / tspan * MAXT + phr);
+        const px = cx + S * val, py = yTop + v;
+        v ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
       }
       ctx.stroke();
-      ctx.strokeStyle = GREY; ctx.setLineDash([3, 3]); ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(rx, ry); ctx.lineTo(x0, cy - S * Ar * Math.cos(th + phr)); ctx.stroke();
-      ctx.setLineDash([]);
+      // pen sits at v = 0, i.e. x = cx + S*Ar*cos(th + phr) = rx exactly
       ctx.fillStyle = "#111";
-      ctx.beginPath(); ctx.arc(x0, cy - S * Ar * Math.cos(th + phr), 4, 0, 2 * Math.PI); ctx.fill();
-      ctx.font = "13px Arial";
-      ctx.fillStyle = NAVY; ctx.fillText("3", cx + 6, cy + 16);
-      ctx.fillStyle = OUT; ctx.fillText("4j", p1x + 8, (p1y + p2y) / 2);
-      ctx.fillStyle = "#111"; ctx.fillText("5\u2220 0.927", (cx + rx) / 2 - 6, (cy + ry) / 2 - 6);
+      ctx.beginPath(); ctx.arc(rx, yTop, 4, 0, 2 * Math.PI); ctx.fill();
       ctx.fillStyle = INK; ctx.font = "14px Arial";
-      ctx.fillText("x(t) = 5 cos(\u03C9t + 0.927)", x0 + 30, cy - 6 * S + 6);
+      ctx.fillText("x(t) = Re(5e^{j0.927} e^{jωt}) = 5 cos(ωt + 0.927)", 6, H - 8);
     }
-    const { btn, sl } = ctrlRow(host);
+    const { btn, sl } = ctrlRow(host, "ωt");
     sl.min = 0; sl.max = MAXT; sl.step = 0.01; sl.value = 0.6;
     sl.addEventListener("input", () => draw(parseFloat(sl.value)));
     looper(btn, dt => { let t = parseFloat(sl.value) + dt * 1.4; if (t > MAXT) t = 0; sl.value = t; draw(t); });
@@ -304,11 +328,7 @@
     }
     function drawW() {
       gw.clearRect(0, 0, Ww, H);
-      // reserve a band at the top for the two curve labels and one at the bottom for
-      // the readout, so neither can land on the waveforms
-      const topPad = 48, botPad = 50;
-      const cy = (topPad + (H - botPad)) / 2, amp = (H - topPad - botPad) / 2;
-      const x0 = 30, span = Ww - 40;
+      const cy = H / 2, amp = H / 2 - 20, x0 = 30, span = Ww - 40;
       axes(gw, x0, cy, x0 - 6, x0 + span + 6, cy - amp - 8, cy + amp + 8, "\u03C9t", "");
       // v(t)=cos(ωt) navy ; i(t)=cos(ωt-∠Z) normalised (amplitude shown as text)
       for (const [ph, col, lw] of [[0, NAVY, 2.4], [-Zang(), OUT, 2.4]]) {
@@ -320,15 +340,13 @@
         }
         gw.stroke();
       }
-      // legend sits in the reserved top band, above the plot area
       gw.font = "13px Arial";
-      gw.fillStyle = NAVY; gw.fillText("v(t) = V cos \u03C9t", x0, 16);
-      gw.fillStyle = OUT; gw.fillText("i(t) = (V/|Z|) cos(\u03C9t \u2212 \u2220Z)", x0, 34);
-      // readout sits in the reserved bottom band
+      gw.fillStyle = NAVY; gw.fillText("v(t) = V cos \u03C9t", x0 + 6, cy - amp + 2);
+      gw.fillStyle = OUT; gw.fillText("i(t) = (V/|Z|) cos(\u03C9t \u2212 \u2220Z)", x0 + 6, cy - amp + 20);
       gw.fillStyle = INK;
-      gw.fillText("|Z| = " + Zmag().toFixed(1) + "   \u2220Z = " + Zang().toFixed(3) + " rad", x0, H - 26);
+      gw.fillText("|Z| = " + Zmag().toFixed(1) + "   \u2220Z = " + Zang().toFixed(3) + " rad", x0 + 6, cy + amp + 4);
       gw.fillStyle = "#666"; gw.font = "12px Arial";
-      gw.fillText("(waveforms normalised; true output amplitude = V/|Z|)", x0, H - 8);
+      gw.fillText("(waveforms normalised; true output amplitude = V/|Z|)", x0 + 6, cy + amp + 22);
     }
     function redraw() { drawP(); drawW(); }
     // reactance slider
