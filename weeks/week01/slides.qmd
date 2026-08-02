@@ -77,6 +77,14 @@ Times, rooms and which lab weeks apply to you are on your timetable.
 There is no tutorial in Week 1.
 :::
 
+## Course materials
+
+ Lectures, tutorials and lab instructions will be posted on the course website: [tchaffey.com/elec2302]{.navy}.
+
+ Anything to do with assessments: **Canvas**.
+
+ Discussion: Ed.
+
 ## Assessment
 
 | Component | Weight | When |
@@ -202,11 +210,11 @@ fastest route to an answer.
 * Ask questions
 * Have fun!
 :::
+:::
 
 **Pass/credit standard:** able perform calculations and system analysis to a sufficient standard for third year courses.
 
 **D/HD standard:** understand the underlying concepts and structures, perform analysis beyond the example problems.
-:::
 
 # What is this course about?
 
