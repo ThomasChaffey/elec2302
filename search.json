@@ -4,7 +4,7 @@
     "href": "weeks/week01/slides.html#course-outline",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Course outline",
-    "text": "Course outline\n\n\nFoundations Weeks 1–3\n\nSignals, systems, differential equations, Euler’s formula\nSignals as vectors, systems as maps\nLTI systems, impulse response, convolution\n\n\n\nFrequency domain Weeks 4–6\n\nPeriodic signals and the Fourier series\nAperiodic signals and the Fourier transform\nFrequency response\n\n\n\nSystems and Laplace Weeks 7–9\n\nSystem response and stability\nThe Laplace transform\nSystem analysis with the Laplace transform\n\n\n\nApplications Weeks 10–13\n\nFilter design\nSignal modulation\nSystem identification\nAdvanced topics\n\n\n\n\nEverything is a different way of looking at the same object: a linear, time-invariant system.",
+    "text": "Course outline\n\n\nFoundations Weeks 1–3\n\nSignals, systems, differential equations, Euler’s formula\nSignals as vectors, systems as maps\nLTI systems, impulse response, convolution\n\n\n\nFrequency domain Weeks 4–6\n\nPeriodic signals and the Fourier series\nAperiodic signals and the Fourier transform\nFrequency response\n\n\n\nSystems and Laplace Weeks 7–9\n\nSystem response and stability\nThe Laplace transform\nSystem analysis with the Laplace transform\n\n\n\nApplications Weeks 10–13\n\nFilter design\nSignal modulation\nSystem identification\nAdvanced topics\n\n\n\n\nEverything is a different way of looking at the same object: a linear, time-invariant system. Both mathematically elegant and extremely useful: the core of electrical engineering.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -16,6 +16,17 @@
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Classes",
     "text": "Classes\nLecture — two hours a week, Monday 15:00-17:00. Typeset notes go up a couple of days before.\nTutorials — two hours, Weeks 2–13. Ten tutorials (two weeks are labs). This is where the quizzes happen.\nLabs — two practicals on the TIMS hardware, in Weeks 6 and 8 for half the tutorial groups and Weeks 7 and 9 for the other half. Attendance is mandatory.\n\nTimes, rooms and which lab weeks apply to you are on your timetable. There is no tutorial in Week 1.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#course-materials",
+    "href": "weeks/week01/slides.html#course-materials",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Course materials",
+    "text": "Course materials\nLectures, tutorials and lab instructions will be posted on the course website: tchaffey.com/elec2302.\nAnything to do with assessments: Canvas.\nDiscussion: Ed.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -44,11 +55,11 @@
     ]
   },
   {
-    "objectID": "weeks/week01/slides.html#the-quizzes-are-hurdles",
-    "href": "weeks/week01/slides.html#the-quizzes-are-hurdles",
+    "objectID": "weeks/week01/slides.html#quizzes",
+    "href": "weeks/week01/slides.html#quizzes",
     "title": "ELEC2302/9302: Signals and Systems",
-    "section": "The quizzes are hurdles",
-    "text": "The quizzes are hurdles\nThree quizzes, each 30 minutes, in your tutorial.\n\nYou need 70% in each quiz to pass the unit.\n\n\nMore than one attempt at every quiz: three at Quizzes 1 and 2, two at Quiz 3.\nEach attempt is in a later tutorial, and your best mark is the one that counts.\nThe questions change between attempts but test the same material. You cannot look up last week’s answers.\n\n\nThe bar is high because you get more than one go at it. Needing a second attempt is normal!\n\n\nAn HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 2.5% top up marks (per quiz).",
+    "section": "Quizzes",
+    "text": "Quizzes\nThree quizzes, each 30 minutes, in your tutorial.\n\nYou need 70% in each quiz to pass the unit.\n\n\nMore than one attempt at every quiz: three at Quizzes 1 and 2, two at Quiz 3.\nEach attempt is in a later tutorial, and your best mark is the one that counts.\nThe questions change between attempts but test the same material. You cannot look up last week’s answers.\n\n\nThe bar is high because you get more than one go at it. Needing a second attempt is normal!\n\n\nAn HD in Quiz 2 or Quiz 3 unlocks a Bonus Quiz, where you can earn up to 2.5% top up marks (per quiz).",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -70,7 +81,18 @@
     "href": "weeks/week01/slides.html#what-the-quizzes-look-like",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "What the quizzes look like",
-    "text": "What the quizzes look like\nOn Canvas, locked-down browser\n\nShort numeric answers — calculations\nMultiple choice — concepts and reasoning\n\nYou get a formula sheet and can use a calculator. The formula sheet is on Canvas.",
+    "text": "What the quizzes look like\nOn Canvas, locked-down browser\n\nShort numeric answers — calculations\nMultiple choice — concepts and reasoning\n\nYou get a formula sheet and can use a calculator. The formula sheet is on the course website tchaffey.com/elec2302.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#tutorials-and-exam",
+    "href": "weeks/week01/slides.html#tutorials-and-exam",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Tutorials and exam",
+    "text": "Tutorials and exam\nIn the tutorials, you will work through practice problems. These are designed to develop and extend the concepts in the lectures and give you practical experience analysing signals and systems.\nThe exam will be closely modelled on the tutorial problems.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -92,7 +114,7 @@
     "href": "weeks/week01/slides.html#expectations",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Expectations",
-    "text": "Expectations\n\n\nWhat you can expect of us\n\nQuiz and prework marks within one week\nAnswering emails and Ed posts within two working days (aiming for one)\nAnswering questions during tutorials, after lecture\nClear guidelines for quizzes and the exam\n\n\n\nWhat we expect of you\n\nAttend your tutorials and labs\nAttempt prework before the tutorial\nAttend or read lecture before the tutorial\nAsk questions\nHave fun!",
+    "text": "Expectations\n\n\nWhat you can expect of us\n\nQuiz and prework marks within one week\nAnswering emails and Ed posts within two working days (aiming for one)\nAnswering questions during tutorials, after lecture\nClear guidelines for quizzes and the exam\n\n\n\nWhat we expect of you\n\nAbout 6hrs independent study per week, as well as tutorial and lecture\nAttend your tutorials and labs\nAttempt prework before the tutorial\nAttend or read lecture before the tutorial\nComplete the tutorial problems after the tutorial\nAsk questions\nHave fun!\n\n\n\nPass/credit standard: able perform calculations and system analysis to a sufficient standard for third year courses.\nD/HD standard: understand the underlying concepts and structures, perform analysis beyond the example problems.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -136,7 +158,7 @@
     "href": "weeks/week01/slides.html#example-3-algorithmic-trading",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Example 3: algorithmic trading",
-    "text": "Example 3: algorithmic trading\n\n\n\nKnight Capital, 1 August 2012. A trading system went live, ran for 45 minutes, and lost US$440 million — about $10 million a minute.\n\nKnight Capital Group. Headline: BBC News, 11 August 2012.",
+    "text": "Example 3: algorithmic trading\n\n\n\nKnight Capital, 1 August 2012. A rogue trading system ran for 45 minutes and lost US$440 million (about $10 million a minute).\n\nHeadline: BBC News, 11 August 2012.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -180,7 +202,7 @@
     "href": "weeks/week01/slides.html#example-7-convolution-for-machine-learning",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Example 7: convolution for machine learning",
-    "text": "Example 7: convolution for machine learning\n\n\n\nA neural network built from memristor crossbars. The convolution (an operation we will learn in Week 3) is the foundation of Convolutional Neural Networks. The figure shows an experimental design for computing the convolution in the array itself, by Ohm’s law and Kirchhoff’s current law. This is two orders of magnitude more energy-efficient than a GPU.\n\nYao, P., Wu, H., Gao, B., Tang, J., Zhang, Q., Zhang, W., Yang, J. J., & Qian, H. (2020). Fully hardware-implemented memristor convolutional neural network. Nature, 577, 641–646.",
+    "text": "Example 7: convolution for machine learning\n\n\n\n\n\n\nA neural network built from memristor crossbars. The convolution (an operation we will learn in Week 3) is the foundation of Convolutional Neural Networks. The figure shows an experimental design for computing the convolution in the array itself, by Ohm’s law and Kirchhoff’s current law. This is two orders of magnitude more energy-efficient than a GPU.\n\nYao, P., Wu, H., Gao, B., Tang, J., Zhang, Q., Zhang, W., Yang, J. J., & Qian, H. (2020). Fully hardware-implemented memristor convolutional neural network. Nature, 577, 641–646.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
@@ -224,7 +246,29 @@
     "href": "weeks/week01/slides.html#where-we-start",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Where we start",
-    "text": "Where we start\n\nSignals and systems sits at the intersection of differential equations, linear algebra, complex numbers and trigonometry.\nToday’s lecture: the exponential function, Euler’s formula, and the complex plane.",
+    "text": "Where we start\n\nSignals and systems sits at the intersection of differential equations, linear algebra, complex numbers and trigonometry.\nRest of today’s lecture: the exponential function, Euler’s formula, and the complex plane.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#eulers-formula",
+    "href": "weeks/week01/slides.html#eulers-formula",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Euler’s formula",
+    "text": "Euler’s formula\n e^{j\\theta} = \\cos\\theta + j\\sin\\theta",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/slides.html#adding-sinusoids",
+    "href": "weeks/week01/slides.html#adding-sinusoids",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Adding sinusoids",
+    "text": "Adding sinusoids\n 3\\,e^{j\\omega t} + 4j\\,e^{j\\omega t} = 5\\,e^{j0.927}e^{j\\omega t}",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
