@@ -91,7 +91,9 @@ There is no tutorial in Week 1.
 
  Anything to do with assessments: **Canvas**.
 
- Discussion: Ed.
+ Discussion: **Ed**.
+
+ [There is a prereq revision quiz available on Canvas.]{.navy}
 
 ## Assessment
 
