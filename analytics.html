@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 1 — Lecture notes</title>
+<title>Analytics on this site</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,21 +26,19 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/formula-sheet.pdf" rel="next">
-<link href="../../weeks/week01/slides.html" rel="prev">
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b4406fb5073a7666fb8a26161aeb2ce7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-b4406fb5073a7666fb8a26161aeb2ce7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -77,49 +75,6 @@ ul.task-list li input[type="checkbox"] {
 -->
 <script data-goatcounter="https://thomaschaffey.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
-  <script>document.addEventListener("DOMContentLoaded", function () {
- var mathElements = document.getElementsByClassName("math");
- var macros = [];
- for (var i = 0; i < mathElements.length; i++) {
-  var texText = mathElements[i].firstChild;
-  if (mathElements[i].tagName == "SPAN") {
-   katex.render(texText.data, mathElements[i], {
-    displayMode: mathElements[i].classList.contains('display'),
-    throwOnError: false,
-    macros: macros,
-    fleqn: false
-   });
-}}});
-  </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -132,7 +87,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week01/slides.html">Week 1 — Introduction</a></li><li class="breadcrumb-item"><a href="../../weeks/week01/notes.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Analytics on this site</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -146,7 +101,7 @@ window.Quarto = {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -161,13 +116,13 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week01/slides.html" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="./weeks/week01/slides.html" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Slides</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week01/notes.html" class="sidebar-item-text sidebar-link active">
+  <a href="./weeks/week01/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -175,7 +130,7 @@ window.Quarto = {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="./weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Quiz 1 formula sheet</span></a>
   </div>
 </li>
@@ -188,10 +143,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week01/slides.html">Week 1 — Introduction</a></li><li class="breadcrumb-item"><a href="../../weeks/week01/notes.html">Notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Week 1 — Lecture notes</h1>
-<p class="subtitle lead">The core: exponentials, Euler’s formula and the complex plane</p>
+<h1 class="title">Analytics on this site</h1>
 </div>
 
 
@@ -208,131 +162,29 @@ window.Quarto = {
 </header>
 
 
-<p>Signals &amp; Systems lives at the intersection of <strong>differential equations</strong>, <strong>linear algebra</strong>, <strong>complex numbers</strong> and <strong>trigonometry</strong>.</p>
-<section id="a-the-exponential-function" class="level2">
-<h2 class="anchored" data-anchor-id="a-the-exponential-function">(a) The exponential function</h2>
-<p>For <span class="math inline">z \in \mathbb{C}</span>, define the exponential by its power series:</p>
-<p><span class="math display"> e^{z} := 1 + z + \frac{z^{2}}{2!} + \frac{z^{3}}{3!} + \cdots </span></p>
-<p><strong>Properties.</strong> First, <span class="math inline">e^{0} = 1</span> (straight from the definition) <span class="math inline">\qquad(1)</span></p>
-<p><span class="math display">
-\begin{aligned}
-\frac{\mathrm{d}}{\mathrm{d}z}\,e^{z}
-&amp;= 0 + 1 + \frac{2z}{2!} + \frac{3z^{2}}{3!} + \cdots \\[2pt]
-&amp;= 1 + z + \frac{z^{2}}{2!} + \cdots \\[2pt]
-&amp;= e^{z}
-\end{aligned}
-\qquad(2)
-</span></p>
-<p>Combining the two properties:</p>
-<p><span class="math display"> \boxed{\,f(z) = f'(z), \qquad f(0) = 1\,} </span></p>
-<p>It turns out <span class="math inline">f(z) = e^{z}</span> is the unique solution to this differential equation, and in fact the differential equation can be used as an alternative definition.</p>
-<p><strong>Extension of (2).</strong> By the chain rule,</p>
-<p><span class="math display">
-\frac{\mathrm{d}}{\mathrm{d}t}\,e^{zt}
-= 0 + z + \frac{2t\,z^{2}}{2!} + \frac{3t^{2}z^{3}}{3!} + \cdots
-= z\,e^{zt}.
-</span></p>
+<p>This site collects a small amount of anonymous usage data, and this page explains exactly what and why. Nothing here is linked to you, to your student record, or to your marks.</p>
+<section id="what-is-collected" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-collected">What is collected</h2>
+<p>The site uses <a href="https://www.goatcounter.com">GoatCounter</a>, an open-source analytics tool that does not use cookies and does not track you across websites. For each page view it records:</p>
+<ul>
+<li>the page you looked at, and the page you arrived from</li>
+<li>your browser, operating system, screen size and country</li>
+<li>whether you interacted with one of the interactive widgets in the notes, and which one</li>
+</ul>
+<p>This is the reason for tracking: the widgets take effort to build, and I would like to know whether they are worth building for the remaining weeks. The count records <em>that</em> a widget was used, once per visit — not what you did with it, not how long for, and not in what order.</p>
 </section>
-<section id="b-eulers-formula" class="level2">
-<h2 class="anchored" data-anchor-id="b-eulers-formula">(b) Euler’s formula</h2>
-<p>Let’s now represent sinusoids as complex numbers. Let</p>
-<p><span class="math display"> g(\theta) = \frac{\cos\theta + j\sin\theta}{e^{j\theta}} . </span></p>
-<p>Then</p>
-<p><span class="math display">
-\begin{aligned}
-g'(\theta)
-&amp;= \big(-\sin\theta + j\cos\theta\big)e^{-j\theta}
-   - \big(\cos\theta + j\sin\theta\big)\,j\,e^{-j\theta} \\[2pt]
-&amp;= \big(-\sin\theta + j\cos\theta\big)e^{-j\theta}
-   - \big(-\sin\theta + j\cos\theta\big)e^{-j\theta} \\[2pt]
-&amp;= 0 .
-\end{aligned}
-</span></p>
-<p>So <span class="math inline">g(\theta) = C</span> (a constant):</p>
-<p><span class="math display"> C\,e^{j\theta} = \cos\theta + j\sin\theta . </span></p>
-<p>Set <span class="math inline">\theta = 0</span>. Then <span class="math inline">C = 1</span>, so we have</p>
-<p><span class="math display"> \boxed{\,e^{j\theta} = \cos\theta + j\sin\theta\,} </span></p>
-<p><strong>What does this mean graphically?</strong> <span class="math inline">e^{j\theta}</span> is the unit vector at angle <span class="math inline">\theta</span>; its real part is <span class="math inline">\cos\theta</span> and its imaginary part is <span class="math inline">\sin\theta</span>. Advance <span class="math inline">\theta</span> and the vector rotates, its shadow tracing a sinusoid.</p>
-<div id="w-euler" class="widget"></div>
-<p>In particular: <span class="math inline">\;e^{j\pi/2} = j, \qquad e^{j\pi} = -1.</span></p>
-<section id="manipulating-sinusoids-using-complex-numbers" class="level3">
-<h3 class="anchored" data-anchor-id="manipulating-sinusoids-using-complex-numbers">Manipulating sinusoids using complex numbers</h3>
-<p>Why use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,</p>
-<p><span class="math display"> x_1(t) = 3\cos\omega t, \qquad x_2(t) = 4\cos\!\big(\omega t + \tfrac{\pi}{2}\big),
-   \qquad x_1(t) + x_2(t) = \;? </span></p>
-<p>The direct way uses the identity <span class="math inline">\cos(\theta + \tfrac{\pi}{2}) = -\sin\theta</span>, so <span class="math inline">x_2(t) = -4\sin\omega t</span>, giving</p>
-<p><span class="math display"> 3\cos\omega t - 4\sin\omega t \;\equiv\; A\cos(\omega t + \varphi)
-   \quad\longrightarrow\quad \text{match coefficients} \dots </span></p>
-<p>With complex numbers:</p>
-<p><span class="math display">
-\begin{aligned}
-x_1(t) &amp;= \operatorname{Re}\!\big(3\,e^{j\omega t}\big) \\[2pt]
-x_2(t) &amp;= \operatorname{Re}\!\big(4\,e^{\,j\omega t + j\pi/2}\big)
-        = \operatorname{Re}\!\big(4\,e^{j\pi/2}\,e^{j\omega t}\big)
-        = \operatorname{Re}\!\big(4j\,e^{j\omega t}\big) \\[2pt]
-x_1(t) + x_2(t)
-        &amp;= \operatorname{Re}\!\big(3\,e^{j\omega t} + 4j\,e^{j\omega t}\big) \\[2pt]
-        &amp;= \operatorname{Re}\!\big((3 + 4j)\,e^{j\omega t}\big) \\[2pt]
-        &amp;= \operatorname{Re}\!\big(5\,e^{j0.927}\,e^{j\omega t}\big)
-        = 5\cos(\omega t + 0.927).
-\end{aligned}
-</span></p>
-<div id="w-sum" class="widget"></div>
-<p>The triangle <span class="math inline">3 + 4j = 5\angle 53.1^{\circ}</span> rotates.</p>
+<section id="what-is-not-collected" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-not-collected">What is not collected</h2>
+<p>No cookies. No name, email, student ID, IP address or any other identifier is stored. GoatCounter distinguishes one visitor from another using a hash of your IP address and browser version that is held in memory for eight hours and then discarded; it is never written to disk and cannot be reversed. Nothing is shared with advertisers, and the data is not used for anything to do with assessment.</p>
 </section>
+<section id="opting-out" class="level2">
+<h2 class="anchored" data-anchor-id="opting-out">Opting out</h2>
+<p>Any ad blocker or tracker blocker will stop the counting, as will <code>Do Not Track</code> in some browsers. The widgets and the rest of the site work exactly the same either way, and nothing is lost by blocking it.</p>
+<p>If you would rather not be counted and do not want to install anything, email me and I will tell you the one-line setting to paste into your browser console.</p>
 </section>
-<section id="c-eulers-formula-differential-equations" class="level2">
-<h2 class="anchored" data-anchor-id="c-eulers-formula-differential-equations">(c) Euler’s formula &amp; differential equations</h2>
-<p>Another differential equation:</p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}\,x(t) = j\,x(t) \qquad(3) </span></p>
-<p>We’ve already seen <span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}e^{zt} = z\,e^{zt}</span>. Set <span class="math inline">z = j</span>:</p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}\,e^{jt} = j\,e^{jt}. </span></p>
-<p>This solves (3). What does it look like in <span class="math inline">\mathbb{C}</span>, and what does the real part look like? What about other choices of <span class="math inline">z</span>?</p>
-<p><span class="math display"> z = -1:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{-t} = -e^{-t}. \qquad\text{No imaginary component.} </span></p>
-<p><span class="math display"> z = -1 + j:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{(-1+j)t} = (-1+j)\,e^{(-1+j)t}. </span></p>
-<p>The widget below plots the trajectory of <span class="math inline">e^{zt}</span> for several values of <span class="math inline">z</span>.</p>
-<div id="w-ezt" class="widget"></div>
-<div class="note">
-<p>The position of <span class="math inline">z</span> determines the behaviour: oscillations, decay, growth.</p>
-</div>
-</section>
-<section id="d-what-has-this-got-to-do-with-electrical-engineering" class="level2">
-<h2 class="anchored" data-anchor-id="d-what-has-this-got-to-do-with-electrical-engineering">(d) What has this got to do with electrical engineering?</h2>
-<p>Example: an RLC circuit (the <strong>system</strong>) with a sinusoidal voltage input (the <strong>signal</strong>).</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="circuit-rlc.svg" class="img-fluid figure-img" width="540"></p>
-<figcaption>Series RLC circuit.</figcaption>
-</figure>
-</div>
-</div>
-<p>KVL around the loop:</p>
-<p><span class="math display"> v(t) = v_R + v_L + v_C </span></p>
-<p><span class="math display"> v(t) = R\,i(t) + L\,\frac{\mathrm{d}i(t)}{\mathrm{d}t}
-   + \frac{1}{C}\!\int_{-\infty}^{t}\! i(\tau)\,\mathrm{d}\tau \qquad(4) </span></p>
-<p>with the lower limit taken to <span class="math inline">-\infty</span> for the steady-state response. Let <span class="math inline">v(t) = V\cos\omega t = \operatorname{Re}(V e^{j\omega t})</span> and look for a current of the same form, <span class="math inline">i(t) = \operatorname{Re}(I e^{j\omega t})</span>.</p>
-<p>Substitute in (4):</p>
-<p><span class="math display">
-\begin{aligned}
-V e^{j\omega t}
-&amp;= R I e^{j\omega t} + L\frac{\mathrm{d}}{\mathrm{d}t}I e^{j\omega t}
-   + \frac{1}{C}\!\int_{-\infty}^{t}\! I e^{j\omega\tau}\,\mathrm{d}\tau \\[2pt]
-&amp;= R I e^{j\omega t} + j\omega L\, I e^{j\omega t} + \frac{I}{j\omega C}\,e^{j\omega t}.
-\end{aligned}
-</span></p>
-<p>Divide through by <span class="math inline">e^{j\omega t}</span> (never zero):</p>
-<p><span class="math display"> V = I\underbrace{\Big(R + j\omega L + \tfrac{1}{j\omega C}\Big)}_{\text{impedance } Z(j\omega)}
-   \qquad\Longrightarrow\qquad I = \frac{V}{Z}. </span></p>
-<p>Suppose <span class="math inline">R = 30\,\Omega</span> and <span class="math inline">\omega L - \tfrac{1}{\omega C} = 40\,\Omega</span>. Then</p>
-<p><span class="math display"> Z = 30 + 40j = 50\,e^{j0.927}, \qquad I = \frac{V}{50\,e^{j0.927}}, </span></p>
-<p><span class="math display"> i(t) = \operatorname{Re}(I e^{j\omega t}) = \frac{V}{50}\cos(\omega t - 0.927). </span></p>
-<p>The widget below plots input and output sinusoids for several values of the reactance <span class="math inline">Z</span>. For some values, the output lags the input, while for others, the output leads.</p>
-<div id="w-rlc" class="widget"></div>
-<div class="note">
-<p>The RLC circuit maps a sinusoid to a sinusoid with the <strong>same frequency</strong>. This is the foundation of the rest of the course.</p>
-</div>
-<script src="phasor-widgets.js"></script>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<p>Ask on Ed, or email <a href="mailto:thomas.chaffey@sydney.edu.au" class="email">thomas.chaffey@sydney.edu.au</a>.</p>
 
 
 </section>
@@ -743,18 +595,6 @@ V e^{j\omega t}
     }
   });
   </script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
-      <a href="../../weeks/week01/slides.html" class="pagination-link" aria-label="Slides">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Slides</span>
-      </a>          
-  </div>
-  <div class="nav-page nav-page-next">
-      <a href="../../weeks/formula-sheet.pdf" class="pagination-link" aria-label="Quiz 1 formula sheet">
-        <span class="nav-page-text">Quiz 1 formula sheet</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
-  </div>
-</nav>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -765,7 +605,7 @@ V e^{j\omega t}
 <p>Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney</p>
 </div>
     <div class="nav-footer-right">
-<p><a href="analytics.qmd">Analytics</a></p>
+<p><a href="./analytics.html">Analytics</a></p>
 </div>
   </div>
 </footer>

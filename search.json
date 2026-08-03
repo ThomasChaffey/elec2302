@@ -306,6 +306,41 @@
     ]
   },
   {
+    "objectID": "analytics.html",
+    "href": "analytics.html",
+    "title": "Analytics on this site",
+    "section": "",
+    "text": "This site collects a small amount of anonymous usage data, and this page explains exactly what and why. Nothing here is linked to you, to your student record, or to your marks."
+  },
+  {
+    "objectID": "analytics.html#what-is-collected",
+    "href": "analytics.html#what-is-collected",
+    "title": "Analytics on this site",
+    "section": "What is collected",
+    "text": "What is collected\nThe site uses GoatCounter, an open-source analytics tool that does not use cookies and does not track you across websites. For each page view it records:\n\nthe page you looked at, and the page you arrived from\nyour browser, operating system, screen size and country\nwhether you interacted with one of the interactive widgets in the notes, and which one\n\nThis is the reason for tracking: the widgets take effort to build, and I would like to know whether they are worth building for the remaining weeks. The count records that a widget was used, once per visit — not what you did with it, not how long for, and not in what order."
+  },
+  {
+    "objectID": "analytics.html#what-is-not-collected",
+    "href": "analytics.html#what-is-not-collected",
+    "title": "Analytics on this site",
+    "section": "What is not collected",
+    "text": "What is not collected\nNo cookies. No name, email, student ID, IP address or any other identifier is stored. GoatCounter distinguishes one visitor from another using a hash of your IP address and browser version that is held in memory for eight hours and then discarded; it is never written to disk and cannot be reversed. Nothing is shared with advertisers, and the data is not used for anything to do with assessment."
+  },
+  {
+    "objectID": "analytics.html#opting-out",
+    "href": "analytics.html#opting-out",
+    "title": "Analytics on this site",
+    "section": "Opting out",
+    "text": "Opting out\nAny ad blocker or tracker blocker will stop the counting, as will Do Not Track in some browsers. The widgets and the rest of the site work exactly the same either way, and nothing is lost by blocking it.\nIf you would rather not be counted and do not want to install anything, email me and I will tell you the one-line setting to paste into your browser console."
+  },
+  {
+    "objectID": "analytics.html#questions",
+    "href": "analytics.html#questions",
+    "title": "Analytics on this site",
+    "section": "Questions",
+    "text": "Questions\nAsk on Ed, or email thomas.chaffey@sydney.edu.au."
+  },
+  {
     "objectID": "weeks/week01/notes.html",
     "href": "weeks/week01/notes.html",
     "title": "Week 1 — Lecture notes",

@@ -55,6 +55,26 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<!--
+  Cookieless, privacy-preserving analytics (GoatCounter).
+
+  SETUP: sign up at https://www.goatcounter.com, pick a site code, and replace
+  YOURCODE below with it. Until you do, this script 404s harmlessly and no
+  counting happens. Free for non-commercial use, which covers a course site.
+
+  What it collects: page path, referrer, browser/OS/screen size, country.
+  No cookies, no cross-site tracking, no personal data stored. Visitors are
+  distinguished by an in-memory hash of IP + User-Agent that is discarded
+  after 8 hours and never written to disk.
+
+  Widget interactions arrive as events named widget-week1-euler and similar,
+  fired from weeks/week01/phasor-widgets.js. See the comment block at the top
+  of that file for how to read them and what the numbers do and do not mean.
+
+  To stop your own visits being counted, open the dashboard and use
+  Settings -> "Ignore this browser", or set the ignore-IP option.
+-->
+<script data-goatcounter="https://thomaschaffey.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
 
 </head>
@@ -597,8 +617,8 @@ ul.task-list li input[type="checkbox"] {
 <p>Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney</p>
 </div>
     <div class="nav-footer-right">
-      &nbsp;
-    </div>
+<p><a href="./analytics.html">Analytics</a></p>
+</div>
   </div>
 </footer>
 
