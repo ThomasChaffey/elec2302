@@ -1,5 +1,16 @@
 [
   {
+    "objectID": "weeks/week01/slides.html#signals-and-systems",
+    "href": "weeks/week01/slides.html#signals-and-systems",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Signals and systems",
+    "text": "Signals and systems\nA signal is a function that carries information: a voltage on a wire, the price of a barrel of oil, the brightness of a pixel, the pressure of the air in this room.\nA system takes a signal in and puts a signal out: an amplifier, a filter, a circuit, a trading algorithm, a lens.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
     "objectID": "weeks/week01/slides.html#course-outline",
     "href": "weeks/week01/slides.html#course-outline",
     "title": "ELEC2302/9302: Signals and Systems",
@@ -121,11 +132,11 @@
     ]
   },
   {
-    "objectID": "weeks/week01/slides.html#signals-and-systems",
-    "href": "weeks/week01/slides.html#signals-and-systems",
+    "objectID": "weeks/week01/slides.html#signals-and-systems-1",
+    "href": "weeks/week01/slides.html#signals-and-systems-1",
     "title": "ELEC2302/9302: Signals and Systems",
     "section": "Signals and systems",
-    "text": "Signals and systems\nA signal carries information: a voltage on a wire, the price of a barrel of oil, the brightness of a pixel, the pressure of the air in this room.\nA system takes a signal in and puts a signal out: an amplifier, a filter, a circuit, a trading algorithm, a lens.",
+    "text": "Signals and systems\nA signal is a function that carries information: a voltage on a wire, the price of a barrel of oil, the brightness of a pixel, the pressure of the air in this room.\nA system takes a signal in and puts a signal out: an amplifier, a filter, a circuit, a trading algorithm, a lens.",
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
