@@ -16,6 +16,14 @@ format:
 engine: markdown
 ---
 
+## Signals and systems
+
+A **signal** is a function that carries information: a voltage on a wire, the price of a barrel of oil, the
+brightness of a pixel, the pressure of the air in this room.
+
+A **system** takes a signal in and puts a signal out: an amplifier, a filter, a circuit,
+a trading algorithm, a lens.
+
 ## Course outline
 
 ::: {.blocks}
@@ -220,7 +228,7 @@ fastest route to an answer.
 
 ## Signals and systems
 
-A **signal** carries information: a voltage on a wire, the price of a barrel of oil, the
+A **signal** is a function that carries information: a voltage on a wire, the price of a barrel of oil, the
 brightness of a pixel, the pressure of the air in this room.
 
 A **system** takes a signal in and puts a signal out: an amplifier, a filter, a circuit,
