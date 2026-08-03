@@ -33,6 +33,32 @@ body { font-family: "Helvetica Neue", Arial, sans-serif; line-height: 1.5; }
 }
 .widget canvas { display: block; }
 
+// "other formats" link, mimicking Quarto's own format-links block. Used
+// manually because the PDF is built on demand rather than declared as a
+// second format on the page — see weeks/week01/figs/README.md.
+.format-links {
+  margin: 0.2em 0 1.4em;
+  font-size: 0.9rem;
+}
+.format-links .label {
+  color: #6c757d;
+  margin-right: 0.5em;
+}
+.format-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: #00468C;
+  text-decoration: none;
+  border: 1px solid rgba(0, 70, 140, 0.35);
+  border-radius: 4px;
+  padding: 2px 10px;
+}
+.format-links a:hover {
+  background: rgba(0, 70, 140, 0.07);
+  text-decoration: none;
+}
+
 // margin note / key-idea callout
 .note {
   border-left: 3px solid #00468C;

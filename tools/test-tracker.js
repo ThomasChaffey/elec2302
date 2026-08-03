@@ -5,7 +5,7 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
 
-const SRC = "/sessions/compassionate-modest-darwin/mnt/week01/phasor-widgets.js";
+const SRC = require("path").resolve(__dirname, "../weeks/week01/phasor-widgets.js");
 const code = fs.readFileSync(SRC, "utf8");
 
 const CTX_METHODS = ["setTransform", "clearRect", "beginPath", "moveTo", "lineTo", "stroke",

@@ -1,0 +1,15 @@
+{
+  "name": "elec2302-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build-time tooling for the ELEC2302 course site: renders the interactive widgets to static PNGs for the PDF notes.",
+  "scripts": {
+    "snapshot": "node snapshot-widgets.js",
+    "check": "node check-freshness.js",
+    "test": "node test-layout.js && node test-tracker.js && node check-freshness.js"
+  },
+  "dependencies": {
+    "canvas": "^3.2.0",
+    "jsdom": "^27.0.0"
+  }
+}

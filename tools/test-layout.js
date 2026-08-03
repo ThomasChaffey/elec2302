@@ -7,7 +7,7 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
 
-const SRC = "/sessions/compassionate-modest-darwin/mnt/website/weeks/week01/phasor-widgets.js";
+const SRC = require("path").resolve(__dirname, "../weeks/week01/phasor-widgets.js");
 const code = fs.readFileSync(SRC, "utf8");
 
 // Arial at 13px: cap height ~9px above baseline, descender ~3px below.

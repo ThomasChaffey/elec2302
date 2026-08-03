@@ -6,6 +6,7 @@ project:
     - "weeks/**/*.qmd"
   resources:
     - "weeks/*.pdf"
+    - "weeks/**/*.pdf"     # per-week notes PDFs, built by tools/build-pdf.sh
 
 website:
   title: ""

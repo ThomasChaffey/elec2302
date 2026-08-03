@@ -3,6 +3,21 @@ title: "Week 1 — Lecture notes"
 subtitle: "The core: exponentials, Euler's formula and the complex plane"
 ---
 
+::: {.content-visible when-format="html"}
+::: {.format-links}
+[Other formats:]{.label}
+```{=html}
+<a href="notes.pdf" title="Week 1 lecture notes as a PDF">&#128196;&nbsp;PDF</a>
+```
+:::
+:::
+
+::: {.content-visible when-format="pdf"}
+The figures below are snapshots of interactive widgets. The live versions, where
+you can move the sliders yourself, are at
+[tchaffey.com/elec2302](https://tchaffey.com/elec2302).
+:::
+
 Signals &amp; Systems lives at the intersection of **differential equations**, **linear
 algebra**, **complex numbers** and **trigonometry**.
 
@@ -70,9 +85,16 @@ $$ \boxed{\,e^{j\theta} = \cos\theta + j\sin\theta\,} $$
 its real part is $\cos\theta$ and its imaginary part is $\sin\theta$. Advance $\theta$ and
 the vector rotates, its shadow tracing a sinusoid.
 
+::: {.content-visible when-format="html"}
 ```{=html}
 <div id="w-euler" class="widget"></div>
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+![The unit vector $e^{j\theta}$ and its imaginary part unrolling into a
+sinusoid.](figs/w-euler.png){#fig-euler width=100%}
+:::
 
 In particular: $\;e^{j\pi/2} = j, \qquad e^{j\pi} = -1.$
 
@@ -105,9 +127,16 @@ x_1(t) + x_2(t)
 \end{aligned}
 $$
 
+::: {.content-visible when-format="html"}
 ```{=html}
 <div id="w-sum" class="widget"></div>
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+![Adding $3$ and $4j$ tip to tail. The resultant $5\angle 0.927$ rotates, and its
+real part traces $5\cos(\omega t + 0.927)$.](figs/w-sum.png){#fig-sum width=52%}
+:::
 
 The triangle $3 + 4j = 5\angle 53.1^{\circ}$ rotates.
 
@@ -130,9 +159,17 @@ $$ z = -1 + j:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{(-1+j)t} = (-1+j)\,e^{(-1
 
 The widget below plots the trajectory of  $e^{zt}$ for several values of $z$.
 
+::: {.content-visible when-format="html"}
 ```{=html}
 <div id="w-ezt" class="widget"></div>
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+![Left: the position of $z$. Middle: the trajectory of $e^{zt}$ in $\mathbb{C}$.
+Right: its real part against $t$. Shown for $z = j$, giving pure
+oscillation.](figs/w-ezt.png){#fig-ezt width=100%}
+:::
 
 ::: {.note}
 The position of $z$ determines the behaviour: oscillations, decay, growth.
@@ -183,9 +220,18 @@ $$ i(t) = \operatorname{Re}(I e^{j\omega t}) = \frac{V}{50}\cos(\omega t - 0.927
 
 The widget below plots input and output sinusoids for several values of the reactance $Z$.  For some values, the output lags the input, while for others, the output leads.
 
+::: {.content-visible when-format="html"}
 ```{=html}
 <div id="w-rlc" class="widget"></div>
 ```
+:::
+
+::: {.content-visible when-format="pdf"}
+![Input and output phasors (left) and waveforms (right), at $R = 30\,\Omega$ and
+$\omega L - 1/\omega C = 40\,\Omega$, so $|Z| = 50\,\Omega$ and $\angle Z = 0.927$.
+Amplitudes are normalised here; the live version can show the output at its true
+size, $R/|Z| = 0.60$ of the input.](figs/w-rlc.png){#fig-rlc width=100%}
+:::
 
 ::: {.note}
 The RLC circuit maps a sinusoid to a sinusoid with the **same frequency**. This is the
