@@ -183,13 +183,26 @@
     ctx.lineTo(x1 - h * Math.cos(a + 0.4), y1 - h * Math.sin(a + 0.4));
     ctx.closePath(); ctx.fill();
   }
+  // Text with an opaque backing, for labels that sit over a curve. Some
+  // traces (the growing spiral in the e^{zt} panel) sweep the whole canvas,
+  // so there is nowhere to move the label to; it has to sit on top instead.
+  // Assumes a white page, which is what the Quarto theme gives us.
+  function haloText(ctx, text, x, y, color) {
+    const w = ctx.measureText(text).width;
+    ctx.fillStyle = "rgba(255,255,255,0.85)";
+    ctx.fillRect(x - 3, y - 12, w + 6, 16);
+    ctx.fillStyle = color;
+    ctx.fillText(text, x, y);
+  }
   function axes(ctx, cx, cy, x0, x1, y0, y1, xl, yl) {
     ctx.strokeStyle = GREY; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(x0, cy); ctx.lineTo(x1, cy); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(cx, y0); ctx.lineTo(cx, y1); ctx.stroke();
-    ctx.fillStyle = GREY; ctx.font = "13px Arial";
-    if (xl) ctx.fillText(xl, x1 - 14, cy - 6);
-    if (yl) ctx.fillText(yl, cx + 6, y0 + 12);
+    ctx.font = "13px Arial";
+    // right-align the axis name to the end of the axis: fixed offsets clipped
+    // multi-character names ("Re z") off the edge of the narrower canvases
+    if (xl) haloText(ctx, xl, x1 - 4 - ctx.measureText(xl).width, cy - 6, GREY);
+    if (yl) haloText(ctx, yl, cx + 6, y0 + 12, GREY);
   }
   function ctrlRow(host, label) {
     const bar = document.createElement("div");
@@ -255,9 +268,11 @@
       arrow(ctx, cx, cy, tx, ty, NAVY, 3);
       // waveform: sinθ unrolling to the right (history trails right)
       axes(ctx, x0, cy, x0 - 6, x0 + xspan, cy - R - 20, cy + R + 20, "\u03B8", "");
+      // the trace stops short of the axis tip so it cannot run through the \u03B8 label
+      const tspan = xspan - 26;
       ctx.strokeStyle = NAVY; ctx.lineWidth = 2; ctx.beginPath();
-      for (let u = 0; u <= xspan; u++) {
-        const val = Math.sin(th - u / xspan * MAXT);
+      for (let u = 0; u <= tspan; u++) {
+        const val = Math.sin(th - u / tspan * MAXT);
         const px = x0 + u, py = cy - R * val;
         u ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
       }
@@ -325,7 +340,7 @@
       arrow(ctx, cx, yTop, cx, yBot, GREY, 1);                   // t axis, downwards
       ctx.fillStyle = GREY; ctx.font = "13px Arial";
       ctx.fillText("x", cx + 6 * S - 18, yTop - 8);
-      ctx.fillText("ωt", cx + 8, yBot - 4);
+      ctx.fillText("ωt", cx + 5.6 * S, yBot - 6);   // right of the trace envelope
       ctx.strokeStyle = "#111"; ctx.lineWidth = 2; ctx.beginPath();
       for (let v = 0; v <= tspan; v++) {
         const val = Ar * Math.cos(th - v / tspan * MAXT + phr);
@@ -393,13 +408,15 @@
       const v = Math.exp(z.re * tAnim);
       const px = Wc / 2 + sc * v * Math.cos(z.im * tAnim), py = H / 2 - sc * v * Math.sin(z.im * tAnim);
       arrow(gc, Wc / 2, H / 2, px, py, NAVY, 2);
-      gc.fillStyle = INK; gc.font = "13px Arial"; gc.fillText("e^{zt} in \u2102", 8, H - 8);
+      gc.font = "13px Arial"; haloText(gc, "e^{zt} in \u2102", 8, H - 8, INK);
     }
     function drawW() {
       gw.clearRect(0, 0, Ww, H);
       axes(gw, 30, H / 2, 24, Ww - 6, 8, H - 8, "t", "");
-      const xt = t => 30 + t / T * (Ww - 40);
-      const A = 1.0, yc = H / 2, ysc = (H / 2 - 16);
+      // stop the trace short of the axis tip so the "t" label stays clear of it
+      const xt = t => 30 + t / T * (Ww - 70);
+      // ysc leaves a top band clear for the label, same fix as the RLC panel
+      const A = 1.0, yc = H / 2, ysc = (H / 2 - 30);
       // envelope
       let emax = 0; for (let i = 0; i <= N; i++) emax = Math.max(emax, Math.exp(z.re * (i / N * T)));
       const norm = ysc / Math.max(1.0, emax);
@@ -471,13 +488,24 @@
     const cp = document.createElement("canvas"), cw = document.createElement("canvas");
     [cp, cw].forEach(c => { const d = document.createElement("div"); d.appendChild(c); row.appendChild(d); });
     const gp = dpiCanvas(cp, Wp, H), gw = dpiCanvas(cw, Ww, H);
-    const R = 30; let X = 40, th = 0.6;
+    const R = 30; let X = 40, th = 0.6, normalise = true;
     function Zmag() { return Math.hypot(R, X); }
     function Zang() { return Math.atan2(X, R); }         // ∠Z
     const MAXT = 4 * Math.PI;
+    // Output amplitude relative to the input, plotting i(t) in units of V/R:
+    //   |i| = V/|Z|, and one unit of the vertical scale is V/R,
+    //   so the drawn amplitude is R/|Z|  ->  1 when X = 0, falling as |X| grows.
+    // This is the same scaling the phasor arrow uses, so the two panels agree.
+    function outAmp() { return normalise ? 1 : R / Zmag(); }
     function drawP() {
       gp.clearRect(0, 0, Wp, H);
-      const cx = Wp / 2, cy = H / 2, Rp = 100;
+      // Labels go in a fixed legend rather than at the arrow tips. The arrows
+      // rotate through every angle, and in a panel this narrow a tip label
+      // either runs off the edge or lies along the arrow it is labelling;
+      // colour carries the association instead. Same legend position as the
+      // waveform panel alongside, so the two read as a pair.
+      const TOP = 46, BOT = 26;
+      const cx = Wp / 2, cy = (TOP + (H - BOT)) / 2, Rp = 100;
       axes(gp, cx, cy, cx - Rp - 18, cx + Rp + 18, cy - Rp - 18, cy + Rp + 18, "Re", "Im");
       // input V-phasor (unit), output I-phasor lags by ∠Z, length 1/|Z| scaled up for visibility
       const vx = cx + Rp * Math.cos(th), vy = cy - Rp * Math.sin(th);
@@ -485,32 +513,56 @@
       const ix = cx + iLen * Math.cos(iang), iy = cy - iLen * Math.sin(iang);
       arrow(gp, cx, cy, vx, vy, NAVY, 3);
       arrow(gp, cx, cy, ix, iy, OUT, 3);
-      gp.fillStyle = NAVY; gp.font = "13px Arial"; gp.fillText("V e^{j\u03C9t}", vx + 6, vy);
-      gp.fillStyle = OUT; gp.fillText("I e^{j\u03C9t}", ix + 6, iy + 4);
-      gp.fillStyle = INK; gp.font = "13px Arial";
+      gp.font = "13px Arial";
+      gp.fillStyle = NAVY; gp.fillText("V e^{j\u03C9t}", 8, 18);
+      gp.fillStyle = OUT;  gp.fillText("I e^{j\u03C9t}", 8, 36);
+      gp.fillStyle = INK;
       gp.fillText("lag \u2220Z = " + Zang().toFixed(2) + " rad", 8, H - 8);
     }
     function drawW() {
       gw.clearRect(0, 0, Ww, H);
-      const cy = H / 2, amp = H / 2 - 20, x0 = 30, span = Ww - 40;
+      // Reserve a band at the top for the two curve labels and a band at the
+      // bottom for the readout, then fit the trace between them. Previously
+      // amp ran to within 20px of the edge, so the peaks ran straight through
+      // the labels and the last caption line fell off the bottom entirely.
+      const TOP = 46, BOT = 46;
+      const cy = (TOP + (H - BOT)) / 2, amp = (H - BOT - TOP) / 2 - 6;
+      const x0 = 30, span = Ww - 40;
       axes(gw, x0, cy, x0 - 6, x0 + span + 6, cy - amp - 8, cy + amp + 8, "\u03C9t", "");
-      // v(t)=cos(ωt) navy ; i(t)=cos(ωt-∠Z) normalised (amplitude shown as text)
-      for (const [ph, col, lw] of [[0, NAVY, 2.4], [-Zang(), OUT, 2.4]]) {
+      // v(t) = cos ωt in navy; i(t) = A cos(ωt − ∠Z) in brick, where A is 1
+      // when normalised and R/|Z| when showing true relative amplitude
+      const tspan = span - 30;   // keeps the trace clear of the ωt axis label
+      const A = outAmp();
+      // faint guide at the input amplitude, so the shrinkage is readable
+      if (!normalise) {
+        gw.strokeStyle = ENV; gw.setLineDash([5, 4]); gw.lineWidth = 1;
+        for (const s of [1, -1]) {
+          gw.beginPath(); gw.moveTo(x0, cy - s * amp); gw.lineTo(x0 + tspan, cy - s * amp); gw.stroke();
+        }
+        gw.setLineDash([]);
+      }
+      for (const [ph, col, lw, a] of [[0, NAVY, 2.4, 1], [-Zang(), OUT, 2.4, A]]) {
         gw.strokeStyle = col; gw.lineWidth = lw; gw.beginPath();
-        for (let u = 0; u <= span; u++) {
-          const val = Math.cos(th - u / span * MAXT + ph);
+        for (let u = 0; u <= tspan; u++) {
+          const val = a * Math.cos(th - u / tspan * MAXT + ph);
           const px = x0 + u, py = cy - amp * val;
           u ? gw.lineTo(px, py) : gw.moveTo(px, py);
         }
         gw.stroke();
       }
+      // labels live in the reserved bands, clear of the trace
       gw.font = "13px Arial";
-      gw.fillStyle = NAVY; gw.fillText("v(t) = V cos \u03C9t", x0 + 6, cy - amp + 2);
-      gw.fillStyle = OUT; gw.fillText("i(t) = (V/|Z|) cos(\u03C9t \u2212 \u2220Z)", x0 + 6, cy - amp + 20);
+      gw.fillStyle = NAVY; gw.fillText("v(t) / V = cos \u03C9t", x0 + 6, 18);
+      gw.fillStyle = OUT; gw.fillText(normalise
+        ? "i(t), rescaled = cos(\u03C9t \u2212 \u2220Z)"
+        : "i(t) \u00B7 R/V = (R/|Z|) cos(\u03C9t \u2212 \u2220Z)", x0 + 6, 36);
       gw.fillStyle = INK;
-      gw.fillText("|Z| = " + Zmag().toFixed(1) + "   \u2220Z = " + Zang().toFixed(3) + " rad", x0 + 6, cy + amp + 4);
+      gw.fillText("|Z| = " + Zmag().toFixed(1) + "   \u2220Z = " + Zang().toFixed(3) + " rad", x0 + 6, H - 26);
       gw.fillStyle = "#666"; gw.font = "12px Arial";
-      gw.fillText("(waveforms normalised; true output amplitude = V/|Z|)", x0 + 6, cy + amp + 22);
+      gw.fillText(normalise
+        ? "(normalised; true output = " + (R / Zmag()).toFixed(2) + " \u00D7 input)"
+        : "(true amplitude R/|Z| = " + (R / Zmag()).toFixed(2) + "; dashed = input)",
+        x0 + 6, H - 8);
     }
     function redraw() { drawP(); drawW(); }
     // reactance slider
@@ -522,6 +574,26 @@
     function setX() { X = parseFloat(xsl.value); xlab.textContent = "reactance  \u03C9L \u2212 1/\u03C9C = " + X + " \u03A9"; redraw(); }
     xsl.addEventListener("input", function () { TRACK.hit(host.id, "slider"); setX(); });
     xrow.appendChild(xlab); xrow.appendChild(xsl); host.appendChild(xrow);
+
+    // normalisation toggle: off shows the output at its true size relative to
+    // the input, which is the point students usually miss when both curves are
+    // drawn the same height
+    const nrow = document.createElement("div");
+    nrow.style.cssText = "margin-top:6px;font:14px Arial;color:" + INK + ";";
+    const nlab = document.createElement("label");
+    nlab.style.cssText = "display:inline-flex;align-items:center;gap:7px;cursor:pointer;";
+    const ncb = document.createElement("input");
+    ncb.type = "checkbox"; ncb.checked = normalise;
+    ncb.style.cssText = "accent-color:" + NAVY + ";cursor:pointer;";
+    nlab.appendChild(ncb);
+    nlab.appendChild(document.createTextNode("normalise output amplitude"));
+    nrow.appendChild(nlab); host.appendChild(nrow);
+    ncb.addEventListener("change", function () {
+      TRACK.hit(host.id, "slider");
+      normalise = ncb.checked;
+      redraw();
+    });
+
     const { btn, sl } = ctrlRow(host);
     sl.min = 0; sl.max = MAXT; sl.step = 0.01; sl.value = th;
     sl.addEventListener("input", () => { th = parseFloat(sl.value); redraw(); });

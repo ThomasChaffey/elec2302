@@ -317,10 +317,10 @@ x_1(t) + x_2(t)
 \begin{aligned}
 V e^{j\omega t}
 &amp;= R I e^{j\omega t} + L\frac{\mathrm{d}}{\mathrm{d}t}I e^{j\omega t}
-   + \frac{1}{C}\!\int_{-\infty}^{t}\! I e^{j\omega\tau}\,\mathrm{d}\tau \\[2pt]
-&amp;= R I e^{j\omega t} + j\omega L\, I e^{j\omega t} + \frac{I}{j\omega C}\,e^{j\omega t}.
+   + \frac{1}{C}\!\int\! I e^{j\omega\tau}\,\mathrm{d}\tau \\[2pt]
+&amp;= R I e^{j\omega t} + j\omega L\, I e^{j\omega t} + \frac{I}{j\omega C}\,e^{j\omega t} + \frac{K}{C},
 \end{aligned}
-</span></p>
+</span> where <span class="math inline">K</span> is a constant of integration. Matching coefficients of <span class="math inline">e^{j\omega t}</span>, we find <span class="math inline">K = 0</span> (<span class="math inline">K</span> represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).</p>
 <p>Divide through by <span class="math inline">e^{j\omega t}</span> (never zero):</p>
 <p><span class="math display"> V = I\underbrace{\Big(R + j\omega L + \tfrac{1}{j\omega C}\Big)}_{\text{impedance } Z(j\omega)}
    \qquad\Longrightarrow\qquad I = \frac{V}{Z}. </span></p>

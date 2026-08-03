@@ -286,6 +286,17 @@
     ]
   },
   {
+    "objectID": "weeks/week01/slides.html#sinusoid-in-sinusoid-out",
+    "href": "weeks/week01/slides.html#sinusoid-in-sinusoid-out",
+    "title": "ELEC2302/9302: Signals and Systems",
+    "section": "Sinusoid in, sinusoid out",
+    "text": "Sinusoid in, sinusoid out\n V = I\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big) = I\\,Z(j\\omega)\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Slides"
+    ]
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "ELEC2302/9302 — Signals and Systems",
@@ -389,7 +400,7 @@
     "href": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
     "title": "Week 1 — Lecture notes",
     "section": "(d) What has this got to do with electrical engineering?",
-    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit.\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t}.\n\\end{aligned}\n\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nThe widget below plots input and output sinusoids for several values of the reactance Z. For some values, the output lags the input, while for others, the output leads.\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
+    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit.\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t} + \\frac{K}{C},\n\\end{aligned}\n where K is a constant of integration. Matching coefficients of e^{j\\omega t}, we find K = 0 (K represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nThe widget below plots input and output sinusoids for several values of the reactance Z. For some values, the output lags the input, while for others, the output leads.\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
     "crumbs": [
       "Week 1 — Introduction",
       "Notes"
