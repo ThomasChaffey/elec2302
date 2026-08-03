@@ -1,0 +1,44 @@
+---
+title: "Analytics on this site"
+toc: false
+---
+
+This site collects a small amount of anonymous usage data, and this page explains
+exactly what and why. Nothing here is linked to you, to your student record, or to
+your marks.
+
+## What is collected
+
+The site uses [GoatCounter](https://www.goatcounter.com), an open-source analytics
+tool that does not use cookies and does not track you across websites. For each page
+view it records:
+
+- the page you looked at, and the page you arrived from
+- your browser, operating system, screen size and country
+- whether you interacted with one of the interactive widgets in the notes, and which one
+
+This is the reason for tracking: the widgets take effort to build, and I
+would like to know whether they are worth building for the remaining weeks. The count
+records *that* a widget was used, once per visit — not what you did with it, not how
+long for, and not in what order.
+
+## What is not collected
+
+No cookies. No name, email, student ID, IP address or any other identifier is stored.
+GoatCounter distinguishes one visitor from another using a hash of your IP address and
+browser version that is held in memory for eight hours and then discarded; it is never
+written to disk and cannot be reversed. Nothing is shared with advertisers, and the
+data is not used for anything to do with assessment.
+
+## Opting out
+
+Any ad blocker or tracker blocker will stop the counting, as will `Do Not Track` in
+some browsers. The widgets and the rest of the site work exactly the same either way,
+and nothing is lost by blocking it.
+
+If you would rather not be counted and do not want to install anything, email me and
+I will tell you the one-line setting to paste into your browser console.
+
+## Questions
+
+Ask on Ed, or email <thomas.chaffey@sydney.edu.au>.

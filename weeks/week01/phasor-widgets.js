@@ -6,7 +6,164 @@
   "use strict";
   const NAVY = "#00468C", OUT = "#C0392B", GREY = "#8a8a8a",
         GRID = "#e8e8ec", ENV = "#b0b0b0", INK = "#222";
- 
+
+  // ---- usage tracking -----------------------------------------------------
+  //
+  //   WHAT THIS RECORDS
+  //   The first time a visitor interacts with a widget on a page load, one
+  //   GoatCounter event is sent, named  widget-<name>  (e.g. widget-euler).
+  //   Nothing is drawn on the page and nothing is logged to the console, so
+  //   this is invisible to a reader. Repeated fiddling with the same widget
+  //   sends nothing further: the question being answered is "how many people
+  //   touched this widget", not "how many times was it dragged".
+  //
+  //   HOW TO READ IT
+  //   Dashboard: https://<yoursite>.goatcounter.com  ->  the event paths are
+  //   listed alongside pages. The "visits" number for widget-euler is the
+  //   count of distinct visitors who touched that widget. Divide it by the
+  //   visits to the page itself to get the proportion who engaged.
+  //
+  //   Requires count.js to be loaded site-wide (see _quarto.yml). If it is
+  //   absent -- local preview, an ad blocker, a student with JS restrictions
+  //   -- every call here silently does nothing and the widgets still work.
+  //
+  //   CAVEAT, and it matters for lecture-theatre numbers: GoatCounter builds
+  //   its session key from site + User-Agent + IP. Students sharing the
+  //   campus NAT with the same browser and OS version collapse into a single
+  //   visitor, so counts taken during a lecture UNDERCOUNT, sometimes badly.
+  //   Numbers from students studying at home are far more trustworthy. Read
+  //   these as a lower bound and as relative popularity between widgets, not
+  //   as a headcount.
+  //
+  //   A local per-browser tally is kept as well, for checking the plumbing
+  //   works. Open the console on any page carrying a widget and run:
+  //       elec2302usage()          -> table of counts on THIS browser
+  //       elec2302usage.json()     -> full record, incl. which events fired
+  //       elec2302usage.reset()    -> clear it
+  //   That tally never leaves the machine it is on, so it shows your own
+  //   usage, not a student's. Student numbers live in GoatCounter.
+  //
+  const TRACK = (function () {
+    const KEY = "elec2302.widgetUsage", VERSION = 1, GAP = 700;
+    const WEEK = "week1";                      // namespaces events across weeks
+    let data = null, lastAt = {}, dirty = false, timer = null;
+    const sent = {};                           // widget id -> event already sent this page load
+
+    // -- local tally (diagnostic only) --------------------------------------
+    function blank() {
+      return { v: VERSION, firstSeen: new Date().toISOString(), lastUsed: null, widgets: {} };
+    }
+    function load() {
+      try {
+        const raw = window.localStorage.getItem(KEY);
+        data = raw ? JSON.parse(raw) : null;
+      } catch (e) { data = null; }             // private mode, file://, blocked storage
+      if (!data || data.v !== VERSION) data = blank();
+    }
+    function save() {
+      if (!dirty || !data) return;
+      try { window.localStorage.setItem(KEY, JSON.stringify(data)); dirty = false; } catch (e) {}
+    }
+    function queueSave() {
+      if (timer) return;
+      timer = setTimeout(function () { timer = null; save(); }, 500);
+    }
+    function rec(id) {
+      if (!data.widgets[id]) {
+        data.widgets[id] = { slider: 0, play: 0, drag: 0, preset: 0, sent: 0, lastUsed: null, pages: {} };
+      }
+      return data.widgets[id];
+    }
+
+    // -- the bit that actually answers "how many students" ------------------
+    // One event per widget per page load. GoatCounter additionally dedupes by
+    // session over 8 hours, so a student who reloads is still counted once.
+    //
+    // count.js is loaded async, so it may not be there yet when someone grabs
+    // a slider in the first second. Rather than drop that interaction, hold it
+    // and retry: otherwise the keenest students are exactly the ones missed.
+    const pending = {};
+    let retries = 0, retryTimer = null;
+
+    function ready() {
+      return !!(window.goatcounter && typeof window.goatcounter.count === "function");
+    }
+    function send(id) {
+      const name = "widget-" + WEEK + "-" + String(id).replace(/^w-/, "");
+      try {
+        window.goatcounter.count({ path: name, title: "Widget interaction: " + name, event: true });
+        sent[id] = true; delete pending[id];
+        if (data) { rec(id).sent += 1; dirty = true; queueSave(); }
+      } catch (e) {
+        sent[id] = true; delete pending[id];   // blocked or erroring: stop trying
+      }
+    }
+    function flush() {
+      Object.keys(pending).forEach(function (id) { if (ready()) send(id); });
+    }
+    function scheduleRetry() {
+      if (retryTimer || retries >= 10) return;   // ~10s, then give up quietly
+      retryTimer = setTimeout(function () {
+        retryTimer = null; retries += 1;
+        flush();
+        if (Object.keys(pending).length) scheduleRetry();
+      }, 1000);
+    }
+    function beacon(id) {
+      if (sent[id]) return;
+      if (ready()) { send(id); return; }
+      pending[id] = true;
+      scheduleRetry();
+    }
+    window.addEventListener("load", flush);
+
+    // kind: "slider" | "play" | "drag" | "preset"
+    function hit(id, kind) {
+      if (!id) return;
+      beacon(id);
+      if (!data) return;
+      const now = Date.now(), k = id + "|" + kind;
+      // coalesce a continuous gesture into a single interaction (clicks exempt)
+      if (kind !== "play" && kind !== "preset" && now - (lastAt[k] || 0) < GAP) {
+        lastAt[k] = now; return;
+      }
+      lastAt[k] = now;
+      const r = rec(id), stamp = new Date().toISOString();
+      r[kind] = (r[kind] || 0) + 1;
+      r.lastUsed = data.lastUsed = stamp;
+      const page = (window.location && window.location.pathname) || "(unknown)";
+      r.pages[page] = (r.pages[page] || 0) + 1;
+      dirty = true; queueSave();
+    }
+
+    function report() {
+      const rows = {};
+      Object.keys(data.widgets).forEach(function (id) {
+        const r = data.widgets[id];
+        rows[id] = { slider: r.slider, play: r.play, drag: r.drag, preset: r.preset,
+                     eventsSent: r.sent, lastUsed: r.lastUsed };
+      });
+      if (Object.keys(rows).length === 0) console.log("elec2302usage: no interactions recorded on this browser yet");
+      else if (console.table) console.table(rows);
+      else console.log(rows);
+      if (!window.goatcounter) {
+        console.log("note: GoatCounter is not loaded on this page, so nothing is being reported centrally.");
+      }
+      return rows;
+    }
+
+    load();
+    window.addEventListener("pagehide", save);
+    document.addEventListener("visibilitychange", function () { if (document.hidden) save(); });
+
+    const api = function () { save(); return report(); };
+    api.json  = function () { save(); return JSON.parse(JSON.stringify(data)); };
+    api.reset = function () { data = blank(); lastAt = {}; dirty = true; save(); return "local usage counters cleared"; };
+    window.elec2302usage = api;
+
+    return { hit: hit };
+  })();
+
   // ---- tiny helpers -------------------------------------------------------
   function dpiCanvas(cv, w, h) {
     const r = window.devicePixelRatio || 1;
@@ -53,6 +210,12 @@
     }
     bar.appendChild(sl);
     host.appendChild(bar);
+    // usage tracking: every widget's play button and main slider come through
+    // here, so instrumenting once covers all four. looper() sets sl.value
+    // programmatically, which fires no "input" event, so animation is not
+    // mistaken for a student moving the slider.
+    sl.addEventListener("input", function () { TRACK.hit(host.id, "slider"); });
+    btn.addEventListener("click", function () { TRACK.hit(host.id, "play"); });
     return { btn, sl };
   }
   function looper(btn, step) {
@@ -266,7 +429,7 @@
       const b = document.createElement("button");
       b.textContent = lab;
       b.style.cssText = "border:1px solid " + NAVY + ";color:" + NAVY + ";background:#fff;border-radius:5px;padding:3px 10px;cursor:pointer;font:13px Arial;";
-      b.addEventListener("click", () => { z = { re, im }; tAnim = 0; sl.value = 0; redraw(); });
+      b.addEventListener("click", () => { TRACK.hit(host.id, "preset"); z = { re, im }; tAnim = 0; sl.value = 0; redraw(); });
       chips.appendChild(b);
     });
     host.appendChild(chips);
@@ -281,6 +444,7 @@
       const px = (ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left;
       const py = (ev.touches ? ev.touches[0].clientY : ev.clientY) - r.top;
       const p = zinv(px, py);
+      TRACK.hit(host.id, "drag");
       z = { re: Math.max(-2, Math.min(2, p.re)), im: Math.max(-2.5, Math.min(2.5, p.im)) };
       redraw();
     }
@@ -356,7 +520,7 @@
     const xsl = document.createElement("input"); xsl.type = "range"; xsl.min = -60; xsl.max = 60; xsl.step = 1; xsl.value = X;
     xsl.style.cssText = "flex:1;accent-color:" + NAVY + ";";
     function setX() { X = parseFloat(xsl.value); xlab.textContent = "reactance  \u03C9L \u2212 1/\u03C9C = " + X + " \u03A9"; redraw(); }
-    xsl.addEventListener("input", setX);
+    xsl.addEventListener("input", function () { TRACK.hit(host.id, "slider"); setX(); });
     xrow.appendChild(xlab); xrow.appendChild(xsl); host.appendChild(xrow);
     const { btn, sl } = ctrlRow(host);
     sl.min = 0; sl.max = MAXT; sl.step = 0.01; sl.value = th;

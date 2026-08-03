@@ -31,6 +31,7 @@ website:
         target: _blank
   page-footer:
     center: "Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney"
+    right: "[Analytics](analytics.qmd)"
 
 format:
   html:
@@ -39,5 +40,7 @@ format:
     html-math-method: katex
     fig-cap-location: bottom
     link-external-newwindow: true
+    include-in-header:
+      - _goatcounter.html
 
 engine: markdown
