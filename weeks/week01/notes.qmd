@@ -163,10 +163,12 @@ $$
 \begin{aligned}
 V e^{j\omega t}
 &= R I e^{j\omega t} + L\frac{\mathrm{d}}{\mathrm{d}t}I e^{j\omega t}
-   + \frac{1}{C}\!\int_{-\infty}^{t}\! I e^{j\omega\tau}\,\mathrm{d}\tau \\[2pt]
-&= R I e^{j\omega t} + j\omega L\, I e^{j\omega t} + \frac{I}{j\omega C}\,e^{j\omega t}.
+   + \frac{1}{C}\!\int\! I e^{j\omega\tau}\,\mathrm{d}\tau \\[2pt]
+&= R I e^{j\omega t} + j\omega L\, I e^{j\omega t} + \frac{I}{j\omega C}\,e^{j\omega t} + \frac{K}{C},
 \end{aligned}
 $$
+where $K$ is a constant of integration.  Matching coefficients of $e^{j\omega t}$, we find $K = 0$ ($K$ represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).
+
 
 Divide through by $e^{j\omega t}$ (never zero):
 

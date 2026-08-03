@@ -440,6 +440,17 @@ $$ 3\,e^{j\omega t} + 4j\,e^{j\omega t} = 5\,e^{j0.927}e^{j\omega t} $$
 :::
 :::
 
+## Sinusoid in, sinusoid out {.smaller}
+
+$$ V = I\Big(R + j\omega L + \tfrac{1}{j\omega C}\Big) = I\,Z(j\omega)
+   \qquad\Longrightarrow\qquad I = \frac{V}{Z} $$
+
+::: {style="display:flex;justify-content:center"}
+```{=html}
+<div id="w-rlc" class="widget"></div>
+```
+:::
+
 ```{=html}
 <script src="phasor-widgets.js"></script>
 ```
