@@ -1,0 +1,836 @@
+---
+title: "Week 2 — Lecture notes"
+subtitle: "Signals as vectors, systems as maps"
+---
+
+::: {.content-visible when-format="html"}
+::: {.format-links}
+[Other formats:]{.label}
+```{=html}
+<a href="notes.pdf" title="Week 2 lecture notes as a PDF">&#128196;&nbsp;PDF</a>
+```
+:::
+:::
+
+::: {.content-visible when-format="pdf"}
+The figures below are snapshots of interactive widgets. The live versions, where
+you can move the sliders yourself, are at
+[tchaffey.com/elec2302](https://tchaffey.com/elec2302).
+:::
+
+## Goals for this week
+
+(a) Make "signal" and "system" precise.
+
+(b) Understand linearity.
+
+(c) How to measure the size of a signal: energy &amp; power.
+
+(d) How to measure the angle between signals.
+
+(e) Useful signals: Dirac delta and friends.
+
+## Signals as vectors
+
+We've seen signals &amp; systems through examples. In this lecture, we'll develop a language to
+represent these things mathematically.  At first this may seem quite abstract, but it ends up being extremely powerful, as we'll see throughout the semester.
+
+We will build on what we know from linear algebra.
+
+A square matrix $A$ maps a vector to another vector of the same dimension:
+
+$$
+\underset{\textstyle \mathbb{R}^{n}}{y} \;=\;
+\underset{\textstyle \mathbb{R}^{n\times n}}{A}\;
+\underset{\textstyle \mathbb{R}^{n}}{u}
+$$
+
+If $n = 2$, we can visualise $A$ in the plane as <u>scaling</u>, <u>rotating</u>, skewing and
+reflecting $u$ to produce $y$:
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 300 210" width="300" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="A vector u and its image Au in the plane, separated by an angle theta.">
+  <defs>
+    <marker id="ahN" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <g stroke="#00468C" fill="none" stroke-width="1.2" marker-end="url(#ahN)">
+    <line x1="60" y1="150" x2="270" y2="150"/>
+    <line x1="60" y1="200" x2="60" y2="30"/>
+  </g>
+  <text x="66" y="42" font-family="Arial" font-size="13" fill="#00468C">&#8477;&#178;</text>
+  <g stroke="#00468C" fill="none" stroke-width="1.6" marker-end="url(#ahN)">
+    <line x1="60" y1="150" x2="185" y2="118"/>
+    <line x1="60" y1="150" x2="175" y2="60"/>
+  </g>
+  <!-- angle marker: a circular arc of radius 48 about the origin (60,150), running from
+       the u ray to the Au ray. Endpoints lie exactly on the two rays. -->
+  <path d="M 106.5 138.1 A 48 48 0 0 0 97.8 120.4" stroke="#00468C" fill="none" stroke-width="1"/>
+  <text x="113" y="129" font-family="Arial" font-size="13" fill="#00468C">&#952;</text>
+  <text x="190" y="120" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">u</text>
+  <text x="180" y="56" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">Au</text>
+</svg>
+<p><em>Scaling and rotating <code>u</code> to produce <code>y = Au</code> (drawn as sketched).</em></p>
+</div>
+```
+
+We measure the scaling using a <u>norm</u>:
+
+$$ \|u\| \;=\; \sqrt{u \cdot u} \;=\; \sqrt{u_1^{2} + u_2^{2}}. $$
+
+We measure the rotation using the <u>dot product</u>:
+
+$$ \cos\theta \;=\; \frac{u \cdot y}{\|u\|\,\|y\|}. $$
+
+**How do we extend these ideas to signals?**
+
+Given a continuous signal, we can approximate one period as an infinite dimensional
+vector.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div id="w-sample" class="widget"></div>
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+![Sampling a continuous signal at spacing $\Delta$: as $\Delta \to 0$, the sum
+$\sum_t u_t y_t\,\Delta$ becomes the integral $\langle u, y\rangle$.](figs/w-sample.png){#fig-sample width=100%}
+:::
+
+$$ \dots\; x_{-1}\;\; x_{0}\;\; x_{1}\;\; x_{2}\;\; x_{3}\;\; x_{4}\;\; x_{5}\;\; x_{6}\;\; x_{7}\; \dots $$
+
+The dot product between these vectors is
+
+$$ \sum_{t=-\infty}^{\infty} u_t\, y_t \;=\; u \cdot y $$
+
+If we let the sampling become <u>infinitesimally fine</u>, we integrate over the samples,
+and have an <u>inner product</u>:
+
+$$ \langle u, y\rangle \;:=\; \int_{-\infty}^{\infty} u(t)\,y(t)\,\mathrm{d}t. $$
+
+For complex signals, we add a complex conjugate:
+
+$$ \boxed{\;\langle u, y\rangle \;:=\; \int_{-\infty}^{\infty} u(t)\,\overline{y}(t)\,\mathrm{d}t\;} $$
+
+<!-- CHECK: the handwritten page conjugates the FIRST slot, ∫ ū(t) y(t) dt, but then
+     lists ⟨αu,y⟩ = α⟨u,y⟩ and ⟨u,βy⟩ = β̄⟨u,y⟩ — which is the conjugate-second-slot
+     convention. The two can't both hold. Per your instruction I've moved the bar onto
+     the second slot so the definition and the four properties below agree. Everything
+     downstream (E(u) = ⟨u,u⟩, ⟨·,·⟩_P) is unaffected, since |u|² = u ū either way. -->
+
+Some useful properties of the inner product:
+
+1. $\langle u_1 + u_2,\, y\rangle \;=\; \langle u_1, y\rangle + \langle u_2, y\rangle$
+2. $\langle \alpha u,\, y\rangle \;=\; \alpha\,\langle u, y\rangle$
+3. $\langle u,\, \beta y\rangle \;=\; \overline{\beta}\,\langle u, y\rangle$
+4. $\langle u, y\rangle \;=\; \overline{\langle y, u\rangle}$
+
+So the inner product is linear in its first argument and conjugate-linear in its second.
+
+## The size of a signal: energy &amp; power
+
+We can use the inner product to measure the size of a signal:
+
+$$ \boxed{\;E(u) \;=\; \int_{-\infty}^{\infty} |u(t)|^{2}\,\mathrm{d}t\;} $$
+
+This is the <u>signal energy</u>. The complex conjugate in $\langle u, y\rangle$
+guarantees $E(u)$ is real.
+
+**Example:**
+
+$$
+u(t) = \begin{cases} e^{-t}, & t \geq 0 \\[2pt] 0, & t < 0. \end{cases}
+$$
+
+$$
+\begin{aligned}
+E(u) &= \int_{0}^{\infty} e^{-2t}\,\mathrm{d}t \\[4pt]
+     &= \left. \frac{-1}{2}\, e^{-2t} \right|_{0}^{\infty} \\[4pt]
+     &= \frac{1}{2}\, e^{0} \;=\; \frac{1}{2}.
+\end{aligned}
+$$
+
+What if $u(t) = A\cos(\omega t)$?
+
+$$ \int_{-\infty}^{\infty} A^{2}\cos^{2}(\omega t)\,\mathrm{d}t \;=\; \infty \;\dots $$
+
+Take the average power:
+
+::: {.note}
+$\text{energy} = \displaystyle\int \text{power}\;\mathrm{d}t$
+:::
+
+$$ \boxed{\;P(u) \;=\; \lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t.\;} $$
+
+If $u(t) = u(t + T)$ for some $T$,
+
+$$ \lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t$$
+Each period contributes the same, so we get the average.
+$$
+\begin{aligned}
+&= \lim_{k \to \infty} \frac{1}{2kT}\left( \cdots
+   \underbrace{\int_{-kT}^{-(k-1)T} |u(t)|^{2}\,\mathrm{d}t}_{\textstyle =\int_{0}^{T}|u(t)|^{2}\,\mathrm{d}t}
+   + \underbrace{\int_{-(k-1)T}^{-(k-2)T} |u(t)|^{2}\,\mathrm{d}t}_{\textstyle =\int_{0}^{T}|u(t)|^{2}\,\mathrm{d}t}
+   + \cdots + \int_{-T}^{0} |u(t)|^{2}\,\mathrm{d}t + \cdots
+   + \int_{(k-1)T}^{kT} |u(t)|^{2}\,\mathrm{d}t \right) \\[10pt]
+&= \lim_{k \to \infty} \frac{1}{2k} \cdot 2k \cdot \frac{1}{T} \int_{0}^{T} |u(t)|^{2}\,\mathrm{d}t \\[6pt]
+&= \boxed{\;P(u) = \frac{1}{T} \int_{0}^{T} |u(t)|^{2}\,\mathrm{d}t.\;}
+\end{aligned}
+$$
+
+This is the average power of a periodic signal.
+
+**Example:** what is the power of $u(t) = A\cos(\omega t)$
+
+$$ \text{Period} = \frac{2\pi}{\omega} $$
+
+$$
+\begin{aligned}
+P(u) &= \frac{\omega}{2\pi} \int_{0}^{\frac{2\pi}{\omega}} A^{2}\cos(\omega t)^{2}\,\mathrm{d}t \\[6pt]
+     &= \frac{\omega}{2\pi} \int_{0}^{\frac{2\pi}{\omega}} A^{2}\,\frac{1 + \cos(2\omega t)}{2}\,\mathrm{d}t \\[6pt]
+     &= \frac{\omega}{2\pi} \left[ A^{2}\,\frac{t}{2} \;+\; A^{2}\,\frac{\sin(2\omega t)}{4\omega} \right]_{0}^{\frac{2\pi}{\omega}} \\[6pt]
+     &= \frac{\omega}{2\pi} \left( A^{2}\,\frac{\frac{2\pi}{\omega}}{2}
+        \;+\; A^{2}\,\frac{\overset{\textstyle 0}{\overbrace{\sin\!\left(\tfrac{4\pi}{\omega}\,\omega\right)}}}{4\omega} \right) \\[6pt]
+     &= \frac{A^{2}}{2}
+\end{aligned}
+$$
+
+**Example:** what is the power of
+$u(t) = \begin{cases} e^{-t}, & t \geq 0 \\[2pt] 0, & t < 0 \end{cases}$ ?
+
+$$
+\begin{aligned}
+P(u) &= \lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t \\[6pt]
+     &= \lim_{W \to \infty} \frac{1}{2W} \int_{0}^{W} e^{-2t}\,\mathrm{d}t \\[6pt]
+     &= \lim_{W \to \infty} \frac{1}{2W} \left[ \frac{-1}{2}\,e^{-2t} \right]_{0}^{W} \\[6pt]
+     &= \lim_{W \to \infty} \underbrace{\frac{1}{2W}}_{\textstyle \to 0}
+        \left[ \underbrace{\frac{1}{2}\,e^{0}}_{\textstyle \frac{1}{2}}
+        \;-\; \underbrace{\frac{1}{2}\,e^{-2W}}_{\textstyle \to 0} \right] \\[6pt]
+     &= 0.
+\end{aligned}
+$$
+
+```{=html}
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
+```
+
+Through the last two examples, we have discovered two types of signals:
+
+<u>Power signals</u>: infinite energy, finite power. $\qquad \cos(\omega t)$
+
+<u>Energy signals</u>: finite energy, zero power. $\qquad e^{-t}$
+
+For periodic signals, we can also define the <u>rms</u> (root mean square):
+
+$$ \boxed{\;u_{\mathrm{RMS}} \;=\; \sqrt{P(u)}\;} $$
+
+It turns out $P$ comes from a different inner product, which is finite for power signals,
+
+$$ \langle u, y\rangle_{P} \;:=\; \frac{1}{T} \int_{0}^{T} u(t)\, \overline{y}(t)\,\mathrm{d}t. $$
+
+We then have
+
+$$
+\begin{aligned}
+P(u) &= \langle u, u\rangle_{P}, \\[4pt]
+u_{\mathrm{RMS}} &= \sqrt{\langle u, u\rangle_{P}} \;=\; \|u\|_{P}.
+\end{aligned}
+$$
+
+**Example:** the RMS of mains power in Australia is 230 V. What is the
+peak voltage?
+
+$$ v(t) = V_p \cos(\omega t), \qquad \omega = 2\pi \cdot 50 = 100\pi \;\text{rad/s},
+   \qquad T = \tfrac{1}{50} = 20\ \text{ms}. $$
+
+From the earlier example, $P(v) = \dfrac{V_p^{2}}{2}$, so
+
+$$ v_{\mathrm{RMS}} \;=\; \sqrt{P(v)} \;=\; \frac{V_p}{\sqrt{2}}
+   \qquad\Longrightarrow\qquad V_p \;=\; 230\sqrt{2} \;=\; 325\ \text{V}. $$
+
+Why do we use $v_{\mathrm{RMS}}$ as the nominal voltage? Let's calculate the power
+delivered to a nominal resistive load $R$, such as a kettle.
+
+Instantaneous power is
+
+$$ p(t) \;=\; v(t)\, i(t) \;=\; \frac{v(t)^{2}}{R} \;=\; \frac{V_p^{2}}{R}\cos^{2}(\omega t). $$
+
+Average over one period:
+
+$$
+\begin{aligned}
+P_{\mathrm{avg}} &= \frac{1}{T} \int_{0}^{T} \frac{|v(t)|^{2}}{R}\,\mathrm{d}t
+   \;=\; \frac{1}{R}\, P(v) \\[6pt]
+&= \frac{V_p^{2}}{2R} \\[6pt]
+&= \frac{v_{\mathrm{RMS}}^{2}}{R}.
+\end{aligned}
+$$
+
+::: {.note}
+$P(v)$ is a *signal* power, so its units are $\mathrm{V}^{2}$ — not joules. Dividing by
+$R$ turns it into a physical power in watts.
+:::
+
+This says that $v_{\mathrm{RMS}}$ is the equivalent <u>DC voltage</u> that delivers the
+same power across a nominal load.
+
+For $R = 23\,\Omega$,
+
+$$ P_{\mathrm{avg}} = \frac{230^{2}}{23} = 2300\ \text{W}, \qquad
+   i_{\mathrm{RMS}} = \frac{230}{23} = 10\ \text{A}. $$
+
+## The angle between two signals
+
+We can use this inner product to measure the angle between two signals using
+$\cos\theta = \dfrac{\langle u, y\rangle_{P}}{\|u\|_{P}\,\|y\|_{P}}$
+
+$$ x_1(t) = 3\cos\omega t, \qquad x_2(t) = 4\cos\!\left(\omega t + \frac{\pi}{4}\right) $$
+
+$$ \langle x_1(t), x_2(t)\rangle_{P} \;=\; \frac{\omega}{2\pi} \int_{0}^{\frac{2\pi}{\omega}}
+   12\cos(\omega t)\cos\!\left(\omega t + \frac{\pi}{4}\right)\mathrm{d}t $$
+
+Plug through to get $\;6\cos\!\left(\dfrac{\pi}{4}\right)$.
+
+$$ \|x_1\|_{P} = \frac{3}{\sqrt{2}}, \qquad \|x_2\|_{P} = \frac{4}{\sqrt{2}} \qquad
+   \text{using the previous example.} $$
+
+So
+
+$$ \cos\theta \;=\; \frac{6\cos\!\left(\frac{\pi}{4}\right)}{6}, \qquad \theta = \frac{\pi}{4}. $$
+
+::: {.note}
+The angle between two sinusoids is their phase shift.
+:::
+
+## Linear systems, gain and delay
+
+Back to our starting point, that a conformal matrix <u>scales</u> &amp; <u>rotates</u> vectors.
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 300 210" width="300" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="The same sketch: a vector u and its image Au, separated by an angle theta.">
+  <defs>
+    <marker id="ahN2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <g stroke="#00468C" fill="none" stroke-width="1.2" marker-end="url(#ahN2)">
+    <line x1="60" y1="150" x2="270" y2="150"/>
+    <line x1="60" y1="200" x2="60" y2="30"/>
+  </g>
+  <text x="66" y="42" font-family="Arial" font-size="13" fill="#00468C">&#8477;&#178;</text>
+  <g stroke="#00468C" fill="none" stroke-width="1.6" marker-end="url(#ahN2)">
+    <line x1="60" y1="150" x2="185" y2="118"/>
+    <line x1="60" y1="150" x2="175" y2="60"/>
+  </g>
+  <path d="M 106.5 138.1 A 48 48 0 0 0 97.8 120.4" stroke="#00468C" fill="none" stroke-width="1"/>
+  <text x="113" y="129" font-family="Arial" font-size="13" fill="#00468C">&#952;</text>
+  <text x="190" y="120" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">u</text>
+  <text x="180" y="56" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">Au</text>
+</svg>
+</div>
+```
+
+A <u>linear system</u> performs these same operations on <u>signals</u>.
+
+For example, a <u>static gain</u> scales a signal:
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 300 80" width="280" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Block diagram: input u into a block labelled k, output ku.">
+  <defs>
+    <marker id="ahB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <text x="24" y="45" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">u</text>
+  <line x1="40" y1="40" x2="120" y2="40" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahB)"/>
+  <rect x="122" y="20" width="52" height="40" fill="none" stroke="#00468C" stroke-width="1.2"/>
+  <text x="142" y="46" font-family="Arial" font-size="15" fill="#00468C" font-style="italic">k</text>
+  <line x1="174" y1="40" x2="250" y2="40" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahB)"/>
+  <text x="258" y="45" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">ku</text>
+</svg>
+</div>
+```
+
+If $u = \cos(\omega t)$,
+
+$$
+\begin{aligned}
+(ku)_{\mathrm{RMS}} &= \sqrt{P(ku)} \\[4pt]
+                    &= \frac{k}{\sqrt{2}} \qquad \text{from the previous example.}
+\end{aligned}
+$$
+
+$$ u_{\mathrm{RMS}} \;=\; \frac{1}{\sqrt{2}}. $$
+
+The <u>gain</u> of the system is
+
+$$ \frac{(ku)_{\mathrm{RMS}}}{u_{\mathrm{RMS}}} \;=\; k. $$
+
+What type of system rotates signals, that is, imparts phase lag?
+
+The pure delay,
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 300 80" width="280" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Block diagram: input u into a block labelled D tau, output y.">
+  <defs>
+    <marker id="ahB2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <text x="24" y="45" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">u</text>
+  <line x1="40" y1="40" x2="118" y2="40" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahB2)"/>
+  <rect x="120" y="20" width="56" height="40" fill="none" stroke="#00468C" stroke-width="1.2"/>
+  <text x="134" y="46" font-family="Arial" font-size="15" fill="#00468C" font-style="italic">D</text>
+  <text x="146" y="51" font-family="Arial" font-size="11" fill="#00468C" font-style="italic">&#964;</text>
+  <line x1="176" y1="40" x2="250" y2="40" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahB2)"/>
+  <text x="258" y="45" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">y</text>
+</svg>
+</div>
+```
+
+$$ y(t) = u(t - \tau). $$
+
+E.g. if $u(t) = \cos(\omega t)$,
+
+$$
+\begin{aligned}
+y(t) &= \cos\big(\omega(t - \tau)\big) \\[2pt]
+     &= \cos(\omega t - \omega\tau).
+\end{aligned}
+$$
+
+From the previous example,
+
+$$ \cos\theta \;=\; \cos(-\omega\tau) \;=\; \cos(\omega\tau) $$
+
+$$ \underline{\;\theta = \omega\tau.\;} $$
+
+The pure delay gives a phase shift of $\omega\tau$, and gain $\underline{1}$.
+
+Pure delay and static gain are two simple examples of <u>linear, time-invariant</u> (LTI)
+systems. We will see many more next week!
+
+## Linearity and time invariance
+
+What do linear and time invariant mean?
+
+Linear =
+
+homogeneous (scale invariant): $\;A(\alpha u) = \alpha A(u)$.
+
+and additive: $\;A(u_1 + u_2) = A(u_1) + A(u_2)$. $\qquad$ *Add inputs $\to$ add outputs.*
+
+Together, we have <u>superposition</u>: $\;A(\alpha u_1 + \beta u_2) = \alpha A(u_1) + \beta A(u_2)$.
+
+Time invariant: behaviour doesn't depend on starting time:
+
+$$ A(D_\tau u) = D_\tau A(u) \quad \text{for all } \tau. \qquad \text{\small shift input} \to \text{\small shift output.} $$
+
+**Quick quiz:** which maps from $u$ to $y$ are linear?
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 340 280" width="340" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="Three candidate maps from u to y sketched on one set of axes: a straight
+                 line through the origin, and two parabolas.">
+  <defs>
+    <marker id="ahQ" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <g stroke="#00468C" fill="none" stroke-width="1.2" marker-end="url(#ahQ)">
+    <line x1="30" y1="160" x2="320" y2="160"/>
+    <line x1="165" y1="265" x2="165" y2="20"/>
+  </g>
+  <text x="326" y="165" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">u</text>
+  <text x="172" y="30" font-family="Arial" font-size="14" fill="#00468C" font-style="italic">y</text>
+  <!-- (1) line through the origin -->
+  <line x1="65" y1="245" x2="295" y2="49.5" stroke="#00468C" stroke-width="1.6"/>
+  <text x="299" y="46" font-family="Arial" font-size="13" fill="#00468C">&#9312;</text>
+  <!-- (2) affine line: same family, offset so it misses the origin -->
+  <line x1="110" y1="230" x2="215" y2="20" stroke="#00468C" stroke-width="1.6"/>
+  <text x="219" y="26" font-family="Arial" font-size="13" fill="#00468C">&#9313;</text>
+  <!-- (3) parabola, vertex at the origin -->
+  <path d="M 60 40 Q 165 280 270 40" stroke="#00468C" fill="none" stroke-width="1.6"/>
+  <text x="44" y="38" font-family="Arial" font-size="13" fill="#00468C">&#9314;</text>
+</svg>
+</div>
+```
+
+<!-- CHECK: numbering. I have matched the label positions in your sketch — ① the shallow
+     straight line (through the origin), ② the steep one (affine), ③ the wide sweeping
+     curve (parabola). Swap if you intended otherwise; it changes the answer. -->
+
+**Example:** check the delay is linear:
+
+$$
+\begin{aligned}
+D_\tau(\alpha u) &= \alpha\, u(t - \tau) = \alpha\, D_\tau(u)
+   &&\Longrightarrow\; \text{homogeneous.} \\[6pt]
+D_\tau(u_1 + u_2) &= u_1(t - \tau) + u_2(t - \tau) = D_\tau(u_1) + D_\tau(u_2)
+   &&\Longrightarrow\; \text{additive.}
+\end{aligned}
+$$
+
+Is it time invariant?
+
+$$ D_\tau\big(D_\mu u\big) \;=\; D_\tau\big(u(t - \mu)\big) \;=\; u(t - \mu - \tau)
+   \;=\; D_\mu\big(D_\tau(u)\big) \;\checkmark $$
+
+## Now: some useful signals
+
+We have already seen the most used signal in this course: $u(t) = e^{st}$,
+$s \in \mathbb{C}$, and all its components: $e^{-t}$, $e^{t}$, $\sin t$, $\cos t$.
+
+Now we'll introduce three more signals which we will see many more times.
+
+### ① Dirac delta
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div id="w-delta" class="widget"></div>
+```
+:::
+
+::: {.content-visible when-format="pdf"}
+![The triangle $u_\varepsilon(t)$ of base $\varepsilon$ and height $2/\varepsilon$,
+area 1, narrowing towards the Dirac delta as $\varepsilon \to 0$.](figs/w-delta.png){#fig-delta width=80%}
+:::
+
+$u_\varepsilon(t)$ is the triangle of base $\varepsilon$ and height $\tfrac{2}{\varepsilon}$, so
+
+$$ \int_{-\infty}^{\infty} u_\varepsilon(t)\,\mathrm{d}t
+   \;=\; \frac{1}{2}\,\varepsilon\,\frac{2}{\varepsilon}
+   \;=\; \varepsilon\,\frac{1}{\varepsilon} \;=\; 1. $$
+
+The Dirac delta, or impulse, $\delta(t)$, may be defined as
+
+$$ \boxed{\;\delta(t) \;=\; \lim_{\varepsilon \to 0} u_\varepsilon(t)\;} $$
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 260 130" width="240" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="The Dirac delta drawn as a single upward arrow at the origin.">
+  <defs>
+    <marker id="ahD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <line x1="20" y1="100" x2="240" y2="100" stroke="#00468C" stroke-width="1.2"
+        marker-end="url(#ahD)"/>
+  <text x="246" y="105" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">t</text>
+  <line x1="90" y1="100" x2="90" y2="25" stroke="#00468C" stroke-width="1.6"
+        marker-end="url(#ahD)"/>
+</svg>
+</div>
+```
+
+infinite height, area 1.
+
+The Dirac delta has an extremely important property: <u>the sifting property</u>.
+
+Let $y(t)$ be an arbitrary continuous signal. Then
+
+$$ \boxed{\;\langle y, \delta\rangle \;=\; \int_{-\infty}^{\infty} y(t)\,\bar \delta(t)\,\mathrm{d}t
+   \;=\; y(0)\;} $$
+
+**Sketch of proof:**
+
+If $\varepsilon$ is small, $y(t) \simeq y(0)$ on $[0, \varepsilon]$, so
+
+$$
+\begin{aligned}
+\int_{-\infty}^{\infty} \delta(t)\, y(t)\,\mathrm{d}t
+  &= \lim_{\varepsilon \to 0} \int_{0}^{\varepsilon} u_\varepsilon(t)\, y(t)\,\mathrm{d}t \\[6pt]
+  &\simeq y(0) \lim_{\varepsilon \to 0} \int_{0}^{\varepsilon} u_\varepsilon(t)\,\mathrm{d}t \\[6pt]
+  &= y(0).
+\end{aligned}
+$$
+
+(Can be made precise using a continuity argument).
+
+What about $\displaystyle \int_{-\infty}^{\infty} \delta(t - \tau)\, y(t)\,\mathrm{d}t$ ?
+
+Let $\sigma = t - \tau$. $\;\mathrm{d}t = \mathrm{d}\sigma$.
+
+Then we have
+
+$$ \int_{-\infty}^{\infty} \delta(\sigma)\, y(\sigma + \tau)\,\mathrm{d}\sigma \;=\; y(\tau). $$
+
+$$ \boxed{\;\int_{-\infty}^{\infty} \delta(t - \tau)\, y(t)\,\mathrm{d}t \;=\; y(\tau)\;}
+   \qquad \text{\small the sifting property.} $$
+
+::: {.note}
+**NOTE:** The above definition of the Dirac delta is not unique. It can be defined in
+many ways, for example using different limits, measures or distributions. The important
+thing (which really defines it) is the sifting property.
+:::
+
+::: {.note}
+**NOTE:** A Dirac delta only really makes sense inside an integral, so it represents an
+<u>area</u> of 1, rather than a height.
+:::
+
+#### The scaling property
+
+What is $\delta(\alpha t)$?
+
+$$ \delta(\alpha t) \;=\; \lim_{\varepsilon \to 0} u_\varepsilon(\alpha t). $$
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 560 300" width="540" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="The triangle u epsilon of alpha t, drawn against the alpha-t axis for
+                 alpha positive and for alpha negative, and then against the t axis where
+                 its base is epsilon over alpha and its area is one over the modulus of alpha.">
+  <defs>
+    <marker id="ahS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+
+  <!-- alpha > 0 : decreasing triangle on 0..epsilon of the (alpha t) axis -->
+  <line x1="30" y1="100" x2="215" y2="100" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahS)"/>
+  <text x="220" y="105" font-family="Arial" font-size="12" fill="#00468C" font-style="italic">&#945;t</text>
+  <path d="M 70 100 L 70 30 L 130 100" stroke="#00468C" fill="none" stroke-width="1.6"/>
+  <text x="62" y="115" font-family="Arial" font-size="11" fill="#00468C">0</text>
+  <text x="125" y="115" font-family="Arial" font-size="11" fill="#00468C">&#949;</text>
+  <line x1="152" y1="100" x2="152" y2="32" stroke="#00468C" stroke-width="1"
+        marker-start="url(#ahS)" marker-end="url(#ahS)"/>
+  <text x="158" y="70" font-family="Arial" font-size="12" fill="#00468C">2/&#949;</text>
+  <text x="40" y="26" font-family="Arial" font-size="12" fill="#00468C" font-style="italic">u&#949;(&#945;t)</text>
+  <text x="245" y="70" font-family="Arial" font-size="13" fill="#00468C">&#945; &gt; 0</text>
+
+  <!-- alpha < 0 : mirrored -->
+  <line x1="215" y1="240" x2="30" y2="240" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahS)"/>
+  <text x="24" y="256" font-family="Arial" font-size="12" fill="#00468C" font-style="italic">&#945;t</text>
+  <path d="M 175 240 L 175 170 L 115 240" stroke="#00468C" fill="none" stroke-width="1.6"/>
+  <text x="178" y="255" font-family="Arial" font-size="11" fill="#00468C">0</text>
+  <text x="110" y="255" font-family="Arial" font-size="11" fill="#00468C">&#949;</text>
+  <line x1="196" y1="240" x2="196" y2="172" stroke="#00468C" stroke-width="1"
+        marker-start="url(#ahS)" marker-end="url(#ahS)"/>
+  <text x="202" y="210" font-family="Arial" font-size="12" fill="#00468C">2/&#949;</text>
+  <text x="112" y="166" font-family="Arial" font-size="12" fill="#00468C" font-style="italic">u&#949;(&#945;t)</text>
+  <text x="245" y="210" font-family="Arial" font-size="13" fill="#00468C">&#945; &lt; 0</text>
+
+  <!-- the same triangle read on the t axis -->
+  <line x1="520" y1="180" x2="340" y2="180" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahS)"/>
+  <text x="334" y="196" font-family="Arial" font-size="12" fill="#00468C" font-style="italic">t</text>
+  <path d="M 480 180 L 480 105 L 415 180" stroke="#00468C" fill="none" stroke-width="1.6"/>
+  <line x1="500" y1="180" x2="500" y2="107" stroke="#00468C" stroke-width="1"
+        marker-start="url(#ahS)" marker-end="url(#ahS)"/>
+  <text x="506" y="146" font-family="Arial" font-size="12" fill="#00468C">2/&#949;</text>
+  <text x="400" y="200" font-family="Arial" font-size="12" fill="#00468C">&#949;/&#945;</text>
+  <text x="330" y="120" font-family="Arial" font-size="13" fill="#00468C">area 1/|&#945;|</text>
+</svg>
+</div>
+```
+
+Let $\sigma = \alpha t$. Then $\sigma = \varepsilon \;\Rightarrow\; t = \dfrac{\varepsilon}{\alpha}$,
+so on the $t$ axis the triangle has base $\left|\dfrac{\varepsilon}{\alpha}\right|$ and height
+$\dfrac{2}{\varepsilon}$, giving
+
+$$ \text{area} \;=\; \frac{1}{2}\left|\frac{\varepsilon}{\alpha}\right|\frac{2}{\varepsilon}
+   \;=\; \frac{1}{|\alpha|}. $$
+
+The limit is therefore an impulse of area $\dfrac{1}{|\alpha|}$ at the origin:
+
+$$ \boxed{\;\delta(\alpha t) \;=\; \frac{1}{|\alpha|}\,\delta(t)\;} $$
+
+#### Example: radar
+
+Radar systems emit a pulse train and measure its reflection to find the distance to
+objects. We can model this as a sequence of deltas.
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 420 150" width="400" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="A radar dish at the left, an outgoing and a returning ray to an aircraft
+                 at the right, and the range r marked between them.">
+  <defs>
+    <marker id="ahR" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <!-- radar dish: parabolic reflector opening to the right, feed at the focus,
+       back-mounted mast on a tripod base -->
+  <path d="M 40 4 Q 4 36 40 68" stroke="#00468C" fill="none" stroke-width="1.8"/>
+  <line x1="22" y1="36" x2="40" y2="36" stroke="#00468C" stroke-width="1.2"/>
+  <circle cx="40" cy="36" r="3" fill="#00468C"/>
+  <line x1="22" y1="36" x2="14" y2="36" stroke="#00468C" stroke-width="1.4"/>
+  <line x1="14" y1="36" x2="14" y2="100" stroke="#00468C" stroke-width="1.4"/>
+  <path d="M 3 108 L 14 100 L 25 108" stroke="#00468C" fill="none" stroke-width="1.4"/>
+  <line x1="0" y1="108" x2="28" y2="108" stroke="#00468C" stroke-width="1.2"/>
+  <!-- aircraft: fuselage, swept wings, tail -->
+  <path d="M 296 34 L 366 34 L 380 30 L 366 26 L 296 26 Z" stroke="#00468C" fill="none" stroke-width="1.4"/>
+  <path d="M 336 26 L 318 8 L 344 26" stroke="#00468C" fill="none" stroke-width="1.4"/>
+  <path d="M 336 34 L 318 52 L 344 34" stroke="#00468C" fill="none" stroke-width="1.4"/>
+  <path d="M 300 26 L 292 12 L 308 26" stroke="#00468C" fill="none" stroke-width="1.4"/>
+  <!-- out and back -->
+  <line x1="48" y1="20" x2="286" y2="20" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahR)"/>
+  <line x1="286" y1="52" x2="48" y2="52" stroke="#00468C" stroke-width="1.2" marker-end="url(#ahR)"/>
+  <!-- range -->
+  <line x1="14" y1="124" x2="336" y2="124" stroke="#00468C" stroke-width="1"
+        marker-start="url(#ahR)" marker-end="url(#ahR)"/>
+  <text x="172" y="143" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r</text>
+</svg>
+</div>
+```
+
+Total path length: $2r$. Round trip time: $\dfrac{2r}{c} = t_d$. So
+
+$$ r \;=\; \frac{c\,t_d}{2}. $$
+
+Delay $\Rightarrow$ distance. E.g. a $1\,\mu\text{s}$ delay gives
+
+$$ r = \tfrac{1}{2}\,(3\times10^{8})(10^{-6}) = 150\ \text{m}. $$
+
+If there are $N$ targets at ranges $r_i$ with reflectivities $a_i$, the reflected signal is
+
+$$ y(t) \;=\; \sum_{i=1}^{N} a_i\, \delta\!\left(t - \frac{2 r_i}{c}\right). $$
+
+**Unambiguous range.** Suppose we transmit radar pulses at a frequency
+$f = \dfrac{1}{T}$:
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 340 110" width="320" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="A train of four impulses spaced T apart along the time axis.">
+  <defs>
+    <marker id="ahT" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <line x1="20" y1="70" x2="320" y2="70" stroke="#00468C" stroke-width="1.4"/>
+  <g stroke="#00468C" stroke-width="1.6" marker-end="url(#ahT)">
+    <line x1="60" y1="70" x2="60" y2="22"/>
+    <line x1="130" y1="70" x2="130" y2="22"/>
+    <line x1="200" y1="70" x2="200" y2="22"/>
+    <line x1="270" y1="70" x2="270" y2="22"/>
+  </g>
+  <line x1="60" y1="92" x2="130" y2="92" stroke="#00468C" stroke-width="1"
+        marker-start="url(#ahT)" marker-end="url(#ahT)"/>
+  <text x="90" y="107" font-family="Arial" font-size="12" fill="#00468C" font-style="italic">T</text>
+</svg>
+</div>
+```
+
+Suppose we measure an echo at time $t_d$ since the most recent pulse. Which pulse is it
+an echo of? The distance could be
+
+$$ \frac{c\,t_d}{2}, \qquad \frac{c\,(t_d + T)}{2}, \qquad \frac{c\,(t_d + 2T)}{2},
+   \qquad \dots $$
+
+The range is only known up to
+
+$$ R_u \;=\; \frac{cT}{2}, $$
+
+the <u>unambiguous range</u>.
+
+Higher $T$: larger range, but slower updates.
+
+How to deal with this? Transmit at two frequencies — the range has to be consistent with
+both measurements.
+
+```{=html}
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
+```
+
+### ② The unit step
+
+Another important function is the <u>unit step</u> or <u>Heaviside</u> function:
+
+$$
+\begin{aligned}
+H(t) &:= \int_{-\infty}^{t} \delta(\varsigma)\,\mathrm{d}\varsigma \\[6pt]
+     &= \begin{cases} 0, & t < 0 \\[2pt] 1, & t \geq 0. \end{cases}
+\end{aligned}
+$$
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 300 140" width="280" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="The unit step: zero for t less than zero, one for t at least zero.">
+  <defs>
+    <marker id="ahH" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <line x1="20" y1="110" x2="280" y2="110" stroke="#00468C" stroke-width="1.2"
+        marker-end="url(#ahH)"/>
+  <text x="284" y="116" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">t</text>
+  <line x1="130" y1="130" x2="130" y2="30" stroke="#00468C" stroke-width="1.2"/>
+  <line x1="20" y1="110" x2="126" y2="110" stroke="#00468C" stroke-width="2.4"/>
+  <circle cx="130" cy="110" r="3.5" fill="#fff" stroke="#00468C" stroke-width="1.4"/>
+  <text x="112" y="128" font-family="Arial" font-size="13" fill="#00468C">0</text>
+  <line x1="130" y1="45" x2="270" y2="45" stroke="#00468C" stroke-width="1.8"/>
+  <circle cx="130" cy="45" r="3.5" fill="#00468C"/>
+  <text x="112" y="50" font-family="Arial" font-size="13" fill="#00468C">1</text>
+</svg>
+</div>
+```
+
+### ③ The pulse
+
+Finally, the pulse function $\Pi_\tau(t)$:
+
+$$
+\Pi_\tau(t) := \begin{cases} 1, & -\dfrac{\tau}{2} \leq t \leq \dfrac{\tau}{2} \\[6pt]
+0, & \text{otherwise.} \end{cases}
+$$
+
+```{=html}
+<div style="text-align:center">
+<svg viewBox="0 0 320 150" width="300" xmlns="http://www.w3.org/2000/svg" role="img"
+     aria-label="The pulse of width tau: one on the interval minus tau over two to tau over
+                 two, zero elsewhere.">
+  <defs>
+    <marker id="ahP" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7"
+            orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"/>
+    </marker>
+  </defs>
+  <line x1="20" y1="105" x2="300" y2="105" stroke="#00468C" stroke-width="1.2"
+        marker-end="url(#ahP)"/>
+  <text x="304" y="111" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">t</text>
+  <line x1="160" y1="130" x2="160" y2="25" stroke="#00468C" stroke-width="1.2"/>
+  <!-- zero level, left and right, open at the jumps -->
+  <line x1="20" y1="105" x2="102" y2="105" stroke="#00468C" stroke-width="1.8"/>
+  <line x1="218" y1="105" x2="290" y2="105" stroke="#00468C" stroke-width="1.8"/>
+  <!-- top of the pulse, closed at the ends -->
+  <line x1="106" y1="55" x2="214" y2="55" stroke="#00468C" stroke-width="1.8"/>
+  <circle cx="106" cy="55" r="3.5" fill="#00468C"/>
+  <circle cx="214" cy="55" r="3.5" fill="#00468C"/>
+  <circle cx="106" cy="105" r="3.5" fill="#fff" stroke="#00468C" stroke-width="1.4"/>
+  <circle cx="214" cy="105" r="3.5" fill="#fff" stroke="#00468C" stroke-width="1.4"/>
+  <text x="150" y="122" font-family="Arial" font-size="12" fill="#00468C">0</text>
+  <text x="84" y="124" font-family="Arial" font-size="12" fill="#00468C">&#8722;&#964;/2</text>
+  <text x="204" y="124" font-family="Arial" font-size="12" fill="#00468C">&#964;/2</text>
+  <text x="140" y="52" font-family="Arial" font-size="12" fill="#00468C">1</text>
+</svg>
+</div>
+```
+
+```{=html}
+<script src="phasor-widgets.js"></script>
+```

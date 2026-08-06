@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 /*
-  Render the Week 1 canvas widgets to static PNGs for the PDF build.
+  Render a week's canvas widgets to static PNGs for the PDF build.
 
-    cd tools && npm install && npm run snapshot
+    cd tools && npm install && node snapshot-widgets.js [week]
 
-  Loads weeks/week01/phasor-widgets.js in a headless DOM with a real canvas
-  behind it, drives each widget to a chosen state, composites multi-panel
-  widgets into one image, and writes them to weeks/week01/figs/.
+  WEEK defaults to week01. Loads weeks/<week>/phasor-widgets.js in a headless
+  DOM with a real canvas behind it, drives each widget to a chosen state,
+  composites multi-panel widgets into one image, and writes them to
+  weeks/<week>/figs/.
 
-  The states below are the ones quoted in the figure captions in notes.qmd.
-  If you change a state here, change the caption to match, or the text and the
-  picture will disagree.
+  The states below are the ones quoted in the figure captions in each week's
+  notes.qmd. If you change a state here, change the caption to match, or the
+  text and the picture will disagree.
 */
 
 const fs = require("fs");
@@ -19,37 +20,59 @@ const { JSDOM } = require("jsdom");
 const { createCanvas } = require("canvas");
 
 const ROOT = path.resolve(__dirname, "..");
-const SRC = path.join(ROOT, "weeks/week01/phasor-widgets.js");
-const OUTDIR = path.join(ROOT, "weeks/week01/figs");
+const WEEK = process.argv[2] || "week01";
+const SRC = path.join(ROOT, `weeks/${WEEK}/phasor-widgets.js`);
+const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
 
 // --- what to render, and in what state -----------------------------------
 // Each state function receives helpers for driving the widget's controls.
-const WIDGETS = [
-  {
-    id: "w-euler",
-    caption: "unit vector at theta = 0.9 rad, sinusoid unrolling to the right",
-    state: () => {}                                   // defaults are fine
-  },
-  {
-    id: "w-sum",
-    caption: "3 + 4j tip to tail at wt = 0.6",
-    state: () => {}
-  },
-  {
-    id: "w-ezt",
-    caption: "z = j, pure oscillation",
-    state: ({ preset }) => { preset(0); }             // 0:z=j 1:z=-1 2:z=-1+j 3:grow
-  },
-  {
-    id: "w-rlc",
-    caption: "R = 30, X = 40 -> |Z| = 50, angle 0.927, normalised",
-    state: ({ slider, checkbox }) => {
-      slider(0, 40);                                  // reactance
-      checkbox(0, true);                              // normalise output
+// Keyed by week, since each week's phasor-widgets.js defines its own set.
+const WIDGETS_BY_WEEK = {
+  week01: [
+    {
+      id: "w-euler",
+      caption: "unit vector at theta = 0.9 rad, sinusoid unrolling to the right",
+      state: () => {}                                   // defaults are fine
+    },
+    {
+      id: "w-sum",
+      caption: "3 + 4j tip to tail at wt = 0.6",
+      state: () => {}
+    },
+    {
+      id: "w-ezt",
+      caption: "z = j, pure oscillation",
+      state: ({ preset }) => { preset(0); }             // 0:z=j 1:z=-1 2:z=-1+j 3:grow
+    },
+    {
+      id: "w-rlc",
+      caption: "R = 30, X = 40 -> |Z| = 50, angle 0.927, normalised",
+      state: ({ slider, checkbox }) => {
+        slider(0, 40);                                  // reactance
+        checkbox(0, true);                              // normalise output
+      }
     }
-  }
-];
+  ],
+  week02: [
+    {
+      id: "w-sample",
+      caption: "continuous signal with sample stems at spacing Delta = 0.9",
+      state: () => {}                                   // defaults are fine
+    },
+    {
+      id: "w-delta",
+      caption: "triangle u_epsilon at epsilon = 1.6, area 1",
+      state: () => {}
+    }
+  ]
+};
+
+const WIDGETS = WIDGETS_BY_WEEK[WEEK];
+if (!WIDGETS) {
+  console.error(`no WIDGETS entry for "${WEEK}" — add one to WIDGETS_BY_WEEK in this file`);
+  process.exit(1);
+}
 
 // --- headless DOM with real canvases --------------------------------------
 const backing = new Map();
@@ -59,7 +82,7 @@ function boot() {
     WIDGETS.map(x => `<div id="${x.id}"></div>`).join("") +
     "</body></html>";
   const dom = new JSDOM(html, {
-    url: "https://tchaffey.com/elec2302/weeks/week01/notes.html",
+    url: `https://tchaffey.com/elec2302/weeks/${WEEK}/notes.html`,
     runScripts: "outside-only",
     pretendToBeVisual: true
   });

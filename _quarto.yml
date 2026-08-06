@@ -29,6 +29,8 @@ website:
             href: weeks/week01/notes.qmd
       - section: "Week 2 — Signals as vectors, systems as maps"
         contents:
+          - text: "Notes"
+            href: weeks/week02/notes.qmd
           - text: "Tutorial"
             href: weeks/week02/tutorial1.pdf
             target: _blank

@@ -33,10 +33,10 @@ for fig in weeks/${WEEK}/figs/w-*.png; do
 done
 if [ "$NEEDS_SNAPSHOT" = "1" ]; then
   echo "==> widget snapshots missing, generating them first"
-  ( cd tools && npm run --silent snapshot )
+  ( cd tools && node snapshot-widgets.js "${WEEK}" )
 elif [ -n "$(find weeks/${WEEK} -maxdepth 1 -name phasor-widgets.js -newer "$(ls weeks/${WEEK}/figs/w-*.png | head -1)" 2>/dev/null)" ]; then
   echo "==> phasor-widgets.js is newer than the snapshots, regenerating them"
-  ( cd tools && npm run --silent snapshot )
+  ( cd tools && node snapshot-widgets.js "${WEEK}" )
 fi
 
 echo "==> rendering $QMD to PDF"
