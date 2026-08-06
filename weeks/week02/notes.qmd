@@ -168,11 +168,11 @@ $\text{energy} = \displaystyle\int \text{power}\;\mathrm{d}t$
 $$ \boxed{\;P(u) \;=\; \lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t.\;} $$
 
 If $u(t) = u(t + T)$ for some $T$,
+each period contributes the same, so we get the average.
 
-$$ \lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t$$
-Each period contributes the same, so we get the average.
 $$
 \begin{aligned}
+\lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t
 &= \lim_{k \to \infty} \frac{1}{2kT}\left( \cdots
    \underbrace{\int_{-kT}^{-(k-1)T} |u(t)|^{2}\,\mathrm{d}t}_{\textstyle =\int_{0}^{T}|u(t)|^{2}\,\mathrm{d}t}
    + \underbrace{\int_{-(k-1)T}^{-(k-2)T} |u(t)|^{2}\,\mathrm{d}t}_{\textstyle =\int_{0}^{T}|u(t)|^{2}\,\mathrm{d}t}
