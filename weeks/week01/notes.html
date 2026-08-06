@@ -28,7 +28,7 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/week02/tutorial1.pdf" rel="next">
+<link href="../../weeks/week02/notes.html" rel="next">
 <link href="../../weeks/week01/slides.html" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
@@ -68,9 +68,11 @@ ul.task-list li input[type="checkbox"] {
   distinguished by an in-memory hash of IP + User-Agent that is discarded
   after 8 hours and never written to disk.
 
-  Widget interactions arrive as events named widget-week1-euler and similar,
-  fired from weeks/week01/phasor-widgets.js. See the comment block at the top
-  of that file for how to read them and what the numbers do and do not mean.
+  Widget interactions arrive as events named widget-week1-euler,
+  widget-week2-sample and similar, fired from each week's own
+  weeks/<week>/phasor-widgets.js. See the "usage tracking" comment block at
+  the top of any of those files for how to read them and what the numbers do
+  and do not mean.
 
   To stop your own visits being counted, open the dashboard and use
   Settings -> "Ignore this browser", or set the ignore-IP option.
@@ -182,6 +184,12 @@ window.Quarto = {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../weeks/week02/tutorial1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
@@ -771,8 +779,8 @@ V e^{j\omega t}
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../weeks/week02/tutorial1.pdf" class="pagination-link" aria-label="Tutorial">
-        <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../weeks/week02/notes.html" class="pagination-link" aria-label="Notes">
+        <span class="nav-page-text">Notes</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

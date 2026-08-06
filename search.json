@@ -1,5 +1,203 @@
 [
   {
+    "objectID": "weeks/week02/notes.html",
+    "href": "weeks/week02/notes.html",
+    "title": "Week 2 — Lecture notes",
+    "section": "",
+    "text": "Other formats:\n📄 PDF",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week02/notes.html#goals-for-this-week",
+    "href": "weeks/week02/notes.html#goals-for-this-week",
+    "title": "Week 2 — Lecture notes",
+    "section": "Goals for this week",
+    "text": "Goals for this week\n\nMake “signal” and “system” precise.\nUnderstand linearity.\nHow to measure the size of a signal: energy & power.\nHow to measure the angle between signals.\nUseful signals: Dirac delta and friends.",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week02/notes.html#signals-as-vectors",
+    "href": "weeks/week02/notes.html#signals-as-vectors",
+    "title": "Week 2 — Lecture notes",
+    "section": "Signals as vectors",
+    "text": "Signals as vectors\nWe’ve seen signals & systems through examples. In this lecture, we’ll develop a language to represent these things mathematically. At first this may seem quite abstract, but it ends up being extremely powerful, as we’ll see throughout the semester.\nWe will build on what we know from linear algebra.\nA square matrix A maps a vector to another vector of the same dimension:\n\n\\underset{\\textstyle \\mathbb{R}^{n}}{y} \\;=\\;\n\\underset{\\textstyle \\mathbb{R}^{n\\times n}}{A}\\;\n\\underset{\\textstyle \\mathbb{R}^{n}}{u}\n\nIf n = 2, we can visualise A in the plane as scaling, rotating, skewing and reflecting u to produce y:\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  ℝ²\n  \n    \n    \n  \n  \n  \n  θ\n  u\n  Au\n\nScaling and rotating u to produce y = Au (drawn as sketched).\n\nWe measure the scaling using a norm:\n \\|u\\| \\;=\\; \\sqrt{u \\cdot u} \\;=\\; \\sqrt{u_1^{2} + u_2^{2}}. \nWe measure the rotation using the dot product:\n \\cos\\theta \\;=\\; \\frac{u \\cdot y}{\\|u\\|\\,\\|y\\|}. \nHow do we extend these ideas to signals?\nGiven a continuous signal, we can approximate one period as an infinite dimensional vector.\n\n \\dots\\; x_{-1}\\;\\; x_{0}\\;\\; x_{1}\\;\\; x_{2}\\;\\; x_{3}\\;\\; x_{4}\\;\\; x_{5}\\;\\; x_{6}\\;\\; x_{7}\\; \\dots \nThe dot product between these vectors is\n \\sum_{t=-\\infty}^{\\infty} u_t\\, y_t \\;=\\; u \\cdot y \nIf we let the sampling become infinitesimally fine, we integrate over the samples, and have an inner product:\n \\langle u, y\\rangle \\;:=\\; \\int_{-\\infty}^{\\infty} u(t)\\,y(t)\\,\\mathrm{d}t. \nFor complex signals, we add a complex conjugate:\n \\boxed{\\;\\langle u, y\\rangle \\;:=\\; \\int_{-\\infty}^{\\infty} u(t)\\,\\overline{y}(t)\\,\\mathrm{d}t\\;} \n\nSome useful properties of the inner product:\n\n\\langle u_1 + u_2,\\, y\\rangle \\;=\\; \\langle u_1, y\\rangle + \\langle u_2, y\\rangle\n\\langle \\alpha u,\\, y\\rangle \\;=\\; \\alpha\\,\\langle u, y\\rangle\n\\langle u,\\, \\beta y\\rangle \\;=\\; \\overline{\\beta}\\,\\langle u, y\\rangle\n\\langle u, y\\rangle \\;=\\; \\overline{\\langle y, u\\rangle}\n\nSo the inner product is linear in its first argument and conjugate-linear in its second.",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week02/notes.html#the-size-of-a-signal-energy-power",
+    "href": "weeks/week02/notes.html#the-size-of-a-signal-energy-power",
+    "title": "Week 2 — Lecture notes",
+    "section": "The size of a signal: energy & power",
+    "text": "The size of a signal: energy & power\nWe can use the inner product to measure the size of a signal:\n \\boxed{\\;E(u) \\;=\\; \\int_{-\\infty}^{\\infty} |u(t)|^{2}\\,\\mathrm{d}t\\;} \nThis is the signal energy. The complex conjugate in \\langle u, y\\rangle guarantees E(u) is real.\nExample:\n\nu(t) = \\begin{cases} e^{-t}, & t \\geq 0 \\\\[2pt] 0, & t &lt; 0. \\end{cases}\n\n\n\\begin{aligned}\nE(u) &= \\int_{0}^{\\infty} e^{-2t}\\,\\mathrm{d}t \\\\[4pt]\n     &= \\left. \\frac{-1}{2}\\, e^{-2t} \\right|_{0}^{\\infty} \\\\[4pt]\n     &= \\frac{1}{2}\\, e^{0} \\;=\\; \\frac{1}{2}.\n\\end{aligned}\n\nWhat if u(t) = A\\cos(\\omega t)?\n \\int_{-\\infty}^{\\infty} A^{2}\\cos^{2}(\\omega t)\\,\\mathrm{d}t \\;=\\; \\infty \\;\\dots \nTake the average power:\n\n\\text{energy} = \\displaystyle\\int \\text{power}\\;\\mathrm{d}t\n\n \\boxed{\\;P(u) \\;=\\; \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t.\\;} \nIf u(t) = u(t + T) for some T,\n \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t Each period contributes the same, so we get the average. \n\\begin{aligned}\n&= \\lim_{k \\to \\infty} \\frac{1}{2kT}\\left( \\cdots\n   \\underbrace{\\int_{-kT}^{-(k-1)T} |u(t)|^{2}\\,\\mathrm{d}t}_{\\textstyle =\\int_{0}^{T}|u(t)|^{2}\\,\\mathrm{d}t}\n   + \\underbrace{\\int_{-(k-1)T}^{-(k-2)T} |u(t)|^{2}\\,\\mathrm{d}t}_{\\textstyle =\\int_{0}^{T}|u(t)|^{2}\\,\\mathrm{d}t}\n   + \\cdots + \\int_{-T}^{0} |u(t)|^{2}\\,\\mathrm{d}t + \\cdots\n   + \\int_{(k-1)T}^{kT} |u(t)|^{2}\\,\\mathrm{d}t \\right) \\\\[10pt]\n&= \\lim_{k \\to \\infty} \\frac{1}{2k} \\cdot 2k \\cdot \\frac{1}{T} \\int_{0}^{T} |u(t)|^{2}\\,\\mathrm{d}t \\\\[6pt]\n&= \\boxed{\\;P(u) = \\frac{1}{T} \\int_{0}^{T} |u(t)|^{2}\\,\\mathrm{d}t.\\;}\n\\end{aligned}\n\nThis is the average power of a periodic signal.\nExample: what is the power of u(t) = A\\cos(\\omega t)\n \\text{Period} = \\frac{2\\pi}{\\omega} \n\n\\begin{aligned}\nP(u) &= \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}} A^{2}\\cos(\\omega t)^{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}} A^{2}\\,\\frac{1 + \\cos(2\\omega t)}{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\left[ A^{2}\\,\\frac{t}{2} \\;+\\; A^{2}\\,\\frac{\\sin(2\\omega t)}{4\\omega} \\right]_{0}^{\\frac{2\\pi}{\\omega}} \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\left( A^{2}\\,\\frac{\\frac{2\\pi}{\\omega}}{2}\n        \\;+\\; A^{2}\\,\\frac{\\overset{\\textstyle 0}{\\overbrace{\\sin\\!\\left(\\tfrac{4\\pi}{\\omega}\\,\\omega\\right)}}}{4\\omega} \\right) \\\\[6pt]\n     &= \\frac{A^{2}}{2}\n\\end{aligned}\n\nExample: what is the power of u(t) = \\begin{cases} e^{-t}, & t \\geq 0 \\\\[2pt] 0, & t &lt; 0 \\end{cases} ?\n\n\\begin{aligned}\nP(u) &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{0}^{W} e^{-2t}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\left[ \\frac{-1}{2}\\,e^{-2t} \\right]_{0}^{W} \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\underbrace{\\frac{1}{2W}}_{\\textstyle \\to 0}\n        \\left[ \\underbrace{\\frac{1}{2}\\,e^{0}}_{\\textstyle \\frac{1}{2}}\n        \\;-\\; \\underbrace{\\frac{1}{2}\\,e^{-2W}}_{\\textstyle \\to 0} \\right] \\\\[6pt]\n     &= 0.\n\\end{aligned}\n\n\nThrough the last two examples, we have discovered two types of signals:\nPower signals: infinite energy, finite power. \\qquad \\cos(\\omega t)\nEnergy signals: finite energy, zero power. \\qquad e^{-t}\nFor periodic signals, we can also define the rms (root mean square):\n \\boxed{\\;u_{\\mathrm{RMS}} \\;=\\; \\sqrt{P(u)}\\;} \nIt turns out P comes from a different inner product, which is finite for power signals,\n \\langle u, y\\rangle_{P} \\;:=\\; \\frac{1}{T} \\int_{0}^{T} u(t)\\, \\overline{y}(t)\\,\\mathrm{d}t. \nWe then have\n\n\\begin{aligned}\nP(u) &= \\langle u, u\\rangle_{P}, \\\\[4pt]\nu_{\\mathrm{RMS}} &= \\sqrt{\\langle u, u\\rangle_{P}} \\;=\\; \\|u\\|_{P}.\n\\end{aligned}\n\nExample: the RMS of mains power in Australia is 230 V. What is the peak voltage?\n v(t) = V_p \\cos(\\omega t), \\qquad \\omega = 2\\pi \\cdot 50 = 100\\pi \\;\\text{rad/s},\n   \\qquad T = \\tfrac{1}{50} = 20\\ \\text{ms}. \nFrom the earlier example, P(v) = \\dfrac{V_p^{2}}{2}, so\n v_{\\mathrm{RMS}} \\;=\\; \\sqrt{P(v)} \\;=\\; \\frac{V_p}{\\sqrt{2}}\n   \\qquad\\Longrightarrow\\qquad V_p \\;=\\; 230\\sqrt{2} \\;=\\; 325\\ \\text{V}. \nWhy do we use v_{\\mathrm{RMS}} as the nominal voltage? Let’s calculate the power delivered to a nominal resistive load R, such as a kettle.\nInstantaneous power is\n p(t) \\;=\\; v(t)\\, i(t) \\;=\\; \\frac{v(t)^{2}}{R} \\;=\\; \\frac{V_p^{2}}{R}\\cos^{2}(\\omega t). \nAverage over one period:\n\n\\begin{aligned}\nP_{\\mathrm{avg}} &= \\frac{1}{T} \\int_{0}^{T} \\frac{|v(t)|^{2}}{R}\\,\\mathrm{d}t\n   \\;=\\; \\frac{1}{R}\\, P(v) \\\\[6pt]\n&= \\frac{V_p^{2}}{2R} \\\\[6pt]\n&= \\frac{v_{\\mathrm{RMS}}^{2}}{R}.\n\\end{aligned}\n\n\nP(v) is a signal power, so its units are \\mathrm{V}^{2} — not joules. Dividing by R turns it into a physical power in watts.\n\nThis says that v_{\\mathrm{RMS}} is the equivalent DC voltage that delivers the same power across a nominal load.\nFor R = 23\\,\\Omega,\n P_{\\mathrm{avg}} = \\frac{230^{2}}{23} = 2300\\ \\text{W}, \\qquad\n   i_{\\mathrm{RMS}} = \\frac{230}{23} = 10\\ \\text{A}.",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week02/notes.html#the-angle-between-two-signals",
+    "href": "weeks/week02/notes.html#the-angle-between-two-signals",
+    "title": "Week 2 — Lecture notes",
+    "section": "The angle between two signals",
+    "text": "The angle between two signals\nWe can use this inner product to measure the angle between two signals using \\cos\\theta = \\dfrac{\\langle u, y\\rangle_{P}}{\\|u\\|_{P}\\,\\|y\\|_{P}}\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\left(\\omega t + \\frac{\\pi}{4}\\right) \n \\langle x_1(t), x_2(t)\\rangle_{P} \\;=\\; \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}}\n   12\\cos(\\omega t)\\cos\\!\\left(\\omega t + \\frac{\\pi}{4}\\right)\\mathrm{d}t \nPlug through to get \\;6\\cos\\!\\left(\\dfrac{\\pi}{4}\\right).\n \\|x_1\\|_{P} = \\frac{3}{\\sqrt{2}}, \\qquad \\|x_2\\|_{P} = \\frac{4}{\\sqrt{2}} \\qquad\n   \\text{using the previous example.} \nSo\n \\cos\\theta \\;=\\; \\frac{6\\cos\\!\\left(\\frac{\\pi}{4}\\right)}{6}, \\qquad \\theta = \\frac{\\pi}{4}. \n\nThe angle between two sinusoids is their phase shift.",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week02/notes.html#linear-systems-gain-and-delay",
+    "href": "weeks/week02/notes.html#linear-systems-gain-and-delay",
+    "title": "Week 2 — Lecture notes",
+    "section": "Linear systems, gain and delay",
+    "text": "Linear systems, gain and delay\nBack to our starting point, that a conformal matrix scales & rotates vectors.\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  ℝ²\n  \n    \n    \n  \n  \n  θ\n  u\n  Au\n\n\nA linear system performs these same operations on signals.\nFor example, a static gain scales a signal:\n\n\n  \n    \n      \n    \n  \n  u\n  \n  \n  k\n  \n  ku\n\n\nIf u = \\cos(\\omega t),\n\n\\begin{aligned}\n(ku)_{\\mathrm{RMS}} &= \\sqrt{P(ku)} \\\\[4pt]\n                    &= \\frac{k}{\\sqrt{2}} \\qquad \\text{from the previous example.}\n\\end{aligned}\n\n u_{\\mathrm{RMS}} \\;=\\; \\frac{1}{\\sqrt{2}}. \nThe gain of the system is\n \\frac{(ku)_{\\mathrm{RMS}}}{u_{\\mathrm{RMS}}} \\;=\\; k. \nWhat type of system rotates signals, that is, imparts phase lag?\nThe pure delay,\n\n\n  \n    \n      \n    \n  \n  u\n  \n  \n  D\n  τ\n  \n  y\n\n\n y(t) = u(t - \\tau). \nE.g. if u(t) = \\cos(\\omega t),\n\n\\begin{aligned}\ny(t) &= \\cos\\big(\\omega(t - \\tau)\\big) \\\\[2pt]\n     &= \\cos(\\omega t - \\omega\\tau).\n\\end{aligned}\n\nFrom the previous example,\n \\cos\\theta \\;=\\; \\cos(-\\omega\\tau) \\;=\\; \\cos(\\omega\\tau) \n \\underline{\\;\\theta = \\omega\\tau.\\;} \nThe pure delay gives a phase shift of \\omega\\tau, and gain \\underline{1}.\nPure delay and static gain are two simple examples of linear, time-invariant (LTI) systems. We will see many more next week!",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week02/notes.html#linearity-and-time-invariance",
+    "href": "weeks/week02/notes.html#linearity-and-time-invariance",
+    "title": "Week 2 — Lecture notes",
+    "section": "Linearity and time invariance",
+    "text": "Linearity and time invariance\nWhat do linear and time invariant mean?\nLinear =\nhomogeneous (scale invariant): \\;A(\\alpha u) = \\alpha A(u).\nand additive: \\;A(u_1 + u_2) = A(u_1) + A(u_2). \\qquad Add inputs \\to add outputs.\nTogether, we have superposition: \\;A(\\alpha u_1 + \\beta u_2) = \\alpha A(u_1) + \\beta A(u_2).\nTime invariant: behaviour doesn’t depend on starting time:\n A(D_\\tau u) = D_\\tau A(u) \\quad \\text{for all } \\tau. \\qquad \\text{\\small shift input} \\to \\text{\\small shift output.} \nQuick quiz: which maps from u to y are linear?\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  u\n  y\n  \n  \n  ①\n  \n  \n  ②\n  \n  \n  ③\n\n\n\nExample: check the delay is linear:\n\n\\begin{aligned}\nD_\\tau(\\alpha u) &= \\alpha\\, u(t - \\tau) = \\alpha\\, D_\\tau(u)\n   &&\\Longrightarrow\\; \\text{homogeneous.} \\\\[6pt]\nD_\\tau(u_1 + u_2) &= u_1(t - \\tau) + u_2(t - \\tau) = D_\\tau(u_1) + D_\\tau(u_2)\n   &&\\Longrightarrow\\; \\text{additive.}\n\\end{aligned}\n\nIs it time invariant?\n D_\\tau\\big(D_\\mu u\\big) \\;=\\; D_\\tau\\big(u(t - \\mu)\\big) \\;=\\; u(t - \\mu - \\tau)\n   \\;=\\; D_\\mu\\big(D_\\tau(u)\\big) \\;\\checkmark",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week02/notes.html#now-some-useful-signals",
+    "href": "weeks/week02/notes.html#now-some-useful-signals",
+    "title": "Week 2 — Lecture notes",
+    "section": "Now: some useful signals",
+    "text": "Now: some useful signals\nWe have already seen the most used signal in this course: u(t) = e^{st}, s \\in \\mathbb{C}, and all its components: e^{-t}, e^{t}, \\sin t, \\cos t.\nNow we’ll introduce three more signals which we will see many more times.\n\n① Dirac delta\n\nu_\\varepsilon(t) is the triangle of base \\varepsilon and height \\tfrac{2}{\\varepsilon}, so\n \\int_{-\\infty}^{\\infty} u_\\varepsilon(t)\\,\\mathrm{d}t\n   \\;=\\; \\frac{1}{2}\\,\\varepsilon\\,\\frac{2}{\\varepsilon}\n   \\;=\\; \\varepsilon\\,\\frac{1}{\\varepsilon} \\;=\\; 1. \nThe Dirac delta, or impulse, \\delta(t), may be defined as\n \\boxed{\\;\\delta(t) \\;=\\; \\lim_{\\varepsilon \\to 0} u_\\varepsilon(t)\\;} \n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n\n\ninfinite height, area 1.\nThe Dirac delta has an extremely important property: the sifting property.\nLet y(t) be an arbitrary continuous signal. Then\n \\boxed{\\;\\langle y, \\delta\\rangle \\;=\\; \\int_{-\\infty}^{\\infty} y(t)\\,\\bar \\delta(t)\\,\\mathrm{d}t\n   \\;=\\; y(0)\\;} \nSketch of proof:\nIf \\varepsilon is small, y(t) \\simeq y(0) on [0, \\varepsilon], so\n\n\\begin{aligned}\n\\int_{-\\infty}^{\\infty} \\delta(t)\\, y(t)\\,\\mathrm{d}t\n  &= \\lim_{\\varepsilon \\to 0} \\int_{0}^{\\varepsilon} u_\\varepsilon(t)\\, y(t)\\,\\mathrm{d}t \\\\[6pt]\n  &\\simeq y(0) \\lim_{\\varepsilon \\to 0} \\int_{0}^{\\varepsilon} u_\\varepsilon(t)\\,\\mathrm{d}t \\\\[6pt]\n  &= y(0).\n\\end{aligned}\n\n(Can be made precise using a continuity argument).\nWhat about \\displaystyle \\int_{-\\infty}^{\\infty} \\delta(t - \\tau)\\, y(t)\\,\\mathrm{d}t ?\nLet \\sigma = t - \\tau. \\;\\mathrm{d}t = \\mathrm{d}\\sigma.\nThen we have\n \\int_{-\\infty}^{\\infty} \\delta(\\sigma)\\, y(\\sigma + \\tau)\\,\\mathrm{d}\\sigma \\;=\\; y(\\tau). \n \\boxed{\\;\\int_{-\\infty}^{\\infty} \\delta(t - \\tau)\\, y(t)\\,\\mathrm{d}t \\;=\\; y(\\tau)\\;}\n   \\qquad \\text{\\small the sifting property.} \n\nNOTE: The above definition of the Dirac delta is not unique. It can be defined in many ways, for example using different limits, measures or distributions. The important thing (which really defines it) is the sifting property.\n\n\nNOTE: A Dirac delta only really makes sense inside an integral, so it represents an area of 1, rather than a height.\n\n\nThe scaling property\nWhat is \\delta(\\alpha t)?\n \\delta(\\alpha t) \\;=\\; \\lim_{\\varepsilon \\to 0} u_\\varepsilon(\\alpha t). \n\n\n  \n    \n      \n    \n  \n\n  \n  \n  αt\n  \n  0\n  ε\n  \n  2/ε\n  uε(αt)\n  α &gt; 0\n\n  \n  \n  αt\n  \n  0\n  ε\n  \n  2/ε\n  uε(αt)\n  α &lt; 0\n\n  \n  \n  t\n  \n  \n  2/ε\n  ε/α\n  area 1/|α|\n\n\nLet \\sigma = \\alpha t. Then \\sigma = \\varepsilon \\;\\Rightarrow\\; t = \\dfrac{\\varepsilon}{\\alpha}, so on the t axis the triangle has base \\left|\\dfrac{\\varepsilon}{\\alpha}\\right| and height \\dfrac{2}{\\varepsilon}, giving\n \\text{area} \\;=\\; \\frac{1}{2}\\left|\\frac{\\varepsilon}{\\alpha}\\right|\\frac{2}{\\varepsilon}\n   \\;=\\; \\frac{1}{|\\alpha|}. \nThe limit is therefore an impulse of area \\dfrac{1}{|\\alpha|} at the origin:\n \\boxed{\\;\\delta(\\alpha t) \\;=\\; \\frac{1}{|\\alpha|}\\,\\delta(t)\\;} \n\n\nExample: radar\nRadar systems emit a pulse train and measure its reflection to find the distance to objects. We can model this as a sequence of deltas.\n\n\n  \n    \n      \n    \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  r\n\n\nTotal path length: 2r. Round trip time: \\dfrac{2r}{c} = t_d. So\n r \\;=\\; \\frac{c\\,t_d}{2}. \nDelay \\Rightarrow distance. E.g. a 1\\,\\mu\\text{s} delay gives\n r = \\tfrac{1}{2}\\,(3\\times10^{8})(10^{-6}) = 150\\ \\text{m}. \nIf there are N targets at ranges r_i with reflectivities a_i, the reflected signal is\n y(t) \\;=\\; \\sum_{i=1}^{N} a_i\\, \\delta\\!\\left(t - \\frac{2 r_i}{c}\\right). \nUnambiguous range. Suppose we transmit radar pulses at a frequency f = \\dfrac{1}{T}:\n\n\n  \n    \n      \n    \n  \n  \n  \n    \n    \n    \n    \n  \n  \n  T\n\n\nSuppose we measure an echo at time t_d since the most recent pulse. Which pulse is it an echo of? The distance could be\n \\frac{c\\,t_d}{2}, \\qquad \\frac{c\\,(t_d + T)}{2}, \\qquad \\frac{c\\,(t_d + 2T)}{2},\n   \\qquad \\dots \nThe range is only known up to\n R_u \\;=\\; \\frac{cT}{2}, \nthe unambiguous range.\nHigher T: larger range, but slower updates.\nHow to deal with this? Transmit at two frequencies — the range has to be consistent with both measurements.\n\n\n\n\n② The unit step\nAnother important function is the unit step or Heaviside function:\n\n\\begin{aligned}\nH(t) &:= \\int_{-\\infty}^{t} \\delta(\\varsigma)\\,\\mathrm{d}\\varsigma \\\\[6pt]\n     &= \\begin{cases} 0, & t &lt; 0 \\\\[2pt] 1, & t \\geq 0. \\end{cases}\n\\end{aligned}\n\n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n  \n  \n  0\n  \n  \n  1\n\n\n\n\n③ The pulse\nFinally, the pulse function \\Pi_\\tau(t):\n\n\\Pi_\\tau(t) := \\begin{cases} 1, & -\\dfrac{\\tau}{2} \\leq t \\leq \\dfrac{\\tau}{2} \\\\[6pt]\n0, & \\text{otherwise.} \\end{cases}\n\n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  0\n  −τ/2\n  τ/2\n  1",
+    "crumbs": [
+      "Week 2 — Signals as vectors, systems as maps",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html",
+    "href": "weeks/week01/notes.html",
+    "title": "Week 1 — Lecture notes",
+    "section": "",
+    "text": "Other formats:\n📄 PDF\nSignals & Systems lives at the intersection of differential equations, linear algebra, complex numbers and trigonometry.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#a-the-exponential-function",
+    "href": "weeks/week01/notes.html#a-the-exponential-function",
+    "title": "Week 1 — Lecture notes",
+    "section": "(a) The exponential function",
+    "text": "(a) The exponential function\nFor z \\in \\mathbb{C}, define the exponential by its power series:\n e^{z} := 1 + z + \\frac{z^{2}}{2!} + \\frac{z^{3}}{3!} + \\cdots \nProperties. First, e^{0} = 1 (straight from the definition) \\qquad(1)\n\n\\begin{aligned}\n\\frac{\\mathrm{d}}{\\mathrm{d}z}\\,e^{z}\n&= 0 + 1 + \\frac{2z}{2!} + \\frac{3z^{2}}{3!} + \\cdots \\\\[2pt]\n&= 1 + z + \\frac{z^{2}}{2!} + \\cdots \\\\[2pt]\n&= e^{z}\n\\end{aligned}\n\\qquad(2)\n\nCombining the two properties:\n \\boxed{\\,f(z) = f'(z), \\qquad f(0) = 1\\,} \nIt turns out f(z) = e^{z} is the unique solution to this differential equation, and in fact the differential equation can be used as an alternative definition.\nExtension of (2). By the chain rule,\n\n\\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{zt}\n= 0 + z + \\frac{2t\\,z^{2}}{2!} + \\frac{3t^{2}z^{3}}{3!} + \\cdots\n= z\\,e^{zt}.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#b-eulers-formula",
+    "href": "weeks/week01/notes.html#b-eulers-formula",
+    "title": "Week 1 — Lecture notes",
+    "section": "(b) Euler’s formula",
+    "text": "(b) Euler’s formula\nLet’s now represent sinusoids as complex numbers. Let\n g(\\theta) = \\frac{\\cos\\theta + j\\sin\\theta}{e^{j\\theta}} . \nThen\n\n\\begin{aligned}\ng'(\\theta)\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(\\cos\\theta + j\\sin\\theta\\big)\\,j\\,e^{-j\\theta} \\\\[2pt]\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta} \\\\[2pt]\n&= 0 .\n\\end{aligned}\n\nSo g(\\theta) = C (a constant):\n C\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta . \nSet \\theta = 0. Then C = 1, so we have\n \\boxed{\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta\\,} \nWhat does this mean graphically? e^{j\\theta} is the unit vector at angle \\theta; its real part is \\cos\\theta and its imaginary part is \\sin\\theta. Advance \\theta and the vector rotates, its shadow tracing a sinusoid.\n\nIn particular: \\;e^{j\\pi/2} = j, \\qquad e^{j\\pi} = -1.\n\nManipulating sinusoids using complex numbers\nWhy use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\big(\\omega t + \\tfrac{\\pi}{2}\\big),\n   \\qquad x_1(t) + x_2(t) = \\;? \nThe direct way uses the identity \\cos(\\theta + \\tfrac{\\pi}{2}) = -\\sin\\theta, so x_2(t) = -4\\sin\\omega t, giving\n 3\\cos\\omega t - 4\\sin\\omega t \\;\\equiv\\; A\\cos(\\omega t + \\varphi)\n   \\quad\\longrightarrow\\quad \\text{match coefficients} \\dots \nWith complex numbers:\n\n\\begin{aligned}\nx_1(t) &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_2(t) &= \\operatorname{Re}\\!\\big(4\\,e^{\\,j\\omega t + j\\pi/2}\\big)\n        = \\operatorname{Re}\\!\\big(4\\,e^{j\\pi/2}\\,e^{j\\omega t}\\big)\n        = \\operatorname{Re}\\!\\big(4j\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_1(t) + x_2(t)\n        &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t} + 4j\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big((3 + 4j)\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big(5\\,e^{j0.927}\\,e^{j\\omega t}\\big)\n        = 5\\cos(\\omega t + 0.927).\n\\end{aligned}\n\n\nThe triangle 3 + 4j = 5\\angle 53.1^{\\circ} rotates.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
+    "href": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
+    "title": "Week 1 — Lecture notes",
+    "section": "(c) Euler’s formula & differential equations",
+    "text": "(c) Euler’s formula & differential equations\nAnother differential equation:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,x(t) = j\\,x(t) \\qquad(3) \nWe’ve already seen \\dfrac{\\mathrm{d}}{\\mathrm{d}t}e^{zt} = z\\,e^{zt}. Set z = j:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{jt} = j\\,e^{jt}. \nThis solves (3). What does it look like in \\mathbb{C}, and what does the real part look like? What about other choices of z?\n z = -1:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{-t} = -e^{-t}. \\qquad\\text{No imaginary component.} \n z = -1 + j:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{(-1+j)t} = (-1+j)\\,e^{(-1+j)t}. \nThe widget below plots the trajectory of e^{zt} for several values of z.\n\n\nThe position of z determines the behaviour: oscillations, decay, growth.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
+    "href": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
+    "title": "Week 1 — Lecture notes",
+    "section": "(d) What has this got to do with electrical engineering?",
+    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit.\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t} + \\frac{K}{C},\n\\end{aligned}\n where K is a constant of integration. Matching coefficients of e^{j\\omega t}, we find K = 0 (K represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nThe widget below plots input and output sinusoids for several values of the reactance Z. For some values, the output lags the input, while for others, the output leads.\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "analytics.html",
+    "href": "analytics.html",
+    "title": "Analytics on this site",
+    "section": "",
+    "text": "This site collects a small amount of anonymous usage data, and this page explains exactly what and why. Nothing here is linked to you, to your student record, or to your marks."
+  },
+  {
+    "objectID": "analytics.html#what-is-collected",
+    "href": "analytics.html#what-is-collected",
+    "title": "Analytics on this site",
+    "section": "What is collected",
+    "text": "What is collected\nThe site uses GoatCounter, an open-source analytics tool that does not use cookies and does not track you across websites. For each page view it records:\n\nthe page you looked at, and the page you arrived from\nyour browser, operating system, screen size and country\nwhether you interacted with one of the interactive widgets in the notes, and which one\n\nThis is the reason for tracking: the widgets take effort to build, and I would like to know whether they are worth building for the remaining weeks. The count records that a widget was used, once per visit — not what you did with it, not how long for, and not in what order."
+  },
+  {
+    "objectID": "analytics.html#what-is-not-collected",
+    "href": "analytics.html#what-is-not-collected",
+    "title": "Analytics on this site",
+    "section": "What is not collected",
+    "text": "What is not collected\nNo cookies. No name, email, student ID, IP address or any other identifier is stored. GoatCounter distinguishes one visitor from another using a hash of your IP address and browser version that is held in memory for eight hours and then discarded; it is never written to disk and cannot be reversed. Nothing is shared with advertisers, and the data is not used for anything to do with assessment."
+  },
+  {
+    "objectID": "analytics.html#opting-out",
+    "href": "analytics.html#opting-out",
+    "title": "Analytics on this site",
+    "section": "Opting out",
+    "text": "Opting out\nAny ad blocker or tracker blocker will stop the counting, as will Do Not Track in some browsers. The widgets and the rest of the site work exactly the same either way, and nothing is lost by blocking it.\nIf you would rather not be counted and do not want to install anything, email me and I will tell you the one-line setting to paste into your browser console."
+  },
+  {
+    "objectID": "analytics.html#questions",
+    "href": "analytics.html#questions",
+    "title": "Analytics on this site",
+    "section": "Questions",
+    "text": "Questions\nAsk on Ed, or email thomas.chaffey@sydney.edu.au."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ELEC2302/9302 — Signals and Systems",
+    "section": "",
+    "text": "Lecture notes, tutorials and lab sheets will be posted here each week.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#lectures",
+    "href": "index.html#lectures",
+    "title": "ELEC2302/9302 — Signals and Systems",
+    "section": "Lectures",
+    "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes\n\n\n2\nSignals as vectors, systems as maps\nTutorial",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
     "objectID": "weeks/week01/slides.html#signals-and-systems",
     "href": "weeks/week01/slides.html#signals-and-systems",
     "title": "ELEC2302/9302: Signals and Systems",
@@ -294,116 +492,6 @@
     "crumbs": [
       "Week 1 — Introduction",
       "Slides"
-    ]
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ELEC2302/9302 — Signals and Systems",
-    "section": "",
-    "text": "Lecture notes, tutorials and lab sheets will be posted here each week.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#lectures",
-    "href": "index.html#lectures",
-    "title": "ELEC2302/9302 — Signals and Systems",
-    "section": "Lectures",
-    "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes\n\n\n2\nSignals as vectors, systems as maps\nTutorial",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "analytics.html",
-    "href": "analytics.html",
-    "title": "Analytics on this site",
-    "section": "",
-    "text": "This site collects a small amount of anonymous usage data, and this page explains exactly what and why. Nothing here is linked to you, to your student record, or to your marks."
-  },
-  {
-    "objectID": "analytics.html#what-is-collected",
-    "href": "analytics.html#what-is-collected",
-    "title": "Analytics on this site",
-    "section": "What is collected",
-    "text": "What is collected\nThe site uses GoatCounter, an open-source analytics tool that does not use cookies and does not track you across websites. For each page view it records:\n\nthe page you looked at, and the page you arrived from\nyour browser, operating system, screen size and country\nwhether you interacted with one of the interactive widgets in the notes, and which one\n\nThis is the reason for tracking: the widgets take effort to build, and I would like to know whether they are worth building for the remaining weeks. The count records that a widget was used, once per visit — not what you did with it, not how long for, and not in what order."
-  },
-  {
-    "objectID": "analytics.html#what-is-not-collected",
-    "href": "analytics.html#what-is-not-collected",
-    "title": "Analytics on this site",
-    "section": "What is not collected",
-    "text": "What is not collected\nNo cookies. No name, email, student ID, IP address or any other identifier is stored. GoatCounter distinguishes one visitor from another using a hash of your IP address and browser version that is held in memory for eight hours and then discarded; it is never written to disk and cannot be reversed. Nothing is shared with advertisers, and the data is not used for anything to do with assessment."
-  },
-  {
-    "objectID": "analytics.html#opting-out",
-    "href": "analytics.html#opting-out",
-    "title": "Analytics on this site",
-    "section": "Opting out",
-    "text": "Opting out\nAny ad blocker or tracker blocker will stop the counting, as will Do Not Track in some browsers. The widgets and the rest of the site work exactly the same either way, and nothing is lost by blocking it.\nIf you would rather not be counted and do not want to install anything, email me and I will tell you the one-line setting to paste into your browser console."
-  },
-  {
-    "objectID": "analytics.html#questions",
-    "href": "analytics.html#questions",
-    "title": "Analytics on this site",
-    "section": "Questions",
-    "text": "Questions\nAsk on Ed, or email thomas.chaffey@sydney.edu.au."
-  },
-  {
-    "objectID": "weeks/week01/notes.html",
-    "href": "weeks/week01/notes.html",
-    "title": "Week 1 — Lecture notes",
-    "section": "",
-    "text": "Other formats:\n📄 PDF\nSignals & Systems lives at the intersection of differential equations, linear algebra, complex numbers and trigonometry.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#a-the-exponential-function",
-    "href": "weeks/week01/notes.html#a-the-exponential-function",
-    "title": "Week 1 — Lecture notes",
-    "section": "(a) The exponential function",
-    "text": "(a) The exponential function\nFor z \\in \\mathbb{C}, define the exponential by its power series:\n e^{z} := 1 + z + \\frac{z^{2}}{2!} + \\frac{z^{3}}{3!} + \\cdots \nProperties. First, e^{0} = 1 (straight from the definition) \\qquad(1)\n\n\\begin{aligned}\n\\frac{\\mathrm{d}}{\\mathrm{d}z}\\,e^{z}\n&= 0 + 1 + \\frac{2z}{2!} + \\frac{3z^{2}}{3!} + \\cdots \\\\[2pt]\n&= 1 + z + \\frac{z^{2}}{2!} + \\cdots \\\\[2pt]\n&= e^{z}\n\\end{aligned}\n\\qquad(2)\n\nCombining the two properties:\n \\boxed{\\,f(z) = f'(z), \\qquad f(0) = 1\\,} \nIt turns out f(z) = e^{z} is the unique solution to this differential equation, and in fact the differential equation can be used as an alternative definition.\nExtension of (2). By the chain rule,\n\n\\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{zt}\n= 0 + z + \\frac{2t\\,z^{2}}{2!} + \\frac{3t^{2}z^{3}}{3!} + \\cdots\n= z\\,e^{zt}.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#b-eulers-formula",
-    "href": "weeks/week01/notes.html#b-eulers-formula",
-    "title": "Week 1 — Lecture notes",
-    "section": "(b) Euler’s formula",
-    "text": "(b) Euler’s formula\nLet’s now represent sinusoids as complex numbers. Let\n g(\\theta) = \\frac{\\cos\\theta + j\\sin\\theta}{e^{j\\theta}} . \nThen\n\n\\begin{aligned}\ng'(\\theta)\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(\\cos\\theta + j\\sin\\theta\\big)\\,j\\,e^{-j\\theta} \\\\[2pt]\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta} \\\\[2pt]\n&= 0 .\n\\end{aligned}\n\nSo g(\\theta) = C (a constant):\n C\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta . \nSet \\theta = 0. Then C = 1, so we have\n \\boxed{\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta\\,} \nWhat does this mean graphically? e^{j\\theta} is the unit vector at angle \\theta; its real part is \\cos\\theta and its imaginary part is \\sin\\theta. Advance \\theta and the vector rotates, its shadow tracing a sinusoid.\n\nIn particular: \\;e^{j\\pi/2} = j, \\qquad e^{j\\pi} = -1.\n\nManipulating sinusoids using complex numbers\nWhy use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\big(\\omega t + \\tfrac{\\pi}{2}\\big),\n   \\qquad x_1(t) + x_2(t) = \\;? \nThe direct way uses the identity \\cos(\\theta + \\tfrac{\\pi}{2}) = -\\sin\\theta, so x_2(t) = -4\\sin\\omega t, giving\n 3\\cos\\omega t - 4\\sin\\omega t \\;\\equiv\\; A\\cos(\\omega t + \\varphi)\n   \\quad\\longrightarrow\\quad \\text{match coefficients} \\dots \nWith complex numbers:\n\n\\begin{aligned}\nx_1(t) &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_2(t) &= \\operatorname{Re}\\!\\big(4\\,e^{\\,j\\omega t + j\\pi/2}\\big)\n        = \\operatorname{Re}\\!\\big(4\\,e^{j\\pi/2}\\,e^{j\\omega t}\\big)\n        = \\operatorname{Re}\\!\\big(4j\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_1(t) + x_2(t)\n        &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t} + 4j\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big((3 + 4j)\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big(5\\,e^{j0.927}\\,e^{j\\omega t}\\big)\n        = 5\\cos(\\omega t + 0.927).\n\\end{aligned}\n\n\nThe triangle 3 + 4j = 5\\angle 53.1^{\\circ} rotates.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
-    "href": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
-    "title": "Week 1 — Lecture notes",
-    "section": "(c) Euler’s formula & differential equations",
-    "text": "(c) Euler’s formula & differential equations\nAnother differential equation:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,x(t) = j\\,x(t) \\qquad(3) \nWe’ve already seen \\dfrac{\\mathrm{d}}{\\mathrm{d}t}e^{zt} = z\\,e^{zt}. Set z = j:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{jt} = j\\,e^{jt}. \nThis solves (3). What does it look like in \\mathbb{C}, and what does the real part look like? What about other choices of z?\n z = -1:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{-t} = -e^{-t}. \\qquad\\text{No imaginary component.} \n z = -1 + j:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{(-1+j)t} = (-1+j)\\,e^{(-1+j)t}. \nThe widget below plots the trajectory of e^{zt} for several values of z.\n\n\nThe position of z determines the behaviour: oscillations, decay, growth.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
-    "href": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
-    "title": "Week 1 — Lecture notes",
-    "section": "(d) What has this got to do with electrical engineering?",
-    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit.\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t} + \\frac{K}{C},\n\\end{aligned}\n where K is a constant of integration. Matching coefficients of e^{j\\omega t}, we find K = 0 (K represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nThe widget below plots input and output sinusoids for several values of the reactance Z. For some values, the output lags the input, while for others, the output leads.\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
     ]
   }
 ]

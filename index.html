@@ -67,9 +67,11 @@ ul.task-list li input[type="checkbox"] {
   distinguished by an in-memory hash of IP + User-Agent that is discarded
   after 8 hours and never written to disk.
 
-  Widget interactions arrive as events named widget-week1-euler and similar,
-  fired from weeks/week01/phasor-widgets.js. See the comment block at the top
-  of that file for how to read them and what the numbers do and do not mean.
+  Widget interactions arrive as events named widget-week1-euler,
+  widget-week2-sample and similar, fired from each week's own
+  weeks/<week>/phasor-widgets.js. See the "usage tracking" comment block at
+  the top of any of those files for how to read them and what the numbers do
+  and do not mean.
 
   To stop your own visits being counted, open the dashboard and use
   Settings -> "Ignore this browser", or set the ignore-IP option.
@@ -138,6 +140,12 @@ ul.task-list li input[type="checkbox"] {
           </a> 
       </div>
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./weeks/week02/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./weeks/week02/tutorial1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
