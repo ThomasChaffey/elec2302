@@ -334,9 +334,10 @@ E(u) &amp;= \int_{0}^{\infty} e^{-2t}\,\mathrm{d}t \\[4pt]
 <p><span class="math inline">\text{energy} = \displaystyle\int \text{power}\;\mathrm{d}t</span></p>
 </div>
 <p><span class="math display"> \boxed{\;P(u) \;=\; \lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t.\;} </span></p>
-<p>If <span class="math inline">u(t) = u(t + T)</span> for some <span class="math inline">T</span>,</p>
-<p><span class="math display"> \lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t</span> Each period contributes the same, so we get the average. <span class="math display">
+<p>If <span class="math inline">u(t) = u(t + T)</span> for some <span class="math inline">T</span>, each period contributes the same, so we get the average.</p>
+<p><span class="math display">
 \begin{aligned}
+\lim_{W \to \infty} \frac{1}{2W} \int_{-W}^{W} |u(t)|^{2}\,\mathrm{d}t
 &amp;= \lim_{k \to \infty} \frac{1}{2kT}\left( \cdots
    \underbrace{\int_{-kT}^{-(k-1)T} |u(t)|^{2}\,\mathrm{d}t}_{\textstyle =\int_{0}^{T}|u(t)|^{2}\,\mathrm{d}t}
    + \underbrace{\int_{-(k-1)T}^{-(k-2)T} |u(t)|^{2}\,\mathrm{d}t}_{\textstyle =\int_{0}^{T}|u(t)|^{2}\,\mathrm{d}t}
