@@ -11,7 +11,6 @@ Lecture notes, tutorials and lab sheets will be posted here each week.
 | Week | Topic | Material |
 |:--|:--|:--|
 | 1 | Introduction; exponentials, Euler's formula and the complex plane | [Slides](weeks/week01/slides.qmd) · [Notes](weeks/week01/notes.qmd) |
-| 2 | Signals as vectors, systems as maps | [Notes](weeks/week02/notes.qmd) · [Notes](weeks/week01/notes.qmd) |
-| 2 | Signals [Tutorial](weeks/week02/tutorial1.pdf) |
+| 2 | Signals as vectors, systems as maps | [Notes](weeks/week02/notes.qmd) · [Tutorial](weeks/week02/tutorial1.pdf) |
 
 : {tbl-colwidths="[8,57,35]"}
