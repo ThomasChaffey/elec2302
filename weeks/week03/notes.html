@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 3 — Lecture notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../weeks/formula-sheet.pdf" rel="next">
+<link href="../../weeks/week02/tutorial1.pdf" rel="prev">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e51413ca38933331223175391a038608.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<!--
+  Cookieless, privacy-preserving analytics (GoatCounter).
+
+  SETUP: sign up at https://www.goatcounter.com, pick a site code, and replace
+  YOURCODE below with it. Until you do, this script 404s harmlessly and no
+  counting happens. Free for non-commercial use, which covers a course site.
+
+  What it collects: page path, referrer, browser/OS/screen size, country.
+  No cookies, no cross-site tracking, no personal data stored. Visitors are
+  distinguished by an in-memory hash of IP + User-Agent that is discarded
+  after 8 hours and never written to disk.
+
+  Widget interactions arrive as events named widget-week1-euler,
+  widget-week2-sample and similar, fired from each week's own
+  weeks/<week>/phasor-widgets.js (week 3 uses convolution-widgets.js, giving
+  widget-week3-comb and widget-week3-conv). See the "usage tracking" comment
+  block at the top of any of those files for how to read them and what the
+  numbers do and do not mean.
+
+  A PDF cannot report on itself: nothing runs when a reader opens one. Two
+  proxies stand in for it. Clicking the "PDF" link on a notes page fires a
+  click event, named pdf-week3 and so on, via the data-goatcounter-click
+  attribute count.js looks for. And the site address printed inside each PDF
+  carries ?ref=notes-pdf-week3, so a reader who types it in or follows it back
+  shows up under that referrer. The first counts opening the file, the second
+  counts returning to the site from it; neither counts reading it.
+
+  To stop your own visits being counted, open the dashboard and use
+  Settings -> "Ignore this browser", or set the ignore-IP option.
+-->
+<script data-goatcounter="https://thomaschaffey.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Week 3 — Linear, time-invariant systems</a></li><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Notes</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1 — Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/slides.html" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2 — Signals as vectors, systems as maps</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/tutorial1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3 — Linear, time-invariant systems</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 1 formula sheet</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Week 3 — Linear, time-invariant systems</a></li><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Notes</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 3 — Lecture notes</h1>
+<p class="subtitle lead">Linear, time-invariant systems</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="format-links">
+<p><span class="label">Other formats:</span></p>
+<a href="notes.pdf" title="Week 3 lecture notes as a PDF" data-goatcounter-click="pdf-week3" data-goatcounter-title="Week 3 notes PDF opened">📄&nbsp;PDF</a>
+</div>
+<!-- CHECK: the revised page 1 heads the lecture "linear, time-invariant systems", so I
+     have used that as the subtitle. The previous version, and the Week 3 tutorial sheet,
+     use "LTI systems, impulse response and convolution". -->
+<section id="goals" class="level2">
+<h2 class="anchored" data-anchor-id="goals">Goals</h2>
+<p>① Convolution: calculate the output of an LTI system by breaking the input into pieces.</p>
+<p>② Impulse response: complete representation of an LTI system.</p>
+<p>③ LTI systems preserve frequency.</p>
+<p>④ ODE descriptions of LTI systems.</p>
+<p>⑤ Interconnections of systems.</p>
+</section>
+<section id="recap" class="level2">
+<h2 class="anchored" data-anchor-id="recap">Recap</h2>
+<p>Linear <span class="math inline">\iff</span> superposition</p>
+<div style="text-align:center">
+<p><img src="fig-recap-gain.svg" class="img-fluid" width="560"></p>
+</div>
+<div style="text-align:center">
+<p><img src="fig-recap-sum.svg" class="img-fluid" width="560"></p>
+</div>
+<p>add/scale input <span class="math inline">\iff</span> add/scale output</p>
+</section>
+<section id="convolution" class="level2">
+<h2 class="anchored" data-anchor-id="convolution">① Convolution</h2>
+<p>If we apply regular impulses to a system, what do we get at the output?</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-superpose.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>Each input sample launches a scaled, shifted copy of the impulse response; the outputs superpose.</figcaption>
+</figure>
+</div>
+</div>
+<p>What do we have at time <span class="math inline">4</span>?</p>
+<p><span class="math inline">h</span> started at <span class="math inline">3</span> and gone <span class="math inline">1</span> time step: <span class="math inline">\;\overbrace{h(t-3)}^{h(1)}\,u(3)\;</span></p>
+<p><span class="math inline">h</span> started at <span class="math inline">2</span> and gone <span class="math inline">2</span> time steps: <span class="math inline">\;\overbrace{h(t-2)}^{h(2)}\,u(2)\;</span></p>
+<p><span class="math inline">h</span> started at <span class="math inline">1</span> and gone <span class="math inline">3</span> time steps: <span class="math inline">\;\overbrace{h(t-1)}^{h(3)}\,u(1)\;</span></p>
+<p>So for fixed <span class="math inline">t</span>: flip <span class="math inline">h</span> and shift by <span class="math inline">t</span>, then for each <span class="math inline">\tau \in [0, t]</span>, multiply with <span class="math inline">u(\tau)</span> and add to total.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-flipshift.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>For fixed <span class="math inline">t</span>: flip <span class="math inline">h</span>, shift by <span class="math inline">t</span>, and add the products <span class="math inline">h(t-k\Delta t)\,u(k\Delta t)\,\Delta t</span>.</figcaption>
+</figure>
+</div>
+</div>
+<div id="w-comb" class="widget"></div>
+<p>This gives the output to a sum of impulses. It turns out we can approximate any input as such a sum.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-approx.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>Approximating <span class="math inline">u(t)</span> by a train of impulses. The shaded rectangle at <span class="math inline">\tau</span> has area <span class="math inline">u(\tau)\,\Delta t</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>Area of the shaded rectangle: <span class="math inline">u(\tau)\,\Delta t.</span></p>
+<p>We can represent this area by an impulse, <span class="math inline">\delta(t-\tau)\,u(\tau)\,\Delta t.</span></p>
+<p>These impulses for each rectangle approximate <span class="math inline">u(t)</span>, just like a Riemann integral:</p>
+<p><span class="math display"> u(t) \approx \sum_{k=-\infty}^{\infty} \delta(t-k\Delta t)\,u(k\Delta t)\,\Delta t \qquad(1) </span></p>
+<p>The corresponding output is a sum of delayed <strong>impulse responses</strong> that approximates the output of the system:</p>
+<p><span class="math display"> y(t) \approx \sum_{k=-\infty}^{\infty} h(t-k\Delta t)\,u(k\Delta t)\,\Delta t. \qquad(2) </span></p>
+<p>What happens to (1) in the limit <span class="math inline">\Delta t \to 0</span>?</p>
+<p><span class="math display"> \sum_{k=-\infty}^{\infty} \delta(t-k\Delta t)\,u(k\Delta t)\,\Delta t
+\;\longrightarrow\; \int_{-\infty}^{\infty}\! \delta(t-\tau)\,u(\tau)\,\mathrm{d}\tau </span></p>
+<p>with <span class="math inline">k\Delta t \to \tau</span> and <span class="math inline">\Delta t \to \mathrm{d}\tau</span>. So we have</p>
+<p><span class="math display"> \boxed{\,u(t) = \int_{-\infty}^{\infty}\! \delta(t-\tau)\,u(\tau)\,\mathrm{d}\tau\,} </span></p>
+<p>This is the <strong>sifting property</strong>! Read backwards, it says that the signal <span class="math inline">u(t)</span> is equal to an integral of impulses with amplitude <span class="math inline">u(\tau)\,\mathrm{d}\tau</span>.</p>
+<p>What about (2) in the limit <span class="math inline">\Delta t \to 0</span>?</p>
+<p><span class="math display"> \sum_{k=-\infty}^{\infty} h(t-k\Delta t)\,u(k\Delta t)\,\Delta t
+\;\longrightarrow\; \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau. </span></p>
+<p>So we have:</p>
+<p><span class="math display"> \boxed{\,y(t) = \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau\,} </span></p>
+<p>The response to <strong>any input</strong> <span class="math inline">u(t)</span> is <strong>determined by the impulse response</strong>! We will look more closely at how to calculate the impulse response soon, but first let’s understand the expression above.</p>
+</section>
+<section id="convolution-definition-and-properties" class="level2">
+<h2 class="anchored" data-anchor-id="convolution-definition-and-properties">Convolution: definition and properties</h2>
+<p><span class="math display"> \boxed{\;\text{The operation}\quad h * u := \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau\;} </span></p>
+<p>is called <strong>convolution</strong>.</p>
+<p>Basic properties of convolution:</p>
+<p><strong>1.</strong> <span class="math inline">h * u = u * h</span> (commutativity)</p>
+<p>Proof:</p>
+<p><span class="math display"> h * u = \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau. </span></p>
+<p>Let <span class="math inline">T = t - \tau</span>. Then <span class="math inline">\tau = t - T</span> and <span class="math inline">\mathrm{d}T = -\mathrm{d}\tau.</span></p>
+<p><span class="math display">
+\begin{aligned}
+&amp;= -\int_{\infty}^{-\infty}\! h(T)\,u(t-T)\,\mathrm{d}T \\[2pt]
+&amp;= \int_{-\infty}^{\infty}\! u(t-T)\,h(T)\,\mathrm{d}T \;=\; u * h.
+\end{aligned}
+</span></p>
+<p><strong>2.</strong> <span class="math inline">(h_1 + h_2) * u = h_1 * u + h_2 * u</span> (additivity).</p>
+<p><strong>3.</strong> <span class="math inline">h_1 * (h_2 * h_3) = (h_1 * h_2) * h_3</span> (associativity).</p>
+<p><strong>4.</strong> <span class="math inline">\displaystyle (u * \delta)(t) = \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau)\,\mathrm{d}\tau = u(t).</span></p>
+<p><strong>5.</strong> <span class="math inline">\displaystyle (u * \delta(t-T)) = \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau-T)\,\mathrm{d}\tau = u(t-T). \qquad = \text{pure delay!}</span></p>
+<p><strong>6.</strong></p>
+<p><span class="math display">
+\begin{aligned}
+(f * g)' &amp;= \frac{\mathrm{d}}{\mathrm{d}t}\int_{-\infty}^{\infty}\! f(t-\tau)\,g(\tau)\,\mathrm{d}\tau \\[2pt]
+         &amp;= \int_{-\infty}^{\infty}\! \frac{\mathrm{d}}{\mathrm{d}t}f(t-\tau)\,g(\tau)\,\mathrm{d}\tau \\[2pt]
+         &amp;= f' * g.
+\end{aligned}
+</span></p>
+<p>But also: <span class="math inline">(f * g)' = (g * f)' = g' * f.</span></p>
+<p>So</p>
+<p><span class="math display"> (f * g)' = f' * g = g' * f </span></p>
+<section id="example-a-pulse-convolved-with-itself" class="level3">
+<h3 class="anchored" data-anchor-id="example-a-pulse-convolved-with-itself">Example: a pulse convolved with itself</h3>
+<p>Example: plot <span class="math inline">(p_1 * p_1)(t)</span></p>
+<p><span class="math display"> \int_{-\infty}^{\infty}\! p_1(t-\tau)\,p_1(\tau)\,\mathrm{d}\tau </span></p>
+<p>The overlapping area is the value of <span class="math inline">(p_1 * p_1)(t)</span>.</p>
+<div id="w-conv" class="widget"></div>
+</section>
+<section id="example-radar" class="level3">
+<h3 class="anchored" data-anchor-id="example-radar">Example: radar</h3>
+<div style="text-align:center">
+<svg viewbox="0 0 540 200" width="520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A train of transmitted pulses on the left; on the right a radar mast with
+                 three rays out to three objects at ranges r1, r2 and r3.">
+  <defs>
+    <marker id="ahRD" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"></path>
+    </marker>
+  </defs>
+  <line x1="20" y1="120" x2="215" y2="120" stroke="#00468C" stroke-width="1.8"></line>
+  <g stroke="#00468C" stroke-width="1.6" marker-end="url(#ahRD)">
+    <line x1="45" y1="120" x2="45" y2="60"></line>
+    <line x1="95" y1="120" x2="95" y2="60"></line>
+    <line x1="145" y1="120" x2="145" y2="60"></line>
+    <line x1="195" y1="120" x2="195" y2="60"></line>
+  </g>
+  <g stroke="#00468C" fill="none" stroke-width="1.2">
+    <path d="M 300 175 L 320 95 L 340 175"></path>
+    <line x1="296" y1="175" x2="344" y2="175"></line>
+    <line x1="306" y1="151" x2="334" y2="151"></line>
+    <line x1="311" y1="131" x2="329" y2="131"></line>
+    <line x1="304" y1="163" x2="331" y2="139"></line>
+    <line x1="309" y1="139" x2="336" y2="163"></line>
+    <path d="M 318 100 A 20 20 0 0 0 318 68"></path>
+    <line x1="320" y1="95" x2="324" y2="86"></line>
+  </g>
+  <g stroke="#00468C" fill="none" stroke-width="1.2">
+    <line x1="322" y1="84" x2="470" y2="30"></line>
+    <line x1="322" y1="84" x2="480" y2="62"></line>
+    <line x1="322" y1="84" x2="472" y2="96"></line>
+  </g>
+  <g fill="#00468C">
+    <circle cx="474" cy="28" r="4"></circle>
+    <circle cx="484" cy="61" r="4"></circle>
+    <circle cx="476" cy="97" r="4"></circle>
+  </g>
+  <text x="386" y="49" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₁</text>
+  <text x="398" y="66" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₂</text>
+  <text x="390" y="107" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₃</text>
+</svg>
+</div>
+<p>For each object, the pulse is delayed by <span class="math inline">t_{d_i} = \dfrac{2r_i}{c}.</span></p>
+<p>This can be interpreted as a <strong>system impulse response</strong>.</p>
+<p>input: <span class="math inline">\delta(t)</span></p>
+<p>system: the scene</p>
+<p>output: <span class="math inline">\displaystyle \sum_i \delta(t - t_{d_i}).</span></p>
+<p><span class="math inline">\hookrightarrow</span> output is a sum of delayed versions of the input.</p>
+<p>What system is this the impulse response of?</p>
+<p><span class="math display"> \sum_i D_{t_{d_i}} \qquad \text{: a sum of delays, one for each object.} </span></p>
+<p>What is the response if we inject a sinusoid:</p>
+<p>Intuitively: <span class="math inline">u(t) = \cos(\omega t)</span>, <span class="math inline">\;y(t) = \sum_i \cos(\omega t + t_{d_i}).</span></p>
+<p>Let’s check our intuition with what we just learnt:</p>
+<p><span class="math display">
+\begin{aligned}
+y(t) &amp;= u(t) * h(t) \\[2pt]
+     &amp;= u(t) * \sum_i \delta(t - t_{d_i}) \\[2pt]
+     &amp;= \sum_i \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau - t_{d_i})\,\mathrm{d}\tau \\[2pt]
+     &amp;= \sum_i u(t - t_{d_i}) \qquad \text{(sifting property)} \\[2pt]
+     &amp;= \sum_i \cos(\omega t + t_{d_i}).
+\end{aligned}
+</span></p>
+<!-- CHECK: the last line is transcribed as written. Substituting u(t) = cos(wt) into
+     u(t - t_di) gives cos(w(t - t_di)) = cos(wt - w t_di), not cos(wt + t_di). The same
+     applies to the "intuitively" line above. -->
+</section>
+</section>
+<section id="the-impulse-response-of-circuits" class="level2">
+<h2 class="anchored" data-anchor-id="the-impulse-response-of-circuits">② The impulse response of circuits</h2>
+<p>Now let’s look at the impulse response of circuits.</p>
+<div class="columns">
+<div class="column" style="width:49%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-rc.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>A series RC circuit.</figcaption>
+</figure>
+</div>
+<p>In the RC circuit, a change in <span class="math inline">v_i</span> causes <strong>gradual</strong> change in <span class="math inline">v_o</span>.</p>
+</div><div class="column" style="width:2%;">
+
+</div><div class="column" style="width:49%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-divider.svg" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>A voltage divider.</figcaption>
+</figure>
+</div>
+<p>In the voltage divider, a change in <span class="math inline">v_i</span> causes <strong>instantaneous</strong> change in <span class="math inline">v_o</span>.</p>
+</div>
+</div>
+<p><span class="math inline">\hookrightarrow</span> capacitor has memory:</p>
+<p>the charge stored on its plates carries a memory of the current.</p>
+<p>The impulse is a fictitious signal that deposits charge on the capacitor instantaneously:</p>
+<p><span class="math display"> q_c = \int i_c(t)\,\mathrm{d}t </span></p>
+<p>So if <span class="math inline">i_c(t) = \delta(t)</span>, <span class="math inline">\;q_c(0) = \displaystyle\int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t = 1.</span></p>
+<p>This means an impulse response (inhomogeneous ODE) is equivalent to an initial condition response (homogeneous ODE).</p>
+<p>This holds generally for LTI systems. Let’s see how on the RC circuit above.</p>
+<p><span class="math display"> v_i(t) = v_R + v_C </span></p>
+<p><span class="math display"> v_R = iR </span></p>
+<p><span class="math display"> i = \frac{\mathrm{d}}{\mathrm{d}t}C v_C. </span></p>
+<p>So</p>
+<p><span class="math display"> v_i(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
+<p>Now let <span class="math inline">v_i(t) = \delta(t)</span>.</p>
+<p><span class="math display"> \delta(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
+<p>Integrate both sides on <span class="math inline">[0^-, 0^+]</span>.</p>
+<p><span class="math display"> \int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t = \underbrace{\int_{0^-}^{0^+}\! v_C(t)\,\mathrm{d}t}_{=\,0} + RC\,v(0) </span></p>
+<p><span class="math display"> 1 = RC\,v(0) </span></p>
+<p><span class="math display"> v(0) = \frac{1}{RC}. </span></p>
+<div class="note">
+<p>Impulse at <span class="math inline">t=0</span> deposits an <strong>initial condition</strong>.</p>
+</div>
+<p>We can use this to calculate the impulse response, by solving</p>
+<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t) + v_C(t) = 0, \qquad v_C(0) = \frac{1}{RC} \qquad(3) </span></p>
+<p>Let <span class="math inline">v_C(t) = \alpha e^{-\beta t}.</span></p>
+<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}v_C = -\beta\alpha e^{-\beta t}. </span></p>
+<p>Sub in (3):</p>
+<p><span class="math display"> -RC\beta\alpha e^{-\beta t} = -\alpha e^{-\beta t} </span></p>
+<p><span class="math display"> RC\beta = 1 \iff \beta = \frac{1}{RC}. </span></p>
+<p>Use the initial condition to find <span class="math inline">\alpha</span>:</p>
+<p><span class="math display"> v_C(0) = \alpha e^{0} = \frac{1}{RC}. </span></p>
+<p>So the impulse response is</p>
+<p><span class="math display"> v_C(t) = \frac{1}{RC}\,e^{-\frac{1}{RC}t} =: h(t). </span></p>
+<!-- CHECK: the exponent in the source reads e^{-(1/C)t}; with beta = 1/RC from the line
+     above it should be e^{-(1/RC)t}, which is what I have used. -->
+<p><span class="math inline">h(t)</span> is the usual notation we’ll use for impulse response.</p>
+</section>
+<section id="ode-descriptions-of-lti-systems" class="level2">
+<h2 class="anchored" data-anchor-id="ode-descriptions-of-lti-systems">④ ODE descriptions of LTI systems</h2>
+<p>We can extend this result into a general principle for <span class="math inline">n</span>th order differential equations:</p>
+<p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) = \delta(t) </span></p>
+<p><span class="math display"> y^{(n-1)}(0) = y^{(n-2)}(0) = \cdots = y(0) = 0. </span></p>
+<p>Integrate both sides over <span class="math inline">0_-</span> to <span class="math inline">0_+</span>. Following the same intuition, every derivative lower than <span class="math inline">y^{(n)}</span> has <span class="math inline">0</span> area over <span class="math inline">0_-</span> to <span class="math inline">0_+</span>, so we have</p>
+<p><span class="math display"> \int_{0_-}^{0_+}\! a_n y^{(n)}(t)\,\mathrm{d}t = 1 </span></p>
+<p><span class="math display"> y^{(n-1)}(0) = \frac{1}{a_n} </span></p>
+<p>If we also allow derivatives of the input:</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) \\[2pt]
+&amp;\qquad = b_m u^{(m)}(t) + b_{m-1}u^{(m-1)}(t) + \cdots + b_0 u(t)
+\end{aligned}
+</span></p>
+<p>with given initial conditions <span class="math inline">y^{(n-1)}(0), y^{(n-2)}(0), \dots, y(0)</span>, we have a description for a large class of useful systems, including all of the circuits we’ve seen so far.</p>
+<ul>
+<li><span class="math inline">n</span> is called the <strong>order</strong> of the system,</li>
+<li>the <span class="math inline">a_i</span> and <span class="math inline">b_i</span> are called the <strong>coefficients</strong> of the system,</li>
+<li>such systems are always <strong>time-invariant</strong>,</li>
+<li>if the initial conditions are all <span class="math inline">0</span>, the system is <strong>linear</strong>,</li>
+<li>this gives an implicit description of the map from <span class="math inline">u</span> to <span class="math inline">y</span>. In weeks 5 &amp; 6 we’ll develop an explicit description.</li>
+</ul>
+</section>
+<section id="lti-systems-and-sinusoids" class="level2">
+<h2 class="anchored" data-anchor-id="lti-systems-and-sinusoids">③ LTI systems and sinusoids</h2>
+<p>Back to our RC circuit. Let’s plug in a complex sinusoidal voltage and see what happens.</p>
+<p><span class="math display"> v_i(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
+<p>Let <span class="math inline">v_i(t) = e^{j\omega t} = \cos(\omega t) + j\sin(\omega t).</span></p>
+<p>Guess a solution <span class="math inline">v_C(t) = G e^{j\omega t}</span> for some <span class="math inline">G \in \mathbb{C}</span> — a sinusoid of the same frequency.</p>
+<p><span class="math display"> e^{j\omega t} = G e^{j\omega t} + \frac{\mathrm{d}}{\mathrm{d}t}RCG e^{j\omega t} </span></p>
+<p><span class="math display"> e^{j\omega t} = G e^{j\omega t} + j\omega RCG e^{j\omega t} </span></p>
+<p><span class="math display"> 1 = G + j\omega RCG \qquad (e^{j\omega t} \neq 0) </span></p>
+<p><span class="math display"> G(j\omega) = \frac{1}{1 + j\omega RC}. </span></p>
+<div class="note">
+<p>Why is <span class="math inline">Ge^{j\omega t}</span> always such a good guess?</p>
+</div>
+<!-- CHECK: the circuit redrawn beside this calculation appears to label the shunt element
+     L, but the equation above it is the RC circuit. I have kept the RC circuit. -->
+<p>Consider an arbitrary LTI system mapping <span class="math inline">u</span> to <span class="math inline">y</span>.</p>
+<p>Let <span class="math inline">u(t) = e^{j\omega t} = \cos(\omega t) + j\sin(\omega t).</span></p>
+<p>Time invariance: <span class="math inline">u(t-\tau) \longmapsto y(t-\tau).</span></p>
+<p>For this input,</p>
+<p><span class="math display">
+\begin{aligned}
+u(t-\tau) &amp;= e^{j\omega(t-\tau)} = e^{j\omega t}e^{-j\omega\tau} \\[2pt]
+          &amp;= e^{-j\omega\tau}u(t).
+\end{aligned}
+</span></p>
+<p>This is the input <span class="math inline">u</span> scaled by <span class="math inline">e^{-j\omega\tau}</span>.</p>
+<p>By linearity, <span class="math inline">y(t-\tau) = e^{-j\omega\tau}y(t).</span></p>
+<p>Set <span class="math inline">t=0</span> and relabel <span class="math inline">-\tau = t</span>, then</p>
+<p><span class="math display"> y(t) = e^{j\omega t}y(0), </span></p>
+<p>where <span class="math inline">y(0)</span> is <span class="math inline">G(j\omega)</span> in the example above.</p>
+<div class="note">
+<p>LTI systems always map a sinusoid to a sinusoid of the same frequency.</p>
+</div>
+<p>Let’s think about this in terms of our matrix <span class="math inline">\longleftrightarrow</span> system analogy.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>matrix</th>
+<th>LTI system</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">y = Au</span></td>
+<td><span class="math inline">y(t) = G(u(t))</span></td>
+</tr>
+<tr class="even">
+<td>If <span class="math inline">u</span> is an eigenvector, <span class="math inline">y = Au = \lambda u</span></td>
+<td>If <span class="math inline">u = e^{j\omega t}</span>, <span class="math inline">y = G(j\omega)\,e^{j\omega t}</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">A</span> scales <span class="math inline">u</span> to get <span class="math inline">y</span>.</td>
+<td><span class="math inline">G</span> scales <span class="math inline">u</span> to get <span class="math inline">y</span>.</td>
+</tr>
+<tr class="even">
+<td></td>
+<td><span class="math inline">e^{j\omega t}</span> is an eigenvector!</td>
+</tr>
+</tbody>
+</table>
+<p>Matrices are hard in general, but diagonal matrices are easy, they simply scale each entry of the vector. How do we diagonalise a matrix? We find a basis of eigenvectors.</p>
+<p>Over the last three weeks, we’ve seen that time domain signals &amp; systems are hard to analyse. We’ve just discovered that the eigenvectors of an LTI system are sinusoids. Can we use this to somehow “diagonalise” the system and make the analysis less difficult, the same as we would do for a matrix?</p>
+<p>YES! This is what the Fourier Transform does. We will build this over the next three weeks.</p>
+</section>
+<section id="block-diagrams-and-interconnections" class="level2">
+<h2 class="anchored" data-anchor-id="block-diagrams-and-interconnections">⑤ Block diagrams and interconnections</h2>
+<p>Block diagrams or signal flow diagrams describe the exchange of signals between systems.</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img src="fig-block-system.svg" class="img-fluid" width="260"></p>
+</div><div class="column" style="width:45%;">
+<p>System <span class="math inline">A</span> with input <span class="math inline">u</span> and output <span class="math inline">y</span>.</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img src="fig-block-gain.svg" class="img-fluid" width="260"></p>
+</div><div class="column" style="width:45%;">
+<p>A static gain <span class="math inline">k</span>.</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img src="fig-block-cascade.svg" class="img-fluid" width="320"></p>
+</div><div class="column" style="width:45%;">
+<p>A cascade interconnection.</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img src="fig-block-sum.svg" class="img-fluid" width="120"></p>
+</div><div class="column" style="width:45%;">
+<p>The sum of two signals.</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img src="fig-block-parallel.svg" class="img-fluid" width="320"></p>
+</div><div class="column" style="width:45%;">
+<p>A parallel interconnection.</p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><img src="fig-block-feedback.svg" class="img-fluid" width="320"></p>
+</div><div class="column" style="width:45%;">
+<p>A negative feedback interconnection (the subject of control systems).</p>
+</div>
+</div>
+</section>
+<section id="extra-example-impulse-response-of-an-rlc-circuit" class="level2">
+<h2 class="anchored" data-anchor-id="extra-example-impulse-response-of-an-rlc-circuit">Extra example: impulse response of an RLC circuit</h2>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-rlc.svg" class="img-fluid figure-img" width="540"></p>
+<figcaption>Series RLC circuit.</figcaption>
+</figure>
+</div>
+</div>
+<p>Let’s consider <span class="math inline">v_C</span> to be the output.</p>
+<p><span class="math display"> v(t) = v_R + v_L + v_C \qquad \text{(KVL)} </span></p>
+<p><span class="math display"> i = C\frac{\mathrm{d}}{\mathrm{d}t}v_C </span></p>
+<p><span class="math display"> v_L = L\frac{\mathrm{d}}{\mathrm{d}t}i </span></p>
+<p><span class="math display"> v_R = Ri </span></p>
+<p>Combining, KVL becomes:</p>
+<p><span class="math display"> v(t) = L\frac{\mathrm{d}}{\mathrm{d}t}i + Ri + v_C \qquad(4) </span></p>
+<p>Or</p>
+<p><span class="math display"> v(t) = LC\frac{\mathrm{d}^2}{\mathrm{d}t^2}v_C(t) + RC\frac{\mathrm{d}}{\mathrm{d}t}v_C(t) + v_C. </span></p>
+<p>Now assume the circuit is at rest and we apply an impulse voltage.</p>
+<p>Imagine what <span class="math inline">v(t) = \delta(t)</span> does to the circuit around <span class="math inline">t=0</span>.</p>
+<p>Integrate (4):</p>
+<p><span class="math display">
+\int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t
+= \int_{0^-}^{0^+}\! L\frac{\mathrm{d}}{\mathrm{d}t}i(t) + \underbrace{Ri(t) + v_C(t)}_{\text{assume finite}}\,\mathrm{d}t
+</span></p>
+<p>The underbraced terms give <span class="math inline">0</span>, as we are integrating over an infinitesimal interval. So</p>
+<p><span class="math display"> 1 = Li(0) </span></p>
+<p><span class="math display"> i(0) = \frac{1}{L}. </span></p>
+<p>Now,</p>
+<p><span class="math display"> v_C(0) = \frac{1}{C}\int_{0^-}^{0^+}\! i(t)\,\mathrm{d}t = 0. </span></p>
+<p>Conclusion: the impulse at <span class="math inline">0</span> deposits an <strong>initial condition</strong> on the inductor: the 2nd highest derivative of <span class="math inline">v_C</span>.</p>
+<p>We can now solve the impulse response of the circuit as an initial condition response:</p>
+<p><span class="math display">
+\frac{\mathrm{d}^2}{\mathrm{d}t^2}v_C(t)
++ \underbrace{\frac{R}{L}}_{2\zeta\omega_n}\frac{\mathrm{d}}{\mathrm{d}t}v_C(t)
++ \underbrace{\frac{1}{LC}}_{\omega_n^2}v_C(t) = 0 \qquad(5)
+</span></p>
+<p>with <span class="math inline">v_C(0) = 0,</span></p>
+<p><span class="math display"> v_C'(0) = \frac{1}{C}i(0) = \frac{1}{LC}. </span></p>
+<p>We suspect the solution will be some kind of exponential/sinusoid combo, so let’s guess a solution</p>
+<p><span class="math display"> e^{st} \qquad \text{for some } s \in \mathbb{C}. </span></p>
+<p>Substituting in (5):</p>
+<p><span class="math display"> s^2 e^{st} + 2\zeta\omega_n s\, e^{st} + \omega_n^2 e^{st} = 0 </span></p>
+<p><span class="math inline">e^{st} \neq 0</span>, so</p>
+<p><span class="math display"> s^2 + 2\zeta\omega_n s + \omega_n^2 = 0 \qquad(6) </span></p>
+<p><span class="math display">
+\begin{aligned}
+s &amp;= \frac{-2\zeta\omega_n \pm \sqrt{4\zeta^2\omega_n^2 - 4\omega_n^2}}{2} \\[2pt]
+  &amp;= -\zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}.
+\end{aligned}
+</span></p>
+<p>The roots of (6) are called the <strong>poles</strong> of the system (recall pole position &amp; behaviour from week 1).</p>
+<p>Suppose <span class="math inline">R = 6\,\Omega</span>, <span class="math inline">L = 1\,\mathrm{H}</span>, <span class="math inline">C = 40\,\mathrm{mF}</span>.</p>
+<p>Then <span class="math inline">s = -3 \pm 4j.</span></p>
+<p>so the response is</p>
+<p><span class="math display"> v_C(t) = A e^{(-3+4j)t} + B e^{(-3-4j)t}. </span></p>
+<p><span class="math inline">v_C(0) = 0</span>, so <span class="math inline">A + B = 0. \quad\Rightarrow\quad B = -A</span></p>
+<p><span class="math inline">v_C'(0) = \dfrac{1}{LC}</span>, so</p>
+<p><span class="math display"> (-3+4j)A - (-3-4j)A = \frac{1}{LC} </span></p>
+<p><span class="math display"> A = \frac{1}{8j\,LC} </span></p>
+<p><span class="math display"> = -3.125j </span></p>
+<p>so we have</p>
+<p><span class="math display">
+\begin{aligned}
+v_C(t) &amp;= A e^{(-3+4j)t} + \bar{A}\, e^{(-3-4j)t} \qquad\text{(complex conjugates!)} \\[2pt]
+       &amp;= 2\operatorname{Re}\!\big(A e^{(-3+4j)t}\big) \\[2pt]
+       &amp;= 6.25\, e^{-3t}\sin(4t)\,H(t)
+\end{aligned}
+</span></p>
+<p><span class="math inline">H(t)</span> encodes that the signal is <span class="math inline">0</span> before <span class="math inline">t=0</span>.</p>
+<script src="convolution-widgets.js"></script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ThomasChaffey\.github\.io\/elec2302\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../weeks/week02/tutorial1.pdf" class="pagination-link" aria-label="Tutorial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../weeks/formula-sheet.pdf" class="pagination-link" aria-label="Quiz 1 formula sheet">
+        <span class="nav-page-text">Quiz 1 formula sheet</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney</p>
+</div>
+    <div class="nav-footer-right">
+<p><a href="analytics.qmd">Analytics</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
