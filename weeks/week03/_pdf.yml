@@ -1,0 +1,26 @@
+# PDF settings for the Week 3 notes, kept out of notes.qmd on purpose.
+#
+# If the qmd declares a pdf format, `quarto preview` builds the PDF on every
+# save as well as the HTML, so any PDF-only problem (a missing snapshot, an SVG
+# that needs rsvg-convert) breaks the web page too. Keeping these settings here
+# means HTML is the only thing the site build touches, and the PDF is opt-in:
+#
+#   quarto render weeks/week03/notes.qmd --to pdf --metadata-file weeks/week03/_pdf.yml
+#
+# The leading underscore keeps Quarto from treating this file as site content.
+#
+# These options deliberately stick to what a minimal LaTeX install already has,
+# so the build does not need to fetch packages. A system-wide BasicTeX lives
+# under /usr/local/texlive and is owned by root, so Quarto's automatic package
+# installation fails there with a tlmgr permission error.
+#
+# With a user-writable TeX (`quarto install tinytex`), Quarto fetches whatever
+# is missing by itself and you can switch to the nicer KOMA class:
+#
+#   documentclass: scrartcl
+#   fig-pos: "H"          # needs the float package; keeps figures where written
+#
+documentclass: article
+papersize: a4
+geometry: margin=2.5cm
+colorlinks: true

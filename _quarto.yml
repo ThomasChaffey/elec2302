@@ -34,6 +34,10 @@ website:
           - text: "Tutorial"
             href: weeks/week02/tutorial1.pdf
             target: _blank
+      - section: "Week 3 — Linear, time-invariant systems"
+        contents:
+          - text: "Notes"
+            href: weeks/week03/notes.qmd
       - text: "Quiz 1 formula sheet"
         href: weeks/formula-sheet.pdf
         target: _blank

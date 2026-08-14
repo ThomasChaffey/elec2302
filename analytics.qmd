@@ -16,6 +16,7 @@ view it records:
 - the page you looked at, and the page you arrived from
 - your browser, operating system, screen size and country
 - whether you interacted with one of the interactive widgets in the notes, and which one
+- whether you opened the PDF version of a week's notes, and which week
 
 This is the reason for tracking: the widgets take effort to build, and I
 would like to know whether they are worth building for the remaining weeks. The count
