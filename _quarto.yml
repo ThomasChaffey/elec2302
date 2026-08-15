@@ -38,6 +38,9 @@ website:
         contents:
           - text: "Notes"
             href: weeks/week03/notes.qmd
+          - text: "Tutorial"
+            href: weeks/week03/tutorial2.pdf
+            target: _blank
       - text: "Quiz 1 formula sheet"
         href: weeks/formula-sheet.pdf
         target: _blank
