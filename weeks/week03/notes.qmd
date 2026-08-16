@@ -72,11 +72,6 @@ So for fixed $t$: flip $h$ and shift by $t$, then for each $\tau \in [0, t]$, mu
 ![For fixed $t$: flip $h$, shift by $t$, and add the products $h(t-k\Delta t)\,u(k\Delta t)\,\Delta t$.](fig-flipshift.svg){width=520}
 :::
 
-::: {.content-visible when-format="html"}
-```{=html}
-<div id="w-comb" class="widget"></div>
-```
-:::
 
 ::: {.content-visible when-format="pdf"}
 ![Left: the input approximated by a comb of impulses, one per slice of width $\Delta$; each
@@ -86,6 +81,12 @@ ms.](figs/w-comb.png){#fig-comb width=100%}
 :::
 
 This gives the output to a sum of impulses.  It turns out we can approximate any input as such a sum.
+
+::: {.content-visible when-format="html"}
+```{=html}
+<div id="w-comb" class="widget"></div>
+```
+:::
 
 ::: {style="text-align:center"}
 ![Approximating $u(t)$ by a train of impulses. The shaded rectangle at $\tau$ has area $u(\tau)\,\Delta t$.](fig-approx.svg){width=520}
