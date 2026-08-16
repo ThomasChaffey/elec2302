@@ -220,13 +220,12 @@ $(p_1 * p_1)(t)$. Shown at $t = 0.5$.](figs/w-conv.png){#fig-conv width=70%}
     <line x1="311" y1="131" x2="329" y2="131"/>
     <line x1="304" y1="163" x2="331" y2="139"/>
     <line x1="309" y1="139" x2="336" y2="163"/>
-    <path d="M 318 100 A 20 20 0 0 0 318 68"/>
-    <line x1="320" y1="95" x2="324" y2="86"/>
+    <path d="M 320 95 A 20 20 0 0 1 320 63"/>
   </g>
   <g stroke="#00468C" fill="none" stroke-width="1.2">
-    <line x1="322" y1="84" x2="470" y2="30"/>
-    <line x1="322" y1="84" x2="480" y2="62"/>
-    <line x1="322" y1="84" x2="472" y2="96"/>
+    <line x1="320" y1="79" x2="470" y2="30"/>
+    <line x1="320" y1="79" x2="480" y2="62"/>
+    <line x1="320" y1="79" x2="472" y2="96"/>
   </g>
   <g fill="#00468C">
     <circle cx="474" cy="28" r="4"/>
@@ -235,7 +234,7 @@ $(p_1 * p_1)(t)$. Shown at $t = 0.5$.](figs/w-conv.png){#fig-conv width=70%}
   </g>
   <text x="386" y="49" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r&#8321;</text>
   <text x="398" y="66" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r&#8322;</text>
-  <text x="390" y="107" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r&#8323;</text>
+  <text x="390" y="99" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r&#8323;</text>
 </svg>
 </div>
 ```
