@@ -431,7 +431,7 @@ window.Quarto = {
 <p>What system is this the impulse response of?</p>
 <p><span class="math display"> \sum_i D_{t_{d_i}} \qquad \text{: a sum of delays, one for each object.} </span></p>
 <p>What is the response if we inject a sinusoid:</p>
-<p>Intuitively: <span class="math inline">u(t) = \cos(\omega t)</span>, <span class="math inline">\;y(t) = \sum_i \cos(\omega t + t_{d_i}).</span></p>
+<p>Intuitively: <span class="math inline">u(t) = \cos(\omega t)</span>, <span class="math inline">\;y(t) = \sum_i \cos(\omega t - \omega t_{d_i}).</span></p>
 <p>Let’s check our intuition with what we just learnt:</p>
 <p><span class="math display">
 \begin{aligned}
@@ -439,12 +439,9 @@ y(t) &amp;= u(t) * h(t) \\[2pt]
      &amp;= u(t) * \sum_i \delta(t - t_{d_i}) \\[2pt]
      &amp;= \sum_i \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau - t_{d_i})\,\mathrm{d}\tau \\[2pt]
      &amp;= \sum_i u(t - t_{d_i}) \qquad \text{(sifting property)} \\[2pt]
-     &amp;= \sum_i \cos(\omega t + t_{d_i}).
+     &amp;= \sum_i \cos(\omega t - \omega t_{d_i}).
 \end{aligned}
 </span></p>
-<!-- CHECK: the last line is transcribed as written. Substituting u(t) = cos(wt) into
-     u(t - t_di) gives cos(w(t - t_di)) = cos(wt - w t_di), not cos(wt + t_di). The same
-     applies to the "intuitively" line above. -->
 </section>
 </section>
 <section id="the-impulse-response-of-circuits" class="level2">
