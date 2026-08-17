@@ -359,17 +359,13 @@ $h(t)$ is the usual notation we'll use for impulse response.
 
 ## ④ ODE descriptions of LTI systems
 
-We can extend this result into a general principle for $n$th order differential equations:
+The same principle holds for $n$th order differential equations. For
 
 $$ a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) = \delta(t) $$
 
-$$ y^{(n-1)}(0) = y^{(n-2)}(0) = \cdots = y(0) = 0. $$
+with the system at rest before $t=0$, the impulse deposits an initial condition on the 2nd highest derivative:
 
-Integrate both sides over $0_-$ to $0_+$. Following the same intuition, every derivative lower than $y^{(n)}$ has $0$ area over $0_-$ to $0_+$, so we have
-
-$$ \int_{0_-}^{0_+}\! a_n y^{(n)}(t)\,\mathrm{d}t = 1 $$
-
-$$ y^{(n-1)}(0) = \frac{1}{a_n} $$
+$$ y^{(n-1)}(0^+) = \frac{1}{a_n}, \qquad y^{(n-2)}(0^+) = \cdots = y(0^+) = 0. $$
 
 If we also allow derivatives of the input:
 
