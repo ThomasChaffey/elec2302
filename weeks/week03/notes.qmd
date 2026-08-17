@@ -257,7 +257,7 @@ $$ \sum_i D_{t_{d_i}} \qquad \text{: a sum of delays, one for each object.} $$
 
 What is the response if we inject a sinusoid:
 
-Intuitively: $u(t) = \cos(\omega t)$, $\;y(t) = \sum_i \cos(\omega t + t_{d_i}).$
+Intuitively: $u(t) = \cos(\omega t)$, $\;y(t) = \sum_i \cos(\omega t - \omega t_{d_i}).$
 
 Let's check our intuition with what we just learnt:
 
@@ -267,13 +267,9 @@ y(t) &= u(t) * h(t) \\[2pt]
      &= u(t) * \sum_i \delta(t - t_{d_i}) \\[2pt]
      &= \sum_i \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau - t_{d_i})\,\mathrm{d}\tau \\[2pt]
      &= \sum_i u(t - t_{d_i}) \qquad \text{(sifting property)} \\[2pt]
-     &= \sum_i \cos(\omega t + t_{d_i}).
+     &= \sum_i \cos(\omega t - \omega t_{d_i}).
 \end{aligned}
 $$
-
-<!-- CHECK: the last line is transcribed as written. Substituting u(t) = cos(wt) into
-     u(t - t_di) gives cos(w(t - t_di)) = cos(wt - w t_di), not cos(wt + t_di). The same
-     applies to the "intuitively" line above. -->
 
 ## ② The impulse response of circuits
 
