@@ -506,12 +506,10 @@ y(t) &amp;= u(t) * h(t) \\[2pt]
 </section>
 <section id="ode-descriptions-of-lti-systems" class="level2">
 <h2 class="anchored" data-anchor-id="ode-descriptions-of-lti-systems">④ ODE descriptions of LTI systems</h2>
-<p>We can extend this result into a general principle for <span class="math inline">n</span>th order differential equations:</p>
+<p>The same principle holds for <span class="math inline">n</span>th order differential equations. For</p>
 <p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) = \delta(t) </span></p>
-<p><span class="math display"> y^{(n-1)}(0) = y^{(n-2)}(0) = \cdots = y(0) = 0. </span></p>
-<p>Integrate both sides over <span class="math inline">0_-</span> to <span class="math inline">0_+</span>. Following the same intuition, every derivative lower than <span class="math inline">y^{(n)}</span> has <span class="math inline">0</span> area over <span class="math inline">0_-</span> to <span class="math inline">0_+</span>, so we have</p>
-<p><span class="math display"> \int_{0_-}^{0_+}\! a_n y^{(n)}(t)\,\mathrm{d}t = 1 </span></p>
-<p><span class="math display"> y^{(n-1)}(0) = \frac{1}{a_n} </span></p>
+<p>with the system at rest before <span class="math inline">t=0</span>, the impulse deposits an initial condition on the 2nd highest derivative:</p>
+<p><span class="math display"> y^{(n-1)}(0^+) = \frac{1}{a_n}, \qquad y^{(n-2)}(0^+) = \cdots = y(0^+) = 0. </span></p>
 <p>If we also allow derivatives of the input:</p>
 <p><span class="math display">
 \begin{aligned}
