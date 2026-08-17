@@ -58,13 +58,13 @@ If we apply regular impulses to a system, what do we get at the output?
 ![Each input sample launches a scaled, shifted copy of the impulse response; the outputs superpose.](fig-superpose.svg){width=520}
 :::
 
-What do we have at time $4$?
+What do we have at time $3$?
 
-$h$ started at $3$ and gone $1$ time step: $\;\overbrace{h(t-3)}^{h(1)}\,u(3)\;$
+$h$ started at $\tau = 2$ and gone $1$ time step: $\;\overbrace{h(t-2)}^{h(1)}\,u(2)\;$
 
-$h$ started at $2$ and gone $2$ time steps: $\;\overbrace{h(t-2)}^{h(2)}\,u(2)\;$
+$h$ started at $\tau = 1$ and gone $2$ time steps: $\;\overbrace{h(t-1)}^{h(2)}\,u(1)\;$
 
-$h$ started at $1$ and gone $3$ time steps: $\;\overbrace{h(t-1)}^{h(3)}\,u(1)\;$
+$h$ started at $\tau = 0$ and gone $3$ time steps: $\;\overbrace{h(t-0)}^{h(3)}\,u(0)\;$
 
 So for fixed $t$: flip $h$ and shift by $t$, then for each $\tau \in [0, t]$, multiply with $u(\tau)$ and add to total.
 
