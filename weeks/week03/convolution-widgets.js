@@ -395,11 +395,12 @@
 
   // ========================================================================
   // Flip-and-slide convolution of a rectangular pulse with itself.
-  //   p_1 = unit-width pulse centred on the origin, i.e. on [-1/2, 1/2];
-  //   (p_1*p_1)(t) = overlap area = max(0, 1 - |t|).
-  // Top panel: p_1(τ) fixed (navy) and the flipped, shifted copy p_1(t-τ) sliding
-  // (brick); the hatched overlap is the value plotted below. Bottom panel traces
-  // the triangular result (p_1*p_1)(t) as t sweeps, with a dashed line linking the
+  //   2p_1 = width-1 pulse centred on the origin, i.e. on [-1/2, 1/2], height 2;
+  //   (2p_1*2p_1)(t) = 2 * 2 * (overlap width) = 4 max(0, 1 - |t|).
+  // Top panel: 2p_1(τ) fixed (navy) and the flipped, shifted copy 2p_1(t-τ) sliding
+  // (brick), with their overlap hatched. The value is NOT the hatched area: it is
+  // the integral of the product, so the two heights multiply. Bottom panel traces
+  // the triangular result (2p_1*2p_1)(t) as t sweeps, with a dashed line linking the
   // pulse position t to the point it produces on the triangle.
   // ========================================================================
   function pulseconv() {
@@ -412,13 +413,15 @@
     const xm = t => padL + (t - TMIN) / (TMAX - TMIN) * plotW;
 
     // panel baselines and the pixel height of one unit of amplitude
-    const yTop = 128, hTop = 88;      // τ-axis (top);   value 1 sits hTop px above
-    const yBot = 312, hBot = 78;      // t-axis (bottom); value 1 sits hBot px above
+    const yTop = 128, hTop = 44;      // τ-axis (top);   value 1 sits hTop px above
+    const yBot = 312, hBot = 19.5;    // t-axis (bottom); value 1 sits hBot px above
     const yTopV = v => yTop - v * hTop;
     const yBotV = v => yBot - v * hBot;
 
     const HALF = 0.5;                                   // pulse half-width
-    const overlap = t => Math.max(0, 1 - Math.abs(t));  // = (x*x)(t)
+    const AMP  = 2;                                     // pulse height: these are 2p_1
+    const width = t => Math.max(0, 1 - Math.abs(t));    // width of the overlap
+    const conv  = t => AMP * AMP * width(t);            // = (2p_1 * 2p_1)(t)
 
     // diagonal hatch clipped to a rectangle, echoing the hand-drawn overlap
     function hatch(x0, x1, ytop, ybase, color) {
@@ -441,8 +444,14 @@
       });
       if (lab) ctx.fillText(lab, padL + plotW - 6, y - 6);
     }
+    function level(y, lab) {                 // amplitude mark on the left of a panel
+      ctx.strokeStyle = GREY; ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(padL - 9, y); ctx.lineTo(padL - 3, y); ctx.stroke();
+      ctx.fillStyle = GREY; ctx.font = "12px Arial";
+      ctx.fillText(lab, padL - 20, y + 4);
+    }
     function box(x0, x1, stroke, fill) {
-      const yt = yTopV(1);
+      const yt = yTopV(AMP);
       ctx.fillStyle = fill; ctx.fillRect(x0, yt, x1 - x0, yTop - yt);
       ctx.strokeStyle = stroke; ctx.lineWidth = 2;
       ctx.beginPath();
@@ -456,45 +465,47 @@
       // legend
       ctx.font = "12px Arial";
       ctx.fillStyle = NAVY; ctx.fillRect(padL + 2, 11, 11, 11);
-      ctx.fillStyle = INK;  ctx.fillText("p\u2081(\u03C4)", padL + 18, 21);
-      ctx.fillStyle = OUT;  ctx.fillRect(padL + 68, 11, 11, 11);
-      ctx.fillStyle = INK;  ctx.fillText("p\u2081(t\u2212\u03C4)", padL + 84, 21);
+      ctx.fillStyle = INK;  ctx.fillText("2p\u2081(\u03C4)", padL + 18, 21);
+      ctx.fillStyle = OUT;  ctx.fillRect(padL + 74, 11, 11, 11);
+      ctx.fillStyle = INK;  ctx.fillText("2p\u2081(t\u2212\u03C4)", padL + 90, 21);
       ctx.fillStyle = "#555";
-      ctx.fillText("hatched = overlap = (p\u2081\u2217p\u2081)(t)", padL + 160, 21);
+      ctx.fillText("hatched: the overlap, width 1\u2212|t|", padL + 176, 21);
 
       // top panel: fixed pulse, sliding flipped pulse, hatched overlap
       axis(yTop, "\u03C4");
+      level(yTopV(AMP), "2");
       box(xm(-HALF), xm(HALF), NAVY, "rgba(0,70,140,0.07)");
       box(xm(t - HALF), xm(t + HALF), OUT, "rgba(192,57,43,0.06)");
       const oL = Math.max(-HALF, t - HALF), oR = Math.min(HALF, t + HALF);
-      if (oR > oL) hatch(xm(oL), xm(oR), yTopV(1), yTop, "rgba(0,70,140,0.45)");
+      if (oR > oL) hatch(xm(oL), xm(oR), yTopV(AMP), yTop, "rgba(0,70,140,0.45)");
 
       // connector: the pulse position t maps to the point below
       ctx.strokeStyle = GREY; ctx.setLineDash([4, 4]); ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(xm(t), yTop + 4); ctx.lineTo(xm(t), yBotV(overlap(t))); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(xm(t), yTop + 4); ctx.lineTo(xm(t), yBotV(conv(t))); ctx.stroke();
       ctx.setLineDash([]);
 
       // bottom panel: full triangle guide, then the swept portion solid
       axis(yBot, "t");
+      level(yBotV(conv(0)), "4");
       ctx.strokeStyle = "rgba(120,120,128,0.55)"; ctx.lineWidth = 1.5; ctx.setLineDash([5, 4]);
       ctx.beginPath();
-      ctx.moveTo(xm(-1), yBotV(0)); ctx.lineTo(xm(0), yBotV(1)); ctx.lineTo(xm(1), yBotV(0));
+      ctx.moveTo(xm(-1), yBotV(0)); ctx.lineTo(xm(0), yBotV(conv(0))); ctx.lineTo(xm(1), yBotV(0));
       ctx.stroke(); ctx.setLineDash([]);
       const ts = Math.max(-1, Math.min(1, t));
       ctx.strokeStyle = NAVY; ctx.lineWidth = 2.4; ctx.beginPath();
       ctx.moveTo(xm(-1), yBotV(0));
-      for (let tt = -1; tt <= ts + 1e-9; tt += 0.02) ctx.lineTo(xm(tt), yBotV(overlap(tt)));
-      ctx.lineTo(xm(ts), yBotV(overlap(ts)));
+      for (let tt = -1; tt <= ts + 1e-9; tt += 0.02) ctx.lineTo(xm(tt), yBotV(conv(tt)));
+      ctx.lineTo(xm(ts), yBotV(conv(ts)));
       ctx.stroke();
       ctx.fillStyle = NAVY;
-      ctx.beginPath(); ctx.arc(xm(ts), yBotV(overlap(ts)), 4.5, 0, 2 * Math.PI); ctx.fill();
+      ctx.beginPath(); ctx.arc(xm(ts), yBotV(conv(ts)), 4.5, 0, 2 * Math.PI); ctx.fill();
       ctx.fillStyle = NAVY; ctx.font = "13px Arial";
-      ctx.fillText("(p\u2081\u2217p\u2081)(t)", xm(0) + 8, yBotV(1) + 2);
+      ctx.fillText("(2p\u2081\u2217 2p\u2081)(t)", xm(0) + 8, yBotV(conv(0)) + 2);
 
       // readout
       ctx.fillStyle = "#555"; ctx.font = "12px Arial";
-      ctx.fillText("t = " + t.toFixed(2) + "     (p\u2081\u2217p\u2081)(t) = " + overlap(t).toFixed(2),
-                   padL + 4, yBot + 32);
+      ctx.fillText("t = " + t.toFixed(2) + "     value = 2 \u00D7 2 \u00D7 " + width(t).toFixed(2) +
+                   " = " + conv(t).toFixed(2), padL + 4, yBot + 32);
     }
 
     // controls: play/pause (ping-pong sweep) + slider for t

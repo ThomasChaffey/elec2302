@@ -1,0 +1,31 @@
+---
+format:
+  revealjs:
+    theme: [default, ../../slides.scss]
+    width: 1280
+    height: 720
+    margin: 0.04
+    html-math-method: katex
+    slide-number: false
+    transition: none
+    progress: true
+engine: markdown
+---
+
+::: {style="display:flex;justify-content:center;align-items:center;height:100%"}
+```{=html}
+<div id="w-comb" class="widget"></div>
+```
+:::
+
+---
+
+::: {style="display:flex;justify-content:center;align-items:center;height:100%"}
+```{=html}
+<div id="w-conv" class="widget"></div>
+```
+:::
+
+```{=html}
+<script src="convolution-widgets.js"></script>
+```

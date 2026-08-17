@@ -175,11 +175,11 @@ $$ (f * g)' = f' * g = g' * f $$
 
 ### Example: a pulse convolved with itself
 
-Example: plot $(p_1 * p_1)(t)$
+Example: plot $(2p_1 * 2p_1)(t)$
 
-$$ \int_{-\infty}^{\infty}\! p_1(t-\tau)\,p_1(\tau)\,\mathrm{d}\tau $$
+$$ \int_{-\infty}^{\infty}\! 2p_1(t-\tau)\,2p_1(\tau)\,\mathrm{d}\tau $$
 
-The overlapping area is the value of $(p_1 * p_1)(t)$.
+The value of $(2p_1 * 2p_1)(t)$ is the area under the product: the heights multiply, so it is $2 \times 2$ times the width of the overlap.
 
 ::: {.content-visible when-format="html"}
 ```{=html}
@@ -188,9 +188,9 @@ The overlapping area is the value of $(p_1 * p_1)(t)$.
 :::
 
 ::: {.content-visible when-format="pdf"}
-![Top: $p_1(\tau)$ fixed and the flipped copy $p_1(t-\tau)$ sliding across it, with the
-overlap hatched. Bottom: the overlap area traced out as $t$ sweeps, giving the triangle
-$(p_1 * p_1)(t)$. Shown at $t = 0.5$.](figs/w-conv.png){#fig-conv width=70%}
+![Top: $2p_1(\tau)$ fixed and the flipped copy $2p_1(t-\tau)$ sliding across it, with the
+overlap hatched. Bottom: $2 \times 2$ times the overlap width, traced out as $t$ sweeps,
+giving a triangle of height $4$. Shown at $t = 0.5$.](figs/w-conv.png){#fig-conv width=70%}
 :::
 
 ### Example: radar
