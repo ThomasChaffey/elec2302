@@ -468,8 +468,6 @@
       ctx.fillStyle = INK;  ctx.fillText("2p\u2081(\u03C4)", padL + 18, 21);
       ctx.fillStyle = OUT;  ctx.fillRect(padL + 74, 11, 11, 11);
       ctx.fillStyle = INK;  ctx.fillText("2p\u2081(t\u2212\u03C4)", padL + 90, 21);
-      ctx.fillStyle = "#555";
-      ctx.fillText("hatched: the overlap, width 1\u2212|t|", padL + 176, 21);
 
       // top panel: fixed pulse, sliding flipped pulse, hatched overlap
       axis(yTop, "\u03C4");
