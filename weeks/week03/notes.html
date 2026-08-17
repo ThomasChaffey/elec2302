@@ -302,10 +302,10 @@ window.Quarto = {
 </figure>
 </div>
 </div>
-<p>What do we have at time <span class="math inline">4</span>?</p>
-<p><span class="math inline">h</span> started at <span class="math inline">3</span> and gone <span class="math inline">1</span> time step: <span class="math inline">\;\overbrace{h(t-3)}^{h(1)}\,u(3)\;</span></p>
-<p><span class="math inline">h</span> started at <span class="math inline">2</span> and gone <span class="math inline">2</span> time steps: <span class="math inline">\;\overbrace{h(t-2)}^{h(2)}\,u(2)\;</span></p>
-<p><span class="math inline">h</span> started at <span class="math inline">1</span> and gone <span class="math inline">3</span> time steps: <span class="math inline">\;\overbrace{h(t-1)}^{h(3)}\,u(1)\;</span></p>
+<p>What do we have at time <span class="math inline">3</span>?</p>
+<p><span class="math inline">h</span> started at <span class="math inline">\tau = 2</span> and gone <span class="math inline">1</span> time step: <span class="math inline">\;\overbrace{h(t-2)}^{h(1)}\,u(2)\;</span></p>
+<p><span class="math inline">h</span> started at <span class="math inline">\tau = 1</span> and gone <span class="math inline">2</span> time steps: <span class="math inline">\;\overbrace{h(t-1)}^{h(2)}\,u(1)\;</span></p>
+<p><span class="math inline">h</span> started at <span class="math inline">\tau = 0</span> and gone <span class="math inline">3</span> time steps: <span class="math inline">\;\overbrace{h(t-0)}^{h(3)}\,u(0)\;</span></p>
 <p>So for fixed <span class="math inline">t</span>: flip <span class="math inline">h</span> and shift by <span class="math inline">t</span>, then for each <span class="math inline">\tau \in [0, t]</span>, multiply with <span class="math inline">u(\tau)</span> and add to total.</p>
 <div style="text-align:center">
 <div class="quarto-figure quarto-figure-center">
@@ -376,9 +376,9 @@ window.Quarto = {
 <p><span class="math display"> (f * g)' = f' * g = g' * f </span></p>
 <section id="example-a-pulse-convolved-with-itself" class="level3">
 <h3 class="anchored" data-anchor-id="example-a-pulse-convolved-with-itself">Example: a pulse convolved with itself</h3>
-<p>Example: plot <span class="math inline">(p_1 * p_1)(t)</span></p>
-<p><span class="math display"> \int_{-\infty}^{\infty}\! p_1(t-\tau)\,p_1(\tau)\,\mathrm{d}\tau </span></p>
-<p>The overlapping area is the value of <span class="math inline">(p_1 * p_1)(t)</span>.</p>
+<p>Example: plot <span class="math inline">(2p_1 * 2p_1)(t)</span></p>
+<p><span class="math display"> \int_{-\infty}^{\infty}\! 2p_1(t-\tau)\,2p_1(\tau)\,\mathrm{d}\tau </span></p>
+<p>The value of <span class="math inline">(2p_1 * 2p_1)(t)</span> is the area under the product: the heights multiply, so it is <span class="math inline">2 \times 2</span> times the width of the overlap.</p>
 <div id="w-conv" class="widget"></div>
 </section>
 <section id="example-radar" class="level3">
