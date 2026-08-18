@@ -34,6 +34,9 @@ website:
           - text: "Tutorial"
             href: weeks/week02/tutorial1.pdf
             target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week02/tutorial1-solutions.pdf
+            target: _blank
       - section: "Week 3 — Linear, time-invariant systems"
         contents:
           - text: "Notes"
