@@ -47,6 +47,8 @@ website:
       - text: "Quiz 1 formula sheet"
         href: weeks/formula-sheet.pdf
         target: _blank
+      - text: "Primer on RLC circuits"
+        href: weeks/primer/notes.qmd
   page-footer:
     center: "Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney"
     right: "[Analytics](analytics.qmd)"

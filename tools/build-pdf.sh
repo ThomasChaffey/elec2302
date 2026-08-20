@@ -26,17 +26,20 @@ cd "$ROOT"
 [ -f "$QMD" ]  || { echo "no such file: $QMD" >&2; exit 1; }
 [ -f "$META" ] || { echo "no such file: $META" >&2; exit 1; }
 
-# The figures are generated; rebuild them if any is missing or out of date.
-NEEDS_SNAPSHOT=0
-for fig in weeks/${WEEK}/figs/w-*.png; do
-  [ -e "$fig" ] || { NEEDS_SNAPSHOT=1; break; }
-done
-if [ "$NEEDS_SNAPSHOT" = "1" ]; then
-  echo "==> widget snapshots missing, generating them first"
-  ( cd tools && node snapshot-widgets.js "${WEEK}" )
-elif [ -n "$(find weeks/${WEEK} -maxdepth 1 -name phasor-widgets.js -newer "$(ls weeks/${WEEK}/figs/w-*.png | head -1)" 2>/dev/null)" ]; then
-  echo "==> phasor-widgets.js is newer than the snapshots, regenerating them"
-  ( cd tools && node snapshot-widgets.js "${WEEK}" )
+# Pages with no widgets (the primer) have no snapshots to keep up to date.
+if ls weeks/${WEEK}/*-widgets.js >/dev/null 2>&1; then
+  # The figures are generated; rebuild them if any is missing or out of date.
+  NEEDS_SNAPSHOT=0
+  for fig in weeks/${WEEK}/figs/w-*.png; do
+    [ -e "$fig" ] || { NEEDS_SNAPSHOT=1; break; }
+  done
+  if [ "$NEEDS_SNAPSHOT" = "1" ]; then
+    echo "==> widget snapshots missing, generating them first"
+    ( cd tools && node snapshot-widgets.js "${WEEK}" )
+  elif [ -n "$(find weeks/${WEEK} -maxdepth 1 -name phasor-widgets.js -newer "$(ls weeks/${WEEK}/figs/w-*.png | head -1)" 2>/dev/null)" ]; then
+    echo "==> phasor-widgets.js is newer than the snapshots, regenerating them"
+    ( cd tools && node snapshot-widgets.js "${WEEK}" )
+  fi
 fi
 
 echo "==> rendering $QMD to PDF"
