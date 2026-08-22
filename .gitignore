@@ -4,3 +4,4 @@
 *_files/
 
 **/*.quarto_ipynb
+/_to_delete/
