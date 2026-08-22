@@ -143,6 +143,26 @@
     ]
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ELEC2302/9302 — Signals and Systems",
+    "section": "",
+    "text": "Lecture notes, tutorials and lab sheets will be posted here each week.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#lectures",
+    "href": "index.html#lectures",
+    "title": "ELEC2302/9302 — Signals and Systems",
+    "section": "Lectures",
+    "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes\n\n\n2\nSignals as vectors, systems as maps\nNotes · Tutorial · Solutions\n\n\n3\nLinear, time-invariant systems\nNotes · Tutorial\n\n\n4\nPeriodic signals and the Fourier series\nTutorial",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
     "objectID": "analytics.html",
     "href": "analytics.html",
     "title": "Analytics on this site",
@@ -178,23 +198,43 @@
     "text": "Questions\nAsk on Ed, or email thomas.chaffey@sydney.edu.au."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ELEC2302/9302 — Signals and Systems",
+    "objectID": "weeks/primer/notes.html",
+    "href": "weeks/primer/notes.html",
+    "title": "A primer on RLC circuits",
     "section": "",
-    "text": "Lecture notes, tutorials and lab sheets will be posted here each week.",
+    "text": "Other formats:\n📄 PDF\nRLC circuits are an important and useful class of LTI systems that are widely used in analogue signal processing.\nRLC circuits are interconnections of resistors (R), capacitors (C) and inductors (L) that manipulate voltages and currents.\nCurrent is the flow (rate of change) of charge (unit: Coulombs). It is measured in Amperes, which are Coulombs/second.\nVoltage is a difference in potential energy which forces current to flow. It is measured in Volts, which are Joules/Coulomb.\nRLC circuits are described by a couple of things:\nThe circuit is governed by two sets of laws:\nKirchhoff’s laws describe the interconnection structure of the circuit diagram: how are current and voltage related between components.\nThe device laws describe how the current and voltage are related across an individual component.\nCombining Kirchhoff’s laws and the device laws gives a complete description of the circuit behaviour.",
     "crumbs": [
-      "Home"
+      "Primer on RLC circuits"
     ]
   },
   {
-    "objectID": "index.html#lectures",
-    "href": "index.html#lectures",
-    "title": "ELEC2302/9302 — Signals and Systems",
-    "section": "Lectures",
-    "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes\n\n\n2\nSignals as vectors, systems as maps\nNotes · Tutorial · Solutions\n\n\n3\nLinear, time-invariant systems\nNotes · Tutorial",
+    "objectID": "weeks/primer/notes.html#kirchhoffs-laws-for-series-parallel-circuits",
+    "href": "weeks/primer/notes.html#kirchhoffs-laws-for-series-parallel-circuits",
+    "title": "A primer on RLC circuits",
+    "section": "Kirchhoff’s laws for series & parallel circuits",
+    "text": "Kirchhoff’s laws for series & parallel circuits\nKirchhoff’s laws can be solved for an arbitrary circuit diagram, but in ELEC2302/9302, we will only use two special cases: series and parallel circuits.\n\n\n\n\n\n\n\nEach device has a current flowing through it and a voltage across it.\n\n\n\n\nA device with a current through it and a voltage across it.\n\n\n\nBy convention, current flows from + to −.\nThe current and voltage have a direction, which you can choose: the important thing is to be consistent. If the actual current flows the other way, you will get a minus sign in your analysis.\nFor series and parallel circuits, Kirchhoff’s laws say the following.\n\nSeries circuit\n\n\n\n\nSeries circuit.\n\n\n\nKirchhoff’s current law: the current through devices in series is equal. i_1 = i_2 = i_3.\nKirchhoff’s voltage law: the voltages around the loop sum to zero. -v + v_1 + v_2 + v_3 = 0. To get the sign of each voltage, follow i around the loop and take the sign of the terminal it enters for each device.\n\n\nParallel circuit\n\n\n\n\nParallel circuit.\n\n\n\nKirchhoff’s voltage law: the voltage across devices in parallel is equal. v_1 = v_2 = v_3.\nKirchhoff’s current law: the sum of the currents through the devices equals the total current i.\n i = i_1 + i_2 + i_3 .",
     "crumbs": [
-      "Home"
+      "Primer on RLC circuits"
+    ]
+  },
+  {
+    "objectID": "weeks/primer/notes.html#device-laws",
+    "href": "weeks/primer/notes.html#device-laws",
+    "title": "A primer on RLC circuits",
+    "section": "Device laws",
+    "text": "Device laws\nThere are four fundamental quantities in a circuit: current i(t), charge q(t), voltage v(t) and magnetic flux linkage \\phi(t).\nCurrent and charge are related by \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,q(t) = i(t).\nVoltage and flux are related by \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,\\phi(t) = v(t).\nResistors, capacitors and inductors each give a static linear relationship between two of these variables.\n\n\n\n\nThe four circuit quantities and the relationships between them.\n\n\n\nResistor: v = Ri (Ohm’s law).\nCapacitor: q = Cv, or i = \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,Cv.\nInductor: \\phi = Li, or v = \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,Li.\nBy combining Kirchhoff’s laws and the device laws, we can completely solve a circuit. Let’s see how on an example.",
+    "crumbs": [
+      "Primer on RLC circuits"
+    ]
+  },
+  {
+    "objectID": "weeks/primer/notes.html#example-series-rl",
+    "href": "weeks/primer/notes.html#example-series-rl",
+    "title": "A primer on RLC circuits",
+    "section": "Example: series RL",
+    "text": "Example: series RL\n\n\n\n\n\nSeries RL circuit.\n\n\n\nFor now, let’s solve in terms of arbitrary applied voltage and current, before choosing an input.\nAnnotate the diagram with voltages and currents for the resistor and inductor.\n\n\nNow follow the three standard steps: write down Kirchhoff’s laws, write down the device laws and combine.\nIn this case, the circuit is series, so we have:\n i = i_R = i_L. \\qquad \\text{(KCL)} \n v = v_R + v_L. \\qquad \\text{(KVL)} \nDevices:\n\n\\begin{aligned}\nv_R &= R\\,i_R \\\\[2pt]\nv_L &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i_L .\n\\end{aligned}\n\nCombine:\n\n\\begin{aligned}\nv_R &= R\\,i \\\\[2pt]\nv_L &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i \\\\[2pt]\nv   &= R\\,i + \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i .\n\\qquad(1)\n\\end{aligned}\n\nThis describes the circuit. We can now choose a particular input and output to get a system.\nFor example: input v, output v_R.\nv already features in equation (1). Let’s eliminate i and get an expression with v_R.\n i = \\frac{1}{R}\\,v_R . \nIn (1):\n \\boxed{\\; v = v_R + \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,\\frac{L}{R}\\,v_R \\;} \\qquad(2) \nThis is an equivalent description of the circuit with only the input and output variables we’re interested in.\nEvery circuit in the lectures and tutorials can be solved this way. Work through some examples: parallel, RC and RLC.",
+    "crumbs": [
+      "Primer on RLC circuits"
     ]
   },
   {

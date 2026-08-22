@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>ELEC2302/9302 — Signals and Systems</title>
+<title>A primer on RLC circuits</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -26,20 +26,20 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<link href="./weeks/week01/slides.html" rel="next">
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e51413ca38933331223175391a038608.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../weeks/formula-sheet.pdf" rel="prev">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e51413ca38933331223175391a038608.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -88,6 +88,49 @@ ul.task-list li input[type="checkbox"] {
 -->
 <script data-goatcounter="https://thomaschaffey.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -100,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Home</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/primer/notes.html">Primer on RLC circuits</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -114,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Home</span></a>
   </div>
 </li>
@@ -129,13 +172,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week01/slides.html" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../../weeks/week01/slides.html" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Slides</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week01/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week01/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -152,19 +195,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week02/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week02/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week02/tutorial1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../../weeks/week02/tutorial1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Tutorial</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week02/tutorial1-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../../weeks/week02/tutorial1-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Tutorial solutions</span></a>
   </div>
 </li>
@@ -181,13 +224,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week03/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week03/tutorial2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../../weeks/week03/tutorial2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Tutorial</span></a>
   </div>
 </li>
@@ -204,7 +247,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/week04/tutorial4.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../../weeks/week04/tutorial4.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Tutorial</span></a>
   </div>
 </li>
@@ -212,13 +255,13 @@ ul.task-list li input[type="checkbox"] {
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Quiz 1 formula sheet</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./weeks/primer/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/primer/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Primer on RLC circuits</span></a>
   </div>
 </li>
@@ -233,8 +276,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">ELEC2302/9302 — Signals and Systems</h1>
-<p class="subtitle lead">Semester 2, 2026</p>
+<h1 class="title">A primer on RLC circuits</h1>
 </div>
 
 
@@ -251,45 +293,146 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Lecture notes, tutorials and lab sheets will be posted here each week.</p>
-<section id="lectures" class="level2">
-<h2 class="anchored" data-anchor-id="lectures">Lectures</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 8%">
-<col style="width: 56%">
-<col style="width: 35%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Week</th>
-<th style="text-align: left;">Topic</th>
-<th style="text-align: left;">Material</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">Introduction; exponentials, Euler’s formula and the complex plane</td>
-<td style="text-align: left;"><a href="./weeks/week01/slides.html">Slides</a> · <a href="./weeks/week01/notes.html">Notes</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">Signals as vectors, systems as maps</td>
-<td style="text-align: left;"><a href="./weeks/week02/notes.html">Notes</a> · <a href="weeks/week02/tutorial1.pdf">Tutorial</a> · <a href="weeks/week02/tutorial1-solutions.pdf">Solutions</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">Linear, time-invariant systems</td>
-<td style="text-align: left;"><a href="./weeks/week03/notes.html">Notes</a> · <a href="weeks/week03/tutorial2.pdf">Tutorial</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">Periodic signals and the Fourier series</td>
-<td style="text-align: left;"><a href="weeks/week04/tutorial4.pdf">Tutorial</a></td>
-</tr>
-</tbody>
-</table>
+<div class="format-links">
+<p><span class="label">Other formats:</span></p>
+<a href="notes.pdf" title="Primer on RLC circuits as a PDF" data-goatcounter-click="pdf-primer" data-goatcounter-title="Primer PDF opened">📄&nbsp;PDF</a>
+</div>
+<p>RLC circuits are an important and useful class of LTI systems that are widely used in analogue signal processing.</p>
+<p>RLC circuits are interconnections of resistors (R), capacitors (C) and inductors (L) that manipulate voltages and currents.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-components.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>Resistor, inductor and capacitor.</figcaption>
+</figure>
+</div>
+</div>
+<p>Current is the <strong>flow</strong> (rate of change) of charge (unit: Coulombs). It is measured in Amperes, which are Coulombs/second.</p>
+<p>Voltage is a difference in potential energy which forces current to flow. It is measured in Volts, which are Joules/Coulomb.</p>
+<p>RLC circuits are described by a couple of things:</p>
+<ul>
+<li>a <strong>circuit diagram</strong> which illustrates how components are interconnected and which component goes where.</li>
+<li>a choice of input(s): ideal voltage and current sources.</li>
+<li>a choice of output(s): the current(s) or voltage(s) that we measure.</li>
+</ul>
+<p>The circuit is governed by two sets of laws:</p>
+<p><strong>Kirchhoff’s laws</strong> describe the interconnection structure of the circuit diagram: how are current and voltage related between components.</p>
+<p>The <strong>device laws</strong> describe how the current and voltage are related across an individual component.</p>
+<p>Combining Kirchhoff’s laws and the device laws gives a complete description of the circuit behaviour.</p>
+<section id="kirchhoffs-laws-for-series-parallel-circuits" class="level2">
+<h2 class="anchored" data-anchor-id="kirchhoffs-laws-for-series-parallel-circuits">Kirchhoff’s laws for series &amp; parallel circuits</h2>
+<p>Kirchhoff’s laws can be solved for an arbitrary circuit diagram, but in ELEC2302/9302, we will only use two special cases: series and parallel circuits.</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig-parallel-generic.svg" class="img-fluid" width="200"></p>
+</div><div class="column" style="width:58%;">
+<p><img src="fig-series-generic.svg" class="img-fluid" width="330"></p>
+</div>
+</div>
+<p>Each device has a current flowing through it and a voltage across it.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-device.svg" class="img-fluid figure-img" width="300"></p>
+<figcaption>A device with a current through it and a voltage across it.</figcaption>
+</figure>
+</div>
+</div>
+<p>By convention, current flows from + to −.</p>
+<p>The current and voltage have a direction, which you can choose: the important thing is to be consistent. If the actual current flows the other way, you will get a minus sign in your analysis.</p>
+<p>For series and parallel circuits, Kirchhoff’s laws say the following.</p>
+<section id="series-circuit" class="level3">
+<h3 class="anchored" data-anchor-id="series-circuit">Series circuit</h3>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-series.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>Series circuit.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong>Kirchhoff’s current law</strong>: the current through devices in series is equal. <span class="math inline">i_1 = i_2 = i_3</span>.</p>
+<p><strong>Kirchhoff’s voltage law</strong>: the voltages around the loop sum to zero. <span class="math inline">-v + v_1 + v_2 + v_3 = 0</span>. To get the sign of each voltage, follow <span class="math inline">i</span> around the loop and take the sign of the terminal it enters for each device.</p>
+</section>
+<section id="parallel-circuit" class="level3">
+<h3 class="anchored" data-anchor-id="parallel-circuit">Parallel circuit</h3>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-parallel.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>Parallel circuit.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong>Kirchhoff’s voltage law</strong>: the voltage across devices in parallel is equal. <span class="math inline">v_1 = v_2 = v_3</span>.</p>
+<p><strong>Kirchhoff’s current law</strong>: the sum of the currents through the devices equals the total current <span class="math inline">i</span>.</p>
+<p><span class="math display"> i = i_1 + i_2 + i_3 . </span></p>
+<!-- CHECK: page 4 of the source spells this "Kirchoff's current law"; set as
+"Kirchhoff's" to match the rest of the primer. -->
+</section>
+</section>
+<section id="device-laws" class="level2">
+<h2 class="anchored" data-anchor-id="device-laws">Device laws</h2>
+<p>There are four fundamental quantities in a circuit: current <span class="math inline">i(t)</span>, charge <span class="math inline">q(t)</span>, voltage <span class="math inline">v(t)</span> and magnetic flux linkage <span class="math inline">\phi(t)</span>.</p>
+<p>Current and charge are related by <span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}\,q(t) = i(t)</span>.</p>
+<p>Voltage and flux are related by <span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}\,\phi(t) = v(t)</span>.</p>
+<p>Resistors, capacitors and inductors each give a static linear relationship between two of these variables.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-device-laws.svg" class="img-fluid figure-img" width="380"></p>
+<figcaption>The four circuit quantities and the relationships between them.</figcaption>
+</figure>
+</div>
+</div>
+<p>Resistor: <span class="math inline">v = Ri</span> (Ohm’s law).</p>
+<p>Capacitor: <span class="math inline">q = Cv</span>, or <span class="math inline">i = \dfrac{\mathrm{d}}{\mathrm{d}t}\,Cv</span>.</p>
+<p>Inductor: <span class="math inline">\phi = Li</span>, or <span class="math inline">v = \dfrac{\mathrm{d}}{\mathrm{d}t}\,Li</span>.</p>
+<p>By combining Kirchhoff’s laws and the device laws, we can completely solve a circuit. Let’s see how on an example.</p>
+</section>
+<section id="example-series-rl" class="level2">
+<h2 class="anchored" data-anchor-id="example-series-rl">Example: series RL</h2>
+<div class="columns">
+<div class="column" style="width:58%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-rl.svg" class="img-fluid figure-img" width="420"></p>
+<figcaption>Series RL circuit.</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:42%;">
+<p>For now, let’s solve in terms of arbitrary applied voltage and current, before choosing an input.</p>
+<p>Annotate the diagram with voltages and currents for the resistor and inductor.</p>
+</div>
+</div>
+<p>Now follow the three standard steps: write down Kirchhoff’s laws, write down the device laws and combine.</p>
+<p>In this case, the circuit is series, so we have:</p>
+<p><span class="math display"> i = i_R = i_L. \qquad \text{(KCL)} </span></p>
+<p><span class="math display"> v = v_R + v_L. \qquad \text{(KVL)} </span></p>
+<p>Devices:</p>
+<p><span class="math display">
+\begin{aligned}
+v_R &amp;= R\,i_R \\[2pt]
+v_L &amp;= \frac{\mathrm{d}}{\mathrm{d}t}\,L\,i_L .
+\end{aligned}
+</span></p>
+<p>Combine:</p>
+<p><span class="math display">
+\begin{aligned}
+v_R &amp;= R\,i \\[2pt]
+v_L &amp;= \frac{\mathrm{d}}{\mathrm{d}t}\,L\,i \\[2pt]
+v   &amp;= R\,i + \frac{\mathrm{d}}{\mathrm{d}t}\,L\,i .
+\qquad(1)
+\end{aligned}
+</span></p>
+<p>This describes the circuit. We can now choose a particular input and output to get a system.</p>
+<p>For example: input <span class="math inline">v</span>, output <span class="math inline">v_R</span>.</p>
+<p><span class="math inline">v</span> already features in equation (1). Let’s eliminate <span class="math inline">i</span> and get an expression with <span class="math inline">v_R</span>.</p>
+<p><span class="math display"> i = \frac{1}{R}\,v_R . </span></p>
+<p>In (1):</p>
+<p><span class="math display"> \boxed{\; v = v_R + \frac{\mathrm{d}}{\mathrm{d}t}\,\frac{L}{R}\,v_R \;} \qquad(2) </span></p>
+<p>This is an equivalent description of the circuit with only the input and output variables we’re interested in.</p>
+<p>Every circuit in the lectures and tutorials can be solved this way. Work through some examples: parallel, RC and RLC.</p>
 
 
 </section>
@@ -702,11 +845,11 @@ ul.task-list li input[type="checkbox"] {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../weeks/formula-sheet.pdf" class="pagination-link" aria-label="Quiz 1 formula sheet">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quiz 1 formula sheet</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./weeks/week01/slides.html" class="pagination-link" aria-label="Slides">
-        <span class="nav-page-text">Slides</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -719,7 +862,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney</p>
 </div>
     <div class="nav-footer-right">
-<p><a href="./analytics.html">Analytics</a></p>
+<p><a href="analytics.qmd">Analytics</a></p>
 </div>
   </div>
 </footer>
