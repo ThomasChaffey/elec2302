@@ -13,6 +13,6 @@ Lecture notes, tutorials and lab sheets will be posted here each week.
 | 1 | Introduction; exponentials, Euler's formula and the complex plane | [Slides](weeks/week01/slides.qmd) · [Notes](weeks/week01/notes.qmd) |
 | 2 | Signals as vectors, systems as maps | [Notes](weeks/week02/notes.qmd) · [Tutorial](weeks/week02/tutorial1.pdf) · [Solutions](weeks/week02/tutorial1-solutions.pdf) |
 | 3 | Linear, time-invariant systems | [Notes](weeks/week03/notes.qmd) · [Tutorial](weeks/week03/tutorial2.pdf) |
-| 4 | Periodic signals and the Fourier series | [Tutorial](weeks/week04/tutorial4.pdf) |
+| 4 | Periodic signals and the Fourier series | [Tutorial](weeks/week04/tutorial3.pdf) |
 
 : {tbl-colwidths="[8,57,35]"}
