@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 3 — Lecture notes</title>
+<title>Week 4 — Lecture notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,8 +28,8 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/week03/tutorial2.pdf" rel="next">
-<link href="../../weeks/week02/tutorial1-solutions.pdf" rel="prev">
+<link href="../../weeks/week04/tutorial3.pdf" rel="next">
+<link href="../../weeks/week03/tutorial2-solutions.pdf" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -145,7 +145,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Week 3 — Linear, time-invariant systems</a></li><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Week 4 — Periodic signals and the Fourier series</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -226,7 +226,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -255,7 +255,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -294,10 +294,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Week 3 — Linear, time-invariant systems</a></li><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Week 4 — Periodic signals and the Fourier series</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Notes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 3 — Lecture notes</h1>
-<p class="subtitle lead">Linear, time-invariant systems</p>
+<h1 class="title">Week 4 — Lecture notes</h1>
+<p class="subtitle lead">Periodic signals and the Fourier series</p>
 </div>
 
 
@@ -316,451 +316,367 @@ window.Quarto = {
 
 <div class="format-links">
 <p><span class="label">Other formats:</span></p>
-<a href="notes.pdf" title="Week 3 lecture notes as a PDF" data-goatcounter-click="pdf-week3" data-goatcounter-title="Week 3 notes PDF opened">📄&nbsp;PDF</a>
+<a href="notes.pdf" title="Week 4 lecture notes as a PDF" data-goatcounter-click="pdf-week4" data-goatcounter-title="Week 4 notes PDF opened">📄&nbsp;PDF</a>
 </div>
-<!-- CHECK: the revised page 1 heads the lecture "linear, time-invariant systems", so I
-     have used that as the subtitle. The previous version, and the Week 3 tutorial sheet,
-     use "LTI systems, impulse response and convolution". -->
-<section id="goals" class="level2">
-<h2 class="anchored" data-anchor-id="goals">Goals</h2>
-<p>① Convolution: calculate the output of an LTI system by breaking the input into pieces.</p>
-<p>② Impulse response: complete representation of an LTI system.</p>
-<p>③ LTI systems preserve frequency.</p>
-<p>④ ODE descriptions of LTI systems.</p>
-<p>⑤ Interconnections of systems.</p>
+<section id="from-impulses-to-sinusoids" class="level2">
+<h2 class="anchored" data-anchor-id="from-impulses-to-sinusoids">From impulses to sinusoids</h2>
+<p>This week we start to develop frequency-domain tools.</p>
+<p>So far, we have seen that any (integrable) signal can be represented as an integral (“sum”) of impulses. This week we develop an alternative representation for <u>periodic</u> signals, by changing the basis signals from impulses to sinusoids. This is the <u>Fourier series</u>.</p>
+<!-- Demo: impulse response of a nonlinear system. -->
+<p><strong>Recap.</strong> If a system is LTI, it preserves the frequency of a sinusoidal input:</p>
+<p><span class="math display"> u = e^{\,j\omega t} \;\longmapsto\; G(j\omega)\,e^{\,j\omega t}, \qquad G(j\omega) \in \mathbb{C}. </span></p>
+<p>In other words, <span class="math inline">e^{\,j\omega t}</span> is an eigenvector of the system. If we can express any <span class="math inline">u</span> in this basis, as a sum of sinusoids, this will “diagonalise the system” and “simplify analysis”.</p>
+<p>This also gives a quick test of whether a system is LTI: inject a sinusoid and see what comes out at the output.</p>
 </section>
-<section id="recap" class="level2">
-<h2 class="anchored" data-anchor-id="recap">Recap</h2>
-<p>Linear <span class="math inline">\iff</span> superposition</p>
-<div style="text-align:center">
-<p><img src="fig-recap-gain.svg" class="img-fluid" width="560"></p>
-</div>
-<div style="text-align:center">
-<p><img src="fig-recap-sum.svg" class="img-fluid" width="560"></p>
-</div>
-<p>add/scale input <span class="math inline">\iff</span> add/scale output</p>
-</section>
-<section id="convolution" class="level2">
-<h2 class="anchored" data-anchor-id="convolution">① Convolution</h2>
-<p>If we apply regular impulses to a system, what do we get at the output?</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig-superpose.svg" class="img-fluid figure-img" width="520"></p>
-<figcaption>Each input sample launches a scaled, shifted copy of the impulse response; the outputs superpose.</figcaption>
-</figure>
-</div>
-</div>
-<p>What do we have at time <span class="math inline">3</span>?</p>
-<p><span class="math inline">h</span> started at <span class="math inline">\tau = 2</span> and gone <span class="math inline">1</span> time step: <span class="math inline">\;\overbrace{h(t-2)}^{h(1)}\,u(2)\;</span></p>
-<p><span class="math inline">h</span> started at <span class="math inline">\tau = 1</span> and gone <span class="math inline">2</span> time steps: <span class="math inline">\;\overbrace{h(t-1)}^{h(2)}\,u(1)\;</span></p>
-<p><span class="math inline">h</span> started at <span class="math inline">\tau = 0</span> and gone <span class="math inline">3</span> time steps: <span class="math inline">\;\overbrace{h(t-0)}^{h(3)}\,u(0)\;</span></p>
-<p>So for fixed <span class="math inline">t</span>: flip <span class="math inline">h</span> and shift by <span class="math inline">t</span>, then for each <span class="math inline">\tau \in [0, t]</span>, multiply with <span class="math inline">u(\tau)</span> and add to total.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig-flipshift.svg" class="img-fluid figure-img" width="520"></p>
-<figcaption>For fixed <span class="math inline">t</span>: flip <span class="math inline">h</span>, shift by <span class="math inline">t</span>, and add the products <span class="math inline">h(t-k\Delta t)\,u(k\Delta t)\,\Delta t</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>This gives the output to a sum of impulses. It turns out we can approximate any input as such a sum.</p>
-<div id="w-comb" class="widget"></div>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig-approx.svg" class="img-fluid figure-img" width="520"></p>
-<figcaption>Approximating <span class="math inline">u(t)</span> by a train of impulses. The shaded rectangle at <span class="math inline">\tau</span> has area <span class="math inline">u(\tau)\,\Delta t</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>Area of the shaded rectangle: <span class="math inline">u(\tau)\,\Delta t.</span></p>
-<p>We can represent this area by an impulse, <span class="math inline">\delta(t-\tau)\,u(\tau)\,\Delta t.</span></p>
-<p>These impulses for each rectangle approximate <span class="math inline">u(t)</span>, just like a Riemann integral:</p>
-<p><span class="math display"> u(t) \approx \sum_{k=-\infty}^{\infty} \delta(t-k\Delta t)\,u(k\Delta t)\,\Delta t \qquad(1) </span></p>
-<p>The corresponding output is a sum of delayed <strong>impulse responses</strong> that approximates the output of the system:</p>
-<p><span class="math display"> y(t) \approx \sum_{k=-\infty}^{\infty} h(t-k\Delta t)\,u(k\Delta t)\,\Delta t. \qquad(2) </span></p>
-<p>What happens to (1) in the limit <span class="math inline">\Delta t \to 0</span>?</p>
-<p><span class="math display"> \sum_{k=-\infty}^{\infty} \delta(t-k\Delta t)\,u(k\Delta t)\,\Delta t
-\;\longrightarrow\; \int_{-\infty}^{\infty}\! \delta(t-\tau)\,u(\tau)\,\mathrm{d}\tau </span></p>
-<p>with <span class="math inline">k\Delta t \to \tau</span> and <span class="math inline">\Delta t \to \mathrm{d}\tau</span>. So we have</p>
-<p><span class="math display"> \boxed{\,u(t) = \int_{-\infty}^{\infty}\! \delta(t-\tau)\,u(\tau)\,\mathrm{d}\tau\,} </span></p>
-<p>This is the <strong>sifting property</strong>! Read backwards, it says that the signal <span class="math inline">u(t)</span> is equal to an integral of impulses with amplitude <span class="math inline">u(\tau)\,\mathrm{d}\tau</span>.</p>
-<p>What about (2) in the limit <span class="math inline">\Delta t \to 0</span>?</p>
-<p><span class="math display"> \sum_{k=-\infty}^{\infty} h(t-k\Delta t)\,u(k\Delta t)\,\Delta t
-\;\longrightarrow\; \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau. </span></p>
-<p>So we have:</p>
-<p><span class="math display"> \boxed{\,y(t) = \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau\,} </span></p>
-<p>The response to <strong>any input</strong> <span class="math inline">u(t)</span> is <strong>determined by the impulse response</strong>! We will look more closely at how to calculate the impulse response soon, but first let’s understand the expression above.</p>
-</section>
-<section id="convolution-definition-and-properties" class="level2">
-<h2 class="anchored" data-anchor-id="convolution-definition-and-properties">Convolution: definition and properties</h2>
-<p><span class="math display"> \boxed{\;\text{The operation}\quad h * u := \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau\;} </span></p>
-<p>is called <strong>convolution</strong>.</p>
-<p>Basic properties of convolution:</p>
-<p><strong>1.</strong> <span class="math inline">h * u = u * h</span> (commutativity)</p>
-<p>Proof:</p>
-<p><span class="math display"> h * u = \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau. </span></p>
-<p>Let <span class="math inline">T = t - \tau</span>. Then <span class="math inline">\tau = t - T</span> and <span class="math inline">\mathrm{d}T = -\mathrm{d}\tau.</span></p>
+<section id="approximating-a-periodic-signal" class="level2">
+<h2 class="anchored" data-anchor-id="approximating-a-periodic-signal">Approximating a periodic signal</h2>
+<p><span class="math inline">u(t)</span> arbitrary periodic signal on <span class="math inline">[0, T]</span>.</p>
+<p><span class="math inline">\omega_0 = \frac{2\pi}{T}</span> is called the <u>fundamental frequency</u> of <span class="math inline">u(t)</span>.</p>
+<p><span class="math display"> \phi(t) := e^{\,j\left(\frac{2\pi}{T}t\right)} \quad\text{also periodic on } [0,T]. \qquad \text{Let } \tfrac{2\pi}{T} =: \omega. </span></p>
+<p>How well can we approximate <span class="math inline">u(t)</span> by scaling &amp; rotating <span class="math inline">e^{j\omega t}</span>?</p>
+<p>We already have a measure of the size of a periodic signal:</p>
+<p><span class="math display"> P(u) := \frac{1}{T}\int_0^T |u(t)|^2\,\mathrm{d}t = \langle u, u\rangle_P = \|u\|_P^2 \qquad (\text{see Lecture 2}). </span></p>
+<p>Multiplying <span class="math inline">\phi</span> by <span class="math inline">c \in \mathbb{C}</span> gives us a <u>scaling and rotation</u> of <span class="math inline">\phi</span>:</p>
+<p><span class="math display"> c = a\,e^{\,j\vartheta} \;(\text{polar form}) \quad\text{so}\quad c\phi = a\,e^{\,j(\omega t + \vartheta)}. </span></p>
+<p>Here <span class="math inline">a</span> is the <span class="out">scale</span>, and the <span class="out">rotation <span class="math inline">=</span> phase shift</span>.</p>
+<p>Let’s minimise <span class="math inline">J(c) = \|u - c\phi\|_P^2</span> over <span class="math inline">c \in \mathbb{C}</span>, then <span class="math inline">u \approx c\phi</span>.</p>
 <p><span class="math display">
 \begin{aligned}
-&amp;= -\int_{\infty}^{-\infty}\! h(T)\,u(t-T)\,\mathrm{d}T \\[2pt]
-&amp;= \int_{-\infty}^{\infty}\! u(t-T)\,h(T)\,\mathrm{d}T \;=\; u * h.
+J(c) &amp;= \langle u - c\phi,\; u - c\phi\rangle_P \\[2pt]
+&amp;= \langle u, u\rangle_P - \langle u, c\phi\rangle_P - \langle c\phi, u\rangle_P + \langle c\phi, c\phi\rangle_P \\[2pt]
+&amp;= \|u\|_P^2 - \bar{c}\,\langle u,\phi\rangle_P - c\,\overline{\langle u,\phi\rangle}_P + |c|^2\,\|\phi\|_P^2 . \qquad(1)
 \end{aligned}
 </span></p>
-<p><strong>2.</strong> <span class="math inline">(h_1 + h_2) * u = h_1 * u + h_2 * u</span> (additivity).</p>
-<p><strong>3.</strong> <span class="math inline">h_1 * (h_2 * h_3) = (h_1 * h_2) * h_3</span> (associativity).</p>
-<p><strong>4.</strong> <span class="math inline">\displaystyle (u * \delta)(t) = \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau)\,\mathrm{d}\tau = u(t).</span></p>
-<p><strong>5.</strong> <span class="math inline">\displaystyle (u * \delta(t-T)) = \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau-T)\,\mathrm{d}\tau = u(t-T). \qquad = \text{pure delay!}</span></p>
-<p><strong>6.</strong></p>
+<p>We can simplify <span class="math inline">\|\phi\|_P^2</span>:</p>
+<p><span class="math display">
+\|\phi\|_P^2 = \frac{1}{T}\int_0^T e^{\,j\omega t}\,e^{-j\omega t}\,\mathrm{d}t
+= \frac{1}{T}\int_0^T 1\,\mathrm{d}t = 1 .
+</span></p>
+<p>Let <span class="math inline">\gamma := \langle u,\phi\rangle</span>. Then we can write <span class="math inline">(1)</span> as</p>
+<p><span class="math display"> J(c) = \|u\|_P^2 - \bar{c}\gamma - c\bar{\gamma} + |c|^2 . </span></p>
+<p>Now notice that</p>
 <p><span class="math display">
 \begin{aligned}
-(f * g)' &amp;= \frac{\mathrm{d}}{\mathrm{d}t}\int_{-\infty}^{\infty}\! f(t-\tau)\,g(\tau)\,\mathrm{d}\tau \\[2pt]
-         &amp;= \int_{-\infty}^{\infty}\! \frac{\mathrm{d}}{\mathrm{d}t}f(t-\tau)\,g(\tau)\,\mathrm{d}\tau \\[2pt]
-         &amp;= f' * g.
+|c-\gamma|^2 &amp;= (c-\gamma)\overline{(c-\gamma)} \\[2pt]
+&amp;= |c|^2 - \gamma\bar{c} - c\bar{\gamma} + |\gamma|^2 .
 \end{aligned}
 </span></p>
-<p>But also: <span class="math inline">(f * g)' = (g * f)' = g' * f.</span></p>
 <p>So</p>
-<p><span class="math display"> (f * g)' = f' * g = g' * f </span></p>
-<section id="example-a-pulse-convolved-with-itself" class="level3">
-<h3 class="anchored" data-anchor-id="example-a-pulse-convolved-with-itself">Example: a pulse convolved with itself</h3>
-<p>Example: plot <span class="math inline">(2p_1 * 2p_1)(t)</span></p>
-<p><span class="math display"> \int_{-\infty}^{\infty}\! 2p_1(t-\tau)\,2p_1(\tau)\,\mathrm{d}\tau </span></p>
-<p>The value of <span class="math inline">(2p_1 * 2p_1)(t)</span> is the area under the product: the heights multiply, so it is <span class="math inline">2 \times 2</span> times the width of the overlap.</p>
-<div id="w-conv" class="widget"></div>
+<p><span class="math display"> J(c) = \|u\|_P^2 + |c-\gamma|^2 - |\gamma|^2 . </span></p>
+<p>All terms are positive. This is minimised when <span class="math inline">|c-\gamma|^2 = 0</span>, that is,</p>
+<p><span class="math display"> \boxed{\,c = \langle u,\phi\rangle_P = \frac{1}{T}\int_0^T u(t)\,e^{-j\omega t}\,\mathrm{d}t\,} </span></p>
+<p>The least-squares approximation of <span class="math inline">u(t)</span> by <span class="math inline">\phi(t)</span> is therefore</p>
+<p><span class="math display"> \boxed{\,c\phi = \frac{\langle u,\phi\rangle_P}{\|\phi\|_P^2}\,\phi\,} </span></p>
+<p>This is <u>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi</span></u>.</p>
+<p>This procedure is exactly the same for <span class="math inline">\phi_k = e^{\,jk\omega t}</span> for any <span class="math inline">k \in \mathbb{Z}</span>, so we define</p>
+<p><span class="math display"> \boxed{\,c_k = \langle u,\phi_k\rangle_P = \frac{1}{T}\int_0^T u(t)\,e^{-jk\omega t}\,\mathrm{d}t\,} </span></p>
+<p>These are the <u>complex Fourier coefficients</u>.</p>
 </section>
-<section id="example-radar" class="level3">
-<h3 class="anchored" data-anchor-id="example-radar">Example: radar</h3>
-<div style="text-align:center">
-<svg viewbox="0 0 540 200" width="520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A train of transmitted pulses on the left; on the right a radar mast with
-                 three rays out to three objects at ranges r1, r2 and r3.">
-  <defs>
-    <marker id="ahRD" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"></path>
-    </marker>
-  </defs>
-  <line x1="20" y1="120" x2="215" y2="120" stroke="#00468C" stroke-width="1.8"></line>
-  <g stroke="#00468C" stroke-width="1.6" marker-end="url(#ahRD)">
-    <line x1="45" y1="120" x2="45" y2="60"></line>
-    <line x1="95" y1="120" x2="95" y2="60"></line>
-    <line x1="145" y1="120" x2="145" y2="60"></line>
-    <line x1="195" y1="120" x2="195" y2="60"></line>
-  </g>
-  <g stroke="#00468C" fill="none" stroke-width="1.2">
-    <path d="M 300 175 L 320 95 L 340 175"></path>
-    <line x1="296" y1="175" x2="344" y2="175"></line>
-    <line x1="306" y1="151" x2="334" y2="151"></line>
-    <line x1="311" y1="131" x2="329" y2="131"></line>
-    <line x1="304" y1="163" x2="331" y2="139"></line>
-    <line x1="309" y1="139" x2="336" y2="163"></line>
-    <path d="M 320 95 A 20 20 0 0 1 320 63"></path>
-  </g>
-  <g stroke="#00468C" fill="none" stroke-width="1.2">
-    <line x1="320" y1="79" x2="470" y2="30"></line>
-    <line x1="320" y1="79" x2="480" y2="62"></line>
-    <line x1="320" y1="79" x2="472" y2="96"></line>
-  </g>
-  <g fill="#00468C">
-    <circle cx="474" cy="28" r="4"></circle>
-    <circle cx="484" cy="61" r="4"></circle>
-    <circle cx="476" cy="97" r="4"></circle>
-  </g>
-  <text x="386" y="49" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₁</text>
-  <text x="398" y="66" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₂</text>
-  <text x="390" y="99" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₃</text>
-</svg>
-</div>
-<p>For each object, the pulse is delayed by <span class="math inline">t_{d_i} = \dfrac{2r_i}{c}.</span></p>
-<p>This can be interpreted as a <strong>system impulse response</strong>.</p>
-<p>input: <span class="math inline">\delta(t)</span></p>
-<p>system: the scene</p>
-<p>output: <span class="math inline">\displaystyle \sum_i \delta(t - t_{d_i}).</span></p>
-<p><span class="math inline">\hookrightarrow</span> output is a sum of delayed versions of the input.</p>
-<p>What system is this the impulse response of?</p>
-<p><span class="math display"> \sum_i D_{t_{d_i}} \qquad \text{: a sum of delays, one for each object.} </span></p>
-<p>What is the response if we inject a sinusoid:</p>
-<p>Intuitively: <span class="math inline">u(t) = \cos(\omega t)</span>, <span class="math inline">\;y(t) = \sum_i \cos(\omega t - \omega t_{d_i}).</span></p>
-<p>Let’s check our intuition with what we just learnt:</p>
+<section id="the-fourier-series" class="level2">
+<h2 class="anchored" data-anchor-id="the-fourier-series">The Fourier series</h2>
+<p>Each coefficient gives a least-squares approximation of <span class="math inline">u(t)</span> by <span class="math inline">\phi_k(t)</span>, calculated as</p>
+<p><span class="math display"> u(t) \approx c_k \phi_k = \frac{\langle u,\phi_k\rangle_P}{\|\phi_k\|_P^2}\,\phi_k, </span></p>
+<p>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi_k</span>.</p>
+<p>It turns out that the sum of all these approximations is an <u>exact</u> representation of <span class="math inline">u(t)</span> (provided it is sufficiently well-behaved):</p>
+<p><span class="math display"> \boxed{\,u = \sum_{k=-\infty}^{\infty} c_k \phi_k = \sum_{k=-\infty}^{\infty} \langle u,\phi_k\rangle_P\,\phi_k, \qquad \phi_k(t) = e^{\,jk\omega t}\,} </span></p>
+<p>This is the <u>Fourier series</u> of <span class="math inline">u</span>. It also turns out that each <span class="math inline">c_k</span> is independent, as <span class="math inline">\phi_k</span> are orthogonal, so the finite sum <span class="math inline">\displaystyle\sum_{k=-n}^{n} \langle u,\phi_k\rangle_P\,\phi_k</span> is a least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\{\phi_k\}_{k=-n,\dots,n}</span>. See the starred section of the notes for the full details.</p>
+<p>For <span class="math inline">k = 0</span>, we have</p>
 <p><span class="math display">
 \begin{aligned}
-y(t) &amp;= u(t) * h(t) \\[2pt]
-     &amp;= u(t) * \sum_i \delta(t - t_{d_i}) \\[2pt]
-     &amp;= \sum_i \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau - t_{d_i})\,\mathrm{d}\tau \\[2pt]
-     &amp;= \sum_i u(t - t_{d_i}) \qquad \text{(sifting property)} \\[2pt]
-     &amp;= \sum_i \cos(\omega t - \omega t_{d_i}).
+c_0 = \langle u,\phi_0\rangle &amp;= \frac{1}{T}\int_0^T u\,e^{0}\,\mathrm{d}t \\[2pt]
+&amp;= \frac{1}{T}\int_0^T u(t)\,\mathrm{d}t . \qquad \text{Average value of } u = \text{DC offset.}
+\end{aligned}
+</span></p>
+<section id="starred-section-why-are-the-c_k-independent" class="level3">
+<h3 class="anchored" data-anchor-id="starred-section-why-are-the-c_k-independent">Starred section: why are the <span class="math inline">c_k</span> independent?</h3>
+<p>First, let’s calculate</p>
+<p><span class="math display">
+\begin{aligned}
+\langle \phi_k, \phi_\ell\rangle &amp;= \frac{1}{T}\int_0^T e^{\,jk\omega t}\,e^{-j\ell\omega t}\,\mathrm{d}t \\[2pt]
+&amp;= \frac{1}{T}\int_0^T e^{\,+j(k-\ell)\omega t}\,\mathrm{d}t \\[2pt]
+&amp;= 1 \quad \text{if } k = \ell \quad\text{or} \\[6pt]
+&amp;= \left[\frac{1}{+j(k-\ell)\omega}\,e^{\,+j(k-\ell)\omega t}\right]_0^{T} \\[6pt]
+&amp;= 0 \quad \text{as } e^{\,+j(k-\ell)\omega t} \text{ is } T\text{-periodic.}
+\end{aligned}
+</span></p>
+<p>This means the <span class="math inline">\phi_k</span> are <u>orthogonal</u>.</p>
+<p>Now let’s minimise <span class="math inline">\left\|u - \sum_k c_k \phi_k\right\|_P^2</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+\left\|u - \sum_k c_k \phi_k\right\|_P^2
+&amp;= \left\langle u - \sum_k c_k \phi_k,\; u - \sum_k c_k \phi_k\right\rangle_P \\[6pt]
+&amp;= \|u\|_P^2 + \left\langle u,\, -\sum_k c_k \phi_k\right\rangle + \left\langle -\sum_k c_k \phi_k,\, u\right\rangle + \left\langle \sum_k c_k \phi_k,\, \sum_k c_k \phi_k\right\rangle \\[6pt]
+&amp;= \|u\|_P^2 - \sum_k \bar{c}_k \underbrace{\langle u,\phi_k\rangle}_{:=\,\gamma_k} - \sum_k c_k \overline{\langle u,\phi_k\rangle} + \underbrace{\sum_k \sum_\ell c_k \bar{c}_\ell \langle \phi_k,\phi_\ell\rangle}_{=\,0 \text{ for } k \neq \ell} \\[6pt]
+&amp;= \|u\|_P^2 - \sum_k \left(\bar{c}_k \gamma_k + c_k \bar{\gamma}_k\right) + \sum_k c_k \bar{c}_k \langle \phi_k,\phi_k\rangle .
+\end{aligned}
+</span></p>
+<p>Following the same completion of squares argument as before, we have</p>
+<p><span class="math display"> = \|u\|_P^2 + \sum_k |c_k - \gamma_k|^2 - \sum_k |\gamma_k|^2 . </span></p>
+<p>This is minimised when <span class="math inline">c_k = \gamma_k</span> for all <span class="math inline">k</span>. These are the Fourier coefficients we derived earlier with individual minimisations!</p>
+<p><em>— end starred section —</em></p>
+<p>If <span class="math inline">u(t)</span> is real, its Fourier series must be real:</p>
+<p><span class="math display"> \operatorname{Im}\!\left(\sum_k c_k \phi_k\right) = 0. </span></p>
+<p>This is achieved if</p>
+<p><span class="math display">
+\begin{aligned}
+c_k \phi_k &amp;= \overline{c_{-k}\,\phi_{-k}} \\[2pt]
+&amp;= \overline{c_{-k}}\,\phi_k .
+\end{aligned}
+</span></p>
+<p>So <span class="math inline">c_k = \overline{c_{-k}}</span>. In particular, <span class="math inline">c_0 = \overline{c_0}</span>, so <span class="math inline">c_0</span> is real.</p>
+</section>
+</section>
+<section id="the-sinecosine-form-for-a-real-signal" class="level2">
+<h2 class="anchored" data-anchor-id="the-sinecosine-form-for-a-real-signal">The sine–cosine form for a real signal</h2>
+<p>In this case, we can also derive a sin/cosine form of the Fourier series.</p>
+<p><span class="math display"> \frac{e^{\,j\omega t} + e^{-j\omega t}}{2} = \cos\omega t, \qquad \frac{e^{\,j\omega t} - e^{-j\omega t}}{2j} = \sin\omega t. </span></p>
+<p>Let <span class="math inline">c_k = \tfrac{1}{2}(a_k - j b_k)</span>, <span class="math inline">k \geq 0</span>. Then</p>
+<p><span class="math display">
+\begin{aligned}
+c_k e^{\,jk\omega t} + c_{-k} e^{-jk\omega t}
+&amp;= c_k e^{\,jk\omega t} + \bar{c}_k e^{-jk\omega t} \\[2pt]
+&amp;= \tfrac{1}{2}(a_k - j b_k)\big(\cos(k\omega t) + j\sin(k\omega t)\big) + \tfrac{1}{2}(a_k + j b_k)\big(\cos(k\omega t) - j\sin(k\omega t)\big) \\[2pt]
+&amp;= a_k \cos(k\omega t) + b_k \sin(k\omega t) .
+\end{aligned}
+</span></p>
+<p>So we have an alternative form for the Fourier series of a real function <span class="math inline">u</span>:</p>
+<p><span class="math display">
+\boxed{\;u(t) = a_0 + \sum_{k=1}^{\infty} a_k \cos(k\omega t) + b_k \sin(k\omega t),\;}
+</span></p>
+<p>where</p>
+<p><span class="math display">
+\begin{aligned}
+a_0 &amp;= c_0 \\[4pt]
+a_k &amp;= 2\operatorname{Re}(c_k) = \frac{2}{T}\int_0^T u(t)\cos(k\omega t)\,\mathrm{d}t \\[4pt]
+b_k &amp;= -2\operatorname{Im}(c_k) = \frac{2}{T}\int_0^T u(t)\sin(k\omega t)\,\mathrm{d}t .
 \end{aligned}
 </span></p>
 </section>
-</section>
-<section id="the-impulse-response-of-circuits" class="level2">
-<h2 class="anchored" data-anchor-id="the-impulse-response-of-circuits">② The impulse response of circuits</h2>
-<p>Now let’s look at the impulse response of circuits.</p>
-<div class="columns">
-<div class="column" style="width:49%;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="circuit-rc.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>A series RC circuit.</figcaption>
-</figure>
-</div>
-<p>In the RC circuit, a change in <span class="math inline">v_i</span> causes <strong>gradual</strong> change in <span class="math inline">v_o</span>.</p>
-</div><div class="column" style="width:2%;">
-
-</div><div class="column" style="width:49%;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="circuit-divider.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>A voltage divider.</figcaption>
-</figure>
-</div>
-<p>In the voltage divider, a change in <span class="math inline">v_i</span> causes <strong>instantaneous</strong> change in <span class="math inline">v_o</span>.</p>
-</div>
-</div>
-<p><span class="math inline">\hookrightarrow</span> capacitor has memory:</p>
-<p>the charge stored on its plates carries a memory of the current.</p>
-<p>The impulse is a fictitious signal that deposits charge on the capacitor instantaneously:</p>
-<p><span class="math display"> q_c = \int i_c(t)\,\mathrm{d}t </span></p>
-<p>So if <span class="math inline">i_c(t) = \delta(t)</span>, <span class="math inline">\;q_c(0) = \displaystyle\int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t = 1.</span></p>
-<p>This means an impulse response (inhomogeneous ODE) is equivalent to an initial condition response (homogeneous ODE).</p>
-<p>This holds generally for LTI systems. Let’s see how on the RC circuit above.</p>
-<p><span class="math display"> v_i(t) = v_R + v_C </span></p>
-<p><span class="math display"> v_R = iR </span></p>
-<p><span class="math display"> i = \frac{\mathrm{d}}{\mathrm{d}t}C v_C. </span></p>
-<p>So</p>
-<p><span class="math display"> v_i(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
-<p>Now let <span class="math inline">v_i(t) = \delta(t)</span>.</p>
-<p><span class="math display"> \delta(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
-<p>Integrate both sides on <span class="math inline">[0^-, 0^+]</span>.</p>
-<p><span class="math display"> \int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t = \underbrace{\int_{0^-}^{0^+}\! v_C(t)\,\mathrm{d}t}_{=\,0} + RC\,v(0) </span></p>
-<p><span class="math display"> 1 = RC\,v(0) </span></p>
-<p><span class="math display"> v(0) = \frac{1}{RC}. </span></p>
-<div class="note">
-<p>Impulse at <span class="math inline">t=0</span> deposits an <strong>initial condition</strong>.</p>
-</div>
-<p>We can use this to calculate the impulse response, by solving</p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t) + v_C(t) = 0, \qquad v_C(0) = \frac{1}{RC} \qquad(3) </span></p>
-<p>Let <span class="math inline">v_C(t) = \alpha e^{-\beta t}.</span></p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}v_C = -\beta\alpha e^{-\beta t}. </span></p>
-<p>Sub in (3):</p>
-<p><span class="math display"> -RC\beta\alpha e^{-\beta t} = -\alpha e^{-\beta t} </span></p>
-<p><span class="math display"> RC\beta = 1 \iff \beta = \frac{1}{RC}. </span></p>
-<p>Use the initial condition to find <span class="math inline">\alpha</span>:</p>
-<p><span class="math display"> v_C(0) = \alpha e^{0} = \frac{1}{RC}. </span></p>
-<p>So the impulse response is</p>
-<p><span class="math display"> v_C(t) = \frac{1}{RC}\,e^{-\frac{1}{RC}t} =: h(t). </span></p>
-<!-- CHECK: the exponent in the source reads e^{-(1/C)t}; with beta = 1/RC from the line
-     above it should be e^{-(1/RC)t}, which is what I have used. -->
-<p><span class="math inline">h(t)</span> is the usual notation we’ll use for impulse response.</p>
-</section>
-<section id="ode-descriptions-of-lti-systems" class="level2">
-<h2 class="anchored" data-anchor-id="ode-descriptions-of-lti-systems">④ ODE descriptions of LTI systems</h2>
-<p>The same principle holds for <span class="math inline">n</span>th order differential equations. For</p>
-<p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) = \delta(t) </span></p>
-<p>with the system at rest before <span class="math inline">t=0</span>, the impulse deposits an initial condition on the 2nd highest derivative:</p>
-<p><span class="math display"> y^{(n-1)}(0^+) = \frac{1}{a_n}, \qquad y^{(n-2)}(0^+) = \cdots = y(0^+) = 0. </span></p>
-<p>If we also allow derivatives of the input:</p>
-<p><span class="math display">
-\begin{aligned}
-&amp;a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) \\[2pt]
-&amp;\qquad = b_m u^{(m)}(t) + b_{m-1}u^{(m-1)}(t) + \cdots + b_0 u(t)
-\end{aligned}
-</span></p>
-<p>with given initial conditions <span class="math inline">y^{(n-1)}(0), y^{(n-2)}(0), \dots, y(0)</span>, we have a description for a large class of useful systems, including all of the circuits we’ve seen so far.</p>
-<ul>
-<li><span class="math inline">n</span> is called the <strong>order</strong> of the system,</li>
-<li>the <span class="math inline">a_i</span> and <span class="math inline">b_i</span> are called the <strong>coefficients</strong> of the system,</li>
-<li>such systems are always <strong>time-invariant</strong>,</li>
-<li>if the initial conditions are all <span class="math inline">0</span>, the system is <strong>linear</strong>,</li>
-<li>this gives an implicit description of the map from <span class="math inline">u</span> to <span class="math inline">y</span>. In weeks 5 &amp; 6 we’ll develop an explicit description.</li>
-</ul>
-</section>
-<section id="lti-systems-and-sinusoids" class="level2">
-<h2 class="anchored" data-anchor-id="lti-systems-and-sinusoids">③ LTI systems and sinusoids</h2>
-<p>Back to our RC circuit. Let’s plug in a complex sinusoidal voltage and see what happens.</p>
-<p><span class="math display"> v_i(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
-<p>Let <span class="math inline">v_i(t) = e^{j\omega t} = \cos(\omega t) + j\sin(\omega t).</span></p>
-<p>Guess a solution <span class="math inline">v_C(t) = G e^{j\omega t}</span> for some <span class="math inline">G \in \mathbb{C}</span> — a sinusoid of the same frequency.</p>
-<p><span class="math display"> e^{j\omega t} = G e^{j\omega t} + \frac{\mathrm{d}}{\mathrm{d}t}RCG e^{j\omega t} </span></p>
-<p><span class="math display"> e^{j\omega t} = G e^{j\omega t} + j\omega RCG e^{j\omega t} </span></p>
-<p><span class="math display"> 1 = G + j\omega RCG \qquad (e^{j\omega t} \neq 0) </span></p>
-<p><span class="math display"> G(j\omega) = \frac{1}{1 + j\omega RC}. </span></p>
-<div class="note">
-<p>Why is <span class="math inline">Ge^{j\omega t}</span> always such a good guess?</p>
-</div>
-<!-- CHECK: the circuit redrawn beside this calculation appears to label the shunt element
-     L, but the equation above it is the RC circuit. I have kept the RC circuit. -->
-<p>Consider an arbitrary LTI system mapping <span class="math inline">u</span> to <span class="math inline">y</span>.</p>
-<p>Let <span class="math inline">u(t) = e^{j\omega t} = \cos(\omega t) + j\sin(\omega t).</span></p>
-<p>Time invariance: <span class="math inline">u(t-\tau) \longmapsto y(t-\tau).</span></p>
-<p>For this input,</p>
-<p><span class="math display">
-\begin{aligned}
-u(t-\tau) &amp;= e^{j\omega(t-\tau)} = e^{j\omega t}e^{-j\omega\tau} \\[2pt]
-          &amp;= e^{-j\omega\tau}u(t).
-\end{aligned}
-</span></p>
-<p>This is the input <span class="math inline">u</span> scaled by <span class="math inline">e^{-j\omega\tau}</span>.</p>
-<p>By linearity, <span class="math inline">y(t-\tau) = e^{-j\omega\tau}y(t).</span></p>
-<p>Set <span class="math inline">t=0</span> and relabel <span class="math inline">-\tau = t</span>, then</p>
-<p><span class="math display"> y(t) = e^{j\omega t}y(0), </span></p>
-<p>where <span class="math inline">y(0)</span> is <span class="math inline">G(j\omega)</span> in the example above.</p>
-<div class="note">
-<p>LTI systems always map a sinusoid to a sinusoid of the same frequency.</p>
-</div>
-<p>Let’s think about this in terms of our matrix <span class="math inline">\longleftrightarrow</span> system analogy.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>matrix</th>
-<th>LTI system</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">y = Au</span></td>
-<td><span class="math inline">y(t) = G(u(t))</span></td>
-</tr>
-<tr class="even">
-<td>If <span class="math inline">u</span> is an eigenvector, <span class="math inline">y = Au = \lambda u</span></td>
-<td>If <span class="math inline">u = e^{j\omega t}</span>, <span class="math inline">y = G(j\omega)\,e^{j\omega t}</span></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">A</span> scales <span class="math inline">u</span> to get <span class="math inline">y</span>.</td>
-<td><span class="math inline">G</span> scales <span class="math inline">u</span> to get <span class="math inline">y</span>.</td>
-</tr>
-<tr class="even">
-<td></td>
-<td><span class="math inline">e^{j\omega t}</span> is an eigenvector!</td>
-</tr>
-</tbody>
-</table>
-<p>Matrices are hard in general, but diagonal matrices are easy, they simply scale each entry of the vector. How do we diagonalise a matrix? We find a basis of eigenvectors.</p>
-<p>Over the last three weeks, we’ve seen that time domain signals &amp; systems are hard to analyse. We’ve just discovered that the eigenvectors of an LTI system are sinusoids. Can we use this to somehow “diagonalise” the system and make the analysis less difficult, the same as we would do for a matrix?</p>
-<p>YES! This is what the Fourier Transform does. We will build this over the next three weeks.</p>
-</section>
-<section id="block-diagrams-and-interconnections" class="level2">
-<h2 class="anchored" data-anchor-id="block-diagrams-and-interconnections">⑤ Block diagrams and interconnections</h2>
-<p>Block diagrams or signal flow diagrams describe the exchange of signals between systems.</p>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-system.svg" class="img-fluid" width="260"></p>
-</div><div class="column" style="width:45%;">
-<p>System <span class="math inline">A</span> with input <span class="math inline">u</span> and output <span class="math inline">y</span>.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-gain.svg" class="img-fluid" width="260"></p>
-</div><div class="column" style="width:45%;">
-<p>A static gain <span class="math inline">k</span>.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-cascade.svg" class="img-fluid" width="320"></p>
-</div><div class="column" style="width:45%;">
-<p>A cascade interconnection.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-sum.svg" class="img-fluid" width="120"></p>
-</div><div class="column" style="width:45%;">
-<p>The sum of two signals.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-parallel.svg" class="img-fluid" width="320"></p>
-</div><div class="column" style="width:45%;">
-<p>A parallel interconnection.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-feedback.svg" class="img-fluid" width="320"></p>
-</div><div class="column" style="width:45%;">
-<p>A negative feedback interconnection (the subject of control systems).</p>
-</div>
-</div>
-</section>
-<section id="extra-example-impulse-response-of-an-rlc-circuit" class="level2">
-<h2 class="anchored" data-anchor-id="extra-example-impulse-response-of-an-rlc-circuit">Extra example: impulse response of an RLC circuit</h2>
+<section id="example-the-bridge-rectifier" class="level2">
+<h2 class="anchored" data-anchor-id="example-the-bridge-rectifier">Example: the bridge rectifier</h2>
+<p><strong>Example:</strong> Compute the Fourier series of the output of a bridge rectifier driven by a <span class="math inline">1000\,</span>Hz sinusoid,</p>
+<p><span class="math display"> u(t) = \left|\sin(2000\pi t)\right| . </span></p>
 <div style="text-align:center">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="circuit-rlc.svg" class="img-fluid figure-img" width="540"></p>
-<figcaption>Series RLC circuit.</figcaption>
+<p><img src="fig/rectifier-wave.svg" class="img-fluid figure-img" width="640"></p>
+<figcaption>The rectifier output <span class="math inline">u(t) = |\sin(2000\pi t)|</span>. Rectification folds the negative half-cycles up, so the period is half that of the input.</figcaption>
 </figure>
 </div>
 </div>
-<p>Let’s consider <span class="math inline">v_C</span> to be the output.</p>
-<p><span class="math display"> v(t) = v_R + v_L + v_C \qquad \text{(KVL)} </span></p>
-<p><span class="math display"> i = C\frac{\mathrm{d}}{\mathrm{d}t}v_C </span></p>
-<p><span class="math display"> v_L = L\frac{\mathrm{d}}{\mathrm{d}t}i </span></p>
-<p><span class="math display"> v_R = Ri </span></p>
-<p>Combining, KVL becomes:</p>
-<p><span class="math display"> v(t) = L\frac{\mathrm{d}}{\mathrm{d}t}i + Ri + v_C \qquad(4) </span></p>
-<p>Or</p>
-<p><span class="math display"> v(t) = LC\frac{\mathrm{d}^2}{\mathrm{d}t^2}v_C(t) + RC\frac{\mathrm{d}}{\mathrm{d}t}v_C(t) + v_C. </span></p>
-<p>Now assume the circuit is at rest and we apply an impulse voltage.</p>
-<p>Imagine what <span class="math inline">v(t) = \delta(t)</span> does to the circuit around <span class="math inline">t=0</span>.</p>
-<p>Integrate (4):</p>
+<p>The input frequency is <span class="math inline">1000\,\text{Hz} = 2000\pi\,</span>rad/s. Rectification doubles this, so the fundamental frequency of <span class="math inline">u</span> is</p>
+<p><span class="math display"> \omega_0 = 4000\pi \;\text{rad/s}, \qquad T = \frac{2\pi}{\omega_0} = \frac{1}{2000}\,\text{s}. </span></p>
+<p>On <span class="math inline">[0,T]</span> the argument <span class="math inline">2000\pi t</span> runs from <span class="math inline">0</span> to <span class="math inline">\pi</span>, where the sine is non-negative, so <span class="math inline">u(t) = \sin\!\left(\tfrac{\omega_0}{2}t\right)</span> there and the absolute value can be dropped.</p>
+<p>Start with the DC term:</p>
 <p><span class="math display">
-\int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t
-= \int_{0^-}^{0^+}\! L\frac{\mathrm{d}}{\mathrm{d}t}i(t) + \underbrace{Ri(t) + v_C(t)}_{\text{assume finite}}\,\mathrm{d}t
+\begin{aligned}
+c_0 = \frac{1}{T}\int_0^T u(t)\,\mathrm{d}t
+&amp;= 2000\int_0^{1/2000} \sin(2000\pi t)\,\mathrm{d}t \\[6pt]
+&amp;= 2000\left[\frac{-\cos(2000\pi t)}{2000\pi}\right]_0^{1/2000} \\[6pt]
+&amp;= \frac{1}{\pi}\Big(\cos(0) - \cos(\pi)\Big) = \frac{2}{\pi} .
+\end{aligned}
 </span></p>
-<p>The underbraced terms give <span class="math inline">0</span>, as we are integrating over an infinitesimal interval. So</p>
-<p><span class="math display"> 1 = Li(0) </span></p>
-<p><span class="math display"> i(0) = \frac{1}{L}. </span></p>
+<p>Now the general coefficient:</p>
+<p><span class="math display">
+\begin{aligned}
+c_k = \frac{1}{T}\int_0^T u(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t
+&amp;= \frac{\omega_0}{2\pi}\int_0^{2\pi/\omega_0} \sin\!\left(\frac{\omega_0}{2}t\right) e^{-jk\omega_0 t}\,\mathrm{d}t \\[6pt]
+&amp;= \frac{\omega_0}{2\pi}\int_0^{2\pi/\omega_0} \frac{1}{2j}\left(e^{\,j\frac{\omega_0}{2}t} - e^{-j\frac{\omega_0}{2}t}\right) e^{-jk\omega_0 t}\,\mathrm{d}t \\[6pt]
+&amp;= \frac{\omega_0}{4\pi j}\int_0^{2\pi/\omega_0} \left(e^{\,j\frac{\omega_0}{2}(1-2k)t} - e^{-j\frac{\omega_0}{2}(1+2k)t}\right)\mathrm{d}t \\[6pt]
+&amp;= \frac{\omega_0}{4\pi j}\left[\frac{2\,e^{\,j\frac{\omega_0}{2}(1-2k)t}}{j\omega_0(1-2k)} + \frac{2\,e^{-j\frac{\omega_0}{2}(1+2k)t}}{j\omega_0(1+2k)}\right]_0^{2\pi/\omega_0} .
+\end{aligned}
+</span></p>
+<p>At <span class="math inline">t = 2\pi/\omega_0</span> the two exponentials are <span class="math inline">e^{\,j\pi(1-2k)}</span> and <span class="math inline">e^{-j\pi(1+2k)}</span>. Both <span class="math inline">1-2k</span> and <span class="math inline">1+2k</span> are odd, so both exponentials equal <span class="math inline">-1</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+c_k &amp;= \frac{\omega_0}{4\pi j}\left(-\frac{4}{j\omega_0}\right)\left(\frac{1}{1-2k} + \frac{1}{1+2k}\right) \\[6pt]
+&amp;= -\frac{1}{\pi j^2}\cdot\frac{(1+2k) + (1-2k)}{(1-2k)(1+2k)} \\[6pt]
+&amp;= \boxed{\;\frac{2}{\pi\left(1-4k^2\right)}\;}
+\end{aligned}
+</span></p>
+<p>Setting <span class="math inline">k=0</span> recovers <span class="math inline">c_0 = 2/\pi</span>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/rectifier-stem.svg" class="img-fluid figure-img" width="600"></p>
+<figcaption>The Fourier coefficients <span class="math inline">c_k = \dfrac{2}{\pi(1-4k^2)}</span> of the rectifier output, with the phase below. Every coefficient with <span class="math inline">|k|\geq 1</span> is negative, so its phase is <span class="math inline">\pi</span>; the phase is drawn as an odd function of <span class="math inline">k</span>, taking <span class="math inline">-\pi</span> for <span class="math inline">k &gt; 0</span> and <span class="math inline">+\pi</span> for <span class="math inline">k &lt; 0</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>The signal <span class="math inline">u</span> is real and even, so <span class="math inline">c_k = \overline{c_{-k}}</span> and <span class="math inline">c_k = c_{-k}</span>, which forces every <span class="math inline">c_k</span> to be real. This is what the calculation gives.</p>
+<p>In sine–cosine form, <span class="math inline">b_k = -2\operatorname{Im}(c_k) = 0</span> and <span class="math inline">a_k = 2\operatorname{Re}(c_k)</span>, so</p>
+<p><span class="math display"> u(t) = \frac{2}{\pi} + \sum_{k=1}^{\infty} \frac{4}{\pi\left(1-4k^2\right)}\cos(k\omega_0 t) . </span></p>
+<p>The DC term <span class="math inline">2/\pi</span> is the average value of the rectified sine, and the harmonics fall off like <span class="math inline">1/k^2</span>.</p>
+</section>
+<section id="symmetry-properties-of-the-fourier-series" class="level2">
+<h2 class="anchored" data-anchor-id="symmetry-properties-of-the-fourier-series">Symmetry properties of the Fourier series</h2>
+<p><strong>★ Odd functions:</strong> <span class="math inline">\;f(-x) = -f(x)</span>. Rotational symmetry <span class="math inline">(180^\circ)</span>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/odd-sym.svg" class="img-fluid figure-img" width="280"></p>
+<figcaption>An odd function: rotational (<span class="math inline">180^\circ</span>) symmetry about the origin.</figcaption>
+</figure>
+</div>
+</div>
+<p><strong>★ Even functions:</strong> <span class="math inline">\;f(-x) = f(x)</span>. Symmetry about <span class="math inline">y</span>-axis.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/even-sym.svg" class="img-fluid figure-img" width="280"></p>
+<figcaption>An even function: symmetry about the <span class="math inline">y</span>-axis.</figcaption>
+</figure>
+</div>
+</div>
+<p>The Fourier series simplifies for even and odd functions.</p>
+<p><strong>① Odd <span class="math inline">u(t)</span>: calculate <span class="math inline">a_k</span>.</strong></p>
+<p><span class="math display"> a_k = \frac{2}{T}\int_0^T u(t)\cos(k\omega t)\,\mathrm{d}t . </span></p>
+<p><span class="math display"> u(-t)\cos(-k\omega t) = -u(t)\cos(k\omega t) \quad(\text{odd}). </span></p>
+<p>Since <span class="math inline">u(t)</span> &amp; <span class="math inline">\cos(k\omega t)</span> are <span class="math inline">T</span>-periodic, we can shift the limits of integration:</p>
+<p><span class="math display">
+\begin{aligned}
+a_k &amp;= \frac{2}{T}\int_{-T/2}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
+&amp;= \frac{2}{T}\int_{-T/2}^{0} u(t)\cos(k\omega t)\,\mathrm{d}t + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
+&amp;= -\frac{2}{T}\int_{0}^{-T/2} u(t)\cos(k\omega t)\,\mathrm{d}t + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t .
+\end{aligned}
+</span></p>
+<p>Let <span class="math inline">\tau = -t</span>. <span class="math inline">\;\mathrm{d}\tau = -\mathrm{d}t</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;= +\frac{2}{T}\int_{0}^{T/2} u(-\tau)\cos(-k\omega\tau)\,\mathrm{d}\tau + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
+&amp;= -\frac{2}{T}\int_{0}^{T/2} u(\tau)\cos(k\omega\tau)\,\mathrm{d}\tau + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t = 0 \\
+&amp;\hphantom{=} \quad (\text{as } u(\tau)\cos(k\omega\tau) \text{ is odd}),
+\end{aligned}
+</span></p>
+<p>So for odd functions, <span class="math inline">\boxed{a_k = 0}</span>. Similarly, <span class="math inline">a_0 = 0</span>, so we get a pure sine series.</p>
+<p>For even functions, a similar argument shows that <span class="math inline">\boxed{b_k = 0}</span> and we get a cosine series <span class="math inline">+</span> DC term.</p>
+</section>
+<section id="example-fourier-series-of-a-square-wave" class="level2">
+<h2 class="anchored" data-anchor-id="example-fourier-series-of-a-square-wave">Example: Fourier series of a square wave</h2>
+<p><strong>Example:</strong> Compute the Fourier series of the square wave illustrated below:</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/square-wave.svg" class="img-fluid figure-img" width="680"></p>
+<figcaption>The square wave <span class="math inline">u(t)</span> (period <span class="math inline">2\pi</span>, amplitude <span class="math inline">\pm 1</span>). The red bracket marks one period, <span class="math inline">[\tfrac{\pi}{2}, \tfrac{5\pi}{2}]</span>, used for the coefficient integral.</figcaption>
+</figure>
+</div>
+</div>
+<p>The wave is <u>even</u>, so we only need to compute the cosine terms. Here the period is <span class="math inline">T = 2\pi</span>, so <span class="math inline">\omega = \tfrac{2\pi}{T} = 1</span>, giving <span class="math inline">\cos(k\omega t) = \cos(kt)</span> and <span class="math inline">\tfrac{2}{T} = \tfrac{1}{\pi}</span>.</p>
+<p><span class="math display"> a_0 = \frac{1}{2\pi}\int_0^{2\pi} u(t)\,\mathrm{d}t = 0. \qquad \text{No DC offset!} \iff \text{mean is zero.} </span></p>
+<p>Compute the coefficients over the red interval in the figure:</p>
+<p><span class="math display">
+\begin{aligned}
+a_k &amp;= \frac{1}{\pi}\int_{\pi/2}^{5\pi/2} u(t)\cos(kt)\,\mathrm{d}t \\[6pt]
+&amp;= \frac{1}{\pi}\int_{\pi/2}^{3\pi/2} -\cos(kt)\,\mathrm{d}t + \frac{1}{\pi}\int_{3\pi/2}^{5\pi/2} \cos(kt)\,\mathrm{d}t .
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\begin{aligned}
+&amp;= \frac{1}{\pi}\left[-\frac{1}{k}\sin(kt)\right]_{\pi/2}^{3\pi/2} + \frac{1}{\pi}\left[\frac{1}{k}\sin(kt)\right]_{3\pi/2}^{5\pi/2} \\[8pt]
+&amp;= \frac{1}{\pi k}\left(\sin\!\left(\frac{k\pi}{2}\right) + \sin\!\left(\frac{5k\pi}{2}\right) - 2\sin\!\left(\frac{3k\pi}{2}\right)\right) \\[8pt]
+&amp;= \frac{2}{\pi k}\left(\sin\!\left(\frac{k\pi}{2}\right) - \sin\!\left(\frac{3k\pi}{2}\right)\right) .
+\end{aligned}
+</span></p>
 <p>Now,</p>
-<p><span class="math display"> v_C(0) = \frac{1}{C}\int_{0^-}^{0^+}\! i(t)\,\mathrm{d}t = 0. </span></p>
-<p>Conclusion: the impulse at <span class="math inline">0</span> deposits an <strong>initial condition</strong> on the inductor: the 2nd highest derivative of <span class="math inline">v_C</span>.</p>
-<p>We can now solve the impulse response of the circuit as an initial condition response:</p>
-<p><span class="math display">
-\frac{\mathrm{d}^2}{\mathrm{d}t^2}v_C(t)
-+ \underbrace{\frac{R}{L}}_{2\zeta\omega_n}\frac{\mathrm{d}}{\mathrm{d}t}v_C(t)
-+ \underbrace{\frac{1}{LC}}_{\omega_n^2}v_C(t) = 0 \qquad(5)
-</span></p>
-<p>with <span class="math inline">v_C(0) = 0,</span></p>
-<p><span class="math display"> v_C'(0) = \frac{1}{C}i(0) = \frac{1}{LC}. </span></p>
-<p>We suspect the solution will be some kind of exponential/sinusoid combo, so let’s guess a solution</p>
-<p><span class="math display"> e^{st} \qquad \text{for some } s \in \mathbb{C}. </span></p>
-<p>Substituting in (5):</p>
-<p><span class="math display"> s^2 e^{st} + 2\zeta\omega_n s\, e^{st} + \omega_n^2 e^{st} = 0 </span></p>
-<p><span class="math inline">e^{st} \neq 0</span>, so</p>
-<p><span class="math display"> s^2 + 2\zeta\omega_n s + \omega_n^2 = 0 \qquad(6) </span></p>
 <p><span class="math display">
 \begin{aligned}
-s &amp;= \frac{-2\zeta\omega_n \pm \sqrt{4\zeta^2\omega_n^2 - 4\omega_n^2}}{2} \\[2pt]
-  &amp;= -\zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}.
+\sin\!\left(\frac{3k\pi}{2}\right) &amp;= \sin\!\left(\frac{k\pi}{2} + k\pi\right) \\[4pt]
+&amp;= (-1)^k \sin\!\left(\frac{k\pi}{2}\right) .
 \end{aligned}
 </span></p>
-<p>The roots of (6) are called the <strong>poles</strong> of the system (recall pole position &amp; behaviour from week 1).</p>
-<p>Suppose <span class="math inline">R = 6\,\Omega</span>, <span class="math inline">L = 1\,\mathrm{H}</span>, <span class="math inline">C = 40\,\mathrm{mF}</span>.</p>
-<p>Then <span class="math inline">s = -3 \pm 4j.</span></p>
-<p>so the response is</p>
-<p><span class="math display"> v_C(t) = A e^{(-3+4j)t} + B e^{(-3-4j)t}. </span></p>
-<p><span class="math inline">v_C(0) = 0</span>, so <span class="math inline">A + B = 0. \quad\Rightarrow\quad B = -A</span></p>
-<p><span class="math inline">v_C'(0) = \dfrac{1}{LC}</span>, so</p>
-<p><span class="math display"> (-3+4j)A - (-3-4j)A = \frac{1}{LC} </span></p>
-<p><span class="math display"> A = \frac{1}{8j\,LC} </span></p>
-<p><span class="math display"> = -3.125j </span></p>
-<p>so we have</p>
+<p>So if <span class="math inline">k</span> is even, <span class="math inline">a_k = 0</span>.</p>
+<p>If <span class="math inline">k</span> is odd,</p>
+<p><span class="math display"> a_k = \frac{4}{\pi k}\sin\!\left(\frac{k\pi}{2}\right) = 2\operatorname{sinc}\!\left(\frac{k}{2}\right), \qquad \text{where } \operatorname{sinc}(x) := \frac{\sin(\pi x)}{\pi x} . </span></p>
+<p>Let <span class="math inline">k = 2\ell + 1</span> for <span class="math inline">\ell \in \mathbb{Z}</span>.</p>
+<p>Then we have the Fourier series</p>
+<p><span class="math display"> u(t) = \sum_{k\;\text{odd}} 2\operatorname{sinc}\!\left(\frac{k}{2}\right)\cos(kt) . </span></p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/sinc-stem.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>The Fourier coefficients <span class="math inline">a_k = 2\operatorname{sinc}(k/2)</span> for the odd harmonics <span class="math inline">k = 2\ell + 1</span>, <span class="math inline">\ell = -6,\dots,6</span>.</figcaption>
+</figure>
+</div>
+</div>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/sinc-phase.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>The phase of the same coefficients. Each <span class="math inline">a_k</span> is real, so the phase is <span class="math inline">0</span> where <span class="math inline">a_k &gt; 0</span> and <span class="math inline">\pi</span> where <span class="math inline">a_k &lt; 0</span>. It is drawn as an odd function of <span class="math inline">k</span>, taking <span class="math inline">-\pi</span> for <span class="math inline">k&gt;0</span> and <span class="math inline">+\pi</span> for <span class="math inline">k&lt;0</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>Below is the square-wave builder for the square wave of this example — drag the slider to add harmonics and watch the Gibbs overshoot near the jumps (the red dot marks the persistent overshoot peak).</p>
+<div id="w-square" class="widget"></div>
+<!-- NOTE: the reused square-wave builder renders the ODD (sine-series) square wave, (4/π)Σ sin((2n−1)x)/(2n−1), whereas this worked example is the EVEN (cosine-series) square wave — a quarter-period shift. The Gibbs behaviour illustrated is identical. Flagged in case you want the widget's phase matched to the even wave. -->
+</section>
+<section id="properties-of-the-fourier-series" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-the-fourier-series">Properties of the Fourier series</h2>
+<p><strong>1. Coefficients depend linearly on signal:</strong></p>
+<p><span class="math display"> c_{1,k} = \frac{1}{T}\int_0^T u_1(t)\,\overline{\phi}_k(t)\,\mathrm{d}t, \qquad c_{2,k} = \frac{1}{T}\int_0^T u_2(t)\,\overline{\phi}_k(t)\,\mathrm{d}t . </span></p>
+<p>The Fourier coefficient of <span class="math inline">\alpha u_1 + \beta u_2</span> is</p>
 <p><span class="math display">
 \begin{aligned}
-v_C(t) &amp;= A e^{(-3+4j)t} + \bar{A}\, e^{(-3-4j)t} \qquad\text{(complex conjugates!)} \\[2pt]
-       &amp;= 2\operatorname{Re}\!\big(A e^{(-3+4j)t}\big) \\[2pt]
-       &amp;= 6.25\, e^{-3t}\sin(4t)\,H(t)
+&amp;\frac{1}{T}\int_0^T \alpha u_1(t)\,\overline{\phi}_k(t)\,\mathrm{d}t + \frac{1}{T}\int_0^T \beta u_2(t)\,\overline{\phi}_k(t)\,\mathrm{d}t \\[4pt]
+&amp;= \alpha c_{1,k} + \beta c_{2,k} .
 \end{aligned}
 </span></p>
-<p><span class="math inline">H(t)</span> encodes that the signal is <span class="math inline">0</span> before <span class="math inline">t=0</span>.</p>
-<script src="convolution-widgets.js"></script>
+<div class="note">
+<p>Add and scale signals <span class="math inline">\longrightarrow</span> add and scale Fourier coefficients.</p>
+</div>
+<p><strong>2. Time shift <span class="math inline">\rightsquigarrow</span> rotation.</strong> (Remember the pure delay!)</p>
+<p>If <span class="math inline">c_k = \dfrac{1}{T}\displaystyle\int_0^T u(t)\,\overline{\phi}_k(t)\,\mathrm{d}t</span>, then</p>
+<p><span class="math display">
+\begin{aligned}
+\frac{1}{T}\int_0^T u(t-\tau)\,\overline{\phi}_k(t)\,\mathrm{d}t
+&amp;= \frac{1}{T}\int_{-\tau}^{T-\tau} u(\mu)\,\overline{\phi}_k(\mu+\tau)\,\mathrm{d}\mu
+&amp;&amp; \left[\text{let } \mu = t-\tau,\; \mathrm{d}\mu = \mathrm{d}t,\; t = \mu+\tau\right] \\[6pt]
+&amp;= \frac{1}{T}\int_{-\tau}^{T-\tau} u(\mu)\,e^{-jk\omega(\mu+\tau)}\,\mathrm{d}\mu \\[6pt]
+&amp;= e^{-jk\omega\tau}\,c_k .
+\end{aligned}
+</span></p>
+<div class="note">
+<p>Rotates the vector <span class="math inline">c_k</span> by <span class="math inline">e^{-jk\omega\tau}</span>.</p>
+</div>
+<p><strong>3. Parseval’s theorem.</strong></p>
+<p>Can we calculate <span class="math inline">\|u\|_P</span> directly from the Fourier coefficients of <span class="math inline">u</span>?</p>
+<p><span class="math display">
+\begin{aligned}
+\|u\|_P^2 &amp;= \frac{1}{T}\int_0^T |u(t)|^2\,\mathrm{d}t \\[6pt]
+&amp;= \frac{1}{T}\int_0^T \left(\sum_k c_k \phi_k(t)\right)\overline{\left(\sum_\ell c_\ell \phi_\ell(t)\right)}\,\mathrm{d}t \\[6pt]
+&amp;= \sum_k \sum_\ell c_k \bar{c}_\ell\, \underbrace{\frac{1}{T}\int_0^T \phi_k(t)\,\overline{\phi_\ell(t)}\,\mathrm{d}t}_{=\,\langle \phi_k, \phi_\ell\rangle\, =\, 0 \text{ for } k \neq \ell} \\[6pt]
+&amp;= \sum_k |c_k|^2\, \underbrace{\langle \phi_k, \phi_k\rangle}_{=\,1} \\[6pt]
+&amp;= \sum_k |c_k|^2 .
+\end{aligned}
+</span></p>
+<p>This is Parseval’s theorem:</p>
+<p><span class="math display"> \boxed{\;\|u\|_P^2 = \sum_{k=-\infty}^{\infty} |c_k|^2\;} </span></p>
+</section>
+<section id="example-the-rlc-circuit" class="level2">
+<h2 class="anchored" data-anchor-id="example-the-rlc-circuit">Example: the RLC circuit</h2>
+<p><strong>Example:</strong> Consider the RLC circuit from Lecture 1.</p>
+<p><span class="math display"> v(t) = R\,i(t) + L\frac{\mathrm{d}i(t)}{\mathrm{d}t} + \frac{1}{C}\int_{-\infty}^{t} i(\tau)\,\mathrm{d}\tau </span></p>
+<p>First, let’s see how a single harmonic voltage maps through the system. Let <span class="math inline">v(t) = e^{\,jk\omega t} = \phi_k(t)</span> and search for <span class="math inline">i(t) = I_k e^{\,jk\omega t}</span>.</p>
+<p><span class="math display"> e^{\,jk\omega t} = R I_k e^{\,jk\omega t} + I_k\,jk\omega L\,e^{\,jk\omega t} + \frac{1}{C}\frac{I_k}{jk\omega}\,e^{\,jk\omega t} . </span></p>
+<p><span class="math display"> 1 = I_k \underbrace{\left(R + jk\omega L + \frac{1}{C\,jk\omega}\right)}_{Z(jk\omega)} </span></p>
+<p><span class="math display"> I_k = \frac{1}{Z(jk\omega)} . \qquad\text{So}\qquad \phi_k \;\longmapsto\; \frac{\phi_k}{Z(j\omega k)} . </span></p>
+<p>Now, let’s use this result to solve for <span class="math inline">i(t)</span> when <span class="math inline">v(t)</span> is the square wave from the previous example.</p>
+<p><span class="math display"> v(t) = \sum_{k\;\text{odd}} 2\operatorname{sinc}\!\left(\frac{k}{2}\right)\cos(kt) </span></p>
+<p><span class="math display">
+\left.\begin{aligned}
+a_k &amp;= 2\operatorname{Re}(c_k) \\
+b_k &amp;= -2\operatorname{Im}(c_k)
+\end{aligned}\right\}
+\implies c_k = \tfrac{1}{2}\left(a_k - j b_k\right) .
+</span></p>
+<p>So</p>
+<p><span class="math display"> v(t) = \sum_{k\;\text{odd}} \operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t} . </span></p>
+<p>Then we have, by superposition,</p>
+<p><span class="math display"> i(t) = \sum_{k\;\text{odd}} \frac{\operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t}}{Z(jk\omega)} . </span></p>
+<p>The widget below builds this output current harmonic by harmonic. The component values put the natural frequency at <span class="math inline">\omega_n = 1/\sqrt{LC} = 2</span> rad/s, between the first and third harmonics, so the first few odd harmonics pass with decreasing weight. Drag the slider to add harmonics and watch <strong>both</strong> waveforms build up: the input (navy) sharpens towards the square wave (with Gibbs overshoot), while the output (brick) — each harmonic scaled by <span class="math inline">1/Z(jk\omega)</span> — grows into a smooth, filtered wave that never develops the sharp edges.</p>
+<div id="w-rlc-out" class="widget"></div>
+<script src="phasor-widgets.js"></script>
 
 
 </section>
@@ -1173,12 +1089,12 @@ v_C(t) &amp;= A e^{(-3+4j)t} + \bar{A}\, e^{(-3-4j)t} \qquad\text{(complex conju
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../weeks/week02/tutorial1-solutions.pdf" class="pagination-link" aria-label="Tutorial solutions">
+      <a href="../../weeks/week03/tutorial2-solutions.pdf" class="pagination-link" aria-label="Tutorial solutions">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial solutions</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../weeks/week03/tutorial2.pdf" class="pagination-link" aria-label="Tutorial">
+      <a href="../../weeks/week04/tutorial3.pdf" class="pagination-link" aria-label="Tutorial">
         <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
