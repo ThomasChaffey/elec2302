@@ -49,9 +49,13 @@ website:
             target: _blank
       - section: "Week 4 — Periodic signals and the Fourier series"
         contents:
+          - text: "Notes"
+            href: weeks/week04/notes.qmd
           - text: "Tutorial"
             href: weeks/week04/tutorial3.pdf
             target: _blank
+      - text: "Course index"
+        href: concepts.qmd
       - text: "Quiz 1 formula sheet"
         href: weeks/formula-sheet.pdf
         target: _blank

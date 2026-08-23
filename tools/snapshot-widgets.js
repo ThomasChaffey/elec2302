@@ -65,6 +65,18 @@ const WIDGETS_BY_WEEK = {
       caption: "triangle u_epsilon at epsilon = 1.6, area 1",
       state: () => {}
     }
+  ],
+  week04: [
+    {
+      id: "w-square",
+      caption: "square-wave partial sum at 12 waves, Gibbs peak marked",
+      state: ({ slider }) => { slider(0, 12); }         // the only slider
+    },
+    {
+      id: "w-rlc-out",
+      caption: "input and RLC output at 7 harmonics, wn = 2 rad/s",
+      state: ({ slider }) => { slider(0, 7); }
+    }
   ]
 };
 

@@ -1,0 +1,407 @@
+---
+title: "Course Index"
+---
+
+Use the search box to find a
+concept and click a column heading to sort.
+
+::: {.note}
+**Key:** &nbsp; **Pre** = the [primer on RLC circuits](weeks/primer/notes.qmd) &nbsp;·&nbsp; **W1–W4 notes** = the lecture notes for that week
+&nbsp;·&nbsp; **T1–T3** = tutorial sheets, with **A, B, C** the prework questions and
+**Q1, Q2, …** the tutorial questions
+:::
+
+```{=html}
+<style>
+  #cx-controls { margin: 0.8em 0; }
+  #cx-search {
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.95rem;
+    padding: 6px 10px;
+    border: 1px solid #c8c8ce;
+    border-radius: 4px;
+    width: 340px;
+    max-width: 100%;
+  }
+  #cx-count { color: #666; font-size: 0.85rem; margin-left: 10px; }
+  table.cx {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    font-size: 0.94rem;
+  }
+  table.cx th, table.cx td {
+    text-align: left;
+    padding: 7px 10px;
+    border-bottom: 1px solid #e2e2e6;
+    vertical-align: top;
+  }
+  table.cx thead th {
+    color: #00468C;
+    border-bottom: 1.5px solid #00468C;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+  }
+  table.cx thead th:hover { background: rgba(0,70,140,0.05); }
+  table.cx thead th .arrow { font-size: 0.75em; opacity: 0.55; }
+  table.cx tbody tr:hover { background: rgba(0,70,140,0.04); }
+  table.cx td.week { text-align: center; font-weight: 700; color: #00468C; width: 3.4em; white-space: nowrap; }
+  table.cx td.concept { font-weight: 600; }
+  table.cx td.src { width: 12.5em; }
+  .cx-src a {
+    color: #00468C;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,70,140,0.3);
+    white-space: nowrap;
+  }
+  .cx-src a:hover { background: rgba(0,70,140,0.07); }
+  .cx-sep { color: #9a9aa2; }
+  .cx-none { color: #C0392B; }
+</style>
+
+<div id="cx-controls">
+  <input id="cx-search" type="text" placeholder="Search concepts, e.g. convolution, energy…" aria-label="Search concepts">
+  <span id="cx-count"></span>
+</div>
+
+<table class="cx" id="cx-table">
+  <thead>
+    <tr>
+      <th data-key="week" data-type="num">Week <span class="arrow">&#9662;</span></th>
+      <th data-key="concept" data-type="str">Concept <span class="arrow"></span></th>
+      <th data-key="intro" data-type="str">Introduced <span class="arrow"></span></th>
+      <th data-key="prac" data-type="str">Practiced <span class="arrow"></span></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+// ---- resources on the site -------------------------------------------------
+const P  = 'weeks/primer/notes.html';
+const N1 = 'weeks/week01/notes.html';
+const S1 = 'weeks/week01/slides.html';
+const N2 = 'weeks/week02/notes.html';
+const N3 = 'weeks/week03/notes.html';
+const N4 = 'weeks/week04/notes.html';
+const T1 = 'weeks/week02/tutorial1.pdf';
+const T2 = 'weeks/week03/tutorial2.pdf';
+const T3 = 'weeks/week04/tutorial3.pdf';
+
+// section anchors
+const P_KIRCH = P + '#kirchhoffs-laws-for-series-parallel-circuits';
+const P_DEV   = P + '#device-laws';
+const P_RL    = P + '#example-series-rl';
+
+const N1_EXP  = N1 + '#a-the-exponential-function';
+const N1_EUL  = N1 + '#b-eulers-formula';
+const N1_SIN  = N1 + '#manipulating-sinusoids-using-complex-numbers';
+const N1_ODE  = N1 + '#c-eulers-formula-differential-equations';
+const N1_EE   = N1 + '#d-what-has-this-got-to-do-with-electrical-engineering';
+
+const N2_VEC  = N2 + '#signals-as-vectors';
+const N2_EP   = N2 + '#the-size-of-a-signal-energy-power';
+const N2_ANG  = N2 + '#the-angle-between-two-signals';
+const N2_GD   = N2 + '#linear-systems-gain-and-delay';
+const N2_LTI  = N2 + '#linearity-and-time-invariance';
+const N2_DEL  = N2 + '#dirac-delta';
+const N2_SCA  = N2 + '#the-scaling-property';
+const N2_RAD  = N2 + '#example-radar';
+const N2_STE  = N2 + '#the-unit-step';
+const N2_PUL  = N2 + '#the-pulse';
+
+const N3_CONV = N3 + '#convolution';
+const N3_DEF  = N3 + '#convolution-definition-and-properties';
+const N3_PP   = N3 + '#example-a-pulse-convolved-with-itself';
+const N3_RAD  = N3 + '#example-radar';
+const N3_IMP  = N3 + '#the-impulse-response-of-circuits';
+const N3_ODE  = N3 + '#ode-descriptions-of-lti-systems';
+const N3_SIN  = N3 + '#lti-systems-and-sinusoids';
+const N3_BLK  = N3 + '#block-diagrams-and-interconnections';
+const N3_RLC  = N3 + '#extra-example-impulse-response-of-an-rlc-circuit';
+
+const N4_APP  = N4 + '#approximating-a-periodic-signal';
+const N4_FS   = N4 + '#the-fourier-series';
+const N4_ORT  = N4 + '#starred-section-why-are-the-c_k-independent';
+const N4_SC   = N4 + '#the-sinecosine-form-for-a-real-signal';
+const N4_SYM  = N4 + '#symmetry-properties-of-the-fourier-series';
+const N4_SQ   = N4 + '#example-fourier-series-of-a-square-wave';
+const N4_PROP = N4 + '#properties-of-the-fourier-series';
+const N4_RLC  = N4 + '#example-the-rlc-circuit';
+
+// ---- the index -------------------------------------------------------------
+// [concept, week, introduced, practiced]   week 0 = primer
+const CONCEPTS = [
+  // ---- Primer ----
+  ["Current, charge, voltage and flux linkage", 0,
+    [["Primer", P_DEV]], []],
+  ["Kirchhoff's current law", 0,
+    [["Primer", P_KIRCH]], [["T2 Q2", T2], ["T2 Q5", T2]]],
+  ["Kirchhoff's voltage law", 0,
+    [["Primer", P_KIRCH]], [["T1 Q4", T1], ["T2 Q5", T2]]],
+  ["Device laws for R, L and C", 0,
+    [["Primer", P_DEV]], [["T1 Q4", T1], ["T2 Q2", T2]]],
+  ["Solving a circuit: Kirchhoff's laws plus device laws", 0,
+    [["Primer", P_RL]], [["T1 Q4", T1], ["T2 Q2", T2], ["T2 Q5", T2]]],
+
+  // ---- Week 1 ----
+  ["The exponential function defined by its power series", 1,
+    [["W1 notes", N1_EXP]], []],
+  ["e<sup>z</sup> is its own derivative", 1,
+    [["W1 notes", N1_EXP]], []],
+  ["The derivative of e<sup>zt</sup>", 1,
+    [["W1 notes", N1_EXP]], [["T1 Q3", T1]]],
+  ["Euler's formula", 1,
+    [["W1 notes", N1_EUL]], [["T1 Q1", T1], ["T3 Q2", T3]]],
+  ["e<sup>j&theta;</sup> as a unit vector rotating in the complex plane", 1,
+    [["W1 notes", N1_EUL]], [["T1 A", T1], ["T1 B", T1]]],
+  ["Polar and Cartesian form, complex arithmetic", 1,
+    [["W1 notes", N1_EUL]], [["T1 A", T1], ["T1 B", T1]]],
+  ["Representing a sinusoid as Re(Ae<sup>j&omega;t</sup>)", 1,
+    [["W1 notes", N1_SIN]], [["T1 Q1", T1], ["T1 Q3", T1]]],
+  ["Adding sinusoids using complex numbers", 1,
+    [["W1 notes", N1_SIN]], [["T1 Q1", T1]]],
+  ["Complex exponential solutions of linear ODEs", 1,
+    [["W1 notes", N1_ODE]], [["T1 C", T1], ["T1 Q3", T1], ["T1 Q4", T1]]],
+  ["The trajectory of e<sup>zt</sup>: growth, decay and oscillation", 1,
+    [["W1 notes", N1_ODE]], [["T1 Q3", T1], ["T1 Q4", T1]]],
+  ["The series RLC circuit", 1,
+    [["W1 notes", N1_EE]], [["T1 Q4", T1], ["W3 notes", N3_RLC], ["W4 notes", N4_RLC]]],
+  ["Impedance and reactance Z(j&omega;)", 1,
+    [["W1 notes", N1_EE]], [["W4 notes", N4_RLC]]],
+  ["Steady-state (phasor) circuit analysis", 1,
+    [["W1 notes", N1_EE]], [["W4 notes", N4_RLC]]],
+  ["Magnitude and phase of a complex function of &omega;", 1,
+    [["W1 notes", N1_EE]], [["T1 Q2", T1]]],
+  ["Phase lead and phase lag", 1,
+    [["W1 notes", N1_EE]], [["T2 Q6", T2]]],
+  ["Continuous-time and discrete-time signals", 1,
+    [["W1 slides", S1]], []],
+
+  // ---- Week 2 ----
+  ["Signals as vectors", 2,
+    [["W2 notes", N2_VEC]], [["T2 Q4", T2]]],
+  ["Norm and dot product in R<sup>n</sup>", 2,
+    [["W2 notes", N2_VEC]], [["T2 Q4", T2]]],
+  ["The inner product of two signals", 2,
+    [["W2 notes", N2_VEC]], [["T2 Q4", T2], ["W4 notes", N4_APP]]],
+  ["Properties of the inner product", 2,
+    [["W2 notes", N2_VEC]], []],
+  ["Signal energy", 2,
+    [["W2 notes", N2_EP]], [["T1 Q5", T1], ["T1 Q6", T1]]],
+  ["Average power", 2,
+    [["W2 notes", N2_EP]], [["T1 Q5", T1], ["T1 Q6", T1]]],
+  ["Power of a periodic signal", 2,
+    [["W2 notes", N2_EP]], [["T1 Q5", T1]]],
+  ["Energy signals and power signals", 2,
+    [["W2 notes", N2_EP]], [["T1 Q5", T1], ["T1 Q6", T1]]],
+  ["RMS value", 2,
+    [["W2 notes", N2_EP]], [["T1 Q5", T1]]],
+  ["The power inner product &lang;&middot;,&middot;&rang;<sub>P</sub>", 2,
+    [["W2 notes", N2_EP]], [["T2 Q4", T2], ["W4 notes", N4_APP]]],
+  ["RMS as the equivalent DC voltage", 2,
+    [["W2 notes", N2_EP]], []],
+  ["Signal power (V<sup>2</sup>) against physical power (W)", 2,
+    [["W2 notes", N2_EP]], []],
+  ["Half-wave and full-wave rectification", 2,
+    [["T1 Q5", T1]], [["T3 Q1", T3]]],
+  ["The angle between two signals", 2,
+    [["W2 notes", N2_ANG]], [["T2 Q4", T2]]],
+  ["Homogeneity and additivity", 2,
+    [["W2 notes", N2_LTI]], [["T2 C", T2], ["T2 Q1", T2]]],
+  ["Superposition", 2,
+    [["W2 notes", N2_LTI]], [["T1 Q4", T1], ["T2 Q1", T2]]],
+  ["An affine system is not linear", 2,
+    [["W2 notes", N2_LTI]], [["T2 C", T2], ["T2 Q1", T2]]],
+  ["Time invariance", 2,
+    [["W2 notes", N2_LTI]], [["T2 C", T2], ["T2 Q1", T2]]],
+  ["Static gain", 2,
+    [["W2 notes", N2_GD]], [["T2 Q5", T2]]],
+  ["Gain as a ratio of RMS values", 2,
+    [["W2 notes", N2_GD]], []],
+  ["Pure delay and the phase shift it imparts", 2,
+    [["W2 notes", N2_GD]], [["T2 A", T2], ["T2 Q3", T2]]],
+  ["The Dirac delta &delta;(t)", 2,
+    [["W2 notes", N2_DEL]], [["T1 Q6", T1], ["T2 B", T2]]],
+  ["The sifting property", 2,
+    [["W2 notes", N2_DEL]], [["T2 B", T2], ["T2 Q3", T2], ["W3 notes", N3_CONV]]],
+  ["Delta scaling &delta;(&alpha;t) = &delta;(t)/|&alpha;|", 2,
+    [["W2 notes", N2_SCA]], [["T1 Q6", T1], ["T2 B", T2]]],
+  ["Radar ranging: delay gives distance", 2,
+    [["W2 notes", N2_RAD]], [["W3 notes", N3_RAD]]],
+  ["Pulse trains and the unambiguous range", 2,
+    [["W2 notes", N2_RAD]], []],
+  ["The unit step H(t)", 2,
+    [["W2 notes", N2_STE]], [["T2 Q2", T2], ["T2 Q3", T2]]],
+  ["The pulse p<sub>&tau;</sub>(t)", 2,
+    [["W2 notes", N2_PUL]], [["T2 A", T2], ["T2 Q3", T2]]],
+  ["Shifting and reflecting a signal", 3,
+    [["T2 A", T2]], [["T2 Q3", T2]]],
+
+  // ---- Week 3 ----
+  ["Approximating an input by a train of impulses", 3,
+    [["W3 notes", N3_CONV]], []],
+  ["Output as a superposition of shifted impulse responses", 3,
+    [["W3 notes", N3_CONV]], []],
+  ["Flip and shift: reading the convolution integral", 3,
+    [["W3 notes", N3_CONV]], [["T2 Q3", T2]]],
+  ["Convolution", 3,
+    [["W3 notes", N3_DEF]], [["T2 Q3", T2]]],
+  ["Commutativity, additivity and associativity of convolution", 3,
+    [["W3 notes", N3_DEF]], [["T2 Q5", T2]]],
+  ["Convolution with &delta;(t) and with &delta;(t &minus; T)", 3,
+    [["W3 notes", N3_DEF]], [["T2 Q3", T2]]],
+  ["The derivative of a convolution", 3,
+    [["W3 notes", N3_DEF]], [["T2 Q3", T2]]],
+  ["A pulse convolved with itself", 3,
+    [["W3 notes", N3_PP]], [["T2 Q3", T2]]],
+  ["Impulse response", 3,
+    [["W3 notes", N3_IMP]], [["T2 Q2", T2], ["T2 Q5", T2]]],
+  ["Capacitor memory: an impulse deposits charge", 3,
+    [["W3 notes", N3_IMP]], [["T2 Q2", T2]]],
+  ["Impulse response as an initial-condition response", 3,
+    [["W3 notes", N3_IMP]], [["T2 Q2", T2]]],
+  ["Impulse loading of an nth-order ODE", 3,
+    [["W3 notes", N3_ODE]], [["W3 notes", N3_RLC]]],
+  ["ODE description of an LTI system: order and coefficients", 3,
+    [["W3 notes", N3_ODE]], [["T1 Q4", T1], ["T2 Q1", T2], ["T2 Q2", T2]]],
+  ["Step response", 3,
+    [["T2 Q2", T2]], [["T2 Q3", T2]]],
+  ["Step response as the convolution h * H", 3,
+    [["T2 Q3", T2]], [["T2 Q3", T2]]],
+  ["The frequency response G(j&omega;)", 3,
+    [["W3 notes", N3_SIN]], [["T2 Q6", T2], ["W4 notes", N4_RLC]]],
+  ["Frequency response as an integral of the impulse response", 3,
+    [["T2 Q6", T2]], []],
+  ["An LTI system maps a sinusoid to a sinusoid of the same frequency", 3,
+    [["W3 notes", N3_SIN]], [["T2 Q6", T2]]],
+  ["e<sup>j&omega;t</sup> as an eigenfunction of an LTI system", 3,
+    [["W3 notes", N3_SIN]], [["T2 Q6", T2], ["W4 notes", N4_RLC]]],
+  ["Block diagrams: cascade, sum, parallel and feedback", 3,
+    [["W3 notes", N3_BLK]], [["T2 Q5", T2]]],
+  ["Impulse response of a series RLC circuit", 3,
+    [["W3 notes", N3_RLC]], []],
+  ["Characteristic equation and poles", 3,
+    [["W3 notes", N3_RLC]], [["T1 Q3", T1], ["T1 Q4", T1]]],
+  ["Damping ratio &zeta; and natural frequency &omega;<sub>n</sub>", 3,
+    [["W3 notes", N3_RLC]], [["W4 notes", N4_RLC]]],
+
+  // ---- Week 4 ----
+  ["Least-squares approximation of a signal", 4,
+    [["W4 notes", N4_APP]], []],
+  ["Projection of a signal onto another signal", 3,
+    [["T2 Q4", T2]], [["W4 notes", N4_APP]]],
+  ["The harmonics &phi;<sub>k</sub> = e<sup>jk&omega;t</sup> and the fundamental frequency &omega; = 2&pi;/T", 4,
+    [["W4 notes", N4_APP]], [["T3 A", T3]]],
+  ["Complex Fourier coefficients c<sub>k</sub>", 4,
+    [["W4 notes", N4_APP]], [["T3 B", T3], ["T3 Q2", T3], ["T3 Q3", T3]]],
+  ["The Fourier series", 4,
+    [["W4 notes", N4_FS]], [["T3 B", T3], ["T3 C", T3], ["T3 Q1", T3]]],
+  ["c<sub>0</sub> as the DC offset", 4,
+    [["W4 notes", N4_FS]], [["T3 Q1", T3]]],
+  ["Orthogonality of the harmonics &phi;<sub>k</sub>", 4,
+    [["W4 notes", N4_ORT]], [["T2 Q4", T2]]],
+  ["Conjugate symmetry c<sub>k</sub> = c&#772;<sub>&minus;k</sub> for a real signal", 4,
+    [["W4 notes", N4_ORT]], [["T3 Q2", T3]]],
+  ["The sine&ndash;cosine form of the Fourier series", 4,
+    [["W4 notes", N4_SC]], [["T3 Q2", T3]]],
+  ["Even and odd functions", 4,
+    [["W4 notes", N4_SYM]], [["T3 C", T3], ["T3 Q3", T3]]],
+  ["Symmetry simplifications of the Fourier series", 4,
+    [["W4 notes", N4_SYM]], [["T3 C", T3], ["T3 Q1", T3], ["T3 Q3", T3]]],
+  ["Fourier series of a square wave", 4,
+    [["W4 notes", N4_SQ]], [["T3 Q2", T3]]],
+  ["The sinc function", 4,
+    [["W4 notes", N4_SQ]], [["T3 Q2", T3]]],
+  ["The Gibbs phenomenon", 4,
+    [["W4 notes", N4_SQ]], []],
+  ["Magnitude and phase spectrum", 4,
+    [["T3 A", T3]], [["T3 Q3", T3]]],
+  ["Linearity of the Fourier coefficients", 4,
+    [["W4 notes", N4_PROP]], [["T3 Q1", T3]]],
+  ["A time shift rotates the Fourier coefficients", 4,
+    [["W4 notes", N4_PROP]], [["T3 Q1", T3]]],
+  ["Parseval's theorem", 4,
+    [["W4 notes", N4_PROP]], [["T3 Q4", T3]]],
+  ["Term-by-term differentiation of a Fourier series", 4,
+    [["T3 Q5", T3]], []],
+  ["Fourier series of an impulse train", 4,
+    [["T3 Q5", T3]], []],
+  ["Fourier series of a sawtooth, f(t) = t", 4,
+    [["T3 C", T3]], [["T3 Q4", T3]]],
+  ["Harmonic response of a circuit via Z(jk&omega;)", 4,
+    [["W4 notes", N4_RLC]], []],
+];
+
+// ---- rendering -------------------------------------------------------------
+const tbody   = document.querySelector('#cx-table tbody');
+const search  = document.getElementById('cx-search');
+const countEl = document.getElementById('cx-count');
+let sortKey = 'week', sortDir = 1, filter = '';
+
+const WEEKLABEL = w => (w === 0 ? 'Pre' : String(w));
+
+function srcHTML(list){
+  if(!list || list.length === 0) return '<span class="cx-none">&mdash;</span>';
+  return '<span class="cx-src">' + list.map(
+    ([label, href]) => '<a href="' + href + '">' + label + '</a>'
+  ).join('<span class="cx-sep"> &middot; </span>') + '</span>';
+}
+
+function plain(x){
+  if(Array.isArray(x)) return x.map(e => e[0]).join(' ');
+  return String(x);
+}
+
+function strip(h){
+  return h.replace(/<[^>]+>/g,'').replace(/&[a-zA-Z]+;/g,' ').replace(/&#\d+;/g,' ').toLowerCase();
+}
+
+function render(){
+  let rows = CONCEPTS.map(c => ({concept:c[0], week:c[1], intro:c[2], prac:c[3]}));
+
+  const f = filter.trim().toLowerCase();
+  if(f){
+    rows = rows.filter(r =>
+      strip(r.concept + ' ' + plain(r.intro) + ' ' + plain(r.prac)).includes(f)
+      || WEEKLABEL(r.week).toLowerCase() === f);
+  }
+
+  rows.sort((a,b)=>{
+    if(sortKey === 'week'){
+      if(a.week !== b.week) return (a.week - b.week) * sortDir;
+      return strip(a.concept).localeCompare(strip(b.concept));
+    }
+    const x = strip(sortKey === 'concept' ? a.concept : plain(a[sortKey]));
+    const y = strip(sortKey === 'concept' ? b.concept : plain(b[sortKey]));
+    return x < y ? -sortDir : x > y ? sortDir : 0;
+  });
+
+  tbody.innerHTML = rows.map(r =>
+    '<tr><td class="week">' + WEEKLABEL(r.week) + '</td>'
+    + '<td class="concept">' + r.concept + '</td>'
+    + '<td class="src">' + srcHTML(r.intro) + '</td>'
+    + '<td class="src">' + srcHTML(r.prac) + '</td></tr>'
+  ).join('');
+
+  countEl.textContent = rows.length + ' of ' + CONCEPTS.length + ' concepts';
+
+  document.querySelectorAll('#cx-table thead th').forEach(th=>{
+    const a = th.querySelector('.arrow');
+    a.innerHTML = th.dataset.key === sortKey ? (sortDir === 1 ? '&#9662;' : '&#9652;') : '';
+  });
+}
+
+document.querySelectorAll('#cx-table thead th').forEach(th=>{
+  th.addEventListener('click', ()=>{
+    const k = th.dataset.key;
+    if(sortKey === k){ sortDir *= -1; } else { sortKey = k; sortDir = 1; }
+    render();
+  });
+});
+search.addEventListener('input', e=>{ filter = e.target.value; render(); });
+render();
+</script>
+```
