@@ -73,6 +73,11 @@ const WIDGETS_BY_WEEK = {
       state: ({ slider }) => { slider(0, 12); }         // the only slider
     },
     {
+      id: "w-rect",
+      caption: "rectifier partial sum at 4 harmonics, largest error marked",
+      state: ({ slider }) => { slider(0, 4); }
+    },
+    {
       id: "w-rlc-out",
       caption: "input and RLC output at 7 harmonics, wn = 2 rad/s",
       state: ({ slider }) => { slider(0, 7); }
