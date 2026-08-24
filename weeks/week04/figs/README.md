@@ -11,6 +11,9 @@ Do not edit these by hand — they are generated.
 - `w-square.png` — the square-wave builder at **12 waves**, the partial sum
   (navy) against the target square wave (grey), red dot on the Gibbs overshoot
   peak.
+- `w-rect.png` — the bridge-rectifier builder at **4 harmonics**, the partial sum
+  (navy) against the rectified sine (grey), dashed line at the DC term 2/π, red
+  dot on the largest error.
 - `w-rlc-out.png` — the RLC output built from **7 harmonics**, input $v(t)$
   (navy) against the target square wave (grey) and output $i(t)$ (brick,
   normalised to fit). Component values are fixed in the widget: R = 1 Ω,
@@ -31,8 +34,8 @@ single image, and writes them here at 2x.
 To change what a figure shows, edit the `week04` entry in the `WIDGETS_BY_WEEK`
 table at the top of `tools/snapshot-widgets.js`. **If you change a state,
 change the caption in `notes.qmd` to match** — captions that quote parameter
-values will otherwise disagree with the picture. Both week 4 captions quote a
-harmonic count, so both are affected.
+values will otherwise disagree with the picture. All three week 4 captions quote
+a harmonic count, so all three are affected.
 
 `weeks/week04/phasor-widgets.js` also carries the four Lecture 1 widgets
 (`w-euler`, `w-sum`, `w-ezt`, `w-rlc`), which the week 4 page does not use.

@@ -741,7 +741,133 @@
     resize();
   }
 
-  function init() { euler(); sum(); ezt(); rlc(); squareBuilder(); rlcHarmonics(); }
+  // ========================================================================
+  // (L4) Bridge-rectifier builder: the Fourier series of |sin(2000 pi t)|.
+  //   u(t) = |sin(2000 pi t)|,  w0 = 4000 pi rad/s,  T = 1/2000 s
+  //   c_k = 2 / (pi (1 - 4k^2)),  a_k = 2 Re(c_k) = 4 / (pi (1 - 4k^2)),  b_k = 0
+  //   u_N(t) = 2/pi + sum_{k=1..N} a_k cos(k w0 t)
+  //   The rectified sine is continuous, so there is no Gibbs overshoot: the peak
+  //   error falls away instead of settling. The red dot marks where the partial
+  //   sum is furthest from the target.
+  //   Guarded by container id "w-rect".
+  // ========================================================================
+  function rectifierBuilder() {
+    const host = document.getElementById("w-rect"); if (!host) return;
+    const cv = document.createElement("canvas");
+    host.appendChild(cv);
+
+    // slider + live count (no play button for this one)
+    const bar = document.createElement("div");
+    bar.style.cssText = "display:flex;align-items:center;gap:12px;margin-top:10px;font:14px Arial;color:" + INK;
+    const sl = document.createElement("input");
+    sl.type = "range"; sl.style.cssText = "flex:1;accent-color:" + NAVY + ";";
+    const count = document.createElement("span");
+    count.style.cssText = "min-width:96px;text-align:right;font-variant-numeric:tabular-nums;";
+    bar.appendChild(sl); bar.appendChild(count); host.appendChild(bar);
+
+    const MAXN = 20;
+    sl.min = 0; sl.max = MAXN; sl.step = 1; sl.value = 0;
+
+    const W0 = 4000 * Math.PI;               // fundamental of the rectified wave
+    const T = 2 * Math.PI / W0;              // 1/2000 s
+    const X0 = -T / 2, X1 = 3 * T / 2;       // two full periods
+    let ctx, W, H;
+
+    // a_k = 4 / (pi (1 - 4k^2)) for k >= 1;  a_0 = c_0 = 2/pi
+    function coeff(k) { return 4 / (Math.PI * (1 - 4 * k * k)); }
+
+    function partial(t, N) {
+      let s = 2 / Math.PI;
+      for (let k = 1; k <= N; k++) s += coeff(k) * Math.cos(k * W0 * t);
+      return s;
+    }
+    function target(t) { return Math.abs(Math.sin(W0 * t / 2)); }
+
+    function draw() {
+      const N = parseInt(sl.value, 10);
+      count.textContent = "harmonics: " + N;
+      ctx.clearRect(0, 0, W, H);
+
+      const mL = 44, mR = 14, mT = 26, mB = 34;
+      const pw = W - mL - mR, ph = H - mT - mB;
+      const VMIN = -0.22, VMAX = 1.18;                 // fixed, so the scale never moves
+      const xPix = t => mL + (t - X0) / (X1 - X0) * pw;
+      const yPix = v => mT + (VMAX - v) / (VMAX - VMIN) * ph;
+
+      // baseline and the 1.0 guide
+      ctx.strokeStyle = GRID; ctx.lineWidth = 1;
+      [0, 1].forEach(function (v) {
+        ctx.beginPath(); ctx.moveTo(mL, yPix(v)); ctx.lineTo(mL + pw, yPix(v)); ctx.stroke();
+      });
+
+      // the DC term 2/pi, the k = 0 piece of every partial sum
+      ctx.strokeStyle = "#b8c6d6"; ctx.lineWidth = 1.4; ctx.setLineDash([5, 4]);
+      ctx.beginPath();
+      ctx.moveTo(mL, yPix(2 / Math.PI)); ctx.lineTo(mL + pw, yPix(2 / Math.PI));
+      ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = "#7d93ab"; ctx.font = "12px Arial";
+      ctx.fillText("2/\u03C0", mL + pw - 26, yPix(2 / Math.PI) - 5);
+
+      // ghost target |sin(2000 pi t)|
+      const M = 1300;
+      ctx.strokeStyle = GHOST; ctx.lineWidth = 2; ctx.beginPath();
+      for (let i = 0; i <= M; i++) {
+        const t = X0 + (X1 - X0) * i / M;
+        const px = xPix(t), py = yPix(target(t));
+        i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+      }
+      ctx.stroke();
+
+      // partial sum, and the point furthest from the target
+      ctx.strokeStyle = NAVY; ctx.lineWidth = 2.3; ctx.beginPath();
+      let errMax = 0, errT = 0, errV = 0;
+      for (let i = 0; i <= M; i++) {
+        const t = X0 + (X1 - X0) * i / M;
+        const v = partial(t, N);
+        const px = xPix(t), py = yPix(v);
+        i ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+        const e = Math.abs(v - target(t));
+        if (e > errMax) { errMax = e; errT = t; errV = v; }
+      }
+      ctx.stroke();
+
+      ctx.fillStyle = OUT;
+      ctx.beginPath(); ctx.arc(xPix(errT), yPix(errV), 4, 0, 2 * Math.PI); ctx.fill();
+
+      // axes: value labels on the left, time in ms along the bottom
+      ctx.fillStyle = "#666"; ctx.font = "12px Arial"; ctx.textAlign = "right";
+      [0, 0.5, 1].forEach(function (v) {
+        ctx.fillText(v.toFixed(1), mL - 8, yPix(v) + 4);
+      });
+      ctx.textAlign = "center";
+      [-0.25, 0, 0.25, 0.5, 0.75].forEach(function (ms) {
+        const t = ms / 1000;
+        if (t < X0 || t > X1) return;
+        ctx.strokeStyle = GRID;
+        ctx.beginPath(); ctx.moveTo(xPix(t), yPix(0)); ctx.lineTo(xPix(t), yPix(0) + 4); ctx.stroke();
+        ctx.fillText(String(ms), xPix(t), yPix(0) + 18);
+      });
+      ctx.fillText("t  (ms)", mL + pw / 2, H - 6);
+      ctx.textAlign = "left";
+
+      ctx.fillStyle = NAVY; ctx.font = "13px Arial";
+      ctx.fillText("u(t) = |sin(2000\u03C0t)|", mL + 6, 14);
+    }
+
+    function resize() {
+      W = Math.max(300, Math.min(720, Math.floor(host.clientWidth) || 720));
+      H = Math.round(W * 0.46);
+      ctx = dpiCanvas(cv, W, H);
+      draw();
+    }
+
+    sl.addEventListener("input", function () { TRACK.hit(host.id, "slider"); draw(); });
+    let rt = null;
+    window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 120); });
+    resize();
+  }
+
+  function init() { euler(); sum(); ezt(); rlc(); squareBuilder(); rectifierBuilder(); rlcHarmonics(); }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();
 })();
