@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e51413ca38933331223175391a038608.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-cf7b1e44051da7d0e5a312b6fd1bb530.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "language": {
     "search-no-results-text": "No results",
@@ -71,8 +71,8 @@ ul.task-list li input[type="checkbox"] {
   Widget interactions arrive as events named widget-week1-euler,
   widget-week2-sample and similar, fired from each week's own
   weeks/<week>/phasor-widgets.js (week 3 uses convolution-widgets.js, giving
-  widget-week3-comb and widget-week3-conv; week 4 gives widget-week4-square
-  and widget-week4-rlc-out). See the "usage tracking" comment block at the top
+  widget-week3-comb and widget-week3-conv; week 4 gives widget-week4-square,
+  widget-week4-rect and widget-week4-rlc-out). See the "usage tracking" comment block at the top
   of any of those files for how to read them and what the numbers do and do
   not mean.
 
@@ -325,7 +325,7 @@ window.Quarto = {
 <!-- Demo: impulse response of a nonlinear system. -->
 <p><strong>Recap.</strong> If a system is LTI, it preserves the frequency of a sinusoidal input:</p>
 <p><span class="math display"> u = e^{\,j\omega t} \;\longmapsto\; G(j\omega)\,e^{\,j\omega t}, \qquad G(j\omega) \in \mathbb{C}. </span></p>
-<p>In other words, <span class="math inline">e^{\,j\omega t}</span> is an eigenvector of the system. If we can express any <span class="math inline">u</span> in this basis, as a sum of sinusoids, this will “diagonalise the system” and “simplify analysis”.</p>
+<p>In other words, <span class="math inline">e^{\,j\omega t}</span> is an eigenvector of the system. If we can express any <span class="math inline">u</span> in this basis, as a sum of sinusoids, this will “diagonalise the system” and “simplify analysis”, in ways that we will soon see.</p>
 <p>This also gives a quick test of whether a system is LTI: inject a sinusoid and see what comes out at the output.</p>
 </section>
 <section id="approximating-a-periodic-signal" class="level2">
@@ -368,6 +368,14 @@ J(c) &amp;= \langle u - c\phi,\; u - c\phi\rangle_P \\[2pt]
 <p>The least-squares approximation of <span class="math inline">u(t)</span> by <span class="math inline">\phi(t)</span> is therefore</p>
 <p><span class="math display"> \boxed{\,c\phi = \frac{\langle u,\phi\rangle_P}{\|\phi\|_P^2}\,\phi\,} </span></p>
 <p>This is <u>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi</span></u>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/projection.svg" class="img-fluid figure-img" width="680"></p>
+<figcaption>(a) The least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\phi</span> is the projection <span class="math inline">c\phi</span>, and the error <span class="math inline">u - c\phi</span> is perpendicular to <span class="math inline">\phi</span>. (b) The same construction for signals: a square wave of period <span class="math inline">2\pi</span> and its best approximation by a single sinusoid at the fundamental frequency, <span class="math inline">\tfrac{4}{\pi}\cos\omega t = \Re(\tfrac{4}{\pi}\exp(j\omega t))</span>.</figcaption>
+</figure>
+</div>
+</div>
 <p>This procedure is exactly the same for <span class="math inline">\phi_k = e^{\,jk\omega t}</span> for any <span class="math inline">k \in \mathbb{Z}</span>, so we define</p>
 <p><span class="math display"> \boxed{\,c_k = \langle u,\phi_k\rangle_P = \frac{1}{T}\int_0^T u(t)\,e^{-jk\omega t}\,\mathrm{d}t\,} </span></p>
 <p>These are the <u>complex Fourier coefficients</u>.</p>
@@ -379,7 +387,7 @@ J(c) &amp;= \langle u - c\phi,\; u - c\phi\rangle_P \\[2pt]
 <p>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi_k</span>.</p>
 <p>It turns out that the sum of all these approximations is an <u>exact</u> representation of <span class="math inline">u(t)</span> (provided it is sufficiently well-behaved):</p>
 <p><span class="math display"> \boxed{\,u = \sum_{k=-\infty}^{\infty} c_k \phi_k = \sum_{k=-\infty}^{\infty} \langle u,\phi_k\rangle_P\,\phi_k, \qquad \phi_k(t) = e^{\,jk\omega t}\,} </span></p>
-<p>This is the <u>Fourier series</u> of <span class="math inline">u</span>. It also turns out that each <span class="math inline">c_k</span> is independent, as <span class="math inline">\phi_k</span> are orthogonal, so the finite sum <span class="math inline">\displaystyle\sum_{k=-n}^{n} \langle u,\phi_k\rangle_P\,\phi_k</span> is a least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\{\phi_k\}_{k=-n,\dots,n}</span>. See the starred section of the notes for the full details.</p>
+<p>This is the <u>Fourier series</u> of <span class="math inline">u</span>. It also turns out that each <span class="math inline">c_k</span> is independent, as <span class="math inline">\phi_k</span> are orthogonal, so the finite sum <span class="math inline">\displaystyle\sum_{k=-n}^{n} \langle u,\phi_k\rangle_P\,\phi_k</span> is a least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\{\phi_k\}_{k=-n,\dots,n}</span>. See the extension section below for the full details.</p>
 <p>For <span class="math inline">k = 0</span>, we have</p>
 <p><span class="math display">
 \begin{aligned}
@@ -387,8 +395,10 @@ c_0 = \langle u,\phi_0\rangle &amp;= \frac{1}{T}\int_0^T u\,e^{0}\,\mathrm{d}t \
 &amp;= \frac{1}{T}\int_0^T u(t)\,\mathrm{d}t . \qquad \text{Average value of } u = \text{DC offset.}
 \end{aligned}
 </span></p>
-<section id="starred-section-why-are-the-c_k-independent" class="level3">
-<h3 class="anchored" data-anchor-id="starred-section-why-are-the-c_k-independent">Starred section: why are the <span class="math inline">c_k</span> independent?</h3>
+<div class="extension">
+<p><span class="extension-label">Extension material</span></p>
+<section id="why-are-the-c_k-independent" class="level3">
+<h3 class="anchored" data-anchor-id="why-are-the-c_k-independent">Why are the <span class="math inline">c_k</span> independent?</h3>
 <p>First, let’s calculate</p>
 <p><span class="math display">
 \begin{aligned}
@@ -405,7 +415,7 @@ c_0 = \langle u,\phi_0\rangle &amp;= \frac{1}{T}\int_0^T u\,e^{0}\,\mathrm{d}t \
 \begin{aligned}
 \left\|u - \sum_k c_k \phi_k\right\|_P^2
 &amp;= \left\langle u - \sum_k c_k \phi_k,\; u - \sum_k c_k \phi_k\right\rangle_P \\[6pt]
-&amp;= \|u\|_P^2 + \left\langle u,\, -\sum_k c_k \phi_k\right\rangle + \left\langle -\sum_k c_k \phi_k,\, u\right\rangle + \left\langle \sum_k c_k \phi_k,\, \sum_k c_k \phi_k\right\rangle \\[6pt]
+&amp;= \|u\|_P^2 + \left\langle u,\, -\sum_k c_k \phi_k\right\rangle + \left\langle -\sum_k c_k \phi_k,\, u\right\rangle \\&amp;+ \left\langle \sum_k c_k \phi_k,\, \sum_k c_k \phi_k\right\rangle \\[6pt]
 &amp;= \|u\|_P^2 - \sum_k \bar{c}_k \underbrace{\langle u,\phi_k\rangle}_{:=\,\gamma_k} - \sum_k c_k \overline{\langle u,\phi_k\rangle} + \underbrace{\sum_k \sum_\ell c_k \bar{c}_\ell \langle \phi_k,\phi_\ell\rangle}_{=\,0 \text{ for } k \neq \ell} \\[6pt]
 &amp;= \|u\|_P^2 - \sum_k \left(\bar{c}_k \gamma_k + c_k \bar{\gamma}_k\right) + \sum_k c_k \bar{c}_k \langle \phi_k,\phi_k\rangle .
 \end{aligned}
@@ -413,7 +423,8 @@ c_0 = \langle u,\phi_0\rangle &amp;= \frac{1}{T}\int_0^T u\,e^{0}\,\mathrm{d}t \
 <p>Following the same completion of squares argument as before, we have</p>
 <p><span class="math display"> = \|u\|_P^2 + \sum_k |c_k - \gamma_k|^2 - \sum_k |\gamma_k|^2 . </span></p>
 <p>This is minimised when <span class="math inline">c_k = \gamma_k</span> for all <span class="math inline">k</span>. These are the Fourier coefficients we derived earlier with individual minimisations!</p>
-<p><em>— end starred section —</em></p>
+</section>
+</div>
 <p>If <span class="math inline">u(t)</span> is real, its Fourier series must be real:</p>
 <p><span class="math display"> \operatorname{Im}\!\left(\sum_k c_k \phi_k\right) = 0. </span></p>
 <p>This is achieved if</p>
@@ -425,10 +436,9 @@ c_k \phi_k &amp;= \overline{c_{-k}\,\phi_{-k}} \\[2pt]
 </span></p>
 <p>So <span class="math inline">c_k = \overline{c_{-k}}</span>. In particular, <span class="math inline">c_0 = \overline{c_0}</span>, so <span class="math inline">c_0</span> is real.</p>
 </section>
-</section>
 <section id="the-sinecosine-form-for-a-real-signal" class="level2">
 <h2 class="anchored" data-anchor-id="the-sinecosine-form-for-a-real-signal">The sine–cosine form for a real signal</h2>
-<p>In this case, we can also derive a sin/cosine form of the Fourier series.</p>
+<p>In the real case, we can also derive a sin/cosine form of the Fourier series.</p>
 <p><span class="math display"> \frac{e^{\,j\omega t} + e^{-j\omega t}}{2} = \cos\omega t, \qquad \frac{e^{\,j\omega t} - e^{-j\omega t}}{2j} = \sin\omega t. </span></p>
 <p>Let <span class="math inline">c_k = \tfrac{1}{2}(a_k - j b_k)</span>, <span class="math inline">k \geq 0</span>. Then</p>
 <p><span class="math display">
@@ -503,10 +513,10 @@ c_k &amp;= \frac{\omega_0}{4\pi j}\left(-\frac{4}{j\omega_0}\right)\left(\frac{1
 </figure>
 </div>
 </div>
-<p>The signal <span class="math inline">u</span> is real and even, so <span class="math inline">c_k = \overline{c_{-k}}</span> and <span class="math inline">c_k = c_{-k}</span>, which forces every <span class="math inline">c_k</span> to be real. This is what the calculation gives.</p>
 <p>In sine–cosine form, <span class="math inline">b_k = -2\operatorname{Im}(c_k) = 0</span> and <span class="math inline">a_k = 2\operatorname{Re}(c_k)</span>, so</p>
 <p><span class="math display"> u(t) = \frac{2}{\pi} + \sum_{k=1}^{\infty} \frac{4}{\pi\left(1-4k^2\right)}\cos(k\omega_0 t) . </span></p>
-<p>The DC term <span class="math inline">2/\pi</span> is the average value of the rectified sine, and the harmonics fall off like <span class="math inline">1/k^2</span>.</p>
+<p>It turns out that the fact the sine series is zero is something we can see straight away from the symmetry of the signal.</p>
+<div id="w-rect" class="widget"></div>
 </section>
 <section id="symmetry-properties-of-the-fourier-series" class="level2">
 <h2 class="anchored" data-anchor-id="symmetry-properties-of-the-fourier-series">Symmetry properties of the Fourier series</h2>
@@ -674,7 +684,7 @@ b_k &amp;= -2\operatorname{Im}(c_k)
 <p><span class="math display"> v(t) = \sum_{k\;\text{odd}} \operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t} . </span></p>
 <p>Then we have, by superposition,</p>
 <p><span class="math display"> i(t) = \sum_{k\;\text{odd}} \frac{\operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t}}{Z(jk\omega)} . </span></p>
-<p>The widget below builds this output current harmonic by harmonic. The component values put the natural frequency at <span class="math inline">\omega_n = 1/\sqrt{LC} = 2</span> rad/s, between the first and third harmonics, so the first few odd harmonics pass with decreasing weight. Drag the slider to add harmonics and watch <strong>both</strong> waveforms build up: the input (navy) sharpens towards the square wave (with Gibbs overshoot), while the output (brick) — each harmonic scaled by <span class="math inline">1/Z(jk\omega)</span> — grows into a smooth, filtered wave that never develops the sharp edges.</p>
+<p>The widget below builds this output current harmonic by harmonic. The component values put the natural frequency at <span class="math inline">\omega_n = 1/\sqrt{LC} = 2</span> rad/s, between the first and third harmonics, so the first few odd harmonics pass with decreasing weight. Drag the slider to add harmonics and watch both waveforms build up: the input (navy) sharpens towards the square wave (with Gibbs overshoot), while the output (brick) — each harmonic scaled by <span class="math inline">1/Z(jk\omega)</span> — grows into a smooth, filtered wave that never develops the sharp edges.</p>
 <div id="w-rlc-out" class="widget"></div>
 <script src="phasor-widgets.js"></script>
 
