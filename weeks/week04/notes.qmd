@@ -32,9 +32,18 @@ This also gives a quick test of whether a system is LTI: inject a sinusoid and s
 
 ## Approximating a periodic signal
 
-$u(t)$ arbitrary periodic signal on $[0, T]$.
+A signal $u(t)$
+is $T$-periodic if $u(t)=u(t−T)$.
+The fundamental frequency of $u$ is the frequency corresponding to smallest $T$
+such that $u(t)$
+is $T$-periodic.  For example, $sin(t)$
+is $2\pi$
+periodic, but also $4\pi$
+periodic, $6\pi$ periodic, etc.  The fundamental frequency is the frequency corresponding to period $2\pi$, that is, $1$ rad/s.
 
-$\omega_0 = \frac{2\pi}{T}$ is called the <u>fundamental frequency</u> of $u(t)$.
+For the sum of two signals to be $T$-periodic, the individual signals must both be $T$-periodic, so we want to find the minimum common period of the two sinusoids.
+
+Let $u(t)$ be an arbitrary periodic signal with fundamental frequency $\frac{2\pi}{T}$.
 
 $$ \phi(t) := e^{\,j\left(\frac{2\pi}{T}t\right)} \quad\text{also periodic on } [0,T]. \qquad \text{Let } \tfrac{2\pi}{T} =: \omega. $$
 
