@@ -330,8 +330,9 @@ window.Quarto = {
 </section>
 <section id="approximating-a-periodic-signal" class="level2">
 <h2 class="anchored" data-anchor-id="approximating-a-periodic-signal">Approximating a periodic signal</h2>
-<p><span class="math inline">u(t)</span> arbitrary periodic signal on <span class="math inline">[0, T]</span>.</p>
-<p><span class="math inline">\omega_0 = \frac{2\pi}{T}</span> is called the <u>fundamental frequency</u> of <span class="math inline">u(t)</span>.</p>
+<p>A signal <span class="math inline">u(t)</span> is <span class="math inline">T</span>-periodic if <span class="math inline">u(t)=u(t−T)</span>. The fundamental frequency of <span class="math inline">u</span> is the frequency corresponding to smallest <span class="math inline">T</span> such that <span class="math inline">u(t)</span> is <span class="math inline">T</span>-periodic. For example, <span class="math inline">sin(t)</span> is <span class="math inline">2\pi</span> periodic, but also <span class="math inline">4\pi</span> periodic, <span class="math inline">6\pi</span> periodic, etc. The fundamental frequency is the frequency corresponding to period <span class="math inline">2\pi</span>, that is, <span class="math inline">1</span> rad/s.</p>
+<p>For the sum of two signals to be <span class="math inline">T</span>-periodic, the individual signals must both be <span class="math inline">T</span>-periodic, so we want to find the minimum common period of the two sinusoids.</p>
+<p>Let <span class="math inline">u(t)</span> be an arbitrary periodic signal with fundamental frequency <span class="math inline">\frac{2\pi}{T}</span>.</p>
 <p><span class="math display"> \phi(t) := e^{\,j\left(\frac{2\pi}{T}t\right)} \quad\text{also periodic on } [0,T]. \qquad \text{Let } \tfrac{2\pi}{T} =: \omega. </span></p>
 <p>How well can we approximate <span class="math inline">u(t)</span> by scaling &amp; rotating <span class="math inline">e^{j\omega t}</span>?</p>
 <p>We already have a measure of the size of a periodic signal:</p>
