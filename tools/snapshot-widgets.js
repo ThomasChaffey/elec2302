@@ -4,7 +4,8 @@
 
     cd tools && npm install && node snapshot-widgets.js [week]
 
-  WEEK defaults to week01. Loads weeks/<week>/phasor-widgets.js in a headless
+  WEEK defaults to week01. Loads the week's widget file (phasor-widgets.js,
+  or whatever SRC_FILE names for that week) in a headless
   DOM with a real canvas behind it, drives each widget to a chosen state,
   composites multi-panel widgets into one image, and writes them to
   weeks/<week>/figs/.
@@ -21,7 +22,10 @@ const { createCanvas } = require("canvas");
 
 const ROOT = path.resolve(__dirname, "..");
 const WEEK = process.argv[2] || "week01";
-const SRC = path.join(ROOT, `weeks/${WEEK}/phasor-widgets.js`);
+// Most weeks keep their widgets in phasor-widgets.js; the ones that do not are
+// listed here.
+const SRC_FILE = { week05: "fourier-widgets.js" };
+const SRC = path.join(ROOT, `weeks/${WEEK}/${SRC_FILE[WEEK] || "phasor-widgets.js"}`);
 const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
 
@@ -81,6 +85,18 @@ const WIDGETS_BY_WEEK = {
       id: "w-rlc-out",
       caption: "input and RLC output at 7 harmonics, wn = 2 rad/s",
       state: ({ slider }) => { slider(0, 7); }
+    }
+  ],
+  week05: [
+    {
+      id: "w-sample",
+      caption: "T c_k sampling the fixed envelope E at T = 4 tau, T c_k view",
+      state: () => {}                                   // defaults are fine
+    },
+    {
+      id: "w-tau",
+      caption: "width-tau pulse and its transform at tau = 1, first null 2 pi",
+      state: () => {}                                   // defaults are fine
     }
   ]
 };

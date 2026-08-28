@@ -40,6 +40,14 @@ Write `weeks/weekNN/notes.qmd`:
   line pointing readers at the live widgets.
 - Replace `<span class="navy">**X**</span>` with `**X**`. The site does not define that
   class. Callouts stay as `::: {.note}`.
+- A section the source marks as starred or optional goes in an extension box, the same
+  as `weeks/week04/notes.qmd`: open `:::: {.extension}`, put
+  `[Extension material]{.extension-label}` on the line after it, and close with `::::`.
+  Use four colons, since these sections usually contain a `::: {.note}` or a centred
+  figure div of their own. Drop the source's own delimiters — a `Starred section:`
+  prefix on the heading, a `— end starred section —` line at the foot — because the box
+  now marks the boundary. Anything the source keeps outside the box, such as a `.note`
+  telling the lecturer to skip it, stays where it is.
 - Every widget appears twice: the live `<div id="w-...">` inside
   `::: {.content-visible when-format="html"}`, and a PNG snapshot in `figs/` inside
   `::: {.content-visible when-format="pdf"}`, captioned with the exact state shown in
@@ -93,7 +101,9 @@ Write `weeks/weekNN/notes.qmd`:
   and that exactly one event per widget fires after.
 - Diff the converted notes against SOURCE paragraph by paragraph and list every
   paragraph that differs. The only differences should be the front matter, the two
-  header blocks, the widget blocks and the `navy` spans.
+  header blocks, the widget blocks, the extension-box fences and the `navy` spans.
+- Render the extension box and look at it. The box must close before the material that
+  follows the starred section, and no bare `::::` may appear in the page text.
 - Check the YAML in `_quarto.yml` still parses and the sidebar lists the new week.
 
 ### Working rules
@@ -116,7 +126,9 @@ Write `weeks/weekNN/notes.qmd`:
   `~/Library/CloudStorage` is a protected location.
 - `tools/snapshot-widgets.js` has a `WIDGETS_BY_WEEK` table. A new week needs an entry
   there before `tools/build-pdf.sh weekNN` can regenerate the snapshots; until then the
-  PNGs are whatever was captured by hand.
+  PNGs are whatever was captured by hand. If the week's widgets live in something other
+  than `phasor-widgets.js`, the file also needs an entry in the `SRC_FILE` table above
+  that, naming the file to load (week 5 uses `fourier-widgets.js`).
 - The lecture-folder copy and the website copy of the notes diverge on purpose: the
   lecture copy carries its own `format:` block and `notes.scss`, the website copy
   inherits from `_quarto.yml`. Later edits to the wording need applying to both, or one

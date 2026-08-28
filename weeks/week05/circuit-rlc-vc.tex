@@ -1,0 +1,17 @@
+\documentclass[border=5pt]{standalone}
+\usepackage[siunitx,RPvoltages]{circuitikz}
+\usepackage{xcolor}
+\definecolor{housenavy}{RGB}{0,70,140}
+\begin{document}
+\ctikzset{color=housenavy}      % house navy; change to `black` trivially
+\ctikzset{voltage=american}      % draw +/- signs, not arrows
+\begin{circuitikz}[american, line width=0.7pt]
+  % series loop: source v(t) -> R -> L -> C, output taken across C
+  \draw (0,2.6) to[short, o-] (0.8,2.6)
+        to[R=$R$]  (3.2,2.6)
+        to[L=$L$]  (5.6,2.6)
+        to[C=$C$, v_<=$v_C$] (8.0,2.6)
+        -- (8.0,0) -- (0.8,0) to[short, -o] (0,0);
+  \draw (0,2.6) to[open, v^<=$v(t)$] (0,0);
+\end{circuitikz}
+\end{document}
