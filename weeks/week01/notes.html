@@ -72,14 +72,15 @@ ul.task-list li input[type="checkbox"] {
   widget-week2-sample and similar, fired from each week's own
   weeks/<week>/phasor-widgets.js (week 3 uses convolution-widgets.js, giving
   widget-week3-comb and widget-week3-conv; week 4 gives widget-week4-square,
-  widget-week4-rect and widget-week4-rlc-out). See the "usage tracking" comment block at the top
+  widget-week4-rect and widget-week4-rlc-out; week 5 uses fourier-widgets.js,
+  giving widget-week5-sample and widget-week5-tau). See the "usage tracking" comment block at the top
   of any of those files for how to read them and what the numbers do and do
   not mean.
 
   A PDF cannot report on itself: nothing runs when a reader opens one. Two
   proxies stand in for it. Clicking the "PDF" link on a notes page fires a
   click event, named pdf-week3 and so on, via the data-goatcounter-click
-  attribute count.js looks for. And the site address printed inside each PDF
+  attribute count.js looks for (pdf-week5 for the week 5 notes). And the site address printed inside each PDF
   carries ?ref=notes-pdf-week3, so a reader who types it in or follows it back
   shows up under that referrer. The first counts opening the file, the second
   counts returning to the site from it; neither counts reading it. The primer
@@ -263,6 +264,23 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../../weeks/week04/tutorial3.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5 — Aperiodic signals and the Fourier transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
   </div>
 </li>
       </ul>

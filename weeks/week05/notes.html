@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 4 — Lecture notes</title>
+<title>Week 5 — Lecture notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,8 +28,8 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/week04/tutorial3.pdf" rel="next">
-<link href="../../weeks/week03/tutorial2-solutions.pdf" rel="prev">
+<link href="../../concepts.html" rel="next">
+<link href="../../weeks/week04/tutorial3.pdf" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -146,7 +146,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Week 4 — Periodic signals and the Fourier series</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Week 5 — Aperiodic signals and the Fourier transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -256,7 +256,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -279,7 +279,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week05/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week05/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -312,10 +312,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Week 4 — Periodic signals and the Fourier series</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Week 5 — Aperiodic signals and the Fourier transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Notes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 4 — Lecture notes</h1>
-<p class="subtitle lead">Periodic signals and the Fourier series</p>
+<h1 class="title">Week 5 — Lecture notes</h1>
+<p class="subtitle lead">Aperiodic signals and the Fourier transform</p>
 </div>
 
 
@@ -334,378 +334,527 @@ window.Quarto = {
 
 <div class="format-links">
 <p><span class="label">Other formats:</span></p>
-<a href="notes.pdf" title="Week 4 lecture notes as a PDF" data-goatcounter-click="pdf-week4" data-goatcounter-title="Week 4 notes PDF opened">📄&nbsp;PDF</a>
+<a href="notes.pdf" title="Week 5 lecture notes as a PDF" data-goatcounter-click="pdf-week5" data-goatcounter-title="Week 5 notes PDF opened">📄&nbsp;PDF</a>
 </div>
-<section id="from-impulses-to-sinusoids" class="level2">
-<h2 class="anchored" data-anchor-id="from-impulses-to-sinusoids">From impulses to sinusoids</h2>
-<p>This week we start to develop frequency-domain tools.</p>
-<p>So far, we have seen that any (integrable) signal can be represented as an integral (“sum”) of impulses. This week we develop an alternative representation for <u>periodic</u> signals, by changing the basis signals from impulses to sinusoids. This is the <u>Fourier series</u>.</p>
-<!-- Demo: impulse response of a nonlinear system. -->
-<p><strong>Recap.</strong> If a system is LTI, it preserves the frequency of a sinusoidal input:</p>
-<p><span class="math display"> u = e^{\,j\omega t} \;\longmapsto\; G(j\omega)\,e^{\,j\omega t}, \qquad G(j\omega) \in \mathbb{C}. </span></p>
-<p>In other words, <span class="math inline">e^{\,j\omega t}</span> is an eigenvector of the system. If we can express any <span class="math inline">u</span> in this basis, as a sum of sinusoids, this will “diagonalise the system” and “simplify analysis”, in ways that we will soon see.</p>
-<p>This also gives a quick test of whether a system is LTI: inject a sinusoid and see what comes out at the output.</p>
-</section>
-<section id="approximating-a-periodic-signal" class="level2">
-<h2 class="anchored" data-anchor-id="approximating-a-periodic-signal">Approximating a periodic signal</h2>
-<p>A signal <span class="math inline">u(t)</span> is <span class="math inline">T</span>-periodic if <span class="math inline">u(t)=u(t−T)</span>. The fundamental frequency of <span class="math inline">u</span> is the frequency corresponding to smallest <span class="math inline">T</span> such that <span class="math inline">u(t)</span> is <span class="math inline">T</span>-periodic. For example, <span class="math inline">sin(t)</span> is <span class="math inline">2\pi</span> periodic, but also <span class="math inline">4\pi</span> periodic, <span class="math inline">6\pi</span> periodic, etc. The fundamental frequency is the frequency corresponding to period <span class="math inline">2\pi</span>, that is, <span class="math inline">1</span> rad/s.</p>
-<p>For the sum of two signals to be <span class="math inline">T</span>-periodic, the individual signals must both be <span class="math inline">T</span>-periodic, so we want to find the minimum common period of the two sinusoids.</p>
-<p>Let <span class="math inline">u(t)</span> be an arbitrary periodic signal with fundamental frequency <span class="math inline">\frac{2\pi}{T}</span>.</p>
-<p><span class="math display"> \phi(t) := e^{\,j\left(\frac{2\pi}{T}t\right)} \quad\text{also periodic on } [0,T]. \qquad \text{Let } \tfrac{2\pi}{T} =: \omega. </span></p>
-<p>How well can we approximate <span class="math inline">u(t)</span> by scaling &amp; rotating <span class="math inline">e^{j\omega t}</span>?</p>
-<p>We already have a measure of the size of a periodic signal:</p>
-<p><span class="math display"> P(u) := \frac{1}{T}\int_0^T |u(t)|^2\,\mathrm{d}t = \langle u, u\rangle_P = \|u\|_P^2 \qquad (\text{see Lecture 2}). </span></p>
-<p>Multiplying <span class="math inline">\phi</span> by <span class="math inline">c \in \mathbb{C}</span> gives us a <u>scaling and rotation</u> of <span class="math inline">\phi</span>:</p>
-<p><span class="math display"> c = a\,e^{\,j\vartheta} \;(\text{polar form}) \quad\text{so}\quad c\phi = a\,e^{\,j(\omega t + \vartheta)}. </span></p>
-<p>Here <span class="math inline">a</span> is the <span class="out">scale</span>, and the <span class="out">rotation <span class="math inline">=</span> phase shift</span>.</p>
-<p>Let’s minimise <span class="math inline">J(c) = \|u - c\phi\|_P^2</span> over <span class="math inline">c \in \mathbb{C}</span>, then <span class="math inline">u \approx c\phi</span>.</p>
+<ol type="1">
+<li>Quiz 1 review/questions</li>
+<li>Periodic <span class="math inline">\longrightarrow</span> aperiodic: motivation</li>
+<li>Fourier transform as the limit of the Fourier series</li>
+<li>Fourier transform vs Fourier series: what changed?</li>
+<li>Fourier transform pairs</li>
+<li>Properties of the Fourier transform.</li>
+<li>Examples: radar, optics, RLC.</li>
+</ol>
+<hr>
+<p><u>Last week</u>: we represented a <u>periodic</u> signal as the sum of sinusoids, using the Fourier series.</p>
+<p>This gave us a <u>spectrum</u>: the frequency content of the signal.</p>
+<p><u>But</u>: most signals are not periodic: a radar pulse, a plucked note, a spoken word …</p>
+<p><u>Question of the lecture</u>: what does the spectrum of a one-off signal look like?</p>
+<p><u>Core idea</u>: we can take the Fourier series of a <span class="math inline">T</span>-periodic signal and let <span class="math inline">T \to \infty</span> to get an aperiodic signal.</p>
+<section id="periodic-longrightarrow-aperiodic-motivation" class="level2">
+<h2 class="anchored" data-anchor-id="periodic-longrightarrow-aperiodic-motivation">Periodic <span class="math inline">\longrightarrow</span> aperiodic: motivation</h2>
+<p>Let’s illustrate this by example: a pulse train, like a radar signal.</p>
+<p>Take</p>
 <p><span class="math display">
-\begin{aligned}
-J(c) &amp;= \langle u - c\phi,\; u - c\phi\rangle_P \\[2pt]
-&amp;= \langle u, u\rangle_P - \langle u, c\phi\rangle_P - \langle c\phi, u\rangle_P + \langle c\phi, c\phi\rangle_P \\[2pt]
-&amp;= \|u\|_P^2 - \bar{c}\,\langle u,\phi\rangle_P - c\,\overline{\langle u,\phi\rangle}_P + |c|^2\,\|\phi\|_P^2 . \qquad(1)
-\end{aligned}
+u_T(t) = A\sum_{m\in\mathbb{Z}} p_\tau(t-mT), \qquad
+p_\tau(t) = \begin{cases} 1, &amp; |t| &lt; \dfrac{\tau}{2} \\[6pt] 0, &amp; |t| &gt; \dfrac{\tau}{2}\end{cases},
+\qquad 0 &lt; \tau &lt; T .
 </span></p>
-<p>We can simplify <span class="math inline">\|\phi\|_P^2</span>:</p>
-<p><span class="math display">
-\|\phi\|_P^2 = \frac{1}{T}\int_0^T e^{\,j\omega t}\,e^{-j\omega t}\,\mathrm{d}t
-= \frac{1}{T}\int_0^T 1\,\mathrm{d}t = 1 .
-</span></p>
-<p>Let <span class="math inline">\gamma := \langle u,\phi\rangle</span>. Then we can write <span class="math inline">(1)</span> as</p>
-<p><span class="math display"> J(c) = \|u\|_P^2 - \bar{c}\gamma - c\bar{\gamma} + |c|^2 . </span></p>
-<p>Now notice that</p>
-<p><span class="math display">
-\begin{aligned}
-|c-\gamma|^2 &amp;= (c-\gamma)\overline{(c-\gamma)} \\[2pt]
-&amp;= |c|^2 - \gamma\bar{c} - c\bar{\gamma} + |\gamma|^2 .
-\end{aligned}
-</span></p>
-<p>So</p>
-<p><span class="math display"> J(c) = \|u\|_P^2 + |c-\gamma|^2 - |\gamma|^2 . </span></p>
-<p>All terms are positive. This is minimised when <span class="math inline">|c-\gamma|^2 = 0</span>, that is,</p>
-<p><span class="math display"> \boxed{\,c = \langle u,\phi\rangle_P = \frac{1}{T}\int_0^T u(t)\,e^{-j\omega t}\,\mathrm{d}t\,} </span></p>
-<p>The least-squares approximation of <span class="math inline">u(t)</span> by <span class="math inline">\phi(t)</span> is therefore</p>
-<p><span class="math display"> \boxed{\,c\phi = \frac{\langle u,\phi\rangle_P}{\|\phi\|_P^2}\,\phi\,} </span></p>
-<p>This is <u>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi</span></u>.</p>
 <div style="text-align:center">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fig/projection.svg" class="img-fluid figure-img" width="680"></p>
-<figcaption>(a) The least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\phi</span> is the projection <span class="math inline">c\phi</span>, and the error <span class="math inline">u - c\phi</span> is perpendicular to <span class="math inline">\phi</span>. (b) The same construction for signals: a square wave of period <span class="math inline">2\pi</span> and its best approximation by a single sinusoid at the fundamental frequency, <span class="math inline">\tfrac{4}{\pi}\cos\omega t = \Re(\tfrac{4}{\pi}\exp(j\omega t))</span>.</figcaption>
+<p><img src="fig/pulse-train.svg" class="img-fluid figure-img" width="680"></p>
+<figcaption>The pulse train <span class="math inline">u_T(t)</span>: amplitude <span class="math inline">A</span>, pulse width <span class="math inline">\tau</span>, period <span class="math inline">T</span>. The red bracket marks the period <span class="math inline">[-\tfrac{T}{2},\tfrac{T}{2}]</span> used for the coefficient integral.</figcaption>
 </figure>
 </div>
 </div>
-<p>This procedure is exactly the same for <span class="math inline">\phi_k = e^{\,jk\omega t}</span> for any <span class="math inline">k \in \mathbb{Z}</span>, so we define</p>
-<p><span class="math display"> \boxed{\,c_k = \langle u,\phi_k\rangle_P = \frac{1}{T}\int_0^T u(t)\,e^{-jk\omega t}\,\mathrm{d}t\,} </span></p>
-<p>These are the <u>complex Fourier coefficients</u>.</p>
-</section>
-<section id="the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="the-fourier-series">The Fourier series</h2>
-<p>Each coefficient gives a least-squares approximation of <span class="math inline">u(t)</span> by <span class="math inline">\phi_k(t)</span>, calculated as</p>
-<p><span class="math display"> u(t) \approx c_k \phi_k = \frac{\langle u,\phi_k\rangle_P}{\|\phi_k\|_P^2}\,\phi_k, </span></p>
-<p>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi_k</span>.</p>
-<p>It turns out that the sum of all these approximations is an <u>exact</u> representation of <span class="math inline">u(t)</span> (provided it is sufficiently well-behaved):</p>
-<p><span class="math display"> \boxed{\,u = \sum_{k=-\infty}^{\infty} c_k \phi_k = \sum_{k=-\infty}^{\infty} \langle u,\phi_k\rangle_P\,\phi_k, \qquad \phi_k(t) = e^{\,jk\omega t}\,} </span></p>
-<p>This is the <u>Fourier series</u> of <span class="math inline">u</span>. It also turns out that each <span class="math inline">c_k</span> is independent, as <span class="math inline">\phi_k</span> are orthogonal, so the finite sum <span class="math inline">\displaystyle\sum_{k=-n}^{n} \langle u,\phi_k\rangle_P\,\phi_k</span> is a least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\{\phi_k\}_{k=-n,\dots,n}</span>. See the extension section below for the full details.</p>
-<p>For <span class="math inline">k = 0</span>, we have</p>
+<p><span class="math inline">\tau</span> varies on time. <span class="math inline">\;</span> <span class="math inline">T</span> varies the period. <span class="math inline">\;</span> The ratio <span class="math inline">\dfrac{\tau}{T}</span> is called the “duty cycle”.</p>
+<!-- CHECK: the source line reads "τ varies on time." — presumably "τ varies the *on time*" (the pulse-on duration). Transcribed as written. -->
+<p>Let’s calculate the Fourier series coefficients over the red period, <span class="math inline">[-\tfrac{T}{2}, \tfrac{T}{2}]</span>. This contains a single pulse.</p>
 <p><span class="math display">
 \begin{aligned}
-c_0 = \langle u,\phi_0\rangle &amp;= \frac{1}{T}\int_0^T u\,e^{0}\,\mathrm{d}t \\[2pt]
-&amp;= \frac{1}{T}\int_0^T u(t)\,\mathrm{d}t . \qquad \text{Average value of } u = \text{DC offset.}
+c_k &amp;= \frac{1}{T}\int_{-T/2}^{T/2} u_T(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t
+&amp;&amp; \left(\omega_0 = \frac{2\pi}{T}\right) \\[8pt]
+&amp;= \frac{A}{T}\int_{-\tau/2}^{\tau/2} e^{-jk\omega_0 t}\,\mathrm{d}t
+&amp;&amp; \left(T = \frac{2\pi}{\omega_0}\right)
+\end{aligned}
+</span></p>
+<p><span class="math inline">k = 0</span>:</p>
+<p><span class="math display"> c_0 = \frac{A}{T}\int_{-\tau/2}^{\tau/2} 1\,\mathrm{d}t = \frac{A\tau}{T}. </span></p>
+<div class="note">
+<p><span class="out">Use evenness — only need cos series.</span></p>
+</div>
+<p><span class="math inline">k \neq 0</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+c_k &amp;= \frac{A}{T}\left[\frac{e^{-jk\omega_0 t}}{-jk\omega_0}\right]_{-\tau/2}^{\tau/2}
+= \frac{A\omega_0}{2\pi}\,\frac{1}{-jk\omega_0}
+   \left(e^{-jk\omega_0 \frac{\tau}{2}} - e^{\,jk\omega_0 \frac{\tau}{2}}\right) \\[8pt]
+&amp;= \frac{Aj}{2\pi k}\left(-2j\sin\!\left(\frac{k\omega_0\tau}{2}\right)\right) \\[8pt]
+&amp;= \frac{A}{\pi k}\sin\!\left(k\,\frac{\pi\tau}{T}\right) \\[8pt]
+&amp;= A\,\frac{\sin(\pi k d)}{\pi k}
+&amp;&amp; \left(d = \frac{\tau}{T}\right)
+\end{aligned}
+</span></p>
+<p><span class="math display"> \boxed{\; c_k = A\,d\,\operatorname{sinc}(kd). \;} </span></p>
+<div class="note">
+<p>Recall: <span class="math inline">\operatorname{sinc}(x) = \dfrac{\sin(\pi x)}{\pi x}</span>.</p>
+</div>
+</section>
+<section id="fourier-transform-as-the-limit-of-the-fourier-series" class="level2">
+<h2 class="anchored" data-anchor-id="fourier-transform-as-the-limit-of-the-fourier-series">Fourier transform as the limit of the Fourier series</h2>
+<p>Now, how does this depend on the period <span class="math inline">T</span>?</p>
+<p><span class="math display">
+\begin{aligned}
+c_k &amp;= A\,\frac{\tau}{T}\operatorname{sinc}\!\left(k\,\frac{\tau}{T}\right) \\[6pt]
+    &amp;= A\,\frac{\tau}{T}\operatorname{sinc}\!\left(k\,\frac{\tau\omega_0}{2\pi}\right).
+\end{aligned}
+</span></p>
+<p>Call <span class="math inline">k\omega_0 = \omega</span>. Then</p>
+<p><span class="math display"> T c_k = A\tau \operatorname{sinc}\!\left(\frac{\tau\omega}{2\pi}\right) =: E(\omega)
+\qquad \text{("envelope")} </span></p>
+<div id="w-sample" class="widget"></div>
+<p>Where are the zeros?</p>
+<p><span class="math display">
+\begin{aligned}
+\operatorname{sinc}\!\left(\frac{\tau\omega}{2\pi}\right) &amp;= 0 \\[6pt]
+\sin\!\left(\frac{\tau\omega}{2}\right) &amp;= 0 \\[6pt]
+\frac{\tau\omega}{2} &amp;= n\pi \quad \text{for } n \in \mathbb{Z} \\[6pt]
+\omega &amp;= \frac{n2\pi}{\tau}.
+\end{aligned}
+</span></p>
+<p>What happens as <span class="math inline">T \to \infty</span>?</p>
+<p>★ <span class="math inline">E(\omega)</span> doesn’t change</p>
+<p>★ Spacing becomes smaller.</p>
+<p>What happens to the coefficients <span class="math inline">c_k</span>?</p>
+<p>Let’s define <span class="math inline">u(t) = \displaystyle\lim_{T\to\infty} u_T(t)</span>.</p>
+<p><span class="math display"> c_k = \frac{1}{T}\int_{-T/2}^{T/2} u_T(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t </span></p>
+<!-- CHECK: the source writes the integrand as x_T(t) here (and "the Fourier transform of x(t)" below), while the surrounding pages use u_T / u. Transcribed with u throughout, per the course notation. -->
+<p>We define the <u>Fourier transform</u> of <span class="math inline">u(t)</span> by</p>
+<p><span class="math display">
+\boxed{\;
+U(j\omega) := \lim_{T\to\infty} T c_k \Big|_{k\omega_0 \to \omega}
+= \int_{-\infty}^{\infty} u(t)\,e^{-j\omega t}\,\mathrm{d}t .
+\;}
+</span></p>
+<p>This can be calculated for <u>any signal</u> for which the integral converges.</p>
+<p>We know that the Fourier series can be used to reconstruct the original signal:</p>
+<p><span class="math display">
+\boxed{\;
+u_T = \sum_{k=-\infty}^{\infty} c_k \phi_k
+    = \sum_{k=-\infty}^{\infty} \langle u_T, \phi_k\rangle_P\,\phi_k,
+\qquad \phi_k(t) = e^{\,jk\omega_0 t}
+\;}
+</span></p>
+<!-- CHECK: the source writes φ_k(t) = e^{jkωt}; here the fundamental is ω₀, so typeset as e^{jkω₀t}. -->
+<div class="note">
+<p>Week 4 lecture.</p>
+</div>
+<p>Do we get something similar in the Fourier transform limit?</p>
+<p>We can rewrite the Fourier series as</p>
+<p><span class="math display">
+\begin{aligned}
+u_T(t) &amp;= \sum_{k=-\infty}^{\infty} T c_k\, e^{\,jk\omega_0 t}\,\frac{1}{T}
+&amp;&amp; \left[\text{trying to get a “}\mathrm{d}\omega\text{” on the RHS}\right] \\[8pt]
+&amp;= \sum_{k=-\infty}^{\infty} T c_k\, e^{\,jk\omega_0 t}\,\frac{\omega_0}{2\pi}
+&amp;&amp; \left[\omega_0 = \text{spacing between samples}\right] \\[8pt]
+&amp;= \sum_{k=-\infty}^{\infty} T c_k\, e^{\,j\omega t}\,\frac{\Delta\omega}{2\pi}.
+\end{aligned}
+</span></p>
+<p>Then in the limit,</p>
+<p><span class="math display"> u(t) = \lim_{T\to\infty} \sum_{k=-\infty}^{\infty} T c_k\, e^{\,j\omega t}\,
+   \frac{\Delta\omega}{2\pi}. </span></p>
+<p><span class="math display">
+\boxed{\;
+u(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\,e^{\,j\omega t}\,\mathrm{d}\omega
+\;}
+\qquad \text{(the Inverse Fourier transform).}
+</span></p>
+<p>We have illustrated this above for a pulse chain, but it holds for <u>any signal</u> for which the Fourier transform integral converges <span class="math inline">\left(\int_{-\infty}^{\infty}|u(t)|\,\mathrm{d}t &lt; \infty \text{ is sufficient}\right)</span>.</p>
+</section>
+<section id="what-has-changed-versus-the-fourier-series" class="level2">
+<h2 class="anchored" data-anchor-id="what-has-changed-versus-the-fourier-series">What has changed versus the Fourier series?</h2>
+<ol type="1">
+<li><p>Sum <span class="math inline">\longmapsto</span> integral, discrete index <span class="math inline">k \longmapsto</span> continuous variable, <span class="math inline">k\omega_0 \longmapsto \omega</span>.</p></li>
+<li><p>Units change. <span class="math inline">c_k</span> has the same units as <span class="math inline">u</span>. <span class="math inline">U(j\omega)</span> has units of <span class="math inline">u \times \text{time}</span>: it is a density. Must be integrated to get anything.</p></li>
+</ol>
+<!-- CHECK: the source writes X(jω) in point 2; transcribed as U(jω) for consistency with the boxed definition. -->
+<p><u>Example</u>: the Kurnell weather radar from the week 2 tutorial.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/kurnell-single-pulse.svg" class="img-fluid figure-img" width="460"></p>
+<figcaption>A single transmitted pulse: amplitude <span class="math inline">5</span> kV, width <span class="math inline">\tau = 1\,\mu</span>s.</figcaption>
+</figure>
+</div>
+</div>
+<p>The parameters <span class="math inline">\tau</span> and <span class="math inline">T</span> are varied independently:</p>
+<p><span class="math inline">\tau</span> adjusts range resolution:</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/radar-two-targets.svg" class="img-fluid figure-img" width="460"></p>
+<figcaption>Two targets at ranges <span class="math inline">r_1</span> and <span class="math inline">r_2</span>, separated by <span class="math inline">\Delta r</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>Consider two targets at ranges <span class="math inline">r_1</span> and <span class="math inline">r_2</span>, with <span class="math inline">\Delta r := r_2 - r_1</span>.</p>
+<p>The round trip time for each pulse <span class="math inline">t_d = \dfrac{2r}{c}</span> <span class="math inline">\;(c = 3\times10^{8}\ \mathrm{m\,s^{-1}})</span>.</p>
+<p><span class="math display"> \Delta t_d = \frac{2\Delta r}{c}. </span></p>
+<p>If <span class="math inline">\Delta t_d &lt; \tau</span>, the returning pulses overlap and can’t be distinguished.</p>
+<p>The minimum distance that can be measured is therefore <span class="math inline">\Delta r = \dfrac{c\tau}{2}</span>. For Kurnell, <span class="math inline">\tau = 1\,\mu</span>s, so <span class="math inline">\Delta r \approx 150\,</span>m.</p>
+<p><u>Why not make <span class="math inline">\tau</span> even smaller?</u></p>
+<p>Let’s check the spectrum again.</p>
+<div id="w-tau" class="widget"></div>
+<div class="note">
+<p>(Higher lobes are filtered — week 10.)</p>
+</div>
+<p>Small <span class="math inline">\tau</span> makes <span class="math inline">\dfrac{2\pi}{\tau}</span> big, so the lobe spreads and we need more bandwidth to transmit the pulse. Bandwidth is tightly regulated and very expensive!</p>
+</section>
+<section id="fourier-transform-pairs" class="level2">
+<h2 class="anchored" data-anchor-id="fourier-transform-pairs">Fourier transform pairs</h2>
+<p>The square <span class="math inline">\longleftrightarrow</span> sinc Fourier transform pair is useful for radar design. Let’s derive some other useful pairs.</p>
+<p><strong>(a)</strong> <span class="math inline">u(t) = \delta(t)</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+U(j\omega) &amp;= \int_{-\infty}^{\infty} \delta(t)\,e^{-j\omega t}\,\mathrm{d}t \\[6pt]
+&amp;= 1 \qquad \text{(sifting property)}.
+\end{aligned}
+</span></p>
+<p><strong>(b)</strong> <span class="math inline">u(t) = e^{-at}H(t)</span></p>
+<p><span class="math display">
+\begin{aligned}
+U(j\omega) &amp;= \int_{-\infty}^{\infty} e^{-at}H(t)\,e^{-j\omega t}\,\mathrm{d}t \\[6pt]
+&amp;= \int_{0}^{\infty} e^{-(a+j\omega)t}\,\mathrm{d}t \\[6pt]
+&amp;= \left[\frac{-1}{a+j\omega}\,e^{-(a+j\omega)t}\right]_{0}^{\infty} \\[6pt]
+&amp;= \frac{1}{a+j\omega}.
 \end{aligned}
 </span></p>
 <div class="extension">
 <p><span class="extension-label">Extension material</span></p>
-<section id="why-are-the-c_k-independent" class="level3">
-<h3 class="anchored" data-anchor-id="why-are-the-c_k-independent">Why are the <span class="math inline">c_k</span> independent?</h3>
-<p>First, let’s calculate</p>
-<p><span class="math display">
-\begin{aligned}
-\langle \phi_k, \phi_\ell\rangle &amp;= \frac{1}{T}\int_0^T e^{\,jk\omega t}\,e^{-j\ell\omega t}\,\mathrm{d}t \\[2pt]
-&amp;= \frac{1}{T}\int_0^T e^{\,+j(k-\ell)\omega t}\,\mathrm{d}t \\[2pt]
-&amp;= 1 \quad \text{if } k = \ell \quad\text{or} \\[6pt]
-&amp;= \left[\frac{1}{+j(k-\ell)\omega}\,e^{\,+j(k-\ell)\omega t}\right]_0^{T} \\[6pt]
-&amp;= 0 \quad \text{as } e^{\,+j(k-\ell)\omega t} \text{ is } T\text{-periodic.}
-\end{aligned}
-</span></p>
-<p>This means the <span class="math inline">\phi_k</span> are <u>orthogonal</u>.</p>
-<p>Now let’s minimise <span class="math inline">\left\|u - \sum_k c_k \phi_k\right\|_P^2</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-\left\|u - \sum_k c_k \phi_k\right\|_P^2
-&amp;= \left\langle u - \sum_k c_k \phi_k,\; u - \sum_k c_k \phi_k\right\rangle_P \\[6pt]
-&amp;= \|u\|_P^2 + \left\langle u,\, -\sum_k c_k \phi_k\right\rangle + \left\langle -\sum_k c_k \phi_k,\, u\right\rangle \\&amp;+ \left\langle \sum_k c_k \phi_k,\, \sum_k c_k \phi_k\right\rangle \\[6pt]
-&amp;= \|u\|_P^2 - \sum_k \bar{c}_k \underbrace{\langle u,\phi_k\rangle}_{:=\,\gamma_k} - \sum_k c_k \overline{\langle u,\phi_k\rangle} + \underbrace{\sum_k \sum_\ell c_k \bar{c}_\ell \langle \phi_k,\phi_\ell\rangle}_{=\,0 \text{ for } k \neq \ell} \\[6pt]
-&amp;= \|u\|_P^2 - \sum_k \left(\bar{c}_k \gamma_k + c_k \bar{\gamma}_k\right) + \sum_k c_k \bar{c}_k \langle \phi_k,\phi_k\rangle .
-\end{aligned}
-</span></p>
-<p>Following the same completion of squares argument as before, we have</p>
-<p><span class="math display"> = \|u\|_P^2 + \sum_k |c_k - \gamma_k|^2 - \sum_k |\gamma_k|^2 . </span></p>
-<p>This is minimised when <span class="math inline">c_k = \gamma_k</span> for all <span class="math inline">k</span>. These are the Fourier coefficients we derived earlier with individual minimisations!</p>
-</section>
-</div>
-<p>If <span class="math inline">u(t)</span> is real, its Fourier series must be real:</p>
-<p><span class="math display"> \operatorname{Im}\!\left(\sum_k c_k \phi_k\right) = 0. </span></p>
-<p>This is achieved if</p>
-<p><span class="math display">
-\begin{aligned}
-c_k \phi_k &amp;= \overline{c_{-k}\,\phi_{-k}} \\[2pt]
-&amp;= \overline{c_{-k}}\,\phi_k .
-\end{aligned}
-</span></p>
-<p>So <span class="math inline">c_k = \overline{c_{-k}}</span>. In particular, <span class="math inline">c_0 = \overline{c_0}</span>, so <span class="math inline">c_0</span> is real.</p>
-</section>
-<section id="the-sinecosine-form-for-a-real-signal" class="level2">
-<h2 class="anchored" data-anchor-id="the-sinecosine-form-for-a-real-signal">The sine–cosine form for a real signal</h2>
-<p>In the real case, we can also derive a sin/cosine form of the Fourier series.</p>
-<p><span class="math display"> \frac{e^{\,j\omega t} + e^{-j\omega t}}{2} = \cos\omega t, \qquad \frac{e^{\,j\omega t} - e^{-j\omega t}}{2j} = \sin\omega t. </span></p>
-<p>Let <span class="math inline">c_k = \tfrac{1}{2}(a_k - j b_k)</span>, <span class="math inline">k \geq 0</span>. Then</p>
-<p><span class="math display">
-\begin{aligned}
-c_k e^{\,jk\omega t} + c_{-k} e^{-jk\omega t}
-&amp;= c_k e^{\,jk\omega t} + \bar{c}_k e^{-jk\omega t} \\[2pt]
-&amp;= \tfrac{1}{2}(a_k - j b_k)\big(\cos(k\omega t) + j\sin(k\omega t)\big) + \tfrac{1}{2}(a_k + j b_k)\big(\cos(k\omega t) - j\sin(k\omega t)\big) \\[2pt]
-&amp;= a_k \cos(k\omega t) + b_k \sin(k\omega t) .
-\end{aligned}
-</span></p>
-<p>So we have an alternative form for the Fourier series of a real function <span class="math inline">u</span>:</p>
-<p><span class="math display">
-\boxed{\;u(t) = a_0 + \sum_{k=1}^{\infty} a_k \cos(k\omega t) + b_k \sin(k\omega t),\;}
-</span></p>
-<p>where</p>
-<p><span class="math display">
-\begin{aligned}
-a_0 &amp;= c_0 \\[4pt]
-a_k &amp;= 2\operatorname{Re}(c_k) = \frac{2}{T}\int_0^T u(t)\cos(k\omega t)\,\mathrm{d}t \\[4pt]
-b_k &amp;= -2\operatorname{Im}(c_k) = \frac{2}{T}\int_0^T u(t)\sin(k\omega t)\,\mathrm{d}t .
-\end{aligned}
-</span></p>
-</section>
-<section id="example-the-bridge-rectifier" class="level2">
-<h2 class="anchored" data-anchor-id="example-the-bridge-rectifier">Example: the bridge rectifier</h2>
-<p><strong>Example:</strong> Compute the Fourier series of the output of a bridge rectifier driven by a <span class="math inline">1000\,</span>Hz sinusoid,</p>
-<p><span class="math display"> u(t) = \left|\sin(2000\pi t)\right| . </span></p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/rectifier-wave.svg" class="img-fluid figure-img" width="640"></p>
-<figcaption>The rectifier output <span class="math inline">u(t) = |\sin(2000\pi t)|</span>. Rectification folds the negative half-cycles up, so the period is half that of the input.</figcaption>
-</figure>
-</div>
-</div>
-<p>The input frequency is <span class="math inline">1000\,\text{Hz} = 2000\pi\,</span>rad/s. Rectification doubles this, so the fundamental frequency of <span class="math inline">u</span> is</p>
-<p><span class="math display"> \omega_0 = 4000\pi \;\text{rad/s}, \qquad T = \frac{2\pi}{\omega_0} = \frac{1}{2000}\,\text{s}. </span></p>
-<p>On <span class="math inline">[0,T]</span> the argument <span class="math inline">2000\pi t</span> runs from <span class="math inline">0</span> to <span class="math inline">\pi</span>, where the sine is non-negative, so <span class="math inline">u(t) = \sin\!\left(\tfrac{\omega_0}{2}t\right)</span> there and the absolute value can be dropped.</p>
-<p>Start with the DC term:</p>
-<p><span class="math display">
-\begin{aligned}
-c_0 = \frac{1}{T}\int_0^T u(t)\,\mathrm{d}t
-&amp;= 2000\int_0^{1/2000} \sin(2000\pi t)\,\mathrm{d}t \\[6pt]
-&amp;= 2000\left[\frac{-\cos(2000\pi t)}{2000\pi}\right]_0^{1/2000} \\[6pt]
-&amp;= \frac{1}{\pi}\Big(\cos(0) - \cos(\pi)\Big) = \frac{2}{\pi} .
-\end{aligned}
-</span></p>
-<p>Now the general coefficient:</p>
-<p><span class="math display">
-\begin{aligned}
-c_k = \frac{1}{T}\int_0^T u(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t
-&amp;= \frac{\omega_0}{2\pi}\int_0^{2\pi/\omega_0} \sin\!\left(\frac{\omega_0}{2}t\right) e^{-jk\omega_0 t}\,\mathrm{d}t \\[6pt]
-&amp;= \frac{\omega_0}{2\pi}\int_0^{2\pi/\omega_0} \frac{1}{2j}\left(e^{\,j\frac{\omega_0}{2}t} - e^{-j\frac{\omega_0}{2}t}\right) e^{-jk\omega_0 t}\,\mathrm{d}t \\[6pt]
-&amp;= \frac{\omega_0}{4\pi j}\int_0^{2\pi/\omega_0} \left(e^{\,j\frac{\omega_0}{2}(1-2k)t} - e^{-j\frac{\omega_0}{2}(1+2k)t}\right)\mathrm{d}t \\[6pt]
-&amp;= \frac{\omega_0}{4\pi j}\left[\frac{2\,e^{\,j\frac{\omega_0}{2}(1-2k)t}}{j\omega_0(1-2k)} + \frac{2\,e^{-j\frac{\omega_0}{2}(1+2k)t}}{j\omega_0(1+2k)}\right]_0^{2\pi/\omega_0} .
-\end{aligned}
-</span></p>
-<p>At <span class="math inline">t = 2\pi/\omega_0</span> the two exponentials are <span class="math inline">e^{\,j\pi(1-2k)}</span> and <span class="math inline">e^{-j\pi(1+2k)}</span>. Both <span class="math inline">1-2k</span> and <span class="math inline">1+2k</span> are odd, so both exponentials equal <span class="math inline">-1</span>:</p>
-<p><span class="math display">
-\begin{aligned}
-c_k &amp;= \frac{\omega_0}{4\pi j}\left(-\frac{4}{j\omega_0}\right)\left(\frac{1}{1-2k} + \frac{1}{1+2k}\right) \\[6pt]
-&amp;= -\frac{1}{\pi j^2}\cdot\frac{(1+2k) + (1-2k)}{(1-2k)(1+2k)} \\[6pt]
-&amp;= \boxed{\;\frac{2}{\pi\left(1-4k^2\right)}\;}
-\end{aligned}
-</span></p>
-<p>Setting <span class="math inline">k=0</span> recovers <span class="math inline">c_0 = 2/\pi</span>.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/rectifier-stem.svg" class="img-fluid figure-img" width="600"></p>
-<figcaption>The Fourier coefficients <span class="math inline">c_k = \dfrac{2}{\pi(1-4k^2)}</span> of the rectifier output, with the phase below. Every coefficient with <span class="math inline">|k|\geq 1</span> is negative, so its phase is <span class="math inline">\pi</span>; the phase is drawn as an odd function of <span class="math inline">k</span>, taking <span class="math inline">-\pi</span> for <span class="math inline">k &gt; 0</span> and <span class="math inline">+\pi</span> for <span class="math inline">k &lt; 0</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>In sine–cosine form, <span class="math inline">b_k = -2\operatorname{Im}(c_k) = 0</span> and <span class="math inline">a_k = 2\operatorname{Re}(c_k)</span>, so</p>
-<p><span class="math display"> u(t) = \frac{2}{\pi} + \sum_{k=1}^{\infty} \frac{4}{\pi\left(1-4k^2\right)}\cos(k\omega_0 t) . </span></p>
-<p>It turns out that the fact the sine series is zero is something we can see straight away from the symmetry of the signal.</p>
-<div id="w-rect" class="widget"></div>
-</section>
-<section id="symmetry-properties-of-the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="symmetry-properties-of-the-fourier-series">Symmetry properties of the Fourier series</h2>
-<p><strong>★ Odd functions:</strong> <span class="math inline">\;f(-x) = -f(x)</span>. Rotational symmetry <span class="math inline">(180^\circ)</span>.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/odd-sym.svg" class="img-fluid figure-img" width="280"></p>
-<figcaption>An odd function: rotational (<span class="math inline">180^\circ</span>) symmetry about the origin.</figcaption>
-</figure>
-</div>
-</div>
-<p><strong>★ Even functions:</strong> <span class="math inline">\;f(-x) = f(x)</span>. Symmetry about <span class="math inline">y</span>-axis.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/even-sym.svg" class="img-fluid figure-img" width="280"></p>
-<figcaption>An even function: symmetry about the <span class="math inline">y</span>-axis.</figcaption>
-</figure>
-</div>
-</div>
-<p>The Fourier series simplifies for even and odd functions.</p>
-<p><strong>① Odd <span class="math inline">u(t)</span>: calculate <span class="math inline">a_k</span>.</strong></p>
-<p><span class="math display"> a_k = \frac{2}{T}\int_0^T u(t)\cos(k\omega t)\,\mathrm{d}t . </span></p>
-<p><span class="math display"> u(-t)\cos(-k\omega t) = -u(t)\cos(k\omega t) \quad(\text{odd}). </span></p>
-<p>Since <span class="math inline">u(t)</span> &amp; <span class="math inline">\cos(k\omega t)</span> are <span class="math inline">T</span>-periodic, we can shift the limits of integration:</p>
-<p><span class="math display">
-\begin{aligned}
-a_k &amp;= \frac{2}{T}\int_{-T/2}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
-&amp;= \frac{2}{T}\int_{-T/2}^{0} u(t)\cos(k\omega t)\,\mathrm{d}t + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
-&amp;= -\frac{2}{T}\int_{0}^{-T/2} u(t)\cos(k\omega t)\,\mathrm{d}t + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t .
-\end{aligned}
-</span></p>
-<p>Let <span class="math inline">\tau = -t</span>. <span class="math inline">\;\mathrm{d}\tau = -\mathrm{d}t</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-&amp;= +\frac{2}{T}\int_{0}^{T/2} u(-\tau)\cos(-k\omega\tau)\,\mathrm{d}\tau + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
-&amp;= -\frac{2}{T}\int_{0}^{T/2} u(\tau)\cos(k\omega\tau)\,\mathrm{d}\tau + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t = 0 \\
-&amp;\hphantom{=} \quad (\text{as } u(\tau)\cos(k\omega\tau) \text{ is odd}),
-\end{aligned}
-</span></p>
-<p>So for odd functions, <span class="math inline">\boxed{a_k = 0}</span>. Similarly, <span class="math inline">a_0 = 0</span>, so we get a pure sine series.</p>
-<p>For even functions, a similar argument shows that <span class="math inline">\boxed{b_k = 0}</span> and we get a cosine series <span class="math inline">+</span> DC term.</p>
-</section>
-<section id="example-fourier-series-of-a-square-wave" class="level2">
-<h2 class="anchored" data-anchor-id="example-fourier-series-of-a-square-wave">Example: Fourier series of a square wave</h2>
-<p><strong>Example:</strong> Compute the Fourier series of the square wave illustrated below:</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/square-wave.svg" class="img-fluid figure-img" width="680"></p>
-<figcaption>The square wave <span class="math inline">u(t)</span> (period <span class="math inline">2\pi</span>, amplitude <span class="math inline">\pm 1</span>). The red bracket marks one period, <span class="math inline">[\tfrac{\pi}{2}, \tfrac{5\pi}{2}]</span>, used for the coefficient integral.</figcaption>
-</figure>
-</div>
-</div>
-<p>The wave is <u>even</u>, so we only need to compute the cosine terms. Here the period is <span class="math inline">T = 2\pi</span>, so <span class="math inline">\omega = \tfrac{2\pi}{T} = 1</span>, giving <span class="math inline">\cos(k\omega t) = \cos(kt)</span> and <span class="math inline">\tfrac{2}{T} = \tfrac{1}{\pi}</span>.</p>
-<p><span class="math display"> a_0 = \frac{1}{2\pi}\int_0^{2\pi} u(t)\,\mathrm{d}t = 0. \qquad \text{No DC offset!} \iff \text{mean is zero.} </span></p>
-<p>Compute the coefficients over the red interval in the figure:</p>
-<p><span class="math display">
-\begin{aligned}
-a_k &amp;= \frac{1}{\pi}\int_{\pi/2}^{5\pi/2} u(t)\cos(kt)\,\mathrm{d}t \\[6pt]
-&amp;= \frac{1}{\pi}\int_{\pi/2}^{3\pi/2} -\cos(kt)\,\mathrm{d}t + \frac{1}{\pi}\int_{3\pi/2}^{5\pi/2} \cos(kt)\,\mathrm{d}t .
-\end{aligned}
-</span></p>
-<p><span class="math display">
-\begin{aligned}
-&amp;= \frac{1}{\pi}\left[-\frac{1}{k}\sin(kt)\right]_{\pi/2}^{3\pi/2} + \frac{1}{\pi}\left[\frac{1}{k}\sin(kt)\right]_{3\pi/2}^{5\pi/2} \\[8pt]
-&amp;= \frac{1}{\pi k}\left(\sin\!\left(\frac{k\pi}{2}\right) + \sin\!\left(\frac{5k\pi}{2}\right) - 2\sin\!\left(\frac{3k\pi}{2}\right)\right) \\[8pt]
-&amp;= \frac{2}{\pi k}\left(\sin\!\left(\frac{k\pi}{2}\right) - \sin\!\left(\frac{3k\pi}{2}\right)\right) .
-\end{aligned}
-</span></p>
-<p>Now,</p>
-<p><span class="math display">
-\begin{aligned}
-\sin\!\left(\frac{3k\pi}{2}\right) &amp;= \sin\!\left(\frac{k\pi}{2} + k\pi\right) \\[4pt]
-&amp;= (-1)^k \sin\!\left(\frac{k\pi}{2}\right) .
-\end{aligned}
-</span></p>
-<p>So if <span class="math inline">k</span> is even, <span class="math inline">a_k = 0</span>.</p>
-<p>If <span class="math inline">k</span> is odd,</p>
-<p><span class="math display"> a_k = \frac{4}{\pi k}\sin\!\left(\frac{k\pi}{2}\right) = 2\operatorname{sinc}\!\left(\frac{k}{2}\right), \qquad \text{where } \operatorname{sinc}(x) := \frac{\sin(\pi x)}{\pi x} . </span></p>
-<p>Let <span class="math inline">k = 2\ell + 1</span> for <span class="math inline">\ell \in \mathbb{Z}</span>.</p>
-<p>Then we have the Fourier series</p>
-<p><span class="math display"> u(t) = \sum_{k\;\text{odd}} 2\operatorname{sinc}\!\left(\frac{k}{2}\right)\cos(kt) . </span></p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/sinc-stem.svg" class="img-fluid figure-img" width="560"></p>
-<figcaption>The Fourier coefficients <span class="math inline">a_k = 2\operatorname{sinc}(k/2)</span> for the odd harmonics <span class="math inline">k = 2\ell + 1</span>, <span class="math inline">\ell = -6,\dots,6</span>.</figcaption>
-</figure>
-</div>
-</div>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/sinc-phase.svg" class="img-fluid figure-img" width="560"></p>
-<figcaption>The phase of the same coefficients. Each <span class="math inline">a_k</span> is real, so the phase is <span class="math inline">0</span> where <span class="math inline">a_k &gt; 0</span> and <span class="math inline">\pi</span> where <span class="math inline">a_k &lt; 0</span>. It is drawn as an odd function of <span class="math inline">k</span>, taking <span class="math inline">-\pi</span> for <span class="math inline">k&gt;0</span> and <span class="math inline">+\pi</span> for <span class="math inline">k&lt;0</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>Below is the square-wave builder for the square wave of this example — drag the slider to add harmonics and watch the Gibbs overshoot near the jumps (the red dot marks the persistent overshoot peak).</p>
-<div id="w-square" class="widget"></div>
-<!-- NOTE: the reused square-wave builder renders the ODD (sine-series) square wave, (4/π)Σ sin((2n−1)x)/(2n−1), whereas this worked example is the EVEN (cosine-series) square wave — a quarter-period shift. The Gibbs behaviour illustrated is identical. Flagged in case you want the widget's phase matched to the even wave. -->
-</section>
-<section id="properties-of-the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="properties-of-the-fourier-series">Properties of the Fourier series</h2>
-<p><strong>1. Coefficients depend linearly on signal:</strong></p>
-<p><span class="math display"> c_{1,k} = \frac{1}{T}\int_0^T u_1(t)\,\overline{\phi}_k(t)\,\mathrm{d}t, \qquad c_{2,k} = \frac{1}{T}\int_0^T u_2(t)\,\overline{\phi}_k(t)\,\mathrm{d}t . </span></p>
-<p>The Fourier coefficient of <span class="math inline">\alpha u_1 + \beta u_2</span> is</p>
-<p><span class="math display">
-\begin{aligned}
-&amp;\frac{1}{T}\int_0^T \alpha u_1(t)\,\overline{\phi}_k(t)\,\mathrm{d}t + \frac{1}{T}\int_0^T \beta u_2(t)\,\overline{\phi}_k(t)\,\mathrm{d}t \\[4pt]
-&amp;= \alpha c_{1,k} + \beta c_{2,k} .
-\end{aligned}
-</span></p>
+<section id="ut-1" class="level3">
+<h3 class="anchored" data-anchor-id="ut-1"><span class="math inline">u(t) = 1</span></h3>
 <div class="note">
-<p>Add and scale signals <span class="math inline">\longrightarrow</span> add and scale Fourier coefficients.</p>
+<p><span class="out">Skip this in lecture. Starred section in notes.</span></p>
 </div>
-<p><strong>2. Time shift <span class="math inline">\rightsquigarrow</span> rotation.</strong> (Remember the pure delay!)</p>
-<p>If <span class="math inline">c_k = \dfrac{1}{T}\displaystyle\int_0^T u(t)\,\overline{\phi}_k(t)\,\mathrm{d}t</span>, then</p>
+<p><strong>(c)</strong> <span class="math inline">u(t) = 1</span>.</p>
+<p>Treat this as the limit of a wide rectangle:</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/wide-rect.svg" class="img-fluid figure-img" width="280"></p>
+<figcaption>The rectangle widened to a constant.</figcaption>
+</figure>
+</div>
+</div>
+<!-- CHECK: the source sketch labels the rectangle edges −τ and τ; the transform used on the next line, τ sinc(ωτ/2π), is that of the width-τ pulse, so the edges are drawn at ∓τ/2. -->
+<p>We already have the Fourier transform of the rectangle: <span class="math inline">\;\tau\operatorname{sinc}\!\left(\dfrac{\tau\omega}{2\pi}\right)</span>.</p>
+<p>What is the area under this curve?</p>
 <p><span class="math display">
 \begin{aligned}
-\frac{1}{T}\int_0^T u(t-\tau)\,\overline{\phi}_k(t)\,\mathrm{d}t
-&amp;= \frac{1}{T}\int_{-\tau}^{T-\tau} u(\mu)\,\overline{\phi}_k(\mu+\tau)\,\mathrm{d}\mu
-&amp;&amp; \left[\text{let } \mu = t-\tau,\; \mathrm{d}\mu = \mathrm{d}t,\; t = \mu+\tau\right] \\[6pt]
-&amp;= \frac{1}{T}\int_{-\tau}^{T-\tau} u(\mu)\,e^{-jk\omega(\mu+\tau)}\,\mathrm{d}\mu \\[6pt]
-&amp;= e^{-jk\omega\tau}\,c_k .
+A &amp;= \int_{-\infty}^{\infty} \tau\,
+     \frac{\sin\!\left(\frac{\tau\omega}{2}\right)}{\frac{\tau\omega}{2}}\,\mathrm{d}\omega \\[8pt]
+  &amp;= \int_{-\infty}^{\infty} \frac{2\sin\!\left(\frac{\tau\omega}{2}\right)}{\omega}\,\mathrm{d}\omega .
 \end{aligned}
 </span></p>
+<p>Let <span class="math inline">\mu = \dfrac{\tau\omega}{2} \iff \omega = \dfrac{2\mu}{\tau}</span>.</p>
+<p><span class="math inline">\mathrm{d}\mu = \dfrac{\tau}{2}\,\mathrm{d}\omega \iff
+\mathrm{d}\omega = \dfrac{2\,\mathrm{d}\mu}{\tau}</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+A &amp;= \int_{-\infty}^{\infty} \frac{2\sin(\mu)}{\frac{2\mu}{\tau}}\,\frac{2\,\mathrm{d}\mu}{\tau} \\[8pt]
+&amp;= \int_{-\infty}^{\infty} \frac{2\sin(\mu)}{\mu}\,\mathrm{d}\mu \\[8pt]
+&amp;= \int_{0}^{\infty} \frac{4\sin(\mu)}{\mu}\,\mathrm{d}\mu
+\qquad \text{(even function)}.
+\end{aligned}
+</span></p>
+<p>Fact: <span class="math inline">\displaystyle\int_{0}^{\infty}\frac{\sin(\mu)}{\mu}\,\mathrm{d}\mu = \frac{\pi}{2}</span> (full derivation in the notes).</p>
+<p>So the Fourier transform of the width <span class="math inline">\tau</span> pulse has <u>constant area <span class="math inline">2\pi</span></u>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/sinc-area.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>The transform of the width-<span class="math inline">\tau</span> pulse, with the main lobe half-width <span class="math inline">\tfrac{2\pi}{\tau}</span> marked.</figcaption>
+</figure>
+</div>
+</div>
+<p>As we increase <span class="math inline">\tau</span>, the sinc gets taller and narrower.</p>
+<p>In the limit <span class="math inline">\tau \to \infty</span>, we have <u>an impulse with area <span class="math inline">2\pi</span></u>.</p>
+<!-- CHECK: the source reads "As we reduce τ, the sinc gets taller and narrower. In the limit τ → 0, we have an impulse with area 2π." The height of the transform is τ and its lobe width is 2π/τ, so it is *increasing* τ that makes it taller and narrower, and u(t) = 1 is the τ → ∞ limit. Typeset in the direction consistent with the algebra above. -->
+<p>So <span class="math inline">\; 1 \;\overset{\text{FT}}{\longrightarrow}\; 2\pi\delta(\omega)</span>.</p>
+</section>
+</div>
+<p><strong>(d)</strong> <span class="math inline">e^{\,j\omega_0 t} \longrightarrow 2\pi\delta(\omega - \omega_0)</span></p>
+<p>We already have the Fourier transform of <span class="math inline">1</span>:</p>
+<p><span class="math display"> \int_{-\infty}^{\infty} 1\cdot e^{-j\omega t}\,\mathrm{d}t = 2\pi\delta(\omega). </span></p>
+<p><span class="math display"> \int_{-\infty}^{\infty} e^{\,j\omega_0 t}e^{-j\omega t}\,\mathrm{d}t
+= \int_{-\infty}^{\infty} e^{-j(\omega-\omega_0)t}\,\mathrm{d}t
+= 2\pi\delta(\omega-\omega_0). </span></p>
+<!-- CHECK: the source writes the middle integrand as e^{+j(ω−ω₀)t}; collecting the two exponentials gives e^{−j(ω−ω₀)t}. The value is the same either way since δ is even. -->
+<p>So</p>
+<p><span class="math display"> \cos(\omega_0 t) = \tfrac{1}{2}\left(e^{\,j\omega_0 t} + e^{-j\omega_0 t}\right)
+\;\overset{\text{FT}}{\rightsquigarrow}
+\pi\delta(\omega-\omega_0) + \pi\delta(\omega+\omega_0) </span></p>
+<!-- CHECK: the source writes cos(ωt) = ½(e^{jωt} − e^{−jωt}); the identity with the minus sign is sin, and the right-hand side is a cosine pair, so typeset with "+" and with ω₀ to match the deltas. -->
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/cos-lines.svg" class="img-fluid figure-img" width="330"></p>
+<figcaption>The spectrum of <span class="math inline">\cos(\omega_0 t)</span>: two impulses of weight <span class="math inline">\pi</span> at <span class="math inline">\pm\omega_0</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>The Fourier series!</p>
+</section>
+<section id="properties-of-the-fourier-transform" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-the-fourier-transform">Properties of the Fourier transform</h2>
+<p>This is also a useful general property of the Fourier transform:</p>
+<p><strong>①</strong> <span class="math inline">\; e^{\,j\omega_0 t}u(t) \;\longleftrightarrow\; U\big(j(\omega-\omega_0)\big)</span> <span class="math inline">\qquad</span> (frequency shift)</p>
+<!-- CHECK: the source writes "e^{−ω₀t} u(t) ⟷ U(ω−ω₀)". A shift of the spectrum to ω−ω₀ comes from multiplying by e^{+jω₀t}, so the exponent is typeset as +jω₀t, and the argument as j(ω−ω₀) to match the U(jω) notation. -->
+<p>There are several other useful properties:</p>
+<p><strong>②</strong> <span class="math inline">u(t-t_0)</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+\int_{-\infty}^{\infty} u(t-t_0)\,e^{-j\omega t}\,\mathrm{d}t
+&amp;= \int_{-\infty}^{\infty} u(\tau)\,e^{-j\omega(\tau+t_0)}\,\mathrm{d}\tau
+&amp;&amp; \left[\tau = t - t_0,\; t = \tau + t_0,\; \mathrm{d}\tau = \mathrm{d}t\right] \\[6pt]
+&amp;= e^{-j\omega t_0}\,U(j\omega).
+\end{aligned}
+</span></p>
+<p><span class="math display"> u(t-t_0) \;\longleftrightarrow\; e^{-j\omega t_0}\,U(j\omega) \qquad \text{(time shift)}. </span></p>
+<p><strong>③</strong> <span class="math inline">u(at)</span>:</p>
+<p><span class="math display"> \int_{-\infty}^{\infty} u(at)\,e^{-j\omega t}\,\mathrm{d}t. \qquad
+\text{Let } \tau = at, \;\; \mathrm{d}\tau = a\,\mathrm{d}t, \;\; t = \frac{\tau}{a}. </span></p>
+<p><span class="math display">
+\begin{aligned}
+&amp;= \frac{a}{|a|}\int_{-\infty}^{\infty} u(\tau)\,e^{-j\omega\frac{\tau}{a}}\,\frac{\mathrm{d}\tau}{a}
+&amp;&amp; \left[\text{to get the limits the right way}\right] \\[6pt]
+&amp;= \frac{1}{|a|}\int_{-\infty}^{\infty} u(\tau)\,e^{-j\frac{\omega}{a}\tau}\,\mathrm{d}\tau \\[6pt]
+&amp;= \frac{1}{|a|}\,U\!\left(\frac{j\omega}{a}\right).
+\end{aligned}
+</span></p>
+<p><span class="math display"> u(at) \;\longleftrightarrow\; \frac{1}{|a|}U\!\left(\frac{j\omega}{a}\right)
+\qquad \text{(time scaling)}. </span></p>
+<p><strong>④</strong> <span class="math inline">\;\alpha u_1(t) + \beta u_2(t) \;\longleftrightarrow\;
+\alpha U_1(j\omega) + \beta U_2(j\omega) \qquad</span> (linearity).</p>
+<p><strong>⑤</strong> <span class="math inline">y = h * u</span>.</p>
+<p><span class="math display"> y(t) = \int_{-\infty}^{\infty} h(t-\tau)\,u(\tau)\,\mathrm{d}\tau </span></p>
+<p><span class="math display">
+\begin{aligned}
+Y(j\omega) &amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty} h(t-\tau)u(\tau)\,\mathrm{d}\tau\;
+   e^{-j\omega t}\,\mathrm{d}t \\[6pt]
+&amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty} h(t-\tau)\,e^{-j\omega t}\,\mathrm{d}t\;
+   u(\tau)\,\mathrm{d}\tau
+&amp;&amp; \left[\text{using Fubini's theorem}\right]
+\end{aligned}
+</span></p>
+<p>Let <span class="math inline">\mu = t - \tau</span>. <span class="math inline">\;\mathrm{d}t = \mathrm{d}\mu</span>. <span class="math inline">\;t = \mu + \tau</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+Y(j\omega) &amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty}
+   h(\mu)\,e^{-j\omega(\mu+\tau)}\,\mathrm{d}\mu\; u(\tau)\,\mathrm{d}\tau \\[6pt]
+&amp;= \int_{-\infty}^{\infty} h(\mu)\,e^{-j\omega\mu}\,\mathrm{d}\mu
+   \int_{-\infty}^{\infty} u(\tau)\,e^{-j\omega\tau}\,\mathrm{d}\tau
+\end{aligned}
+</span></p>
+<p><span class="math display"> Y(j\omega) = H(j\omega)\,U(j\omega) </span></p>
+<p><span class="math display"> \boxed{\; y = h*u \;\longleftrightarrow\; Y = HU \;}
+\qquad \text{(convolution)} </span></p>
+<p>This is the foundation of the rest of the course.</p>
+<p><strong>⑥</strong> <span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}u(t) \;\rightsquigarrow\;
+\displaystyle\int_{-\infty}^{\infty}\frac{\mathrm{d}}{\mathrm{d}t}u(t)\,e^{-j\omega t}\,\mathrm{d}t</span></p>
+<p>Integrate by parts: <span class="math inline">\displaystyle\int u'v = uv - \int uv'</span></p>
+<p><span class="math display">
+\begin{aligned}
+\int_{-\infty}^{\infty}\frac{\mathrm{d}}{\mathrm{d}t}u(t)\,e^{-j\omega t}\,\mathrm{d}t
+&amp;= \underbrace{\left[u(t)e^{-j\omega t}\right]_{-\infty}^{\infty}}_{=\,0 \text{ if } u(-\infty) = u(\infty) = 0}
++ j\omega\int_{-\infty}^{\infty} u(t)\,e^{-j\omega t}\,\mathrm{d}t \\[6pt]
+&amp;= j\omega\,U(j\omega).
+\end{aligned}
+</span></p>
+<p>So</p>
+<p><span class="math display"> \boxed{\; \frac{\mathrm{d}}{\mathrm{d}t}u(t) \;\longleftrightarrow\; j\omega\,U(j\omega). \;} </span></p>
+<section id="summary" class="level3">
+<h3 class="anchored" data-anchor-id="summary">Summary</h3>
+<!-- CHECK: the source says "Include summary table here." — the table below is assembled from the pairs and properties derived above, with nothing added. -->
+<p><strong>Transform pairs.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">u(t)</span></th>
+<th><span class="math inline">U(j\omega)</span></th>
+<th>derived in</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">A\,p_\tau(t)</span></td>
+<td><span class="math inline">A\tau\operatorname{sinc}\!\left(\dfrac{\omega\tau}{2\pi}\right)</span></td>
+<td>§2</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\delta(t)</span></td>
+<td><span class="math inline">1</span></td>
+<td>(a)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">e^{-at}H(t)</span></td>
+<td><span class="math inline">\dfrac{1}{a+j\omega}</span></td>
+<td>(b)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">1</span></td>
+<td><span class="math inline">2\pi\delta(\omega)</span></td>
+<td>(c)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">e^{\,j\omega_0 t}</span></td>
+<td><span class="math inline">2\pi\delta(\omega-\omega_0)</span></td>
+<td>(d)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\cos(\omega_0 t)</span></td>
+<td><span class="math inline">\pi\delta(\omega-\omega_0) + \pi\delta(\omega+\omega_0)</span></td>
+<td>(d)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Properties.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">u(t)</span></th>
+<th><span class="math inline">U(j\omega)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>① frequency shift</td>
+<td><span class="math inline">e^{\,j\omega_0 t}u(t)</span></td>
+<td><span class="math inline">U\big(j(\omega-\omega_0)\big)</span></td>
+</tr>
+<tr class="even">
+<td>② time shift</td>
+<td><span class="math inline">u(t-t_0)</span></td>
+<td><span class="math inline">e^{-j\omega t_0}U(j\omega)</span></td>
+</tr>
+<tr class="odd">
+<td>③ time scaling</td>
+<td><span class="math inline">u(at)</span></td>
+<td><span class="math inline">\dfrac{1}{\lvert a\rvert}U\!\left(\dfrac{j\omega}{a}\right)</span></td>
+</tr>
+<tr class="even">
+<td>④ linearity</td>
+<td><span class="math inline">\alpha u_1(t) + \beta u_2(t)</span></td>
+<td><span class="math inline">\alpha U_1(j\omega) + \beta U_2(j\omega)</span></td>
+</tr>
+<tr class="odd">
+<td>⑤ convolution</td>
+<td><span class="math inline">y = h*u</span></td>
+<td><span class="math inline">Y = HU</span></td>
+</tr>
+<tr class="even">
+<td>⑥ differentiation</td>
+<td><span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}u(t)</span></td>
+<td><span class="math inline">j\omega\,U(j\omega)</span></td>
+</tr>
+<tr class="odd">
+<td>⑦ duality</td>
+<td><span class="math inline">X(jt)</span></td>
+<td><span class="math inline">2\pi x(-\omega)</span></td>
+</tr>
+<tr class="even">
+<td>⑧ Parseval</td>
+<td><span class="math inline">\displaystyle\int_{-\infty}^{\infty} u(t)\overline{y(t)}\,\mathrm{d}t</span></td>
+<td><span class="math inline">\displaystyle\frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\overline{Y(j\omega)}\,\mathrm{d}\omega</span></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="other-properties" class="level3">
+<h3 class="anchored" data-anchor-id="other-properties">Other properties</h3>
+<p>(Proofs in lecture notes.)</p>
+<p><strong>⑦ Duality:</strong> if <span class="math inline">x(t) \rightsquigarrow X(j\omega)</span>, then</p>
+<p><span class="math display"> X(jt) \;\rightsquigarrow\; 2\pi x(-\omega). </span></p>
 <div class="note">
-<p>Rotates the vector <span class="math inline">c_k</span> by <span class="math inline">e^{-jk\omega\tau}</span>.</p>
-</div>
-<p><strong>3. Parseval’s theorem.</strong></p>
-<p>Can we calculate <span class="math inline">\|u\|_P</span> directly from the Fourier coefficients of <span class="math inline">u</span>?</p>
+<p><strong>Proof:</strong></p>
 <p><span class="math display">
 \begin{aligned}
-\|u\|_P^2 &amp;= \frac{1}{T}\int_0^T |u(t)|^2\,\mathrm{d}t \\[6pt]
-&amp;= \frac{1}{T}\int_0^T \left(\sum_k c_k \phi_k(t)\right)\overline{\left(\sum_\ell c_\ell \phi_\ell(t)\right)}\,\mathrm{d}t \\[6pt]
-&amp;= \sum_k \sum_\ell c_k \bar{c}_\ell\, \underbrace{\frac{1}{T}\int_0^T \phi_k(t)\,\overline{\phi_\ell(t)}\,\mathrm{d}t}_{=\,\langle \phi_k, \phi_\ell\rangle\, =\, 0 \text{ for } k \neq \ell} \\[6pt]
-&amp;= \sum_k |c_k|^2\, \underbrace{\langle \phi_k, \phi_k\rangle}_{=\,1} \\[6pt]
-&amp;= \sum_k |c_k|^2 .
+x(-\omega) &amp;= \frac{1}{2\pi}\int_{-\infty}^{\infty} X(js)\,e^{-j\omega s}\,\mathrm{d}s \\[6pt]
+&amp;= \frac{1}{2\pi}\,\mathcal{F}\{X(jt)\}(\omega).
 \end{aligned}
 </span></p>
-<p>This is Parseval’s theorem:</p>
-<p><span class="math display"> \boxed{\;\|u\|_P^2 = \sum_{k=-\infty}^{\infty} |c_k|^2\;} </span></p>
+</div>
+<!-- CHECK: the source writes the left-hand side as x(−t) with the integrand e^{−jωs}; for the second line to read F{X(jt)}(ω) the left-hand side must be x(−ω). Typeset as x(−ω). -->
+<p><u>Example</u>: we know <span class="math inline">\delta(t) \rightsquigarrow 1</span>.</p>
+<p>The dual gives us another pair: <span class="math inline">\;1 \rightsquigarrow 2\pi\delta(\omega)</span>.</p>
+<p><strong>⑧ Parseval’s theorem:</strong></p>
+<p><span class="math display"> \int_{-\infty}^{\infty} u(t)\,\overline{y(t)}\,\mathrm{d}t
+= \frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\,\overline{Y(j\omega)}\,\mathrm{d}\omega. </span></p>
+<p>Special case: if <span class="math inline">y = u</span>:</p>
+<p><span class="math display"> \int_{-\infty}^{\infty} |u(t)|^2\,\mathrm{d}t
+= \frac{1}{2\pi}\int_{-\infty}^{\infty} |U(j\omega)|^2\,\mathrm{d}\omega. </span></p>
+<div class="note">
+<p><strong>Proof:</strong></p>
+<p><span class="math display">
+\begin{aligned}
+\int u\bar{y}\,\mathrm{d}t
+&amp;= \int u(t)\,\frac{1}{2\pi}\int \overline{Y(j\omega)\,e^{\,j\omega t}}\,\mathrm{d}\omega\;\mathrm{d}t \\[6pt]
+&amp;= \frac{1}{2\pi}\int\left[\int u(t)\,e^{-j\omega t}\,\mathrm{d}t\right]\overline{Y(j\omega)}\,\mathrm{d}\omega \\[6pt]
+&amp;= \frac{1}{2\pi}\int U(j\omega)\,\overline{Y(j\omega)}\,\mathrm{d}\omega .
+\end{aligned}
+</span></p>
+</div>
+</section>
 </section>
 <section id="example-the-rlc-circuit" class="level2">
 <h2 class="anchored" data-anchor-id="example-the-rlc-circuit">Example: the RLC circuit</h2>
-<p><strong>Example:</strong> Consider the RLC circuit from Lecture 1.</p>
-<p><span class="math display"> v(t) = R\,i(t) + L\frac{\mathrm{d}i(t)}{\mathrm{d}t} + \frac{1}{C}\int_{-\infty}^{t} i(\tau)\,\mathrm{d}\tau </span></p>
-<p>First, let’s see how a single harmonic voltage maps through the system. Let <span class="math inline">v(t) = e^{\,jk\omega t} = \phi_k(t)</span> and search for <span class="math inline">i(t) = I_k e^{\,jk\omega t}</span>.</p>
-<p><span class="math display"> e^{\,jk\omega t} = R I_k e^{\,jk\omega t} + I_k\,jk\omega L\,e^{\,jk\omega t} + \frac{1}{C}\frac{I_k}{jk\omega}\,e^{\,jk\omega t} . </span></p>
-<p><span class="math display"> 1 = I_k \underbrace{\left(R + jk\omega L + \frac{1}{C\,jk\omega}\right)}_{Z(jk\omega)} </span></p>
-<p><span class="math display"> I_k = \frac{1}{Z(jk\omega)} . \qquad\text{So}\qquad \phi_k \;\longmapsto\; \frac{\phi_k}{Z(j\omega k)} . </span></p>
-<p>Now, let’s use this result to solve for <span class="math inline">i(t)</span> when <span class="math inline">v(t)</span> is the square wave from the previous example.</p>
-<p><span class="math display"> v(t) = \sum_{k\;\text{odd}} 2\operatorname{sinc}\!\left(\frac{k}{2}\right)\cos(kt) </span></p>
-<p><span class="math display">
-\left.\begin{aligned}
-a_k &amp;= 2\operatorname{Re}(c_k) \\
-b_k &amp;= -2\operatorname{Im}(c_k)
-\end{aligned}\right\}
-\implies c_k = \tfrac{1}{2}\left(a_k - j b_k\right) .
-</span></p>
+<p><u>Example</u>: RLC circuit with <span class="math inline">v_C</span> as output.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-rlc-vc.svg" class="img-fluid figure-img" width="540"></p>
+<figcaption>Series RLC circuit with <span class="math inline">v_C</span> as the output (drawn with circuitikz).</figcaption>
+</figure>
+</div>
+</div>
+<p>We know the impulse response is</p>
+<p><span class="math display"> g(t) = 6.25\,e^{-3t}\sin(4t)\,H(t). </span></p>
+<p>What is the spectrum of this signal?</p>
+<p><span class="math display"> \sin(4t) = \frac{1}{2j}\left(e^{\,j4t} - e^{-j4t}\right) </span></p>
 <p>So</p>
-<p><span class="math display"> v(t) = \sum_{k\;\text{odd}} \operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t} . </span></p>
-<p>Then we have, by superposition,</p>
-<p><span class="math display"> i(t) = \sum_{k\;\text{odd}} \frac{\operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t}}{Z(jk\omega)} . </span></p>
-<p>The widget below builds this output current harmonic by harmonic. The component values put the natural frequency at <span class="math inline">\omega_n = 1/\sqrt{LC} = 2</span> rad/s, between the first and third harmonics, so the first few odd harmonics pass with decreasing weight. Drag the slider to add harmonics and watch both waveforms build up: the input (navy) sharpens towards the square wave (with Gibbs overshoot), while the output (brick) — each harmonic scaled by <span class="math inline">1/Z(jk\omega)</span> — grows into a smooth, filtered wave that never develops the sharp edges.</p>
-<div id="w-rlc-out" class="widget"></div>
-<script src="phasor-widgets.js"></script>
+<p><span class="math display"> g(t) = \frac{6.25}{2j}\left(e^{(-3+4j)t} - e^{(-3-4j)t}\right). </span></p>
+<p>Use the Fourier transform pair <span class="math inline">e^{-at}H(t) = \dfrac{1}{a+j\omega}</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+G(j\omega) &amp;= -3.125j\left(\frac{1}{-(-3+4j)+j\omega} - \frac{1}{-(-3-4j)+j\omega}\right) \\[10pt]
+&amp;= -3.125j\left(\frac{(+3+4j+j\omega) - (+3-4j+j\omega)}{(+3-4j+j\omega)(+3+4j+j\omega)}\right) \\[10pt]
+&amp;= -3.125j\left(\frac{8j}{(+3-4j)(+3+4j) + j\omega(+3-4j) + (+3+4j)j\omega - \omega^2}\right) \\[10pt]
+&amp;= \frac{25}{-\omega^2 + 6j\omega + 25}.
+\end{aligned}
+</span></p>
+<!-- CHECK: two sign slips in the source's middle lines. (i) The first denominator is written "(−3+4j)+jω" without the leading minus, although the line below expands it as (+3−4j+jω); typeset with the minus. (ii) The combined numerator is written "−3−4j+jω − (−3+4j+jω)" = −8j; combining 1/(3−4j+jω) − 1/(3+4j+jω) gives (3+4j+jω) − (3−4j+jω) = +8j, which is what produces the +25 in the author's final answer (−3.125j × 8j = +25). -->
+<p>What does the spectrum look like?</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/rlc-bode.svg" class="img-fluid figure-img" width="620"></p>
+<figcaption>Magnitude and phase of <span class="math inline">G(j\omega) = \dfrac{25}{-\omega^2 + 6j\omega + 25}</span>.</figcaption>
+</figure>
+</div>
+</div>
+<script src="fourier-widgets.js"></script>
 
 
 </section>
@@ -1118,13 +1267,13 @@ b_k &amp;= -2\operatorname{Im}(c_k)
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../weeks/week03/tutorial2-solutions.pdf" class="pagination-link" aria-label="Tutorial solutions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial solutions</span>
+      <a href="../../weeks/week04/tutorial3.pdf" class="pagination-link" aria-label="Tutorial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../weeks/week04/tutorial3.pdf" class="pagination-link" aria-label="Tutorial">
-        <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../concepts.html" class="pagination-link" aria-label="Course index">
+        <span class="nav-page-text">Course index</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

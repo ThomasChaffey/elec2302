@@ -1,222 +1,327 @@
 [
   {
-    "objectID": "weeks/week04/notes.html",
-    "href": "weeks/week04/notes.html",
-    "title": "Week 4 — Lecture notes",
+    "objectID": "weeks/week05/notes.html",
+    "href": "weeks/week05/notes.html",
+    "title": "Week 5 — Lecture notes",
     "section": "",
-    "text": "Other formats:\n📄 PDF",
+    "text": "Other formats:\n📄 PDF\nLast week: we represented a periodic signal as the sum of sinusoids, using the Fourier series.\nThis gave us a spectrum: the frequency content of the signal.\nBut: most signals are not periodic: a radar pulse, a plucked note, a spoken word …\nQuestion of the lecture: what does the spectrum of a one-off signal look like?\nCore idea: we can take the Fourier series of a T-periodic signal and let T \\to \\infty to get an aperiodic signal.",
     "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
+      "Week 5 — Aperiodic signals and the Fourier transform",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week04/notes.html#from-impulses-to-sinusoids",
-    "href": "weeks/week04/notes.html#from-impulses-to-sinusoids",
-    "title": "Week 4 — Lecture notes",
-    "section": "From impulses to sinusoids",
-    "text": "From impulses to sinusoids\nThis week we start to develop frequency-domain tools.\nSo far, we have seen that any (integrable) signal can be represented as an integral (“sum”) of impulses. This week we develop an alternative representation for periodic signals, by changing the basis signals from impulses to sinusoids. This is the Fourier series.\n\nRecap. If a system is LTI, it preserves the frequency of a sinusoidal input:\n u = e^{\\,j\\omega t} \\;\\longmapsto\\; G(j\\omega)\\,e^{\\,j\\omega t}, \\qquad G(j\\omega) \\in \\mathbb{C}. \nIn other words, e^{\\,j\\omega t} is an eigenvector of the system. If we can express any u in this basis, as a sum of sinusoids, this will “diagonalise the system” and “simplify analysis”, in ways that we will soon see.\nThis also gives a quick test of whether a system is LTI: inject a sinusoid and see what comes out at the output.",
+    "objectID": "weeks/week05/notes.html#periodic-longrightarrow-aperiodic-motivation",
+    "href": "weeks/week05/notes.html#periodic-longrightarrow-aperiodic-motivation",
+    "title": "Week 5 — Lecture notes",
+    "section": "Periodic \\longrightarrow aperiodic: motivation",
+    "text": "Periodic \\longrightarrow aperiodic: motivation\nLet’s illustrate this by example: a pulse train, like a radar signal.\nTake\n\nu_T(t) = A\\sum_{m\\in\\mathbb{Z}} p_\\tau(t-mT), \\qquad\np_\\tau(t) = \\begin{cases} 1, & |t| &lt; \\dfrac{\\tau}{2} \\\\[6pt] 0, & |t| &gt; \\dfrac{\\tau}{2}\\end{cases},\n\\qquad 0 &lt; \\tau &lt; T .\n\n\n\n\n\nThe pulse train u_T(t): amplitude A, pulse width \\tau, period T. The red bracket marks the period [-\\tfrac{T}{2},\\tfrac{T}{2}] used for the coefficient integral.\n\n\n\n\\tau varies on time. \\; T varies the period. \\; The ratio \\dfrac{\\tau}{T} is called the “duty cycle”.\n\nLet’s calculate the Fourier series coefficients over the red period, [-\\tfrac{T}{2}, \\tfrac{T}{2}]. This contains a single pulse.\n\n\\begin{aligned}\nc_k &= \\frac{1}{T}\\int_{-T/2}^{T/2} u_T(t)\\,e^{-jk\\omega_0 t}\\,\\mathrm{d}t\n&& \\left(\\omega_0 = \\frac{2\\pi}{T}\\right) \\\\[8pt]\n&= \\frac{A}{T}\\int_{-\\tau/2}^{\\tau/2} e^{-jk\\omega_0 t}\\,\\mathrm{d}t\n&& \\left(T = \\frac{2\\pi}{\\omega_0}\\right)\n\\end{aligned}\n\nk = 0:\n c_0 = \\frac{A}{T}\\int_{-\\tau/2}^{\\tau/2} 1\\,\\mathrm{d}t = \\frac{A\\tau}{T}. \n\nUse evenness — only need cos series.\n\nk \\neq 0:\n\n\\begin{aligned}\nc_k &= \\frac{A}{T}\\left[\\frac{e^{-jk\\omega_0 t}}{-jk\\omega_0}\\right]_{-\\tau/2}^{\\tau/2}\n= \\frac{A\\omega_0}{2\\pi}\\,\\frac{1}{-jk\\omega_0}\n   \\left(e^{-jk\\omega_0 \\frac{\\tau}{2}} - e^{\\,jk\\omega_0 \\frac{\\tau}{2}}\\right) \\\\[8pt]\n&= \\frac{Aj}{2\\pi k}\\left(-2j\\sin\\!\\left(\\frac{k\\omega_0\\tau}{2}\\right)\\right) \\\\[8pt]\n&= \\frac{A}{\\pi k}\\sin\\!\\left(k\\,\\frac{\\pi\\tau}{T}\\right) \\\\[8pt]\n&= A\\,\\frac{\\sin(\\pi k d)}{\\pi k}\n&& \\left(d = \\frac{\\tau}{T}\\right)\n\\end{aligned}\n\n \\boxed{\\; c_k = A\\,d\\,\\operatorname{sinc}(kd). \\;} \n\nRecall: \\operatorname{sinc}(x) = \\dfrac{\\sin(\\pi x)}{\\pi x}.",
     "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
+      "Week 5 — Aperiodic signals and the Fourier transform",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week04/notes.html#approximating-a-periodic-signal",
-    "href": "weeks/week04/notes.html#approximating-a-periodic-signal",
-    "title": "Week 4 — Lecture notes",
-    "section": "Approximating a periodic signal",
-    "text": "Approximating a periodic signal\nA signal u(t) is T-periodic if u(t)=u(t−T). The fundamental frequency of u is the frequency corresponding to smallest T such that u(t) is T-periodic. For example, sin(t) is 2\\pi periodic, but also 4\\pi periodic, 6\\pi periodic, etc. The fundamental frequency is the frequency corresponding to period 2\\pi, that is, 1 rad/s.\nFor the sum of two signals to be T-periodic, the individual signals must both be T-periodic, so we want to find the minimum common period of the two sinusoids.\nLet u(t) be an arbitrary periodic signal with fundamental frequency \\frac{2\\pi}{T}.\n \\phi(t) := e^{\\,j\\left(\\frac{2\\pi}{T}t\\right)} \\quad\\text{also periodic on } [0,T]. \\qquad \\text{Let } \\tfrac{2\\pi}{T} =: \\omega. \nHow well can we approximate u(t) by scaling & rotating e^{j\\omega t}?\nWe already have a measure of the size of a periodic signal:\n P(u) := \\frac{1}{T}\\int_0^T |u(t)|^2\\,\\mathrm{d}t = \\langle u, u\\rangle_P = \\|u\\|_P^2 \\qquad (\\text{see Lecture 2}). \nMultiplying \\phi by c \\in \\mathbb{C} gives us a scaling and rotation of \\phi:\n c = a\\,e^{\\,j\\vartheta} \\;(\\text{polar form}) \\quad\\text{so}\\quad c\\phi = a\\,e^{\\,j(\\omega t + \\vartheta)}. \nHere a is the scale, and the rotation = phase shift.\nLet’s minimise J(c) = \\|u - c\\phi\\|_P^2 over c \\in \\mathbb{C}, then u \\approx c\\phi.\n\n\\begin{aligned}\nJ(c) &= \\langle u - c\\phi,\\; u - c\\phi\\rangle_P \\\\[2pt]\n&= \\langle u, u\\rangle_P - \\langle u, c\\phi\\rangle_P - \\langle c\\phi, u\\rangle_P + \\langle c\\phi, c\\phi\\rangle_P \\\\[2pt]\n&= \\|u\\|_P^2 - \\bar{c}\\,\\langle u,\\phi\\rangle_P - c\\,\\overline{\\langle u,\\phi\\rangle}_P + |c|^2\\,\\|\\phi\\|_P^2 . \\qquad(1)\n\\end{aligned}\n\nWe can simplify \\|\\phi\\|_P^2:\n\n\\|\\phi\\|_P^2 = \\frac{1}{T}\\int_0^T e^{\\,j\\omega t}\\,e^{-j\\omega t}\\,\\mathrm{d}t\n= \\frac{1}{T}\\int_0^T 1\\,\\mathrm{d}t = 1 .\n\nLet \\gamma := \\langle u,\\phi\\rangle. Then we can write (1) as\n J(c) = \\|u\\|_P^2 - \\bar{c}\\gamma - c\\bar{\\gamma} + |c|^2 . \nNow notice that\n\n\\begin{aligned}\n|c-\\gamma|^2 &= (c-\\gamma)\\overline{(c-\\gamma)} \\\\[2pt]\n&= |c|^2 - \\gamma\\bar{c} - c\\bar{\\gamma} + |\\gamma|^2 .\n\\end{aligned}\n\nSo\n J(c) = \\|u\\|_P^2 + |c-\\gamma|^2 - |\\gamma|^2 . \nAll terms are positive. This is minimised when |c-\\gamma|^2 = 0, that is,\n \\boxed{\\,c = \\langle u,\\phi\\rangle_P = \\frac{1}{T}\\int_0^T u(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t\\,} \nThe least-squares approximation of u(t) by \\phi(t) is therefore\n \\boxed{\\,c\\phi = \\frac{\\langle u,\\phi\\rangle_P}{\\|\\phi\\|_P^2}\\,\\phi\\,} \nThis is the projection of u onto \\phi.\n\n\n\n\n(a) The least-squares approximation of u by \\phi is the projection c\\phi, and the error u - c\\phi is perpendicular to \\phi. (b) The same construction for signals: a square wave of period 2\\pi and its best approximation by a single sinusoid at the fundamental frequency, \\tfrac{4}{\\pi}\\cos\\omega t = \\Re(\\tfrac{4}{\\pi}\\exp(j\\omega t)).\n\n\n\nThis procedure is exactly the same for \\phi_k = e^{\\,jk\\omega t} for any k \\in \\mathbb{Z}, so we define\n \\boxed{\\,c_k = \\langle u,\\phi_k\\rangle_P = \\frac{1}{T}\\int_0^T u(t)\\,e^{-jk\\omega t}\\,\\mathrm{d}t\\,} \nThese are the complex Fourier coefficients.",
+    "objectID": "weeks/week05/notes.html#fourier-transform-as-the-limit-of-the-fourier-series",
+    "href": "weeks/week05/notes.html#fourier-transform-as-the-limit-of-the-fourier-series",
+    "title": "Week 5 — Lecture notes",
+    "section": "Fourier transform as the limit of the Fourier series",
+    "text": "Fourier transform as the limit of the Fourier series\nNow, how does this depend on the period T?\n\n\\begin{aligned}\nc_k &= A\\,\\frac{\\tau}{T}\\operatorname{sinc}\\!\\left(k\\,\\frac{\\tau}{T}\\right) \\\\[6pt]\n    &= A\\,\\frac{\\tau}{T}\\operatorname{sinc}\\!\\left(k\\,\\frac{\\tau\\omega_0}{2\\pi}\\right).\n\\end{aligned}\n\nCall k\\omega_0 = \\omega. Then\n T c_k = A\\tau \\operatorname{sinc}\\!\\left(\\frac{\\tau\\omega}{2\\pi}\\right) =: E(\\omega)\n\\qquad \\text{(\"envelope\")} \n\nWhere are the zeros?\n\n\\begin{aligned}\n\\operatorname{sinc}\\!\\left(\\frac{\\tau\\omega}{2\\pi}\\right) &= 0 \\\\[6pt]\n\\sin\\!\\left(\\frac{\\tau\\omega}{2}\\right) &= 0 \\\\[6pt]\n\\frac{\\tau\\omega}{2} &= n\\pi \\quad \\text{for } n \\in \\mathbb{Z} \\\\[6pt]\n\\omega &= \\frac{n2\\pi}{\\tau}.\n\\end{aligned}\n\nWhat happens as T \\to \\infty?\n★ E(\\omega) doesn’t change\n★ Spacing becomes smaller.\nWhat happens to the coefficients c_k?\nLet’s define u(t) = \\displaystyle\\lim_{T\\to\\infty} u_T(t).\n c_k = \\frac{1}{T}\\int_{-T/2}^{T/2} u_T(t)\\,e^{-jk\\omega_0 t}\\,\\mathrm{d}t \n\nWe define the Fourier transform of u(t) by\n\n\\boxed{\\;\nU(j\\omega) := \\lim_{T\\to\\infty} T c_k \\Big|_{k\\omega_0 \\to \\omega}\n= \\int_{-\\infty}^{\\infty} u(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t .\n\\;}\n\nThis can be calculated for any signal for which the integral converges.\nWe know that the Fourier series can be used to reconstruct the original signal:\n\n\\boxed{\\;\nu_T = \\sum_{k=-\\infty}^{\\infty} c_k \\phi_k\n    = \\sum_{k=-\\infty}^{\\infty} \\langle u_T, \\phi_k\\rangle_P\\,\\phi_k,\n\\qquad \\phi_k(t) = e^{\\,jk\\omega_0 t}\n\\;}\n\n\n\nWeek 4 lecture.\n\nDo we get something similar in the Fourier transform limit?\nWe can rewrite the Fourier series as\n\n\\begin{aligned}\nu_T(t) &= \\sum_{k=-\\infty}^{\\infty} T c_k\\, e^{\\,jk\\omega_0 t}\\,\\frac{1}{T}\n&& \\left[\\text{trying to get a “}\\mathrm{d}\\omega\\text{” on the RHS}\\right] \\\\[8pt]\n&= \\sum_{k=-\\infty}^{\\infty} T c_k\\, e^{\\,jk\\omega_0 t}\\,\\frac{\\omega_0}{2\\pi}\n&& \\left[\\omega_0 = \\text{spacing between samples}\\right] \\\\[8pt]\n&= \\sum_{k=-\\infty}^{\\infty} T c_k\\, e^{\\,j\\omega t}\\,\\frac{\\Delta\\omega}{2\\pi}.\n\\end{aligned}\n\nThen in the limit,\n u(t) = \\lim_{T\\to\\infty} \\sum_{k=-\\infty}^{\\infty} T c_k\\, e^{\\,j\\omega t}\\,\n   \\frac{\\Delta\\omega}{2\\pi}. \n\n\\boxed{\\;\nu(t) = \\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty} U(j\\omega)\\,e^{\\,j\\omega t}\\,\\mathrm{d}\\omega\n\\;}\n\\qquad \\text{(the Inverse Fourier transform).}\n\nWe have illustrated this above for a pulse chain, but it holds for any signal for which the Fourier transform integral converges \\left(\\int_{-\\infty}^{\\infty}|u(t)|\\,\\mathrm{d}t &lt; \\infty \\text{ is sufficient}\\right).",
     "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
+      "Week 5 — Aperiodic signals and the Fourier transform",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week04/notes.html#the-fourier-series",
-    "href": "weeks/week04/notes.html#the-fourier-series",
-    "title": "Week 4 — Lecture notes",
-    "section": "The Fourier series",
-    "text": "The Fourier series\nEach coefficient gives a least-squares approximation of u(t) by \\phi_k(t), calculated as\n u(t) \\approx c_k \\phi_k = \\frac{\\langle u,\\phi_k\\rangle_P}{\\|\\phi_k\\|_P^2}\\,\\phi_k, \nthe projection of u onto \\phi_k.\nIt turns out that the sum of all these approximations is an exact representation of u(t) (provided it is sufficiently well-behaved):\n \\boxed{\\,u = \\sum_{k=-\\infty}^{\\infty} c_k \\phi_k = \\sum_{k=-\\infty}^{\\infty} \\langle u,\\phi_k\\rangle_P\\,\\phi_k, \\qquad \\phi_k(t) = e^{\\,jk\\omega t}\\,} \nThis is the Fourier series of u. It also turns out that each c_k is independent, as \\phi_k are orthogonal, so the finite sum \\displaystyle\\sum_{k=-n}^{n} \\langle u,\\phi_k\\rangle_P\\,\\phi_k is a least-squares approximation of u by \\{\\phi_k\\}_{k=-n,\\dots,n}. See the extension section below for the full details.\nFor k = 0, we have\n\n\\begin{aligned}\nc_0 = \\langle u,\\phi_0\\rangle &= \\frac{1}{T}\\int_0^T u\\,e^{0}\\,\\mathrm{d}t \\\\[2pt]\n&= \\frac{1}{T}\\int_0^T u(t)\\,\\mathrm{d}t . \\qquad \\text{Average value of } u = \\text{DC offset.}\n\\end{aligned}\n\n\nExtension material\n\nWhy are the c_k independent?\nFirst, let’s calculate\n\n\\begin{aligned}\n\\langle \\phi_k, \\phi_\\ell\\rangle &= \\frac{1}{T}\\int_0^T e^{\\,jk\\omega t}\\,e^{-j\\ell\\omega t}\\,\\mathrm{d}t \\\\[2pt]\n&= \\frac{1}{T}\\int_0^T e^{\\,+j(k-\\ell)\\omega t}\\,\\mathrm{d}t \\\\[2pt]\n&= 1 \\quad \\text{if } k = \\ell \\quad\\text{or} \\\\[6pt]\n&= \\left[\\frac{1}{+j(k-\\ell)\\omega}\\,e^{\\,+j(k-\\ell)\\omega t}\\right]_0^{T} \\\\[6pt]\n&= 0 \\quad \\text{as } e^{\\,+j(k-\\ell)\\omega t} \\text{ is } T\\text{-periodic.}\n\\end{aligned}\n\nThis means the \\phi_k are orthogonal.\nNow let’s minimise \\left\\|u - \\sum_k c_k \\phi_k\\right\\|_P^2.\n\n\\begin{aligned}\n\\left\\|u - \\sum_k c_k \\phi_k\\right\\|_P^2\n&= \\left\\langle u - \\sum_k c_k \\phi_k,\\; u - \\sum_k c_k \\phi_k\\right\\rangle_P \\\\[6pt]\n&= \\|u\\|_P^2 + \\left\\langle u,\\, -\\sum_k c_k \\phi_k\\right\\rangle + \\left\\langle -\\sum_k c_k \\phi_k,\\, u\\right\\rangle \\\\&+ \\left\\langle \\sum_k c_k \\phi_k,\\, \\sum_k c_k \\phi_k\\right\\rangle \\\\[6pt]\n&= \\|u\\|_P^2 - \\sum_k \\bar{c}_k \\underbrace{\\langle u,\\phi_k\\rangle}_{:=\\,\\gamma_k} - \\sum_k c_k \\overline{\\langle u,\\phi_k\\rangle} + \\underbrace{\\sum_k \\sum_\\ell c_k \\bar{c}_\\ell \\langle \\phi_k,\\phi_\\ell\\rangle}_{=\\,0 \\text{ for } k \\neq \\ell} \\\\[6pt]\n&= \\|u\\|_P^2 - \\sum_k \\left(\\bar{c}_k \\gamma_k + c_k \\bar{\\gamma}_k\\right) + \\sum_k c_k \\bar{c}_k \\langle \\phi_k,\\phi_k\\rangle .\n\\end{aligned}\n\nFollowing the same completion of squares argument as before, we have\n = \\|u\\|_P^2 + \\sum_k |c_k - \\gamma_k|^2 - \\sum_k |\\gamma_k|^2 . \nThis is minimised when c_k = \\gamma_k for all k. These are the Fourier coefficients we derived earlier with individual minimisations!\n\n\nIf u(t) is real, its Fourier series must be real:\n \\operatorname{Im}\\!\\left(\\sum_k c_k \\phi_k\\right) = 0. \nThis is achieved if\n\n\\begin{aligned}\nc_k \\phi_k &= \\overline{c_{-k}\\,\\phi_{-k}} \\\\[2pt]\n&= \\overline{c_{-k}}\\,\\phi_k .\n\\end{aligned}\n\nSo c_k = \\overline{c_{-k}}. In particular, c_0 = \\overline{c_0}, so c_0 is real.",
+    "objectID": "weeks/week05/notes.html#what-has-changed-versus-the-fourier-series",
+    "href": "weeks/week05/notes.html#what-has-changed-versus-the-fourier-series",
+    "title": "Week 5 — Lecture notes",
+    "section": "What has changed versus the Fourier series?",
+    "text": "What has changed versus the Fourier series?\n\nSum \\longmapsto integral, discrete index k \\longmapsto continuous variable, k\\omega_0 \\longmapsto \\omega.\nUnits change. c_k has the same units as u. U(j\\omega) has units of u \\times \\text{time}: it is a density. Must be integrated to get anything.\n\n\nExample: the Kurnell weather radar from the week 2 tutorial.\n\n\n\n\nA single transmitted pulse: amplitude 5 kV, width \\tau = 1\\,\\mus.\n\n\n\nThe parameters \\tau and T are varied independently:\n\\tau adjusts range resolution:\n\n\n\n\nTwo targets at ranges r_1 and r_2, separated by \\Delta r.\n\n\n\nConsider two targets at ranges r_1 and r_2, with \\Delta r := r_2 - r_1.\nThe round trip time for each pulse t_d = \\dfrac{2r}{c} \\;(c = 3\\times10^{8}\\ \\mathrm{m\\,s^{-1}}).\n \\Delta t_d = \\frac{2\\Delta r}{c}. \nIf \\Delta t_d &lt; \\tau, the returning pulses overlap and can’t be distinguished.\nThe minimum distance that can be measured is therefore \\Delta r = \\dfrac{c\\tau}{2}. For Kurnell, \\tau = 1\\,\\mus, so \\Delta r \\approx 150\\,m.\nWhy not make \\tau even smaller?\nLet’s check the spectrum again.\n\n\n(Higher lobes are filtered — week 10.)\n\nSmall \\tau makes \\dfrac{2\\pi}{\\tau} big, so the lobe spreads and we need more bandwidth to transmit the pulse. Bandwidth is tightly regulated and very expensive!",
     "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
+      "Week 5 — Aperiodic signals and the Fourier transform",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week04/notes.html#the-sinecosine-form-for-a-real-signal",
-    "href": "weeks/week04/notes.html#the-sinecosine-form-for-a-real-signal",
-    "title": "Week 4 — Lecture notes",
-    "section": "The sine–cosine form for a real signal",
-    "text": "The sine–cosine form for a real signal\nIn the real case, we can also derive a sin/cosine form of the Fourier series.\n \\frac{e^{\\,j\\omega t} + e^{-j\\omega t}}{2} = \\cos\\omega t, \\qquad \\frac{e^{\\,j\\omega t} - e^{-j\\omega t}}{2j} = \\sin\\omega t. \nLet c_k = \\tfrac{1}{2}(a_k - j b_k), k \\geq 0. Then\n\n\\begin{aligned}\nc_k e^{\\,jk\\omega t} + c_{-k} e^{-jk\\omega t}\n&= c_k e^{\\,jk\\omega t} + \\bar{c}_k e^{-jk\\omega t} \\\\[2pt]\n&= \\tfrac{1}{2}(a_k - j b_k)\\big(\\cos(k\\omega t) + j\\sin(k\\omega t)\\big) + \\tfrac{1}{2}(a_k + j b_k)\\big(\\cos(k\\omega t) - j\\sin(k\\omega t)\\big) \\\\[2pt]\n&= a_k \\cos(k\\omega t) + b_k \\sin(k\\omega t) .\n\\end{aligned}\n\nSo we have an alternative form for the Fourier series of a real function u:\n\n\\boxed{\\;u(t) = a_0 + \\sum_{k=1}^{\\infty} a_k \\cos(k\\omega t) + b_k \\sin(k\\omega t),\\;}\n\nwhere\n\n\\begin{aligned}\na_0 &= c_0 \\\\[4pt]\na_k &= 2\\operatorname{Re}(c_k) = \\frac{2}{T}\\int_0^T u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[4pt]\nb_k &= -2\\operatorname{Im}(c_k) = \\frac{2}{T}\\int_0^T u(t)\\sin(k\\omega t)\\,\\mathrm{d}t .\n\\end{aligned}",
+    "objectID": "weeks/week05/notes.html#fourier-transform-pairs",
+    "href": "weeks/week05/notes.html#fourier-transform-pairs",
+    "title": "Week 5 — Lecture notes",
+    "section": "Fourier transform pairs",
+    "text": "Fourier transform pairs\nThe square \\longleftrightarrow sinc Fourier transform pair is useful for radar design. Let’s derive some other useful pairs.\n(a) u(t) = \\delta(t).\n\n\\begin{aligned}\nU(j\\omega) &= \\int_{-\\infty}^{\\infty} \\delta(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t \\\\[6pt]\n&= 1 \\qquad \\text{(sifting property)}.\n\\end{aligned}\n\n(b) u(t) = e^{-at}H(t)\n\n\\begin{aligned}\nU(j\\omega) &= \\int_{-\\infty}^{\\infty} e^{-at}H(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t \\\\[6pt]\n&= \\int_{0}^{\\infty} e^{-(a+j\\omega)t}\\,\\mathrm{d}t \\\\[6pt]\n&= \\left[\\frac{-1}{a+j\\omega}\\,e^{-(a+j\\omega)t}\\right]_{0}^{\\infty} \\\\[6pt]\n&= \\frac{1}{a+j\\omega}.\n\\end{aligned}\n\n\nExtension material\n\nu(t) = 1\n\nSkip this in lecture. Starred section in notes.\n\n(c) u(t) = 1.\nTreat this as the limit of a wide rectangle:\n\n\n\n\nThe rectangle widened to a constant.\n\n\n\n\nWe already have the Fourier transform of the rectangle: \\;\\tau\\operatorname{sinc}\\!\\left(\\dfrac{\\tau\\omega}{2\\pi}\\right).\nWhat is the area under this curve?\n\n\\begin{aligned}\nA &= \\int_{-\\infty}^{\\infty} \\tau\\,\n     \\frac{\\sin\\!\\left(\\frac{\\tau\\omega}{2}\\right)}{\\frac{\\tau\\omega}{2}}\\,\\mathrm{d}\\omega \\\\[8pt]\n  &= \\int_{-\\infty}^{\\infty} \\frac{2\\sin\\!\\left(\\frac{\\tau\\omega}{2}\\right)}{\\omega}\\,\\mathrm{d}\\omega .\n\\end{aligned}\n\nLet \\mu = \\dfrac{\\tau\\omega}{2} \\iff \\omega = \\dfrac{2\\mu}{\\tau}.\n\\mathrm{d}\\mu = \\dfrac{\\tau}{2}\\,\\mathrm{d}\\omega \\iff\n\\mathrm{d}\\omega = \\dfrac{2\\,\\mathrm{d}\\mu}{\\tau}.\n\n\\begin{aligned}\nA &= \\int_{-\\infty}^{\\infty} \\frac{2\\sin(\\mu)}{\\frac{2\\mu}{\\tau}}\\,\\frac{2\\,\\mathrm{d}\\mu}{\\tau} \\\\[8pt]\n&= \\int_{-\\infty}^{\\infty} \\frac{2\\sin(\\mu)}{\\mu}\\,\\mathrm{d}\\mu \\\\[8pt]\n&= \\int_{0}^{\\infty} \\frac{4\\sin(\\mu)}{\\mu}\\,\\mathrm{d}\\mu\n\\qquad \\text{(even function)}.\n\\end{aligned}\n\nFact: \\displaystyle\\int_{0}^{\\infty}\\frac{\\sin(\\mu)}{\\mu}\\,\\mathrm{d}\\mu = \\frac{\\pi}{2} (full derivation in the notes).\nSo the Fourier transform of the width \\tau pulse has constant area 2\\pi.\n\n\n\n\nThe transform of the width-\\tau pulse, with the main lobe half-width \\tfrac{2\\pi}{\\tau} marked.\n\n\n\nAs we increase \\tau, the sinc gets taller and narrower.\nIn the limit \\tau \\to \\infty, we have an impulse with area 2\\pi.\n\nSo \\; 1 \\;\\overset{\\text{FT}}{\\longrightarrow}\\; 2\\pi\\delta(\\omega).\n\n\n(d) e^{\\,j\\omega_0 t} \\longrightarrow 2\\pi\\delta(\\omega - \\omega_0)\nWe already have the Fourier transform of 1:\n \\int_{-\\infty}^{\\infty} 1\\cdot e^{-j\\omega t}\\,\\mathrm{d}t = 2\\pi\\delta(\\omega). \n \\int_{-\\infty}^{\\infty} e^{\\,j\\omega_0 t}e^{-j\\omega t}\\,\\mathrm{d}t\n= \\int_{-\\infty}^{\\infty} e^{-j(\\omega-\\omega_0)t}\\,\\mathrm{d}t\n= 2\\pi\\delta(\\omega-\\omega_0). \n\nSo\n \\cos(\\omega_0 t) = \\tfrac{1}{2}\\left(e^{\\,j\\omega_0 t} + e^{-j\\omega_0 t}\\right)\n\\;\\overset{\\text{FT}}{\\rightsquigarrow}\n\\pi\\delta(\\omega-\\omega_0) + \\pi\\delta(\\omega+\\omega_0) \n\n\n\n\n\nThe spectrum of \\cos(\\omega_0 t): two impulses of weight \\pi at \\pm\\omega_0.\n\n\n\nThe Fourier series!",
     "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
+      "Week 5 — Aperiodic signals and the Fourier transform",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week04/notes.html#example-the-bridge-rectifier",
-    "href": "weeks/week04/notes.html#example-the-bridge-rectifier",
-    "title": "Week 4 — Lecture notes",
-    "section": "Example: the bridge rectifier",
-    "text": "Example: the bridge rectifier\nExample: Compute the Fourier series of the output of a bridge rectifier driven by a 1000\\,Hz sinusoid,\n u(t) = \\left|\\sin(2000\\pi t)\\right| . \n\n\n\n\nThe rectifier output u(t) = |\\sin(2000\\pi t)|. Rectification folds the negative half-cycles up, so the period is half that of the input.\n\n\n\nThe input frequency is 1000\\,\\text{Hz} = 2000\\pi\\,rad/s. Rectification doubles this, so the fundamental frequency of u is\n \\omega_0 = 4000\\pi \\;\\text{rad/s}, \\qquad T = \\frac{2\\pi}{\\omega_0} = \\frac{1}{2000}\\,\\text{s}. \nOn [0,T] the argument 2000\\pi t runs from 0 to \\pi, where the sine is non-negative, so u(t) = \\sin\\!\\left(\\tfrac{\\omega_0}{2}t\\right) there and the absolute value can be dropped.\nStart with the DC term:\n\n\\begin{aligned}\nc_0 = \\frac{1}{T}\\int_0^T u(t)\\,\\mathrm{d}t\n&= 2000\\int_0^{1/2000} \\sin(2000\\pi t)\\,\\mathrm{d}t \\\\[6pt]\n&= 2000\\left[\\frac{-\\cos(2000\\pi t)}{2000\\pi}\\right]_0^{1/2000} \\\\[6pt]\n&= \\frac{1}{\\pi}\\Big(\\cos(0) - \\cos(\\pi)\\Big) = \\frac{2}{\\pi} .\n\\end{aligned}\n\nNow the general coefficient:\n\n\\begin{aligned}\nc_k = \\frac{1}{T}\\int_0^T u(t)\\,e^{-jk\\omega_0 t}\\,\\mathrm{d}t\n&= \\frac{\\omega_0}{2\\pi}\\int_0^{2\\pi/\\omega_0} \\sin\\!\\left(\\frac{\\omega_0}{2}t\\right) e^{-jk\\omega_0 t}\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{\\omega_0}{2\\pi}\\int_0^{2\\pi/\\omega_0} \\frac{1}{2j}\\left(e^{\\,j\\frac{\\omega_0}{2}t} - e^{-j\\frac{\\omega_0}{2}t}\\right) e^{-jk\\omega_0 t}\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{\\omega_0}{4\\pi j}\\int_0^{2\\pi/\\omega_0} \\left(e^{\\,j\\frac{\\omega_0}{2}(1-2k)t} - e^{-j\\frac{\\omega_0}{2}(1+2k)t}\\right)\\mathrm{d}t \\\\[6pt]\n&= \\frac{\\omega_0}{4\\pi j}\\left[\\frac{2\\,e^{\\,j\\frac{\\omega_0}{2}(1-2k)t}}{j\\omega_0(1-2k)} + \\frac{2\\,e^{-j\\frac{\\omega_0}{2}(1+2k)t}}{j\\omega_0(1+2k)}\\right]_0^{2\\pi/\\omega_0} .\n\\end{aligned}\n\nAt t = 2\\pi/\\omega_0 the two exponentials are e^{\\,j\\pi(1-2k)} and e^{-j\\pi(1+2k)}. Both 1-2k and 1+2k are odd, so both exponentials equal -1:\n\n\\begin{aligned}\nc_k &= \\frac{\\omega_0}{4\\pi j}\\left(-\\frac{4}{j\\omega_0}\\right)\\left(\\frac{1}{1-2k} + \\frac{1}{1+2k}\\right) \\\\[6pt]\n&= -\\frac{1}{\\pi j^2}\\cdot\\frac{(1+2k) + (1-2k)}{(1-2k)(1+2k)} \\\\[6pt]\n&= \\boxed{\\;\\frac{2}{\\pi\\left(1-4k^2\\right)}\\;}\n\\end{aligned}\n\nSetting k=0 recovers c_0 = 2/\\pi.\n\n\n\n\nThe Fourier coefficients c_k = \\dfrac{2}{\\pi(1-4k^2)} of the rectifier output, with the phase below. Every coefficient with |k|\\geq 1 is negative, so its phase is \\pi; the phase is drawn as an odd function of k, taking -\\pi for k &gt; 0 and +\\pi for k &lt; 0.\n\n\n\nIn sine–cosine form, b_k = -2\\operatorname{Im}(c_k) = 0 and a_k = 2\\operatorname{Re}(c_k), so\n u(t) = \\frac{2}{\\pi} + \\sum_{k=1}^{\\infty} \\frac{4}{\\pi\\left(1-4k^2\\right)}\\cos(k\\omega_0 t) . \nIt turns out that the fact the sine series is zero is something we can see straight away from the symmetry of the signal.",
+    "objectID": "weeks/week05/notes.html#properties-of-the-fourier-transform",
+    "href": "weeks/week05/notes.html#properties-of-the-fourier-transform",
+    "title": "Week 5 — Lecture notes",
+    "section": "Properties of the Fourier transform",
+    "text": "Properties of the Fourier transform\nThis is also a useful general property of the Fourier transform:\n① \\; e^{\\,j\\omega_0 t}u(t) \\;\\longleftrightarrow\\; U\\big(j(\\omega-\\omega_0)\\big) \\qquad (frequency shift)\n\nThere are several other useful properties:\n② u(t-t_0):\n\n\\begin{aligned}\n\\int_{-\\infty}^{\\infty} u(t-t_0)\\,e^{-j\\omega t}\\,\\mathrm{d}t\n&= \\int_{-\\infty}^{\\infty} u(\\tau)\\,e^{-j\\omega(\\tau+t_0)}\\,\\mathrm{d}\\tau\n&& \\left[\\tau = t - t_0,\\; t = \\tau + t_0,\\; \\mathrm{d}\\tau = \\mathrm{d}t\\right] \\\\[6pt]\n&= e^{-j\\omega t_0}\\,U(j\\omega).\n\\end{aligned}\n\n u(t-t_0) \\;\\longleftrightarrow\\; e^{-j\\omega t_0}\\,U(j\\omega) \\qquad \\text{(time shift)}. \n③ u(at):\n \\int_{-\\infty}^{\\infty} u(at)\\,e^{-j\\omega t}\\,\\mathrm{d}t. \\qquad\n\\text{Let } \\tau = at, \\;\\; \\mathrm{d}\\tau = a\\,\\mathrm{d}t, \\;\\; t = \\frac{\\tau}{a}. \n\n\\begin{aligned}\n&= \\frac{a}{|a|}\\int_{-\\infty}^{\\infty} u(\\tau)\\,e^{-j\\omega\\frac{\\tau}{a}}\\,\\frac{\\mathrm{d}\\tau}{a}\n&& \\left[\\text{to get the limits the right way}\\right] \\\\[6pt]\n&= \\frac{1}{|a|}\\int_{-\\infty}^{\\infty} u(\\tau)\\,e^{-j\\frac{\\omega}{a}\\tau}\\,\\mathrm{d}\\tau \\\\[6pt]\n&= \\frac{1}{|a|}\\,U\\!\\left(\\frac{j\\omega}{a}\\right).\n\\end{aligned}\n\n u(at) \\;\\longleftrightarrow\\; \\frac{1}{|a|}U\\!\\left(\\frac{j\\omega}{a}\\right)\n\\qquad \\text{(time scaling)}. \n④ \\;\\alpha u_1(t) + \\beta u_2(t) \\;\\longleftrightarrow\\;\n\\alpha U_1(j\\omega) + \\beta U_2(j\\omega) \\qquad (linearity).\n⑤ y = h * u.\n y(t) = \\int_{-\\infty}^{\\infty} h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau \n\n\\begin{aligned}\nY(j\\omega) &= \\int_{-\\infty}^{\\infty}\\!\\int_{-\\infty}^{\\infty} h(t-\\tau)u(\\tau)\\,\\mathrm{d}\\tau\\;\n   e^{-j\\omega t}\\,\\mathrm{d}t \\\\[6pt]\n&= \\int_{-\\infty}^{\\infty}\\!\\int_{-\\infty}^{\\infty} h(t-\\tau)\\,e^{-j\\omega t}\\,\\mathrm{d}t\\;\n   u(\\tau)\\,\\mathrm{d}\\tau\n&& \\left[\\text{using Fubini's theorem}\\right]\n\\end{aligned}\n\nLet \\mu = t - \\tau. \\;\\mathrm{d}t = \\mathrm{d}\\mu. \\;t = \\mu + \\tau.\n\n\\begin{aligned}\nY(j\\omega) &= \\int_{-\\infty}^{\\infty}\\!\\int_{-\\infty}^{\\infty}\n   h(\\mu)\\,e^{-j\\omega(\\mu+\\tau)}\\,\\mathrm{d}\\mu\\; u(\\tau)\\,\\mathrm{d}\\tau \\\\[6pt]\n&= \\int_{-\\infty}^{\\infty} h(\\mu)\\,e^{-j\\omega\\mu}\\,\\mathrm{d}\\mu\n   \\int_{-\\infty}^{\\infty} u(\\tau)\\,e^{-j\\omega\\tau}\\,\\mathrm{d}\\tau\n\\end{aligned}\n\n Y(j\\omega) = H(j\\omega)\\,U(j\\omega) \n \\boxed{\\; y = h*u \\;\\longleftrightarrow\\; Y = HU \\;}\n\\qquad \\text{(convolution)} \nThis is the foundation of the rest of the course.\n⑥ \\dfrac{\\mathrm{d}}{\\mathrm{d}t}u(t) \\;\\rightsquigarrow\\;\n\\displaystyle\\int_{-\\infty}^{\\infty}\\frac{\\mathrm{d}}{\\mathrm{d}t}u(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t\nIntegrate by parts: \\displaystyle\\int u'v = uv - \\int uv'\n\n\\begin{aligned}\n\\int_{-\\infty}^{\\infty}\\frac{\\mathrm{d}}{\\mathrm{d}t}u(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t\n&= \\underbrace{\\left[u(t)e^{-j\\omega t}\\right]_{-\\infty}^{\\infty}}_{=\\,0 \\text{ if } u(-\\infty) = u(\\infty) = 0}\n+ j\\omega\\int_{-\\infty}^{\\infty} u(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t \\\\[6pt]\n&= j\\omega\\,U(j\\omega).\n\\end{aligned}\n\nSo\n \\boxed{\\; \\frac{\\mathrm{d}}{\\mathrm{d}t}u(t) \\;\\longleftrightarrow\\; j\\omega\\,U(j\\omega). \\;} \n\nSummary\n\nTransform pairs.\n\n\n\n\n\n\n\n\nu(t)\nU(j\\omega)\nderived in\n\n\n\n\nA\\,p_\\tau(t)\nA\\tau\\operatorname{sinc}\\!\\left(\\dfrac{\\omega\\tau}{2\\pi}\\right)\n§2\n\n\n\\delta(t)\n1\n(a)\n\n\ne^{-at}H(t)\n\\dfrac{1}{a+j\\omega}\n(b)\n\n\n1\n2\\pi\\delta(\\omega)\n(c)\n\n\ne^{\\,j\\omega_0 t}\n2\\pi\\delta(\\omega-\\omega_0)\n(d)\n\n\n\\cos(\\omega_0 t)\n\\pi\\delta(\\omega-\\omega_0) + \\pi\\delta(\\omega+\\omega_0)\n(d)\n\n\n\nProperties.\n\n\n\n\n\n\n\n\n\nu(t)\nU(j\\omega)\n\n\n\n\n① frequency shift\ne^{\\,j\\omega_0 t}u(t)\nU\\big(j(\\omega-\\omega_0)\\big)\n\n\n② time shift\nu(t-t_0)\ne^{-j\\omega t_0}U(j\\omega)\n\n\n③ time scaling\nu(at)\n\\dfrac{1}{\\lvert a\\rvert}U\\!\\left(\\dfrac{j\\omega}{a}\\right)\n\n\n④ linearity\n\\alpha u_1(t) + \\beta u_2(t)\n\\alpha U_1(j\\omega) + \\beta U_2(j\\omega)\n\n\n⑤ convolution\ny = h*u\nY = HU\n\n\n⑥ differentiation\n\\dfrac{\\mathrm{d}}{\\mathrm{d}t}u(t)\nj\\omega\\,U(j\\omega)\n\n\n⑦ duality\nX(jt)\n2\\pi x(-\\omega)\n\n\n⑧ Parseval\n\\displaystyle\\int_{-\\infty}^{\\infty} u(t)\\overline{y(t)}\\,\\mathrm{d}t\n\\displaystyle\\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty} U(j\\omega)\\overline{Y(j\\omega)}\\,\\mathrm{d}\\omega\n\n\n\n\n\nOther properties\n(Proofs in lecture notes.)\n⑦ Duality: if x(t) \\rightsquigarrow X(j\\omega), then\n X(jt) \\;\\rightsquigarrow\\; 2\\pi x(-\\omega). \n\nProof:\n\n\\begin{aligned}\nx(-\\omega) &= \\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty} X(js)\\,e^{-j\\omega s}\\,\\mathrm{d}s \\\\[6pt]\n&= \\frac{1}{2\\pi}\\,\\mathcal{F}\\{X(jt)\\}(\\omega).\n\\end{aligned}\n\n\n\nExample: we know \\delta(t) \\rightsquigarrow 1.\nThe dual gives us another pair: \\;1 \\rightsquigarrow 2\\pi\\delta(\\omega).\n⑧ Parseval’s theorem:\n \\int_{-\\infty}^{\\infty} u(t)\\,\\overline{y(t)}\\,\\mathrm{d}t\n= \\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty} U(j\\omega)\\,\\overline{Y(j\\omega)}\\,\\mathrm{d}\\omega. \nSpecial case: if y = u:\n \\int_{-\\infty}^{\\infty} |u(t)|^2\\,\\mathrm{d}t\n= \\frac{1}{2\\pi}\\int_{-\\infty}^{\\infty} |U(j\\omega)|^2\\,\\mathrm{d}\\omega. \n\nProof:\n\n\\begin{aligned}\n\\int u\\bar{y}\\,\\mathrm{d}t\n&= \\int u(t)\\,\\frac{1}{2\\pi}\\int \\overline{Y(j\\omega)\\,e^{\\,j\\omega t}}\\,\\mathrm{d}\\omega\\;\\mathrm{d}t \\\\[6pt]\n&= \\frac{1}{2\\pi}\\int\\left[\\int u(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t\\right]\\overline{Y(j\\omega)}\\,\\mathrm{d}\\omega \\\\[6pt]\n&= \\frac{1}{2\\pi}\\int U(j\\omega)\\,\\overline{Y(j\\omega)}\\,\\mathrm{d}\\omega .\n\\end{aligned}",
     "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
+      "Week 5 — Aperiodic signals and the Fourier transform",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week04/notes.html#symmetry-properties-of-the-fourier-series",
-    "href": "weeks/week04/notes.html#symmetry-properties-of-the-fourier-series",
-    "title": "Week 4 — Lecture notes",
-    "section": "Symmetry properties of the Fourier series",
-    "text": "Symmetry properties of the Fourier series\n★ Odd functions: \\;f(-x) = -f(x). Rotational symmetry (180^\\circ).\n\n\n\n\nAn odd function: rotational (180^\\circ) symmetry about the origin.\n\n\n\n★ Even functions: \\;f(-x) = f(x). Symmetry about y-axis.\n\n\n\n\nAn even function: symmetry about the y-axis.\n\n\n\nThe Fourier series simplifies for even and odd functions.\n① Odd u(t): calculate a_k.\n a_k = \\frac{2}{T}\\int_0^T u(t)\\cos(k\\omega t)\\,\\mathrm{d}t . \n u(-t)\\cos(-k\\omega t) = -u(t)\\cos(k\\omega t) \\quad(\\text{odd}). \nSince u(t) & \\cos(k\\omega t) are T-periodic, we can shift the limits of integration:\n\n\\begin{aligned}\na_k &= \\frac{2}{T}\\int_{-T/2}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{2}{T}\\int_{-T/2}^{0} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[6pt]\n&= -\\frac{2}{T}\\int_{0}^{-T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t .\n\\end{aligned}\n\nLet \\tau = -t. \\;\\mathrm{d}\\tau = -\\mathrm{d}t.\n\n\\begin{aligned}\n&= +\\frac{2}{T}\\int_{0}^{T/2} u(-\\tau)\\cos(-k\\omega\\tau)\\,\\mathrm{d}\\tau + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[6pt]\n&= -\\frac{2}{T}\\int_{0}^{T/2} u(\\tau)\\cos(k\\omega\\tau)\\,\\mathrm{d}\\tau + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t = 0 \\\\\n&\\hphantom{=} \\quad (\\text{as } u(\\tau)\\cos(k\\omega\\tau) \\text{ is odd}),\n\\end{aligned}\n\nSo for odd functions, \\boxed{a_k = 0}. Similarly, a_0 = 0, so we get a pure sine series.\nFor even functions, a similar argument shows that \\boxed{b_k = 0} and we get a cosine series + DC term.",
-    "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week04/notes.html#example-fourier-series-of-a-square-wave",
-    "href": "weeks/week04/notes.html#example-fourier-series-of-a-square-wave",
-    "title": "Week 4 — Lecture notes",
-    "section": "Example: Fourier series of a square wave",
-    "text": "Example: Fourier series of a square wave\nExample: Compute the Fourier series of the square wave illustrated below:\n\n\n\n\nThe square wave u(t) (period 2\\pi, amplitude \\pm 1). The red bracket marks one period, [\\tfrac{\\pi}{2}, \\tfrac{5\\pi}{2}], used for the coefficient integral.\n\n\n\nThe wave is even, so we only need to compute the cosine terms. Here the period is T = 2\\pi, so \\omega = \\tfrac{2\\pi}{T} = 1, giving \\cos(k\\omega t) = \\cos(kt) and \\tfrac{2}{T} = \\tfrac{1}{\\pi}.\n a_0 = \\frac{1}{2\\pi}\\int_0^{2\\pi} u(t)\\,\\mathrm{d}t = 0. \\qquad \\text{No DC offset!} \\iff \\text{mean is zero.} \nCompute the coefficients over the red interval in the figure:\n\n\\begin{aligned}\na_k &= \\frac{1}{\\pi}\\int_{\\pi/2}^{5\\pi/2} u(t)\\cos(kt)\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{1}{\\pi}\\int_{\\pi/2}^{3\\pi/2} -\\cos(kt)\\,\\mathrm{d}t + \\frac{1}{\\pi}\\int_{3\\pi/2}^{5\\pi/2} \\cos(kt)\\,\\mathrm{d}t .\n\\end{aligned}\n\n\n\\begin{aligned}\n&= \\frac{1}{\\pi}\\left[-\\frac{1}{k}\\sin(kt)\\right]_{\\pi/2}^{3\\pi/2} + \\frac{1}{\\pi}\\left[\\frac{1}{k}\\sin(kt)\\right]_{3\\pi/2}^{5\\pi/2} \\\\[8pt]\n&= \\frac{1}{\\pi k}\\left(\\sin\\!\\left(\\frac{k\\pi}{2}\\right) + \\sin\\!\\left(\\frac{5k\\pi}{2}\\right) - 2\\sin\\!\\left(\\frac{3k\\pi}{2}\\right)\\right) \\\\[8pt]\n&= \\frac{2}{\\pi k}\\left(\\sin\\!\\left(\\frac{k\\pi}{2}\\right) - \\sin\\!\\left(\\frac{3k\\pi}{2}\\right)\\right) .\n\\end{aligned}\n\nNow,\n\n\\begin{aligned}\n\\sin\\!\\left(\\frac{3k\\pi}{2}\\right) &= \\sin\\!\\left(\\frac{k\\pi}{2} + k\\pi\\right) \\\\[4pt]\n&= (-1)^k \\sin\\!\\left(\\frac{k\\pi}{2}\\right) .\n\\end{aligned}\n\nSo if k is even, a_k = 0.\nIf k is odd,\n a_k = \\frac{4}{\\pi k}\\sin\\!\\left(\\frac{k\\pi}{2}\\right) = 2\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right), \\qquad \\text{where } \\operatorname{sinc}(x) := \\frac{\\sin(\\pi x)}{\\pi x} . \nLet k = 2\\ell + 1 for \\ell \\in \\mathbb{Z}.\nThen we have the Fourier series\n u(t) = \\sum_{k\\;\\text{odd}} 2\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right)\\cos(kt) . \n\n\n\n\nThe Fourier coefficients a_k = 2\\operatorname{sinc}(k/2) for the odd harmonics k = 2\\ell + 1, \\ell = -6,\\dots,6.\n\n\n\n\n\n\n\nThe phase of the same coefficients. Each a_k is real, so the phase is 0 where a_k &gt; 0 and \\pi where a_k &lt; 0. It is drawn as an odd function of k, taking -\\pi for k&gt;0 and +\\pi for k&lt;0.\n\n\n\nBelow is the square-wave builder for the square wave of this example — drag the slider to add harmonics and watch the Gibbs overshoot near the jumps (the red dot marks the persistent overshoot peak).",
-    "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week04/notes.html#properties-of-the-fourier-series",
-    "href": "weeks/week04/notes.html#properties-of-the-fourier-series",
-    "title": "Week 4 — Lecture notes",
-    "section": "Properties of the Fourier series",
-    "text": "Properties of the Fourier series\n1. Coefficients depend linearly on signal:\n c_{1,k} = \\frac{1}{T}\\int_0^T u_1(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t, \\qquad c_{2,k} = \\frac{1}{T}\\int_0^T u_2(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t . \nThe Fourier coefficient of \\alpha u_1 + \\beta u_2 is\n\n\\begin{aligned}\n&\\frac{1}{T}\\int_0^T \\alpha u_1(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t + \\frac{1}{T}\\int_0^T \\beta u_2(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t \\\\[4pt]\n&= \\alpha c_{1,k} + \\beta c_{2,k} .\n\\end{aligned}\n\n\nAdd and scale signals \\longrightarrow add and scale Fourier coefficients.\n\n2. Time shift \\rightsquigarrow rotation. (Remember the pure delay!)\nIf c_k = \\dfrac{1}{T}\\displaystyle\\int_0^T u(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t, then\n\n\\begin{aligned}\n\\frac{1}{T}\\int_0^T u(t-\\tau)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t\n&= \\frac{1}{T}\\int_{-\\tau}^{T-\\tau} u(\\mu)\\,\\overline{\\phi}_k(\\mu+\\tau)\\,\\mathrm{d}\\mu\n&& \\left[\\text{let } \\mu = t-\\tau,\\; \\mathrm{d}\\mu = \\mathrm{d}t,\\; t = \\mu+\\tau\\right] \\\\[6pt]\n&= \\frac{1}{T}\\int_{-\\tau}^{T-\\tau} u(\\mu)\\,e^{-jk\\omega(\\mu+\\tau)}\\,\\mathrm{d}\\mu \\\\[6pt]\n&= e^{-jk\\omega\\tau}\\,c_k .\n\\end{aligned}\n\n\nRotates the vector c_k by e^{-jk\\omega\\tau}.\n\n3. Parseval’s theorem.\nCan we calculate \\|u\\|_P directly from the Fourier coefficients of u?\n\n\\begin{aligned}\n\\|u\\|_P^2 &= \\frac{1}{T}\\int_0^T |u(t)|^2\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{1}{T}\\int_0^T \\left(\\sum_k c_k \\phi_k(t)\\right)\\overline{\\left(\\sum_\\ell c_\\ell \\phi_\\ell(t)\\right)}\\,\\mathrm{d}t \\\\[6pt]\n&= \\sum_k \\sum_\\ell c_k \\bar{c}_\\ell\\, \\underbrace{\\frac{1}{T}\\int_0^T \\phi_k(t)\\,\\overline{\\phi_\\ell(t)}\\,\\mathrm{d}t}_{=\\,\\langle \\phi_k, \\phi_\\ell\\rangle\\, =\\, 0 \\text{ for } k \\neq \\ell} \\\\[6pt]\n&= \\sum_k |c_k|^2\\, \\underbrace{\\langle \\phi_k, \\phi_k\\rangle}_{=\\,1} \\\\[6pt]\n&= \\sum_k |c_k|^2 .\n\\end{aligned}\n\nThis is Parseval’s theorem:\n \\boxed{\\;\\|u\\|_P^2 = \\sum_{k=-\\infty}^{\\infty} |c_k|^2\\;}",
-    "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week04/notes.html#example-the-rlc-circuit",
-    "href": "weeks/week04/notes.html#example-the-rlc-circuit",
-    "title": "Week 4 — Lecture notes",
+    "objectID": "weeks/week05/notes.html#example-the-rlc-circuit",
+    "href": "weeks/week05/notes.html#example-the-rlc-circuit",
+    "title": "Week 5 — Lecture notes",
     "section": "Example: the RLC circuit",
-    "text": "Example: the RLC circuit\nExample: Consider the RLC circuit from Lecture 1.\n v(t) = R\\,i(t) + L\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t} + \\frac{1}{C}\\int_{-\\infty}^{t} i(\\tau)\\,\\mathrm{d}\\tau \nFirst, let’s see how a single harmonic voltage maps through the system. Let v(t) = e^{\\,jk\\omega t} = \\phi_k(t) and search for i(t) = I_k e^{\\,jk\\omega t}.\n e^{\\,jk\\omega t} = R I_k e^{\\,jk\\omega t} + I_k\\,jk\\omega L\\,e^{\\,jk\\omega t} + \\frac{1}{C}\\frac{I_k}{jk\\omega}\\,e^{\\,jk\\omega t} . \n 1 = I_k \\underbrace{\\left(R + jk\\omega L + \\frac{1}{C\\,jk\\omega}\\right)}_{Z(jk\\omega)} \n I_k = \\frac{1}{Z(jk\\omega)} . \\qquad\\text{So}\\qquad \\phi_k \\;\\longmapsto\\; \\frac{\\phi_k}{Z(j\\omega k)} . \nNow, let’s use this result to solve for i(t) when v(t) is the square wave from the previous example.\n v(t) = \\sum_{k\\;\\text{odd}} 2\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right)\\cos(kt) \n\n\\left.\\begin{aligned}\na_k &= 2\\operatorname{Re}(c_k) \\\\\nb_k &= -2\\operatorname{Im}(c_k)\n\\end{aligned}\\right\\}\n\\implies c_k = \\tfrac{1}{2}\\left(a_k - j b_k\\right) .\n\nSo\n v(t) = \\sum_{k\\;\\text{odd}} \\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right) e^{\\,jk\\omega t} . \nThen we have, by superposition,\n i(t) = \\sum_{k\\;\\text{odd}} \\frac{\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right) e^{\\,jk\\omega t}}{Z(jk\\omega)} . \nThe widget below builds this output current harmonic by harmonic. The component values put the natural frequency at \\omega_n = 1/\\sqrt{LC} = 2 rad/s, between the first and third harmonics, so the first few odd harmonics pass with decreasing weight. Drag the slider to add harmonics and watch both waveforms build up: the input (navy) sharpens towards the square wave (with Gibbs overshoot), while the output (brick) — each harmonic scaled by 1/Z(jk\\omega) — grows into a smooth, filtered wave that never develops the sharp edges.",
+    "text": "Example: the RLC circuit\nExample: RLC circuit with v_C as output.\n\n\n\n\nSeries RLC circuit with v_C as the output (drawn with circuitikz).\n\n\n\nWe know the impulse response is\n g(t) = 6.25\\,e^{-3t}\\sin(4t)\\,H(t). \nWhat is the spectrum of this signal?\n \\sin(4t) = \\frac{1}{2j}\\left(e^{\\,j4t} - e^{-j4t}\\right) \nSo\n g(t) = \\frac{6.25}{2j}\\left(e^{(-3+4j)t} - e^{(-3-4j)t}\\right). \nUse the Fourier transform pair e^{-at}H(t) = \\dfrac{1}{a+j\\omega}:\n\n\\begin{aligned}\nG(j\\omega) &= -3.125j\\left(\\frac{1}{-(-3+4j)+j\\omega} - \\frac{1}{-(-3-4j)+j\\omega}\\right) \\\\[10pt]\n&= -3.125j\\left(\\frac{(+3+4j+j\\omega) - (+3-4j+j\\omega)}{(+3-4j+j\\omega)(+3+4j+j\\omega)}\\right) \\\\[10pt]\n&= -3.125j\\left(\\frac{8j}{(+3-4j)(+3+4j) + j\\omega(+3-4j) + (+3+4j)j\\omega - \\omega^2}\\right) \\\\[10pt]\n&= \\frac{25}{-\\omega^2 + 6j\\omega + 25}.\n\\end{aligned}\n\n\nWhat does the spectrum look like?\n\n\n\n\nMagnitude and phase of G(j\\omega) = \\dfrac{25}{-\\omega^2 + 6j\\omega + 25}.",
     "crumbs": [
-      "Week 4 — Periodic signals and the Fourier series",
+      "Week 5 — Aperiodic signals and the Fourier transform",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html",
-    "href": "weeks/week03/notes.html",
-    "title": "Week 3 — Lecture notes",
+    "objectID": "weeks/week02/notes.html",
+    "href": "weeks/week02/notes.html",
+    "title": "Week 2 — Lecture notes",
     "section": "",
     "text": "Other formats:\n📄 PDF",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#goals",
-    "href": "weeks/week03/notes.html#goals",
-    "title": "Week 3 — Lecture notes",
-    "section": "Goals",
-    "text": "Goals\n① Convolution: calculate the output of an LTI system by breaking the input into pieces.\n② Impulse response: complete representation of an LTI system.\n③ LTI systems preserve frequency.\n④ ODE descriptions of LTI systems.\n⑤ Interconnections of systems.",
+    "objectID": "weeks/week02/notes.html#goals-for-this-week",
+    "href": "weeks/week02/notes.html#goals-for-this-week",
+    "title": "Week 2 — Lecture notes",
+    "section": "Goals for this week",
+    "text": "Goals for this week\n\nMake “signal” and “system” precise.\nUnderstand linearity.\nHow to measure the size of a signal: energy & power.\nHow to measure the angle between signals.\nUseful signals: Dirac delta and friends.",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#recap",
-    "href": "weeks/week03/notes.html#recap",
-    "title": "Week 3 — Lecture notes",
-    "section": "Recap",
-    "text": "Recap\nLinear \\iff superposition\n\n\n\n\n\n\nadd/scale input \\iff add/scale output",
+    "objectID": "weeks/week02/notes.html#signals-as-vectors",
+    "href": "weeks/week02/notes.html#signals-as-vectors",
+    "title": "Week 2 — Lecture notes",
+    "section": "Signals as vectors",
+    "text": "Signals as vectors\nWe’ve seen signals & systems through examples. In this lecture, we’ll develop a language to represent these things mathematically. At first this may seem quite abstract, but it ends up being extremely powerful, as we’ll see throughout the semester.\nWe will build on what we know from linear algebra.\nA square matrix A maps a vector to another vector of the same dimension:\n\n\\underset{\\textstyle \\mathbb{R}^{n}}{y} \\;=\\;\n\\underset{\\textstyle \\mathbb{R}^{n\\times n}}{A}\\;\n\\underset{\\textstyle \\mathbb{R}^{n}}{u}\n\nIf n = 2, we can visualise A in the plane as scaling, rotating, skewing and reflecting u to produce y:\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  ℝ²\n  \n    \n    \n  \n  \n  \n  θ\n  u\n  Au\n\nScaling and rotating u to produce y = Au (drawn as sketched).\n\nWe measure the scaling using a norm:\n \\|u\\| \\;=\\; \\sqrt{u \\cdot u} \\;=\\; \\sqrt{u_1^{2} + u_2^{2}}. \nWe measure the rotation using the dot product:\n \\cos\\theta \\;=\\; \\frac{u \\cdot y}{\\|u\\|\\,\\|y\\|}. \nHow do we extend these ideas to signals?\nGiven a continuous signal, we can approximate one period as an infinite dimensional vector.\n\n \\dots\\; x_{-1}\\;\\; x_{0}\\;\\; x_{1}\\;\\; x_{2}\\;\\; x_{3}\\;\\; x_{4}\\;\\; x_{5}\\;\\; x_{6}\\;\\; x_{7}\\; \\dots \nThe dot product between these vectors is\n \\sum_{t=-\\infty}^{\\infty} u_t\\, y_t \\;=\\; u \\cdot y \nIf we let the sampling become infinitesimally fine, we integrate over the samples, and have an inner product:\n \\langle u, y\\rangle \\;:=\\; \\int_{-\\infty}^{\\infty} u(t)\\,y(t)\\,\\mathrm{d}t. \nFor complex signals, we add a complex conjugate:\n \\boxed{\\;\\langle u, y\\rangle \\;:=\\; \\int_{-\\infty}^{\\infty} u(t)\\,\\overline{y}(t)\\,\\mathrm{d}t\\;} \n\nSome useful properties of the inner product:\n\n\\langle u_1 + u_2,\\, y\\rangle \\;=\\; \\langle u_1, y\\rangle + \\langle u_2, y\\rangle\n\\langle \\alpha u,\\, y\\rangle \\;=\\; \\alpha\\,\\langle u, y\\rangle\n\\langle u,\\, \\beta y\\rangle \\;=\\; \\overline{\\beta}\\,\\langle u, y\\rangle\n\\langle u, y\\rangle \\;=\\; \\overline{\\langle y, u\\rangle}\n\nSo the inner product is linear in its first argument and conjugate-linear in its second.",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#convolution",
-    "href": "weeks/week03/notes.html#convolution",
-    "title": "Week 3 — Lecture notes",
-    "section": "① Convolution",
-    "text": "① Convolution\nIf we apply regular impulses to a system, what do we get at the output?\n\n\n\n\nEach input sample launches a scaled, shifted copy of the impulse response; the outputs superpose.\n\n\n\nWhat do we have at time 3?\nh started at \\tau = 2 and gone 1 time step: \\;\\overbrace{h(t-2)}^{h(1)}\\,u(2)\\;\nh started at \\tau = 1 and gone 2 time steps: \\;\\overbrace{h(t-1)}^{h(2)}\\,u(1)\\;\nh started at \\tau = 0 and gone 3 time steps: \\;\\overbrace{h(t-0)}^{h(3)}\\,u(0)\\;\nSo for fixed t: flip h and shift by t, then for each \\tau \\in [0, t], multiply with u(\\tau) and add to total.\n\n\n\n\nFor fixed t: flip h, shift by t, and add the products h(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t.\n\n\n\nThis gives the output to a sum of impulses. It turns out we can approximate any input as such a sum.\n\n\n\n\n\nApproximating u(t) by a train of impulses. The shaded rectangle at \\tau has area u(\\tau)\\,\\Delta t.\n\n\n\nArea of the shaded rectangle: u(\\tau)\\,\\Delta t.\nWe can represent this area by an impulse, \\delta(t-\\tau)\\,u(\\tau)\\,\\Delta t.\nThese impulses for each rectangle approximate u(t), just like a Riemann integral:\n u(t) \\approx \\sum_{k=-\\infty}^{\\infty} \\delta(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t \\qquad(1) \nThe corresponding output is a sum of delayed impulse responses that approximates the output of the system:\n y(t) \\approx \\sum_{k=-\\infty}^{\\infty} h(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t. \\qquad(2) \nWhat happens to (1) in the limit \\Delta t \\to 0?\n \\sum_{k=-\\infty}^{\\infty} \\delta(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t\n\\;\\longrightarrow\\; \\int_{-\\infty}^{\\infty}\\! \\delta(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau \nwith k\\Delta t \\to \\tau and \\Delta t \\to \\mathrm{d}\\tau. So we have\n \\boxed{\\,u(t) = \\int_{-\\infty}^{\\infty}\\! \\delta(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau\\,} \nThis is the sifting property! Read backwards, it says that the signal u(t) is equal to an integral of impulses with amplitude u(\\tau)\\,\\mathrm{d}\\tau.\nWhat about (2) in the limit \\Delta t \\to 0?\n \\sum_{k=-\\infty}^{\\infty} h(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t\n\\;\\longrightarrow\\; \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau. \nSo we have:\n \\boxed{\\,y(t) = \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau\\,} \nThe response to any input u(t) is determined by the impulse response! We will look more closely at how to calculate the impulse response soon, but first let’s understand the expression above.",
+    "objectID": "weeks/week02/notes.html#the-size-of-a-signal-energy-power",
+    "href": "weeks/week02/notes.html#the-size-of-a-signal-energy-power",
+    "title": "Week 2 — Lecture notes",
+    "section": "The size of a signal: energy & power",
+    "text": "The size of a signal: energy & power\nWe can use the inner product to measure the size of a signal:\n \\boxed{\\;E(u) \\;=\\; \\int_{-\\infty}^{\\infty} |u(t)|^{2}\\,\\mathrm{d}t\\;} \nThis is the signal energy. The complex conjugate in \\langle u, y\\rangle guarantees E(u) is real.\nExample:\n\nu(t) = \\begin{cases} e^{-t}, & t \\geq 0 \\\\[2pt] 0, & t &lt; 0. \\end{cases}\n\n\n\\begin{aligned}\nE(u) &= \\int_{0}^{\\infty} e^{-2t}\\,\\mathrm{d}t \\\\[4pt]\n     &= \\left. \\frac{-1}{2}\\, e^{-2t} \\right|_{0}^{\\infty} \\\\[4pt]\n     &= \\frac{1}{2}\\, e^{0} \\;=\\; \\frac{1}{2}.\n\\end{aligned}\n\nWhat if u(t) = A\\cos(\\omega t)?\n \\int_{-\\infty}^{\\infty} A^{2}\\cos^{2}(\\omega t)\\,\\mathrm{d}t \\;=\\; \\infty \\;\\dots \nTake the average power:\n\n\\text{energy} = \\displaystyle\\int \\text{power}\\;\\mathrm{d}t\n\n \\boxed{\\;P(u) \\;=\\; \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t.\\;} \nIf u(t) = u(t + T) for some T, each period contributes the same, so we get the average.\n\n\\begin{aligned}\n\\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t\n&= \\lim_{k \\to \\infty} \\frac{1}{2kT}\\left( \\cdots\n   \\underbrace{\\int_{-kT}^{-(k-1)T} |u(t)|^{2}\\,\\mathrm{d}t}_{\\textstyle =\\int_{0}^{T}|u(t)|^{2}\\,\\mathrm{d}t}\n   + \\underbrace{\\int_{-(k-1)T}^{-(k-2)T} |u(t)|^{2}\\,\\mathrm{d}t}_{\\textstyle =\\int_{0}^{T}|u(t)|^{2}\\,\\mathrm{d}t}\n   + \\cdots + \\int_{-T}^{0} |u(t)|^{2}\\,\\mathrm{d}t + \\cdots\n   + \\int_{(k-1)T}^{kT} |u(t)|^{2}\\,\\mathrm{d}t \\right) \\\\[10pt]\n&= \\lim_{k \\to \\infty} \\frac{1}{2k} \\cdot 2k \\cdot \\frac{1}{T} \\int_{0}^{T} |u(t)|^{2}\\,\\mathrm{d}t \\\\[6pt]\n&= \\boxed{\\;P(u) = \\frac{1}{T} \\int_{0}^{T} |u(t)|^{2}\\,\\mathrm{d}t.\\;}\n\\end{aligned}\n\nThis is the average power of a periodic signal.\nExample: what is the power of u(t) = A\\cos(\\omega t)\n \\text{Period} = \\frac{2\\pi}{\\omega} \n\n\\begin{aligned}\nP(u) &= \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}} A^{2}\\cos(\\omega t)^{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}} A^{2}\\,\\frac{1 + \\cos(2\\omega t)}{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\left[ A^{2}\\,\\frac{t}{2} \\;+\\; A^{2}\\,\\frac{\\sin(2\\omega t)}{4\\omega} \\right]_{0}^{\\frac{2\\pi}{\\omega}} \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\left( A^{2}\\,\\frac{\\frac{2\\pi}{\\omega}}{2}\n        \\;+\\; A^{2}\\,\\frac{\\overset{\\textstyle 0}{\\overbrace{\\sin\\!\\left(\\tfrac{4\\pi}{\\omega}\\,\\omega\\right)}}}{4\\omega} \\right) \\\\[6pt]\n     &= \\frac{A^{2}}{2}\n\\end{aligned}\n\nExample: what is the power of u(t) = \\begin{cases} e^{-t}, & t \\geq 0 \\\\[2pt] 0, & t &lt; 0 \\end{cases} ?\n\n\\begin{aligned}\nP(u) &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{0}^{W} e^{-2t}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\left[ \\frac{-1}{2}\\,e^{-2t} \\right]_{0}^{W} \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\underbrace{\\frac{1}{2W}}_{\\textstyle \\to 0}\n        \\left[ \\underbrace{\\frac{1}{2}\\,e^{0}}_{\\textstyle \\frac{1}{2}}\n        \\;-\\; \\underbrace{\\frac{1}{2}\\,e^{-2W}}_{\\textstyle \\to 0} \\right] \\\\[6pt]\n     &= 0.\n\\end{aligned}\n\n\nThrough the last two examples, we have discovered two types of signals:\nPower signals: infinite energy, finite power. \\qquad \\cos(\\omega t)\nEnergy signals: finite energy, zero power. \\qquad e^{-t}\nFor periodic signals, we can also define the rms (root mean square):\n \\boxed{\\;u_{\\mathrm{RMS}} \\;=\\; \\sqrt{P(u)}\\;} \nIt turns out P comes from a different inner product, which is finite for power signals,\n \\langle u, y\\rangle_{P} \\;:=\\; \\frac{1}{T} \\int_{0}^{T} u(t)\\, \\overline{y}(t)\\,\\mathrm{d}t. \nWe then have\n\n\\begin{aligned}\nP(u) &= \\langle u, u\\rangle_{P}, \\\\[4pt]\nu_{\\mathrm{RMS}} &= \\sqrt{\\langle u, u\\rangle_{P}} \\;=\\; \\|u\\|_{P}.\n\\end{aligned}\n\nExample: the RMS of mains power in Australia is 230 V. What is the peak voltage?\n v(t) = V_p \\cos(\\omega t), \\qquad \\omega = 2\\pi \\cdot 50 = 100\\pi \\;\\text{rad/s},\n   \\qquad T = \\tfrac{1}{50} = 20\\ \\text{ms}. \nFrom the earlier example, P(v) = \\dfrac{V_p^{2}}{2}, so\n v_{\\mathrm{RMS}} \\;=\\; \\sqrt{P(v)} \\;=\\; \\frac{V_p}{\\sqrt{2}}\n   \\qquad\\Longrightarrow\\qquad V_p \\;=\\; 230\\sqrt{2} \\;=\\; 325\\ \\text{V}. \nWhy do we use v_{\\mathrm{RMS}} as the nominal voltage? Let’s calculate the power delivered to a nominal resistive load R, such as a kettle.\nInstantaneous power is\n p(t) \\;=\\; v(t)\\, i(t) \\;=\\; \\frac{v(t)^{2}}{R} \\;=\\; \\frac{V_p^{2}}{R}\\cos^{2}(\\omega t). \nAverage over one period:\n\n\\begin{aligned}\nP_{\\mathrm{avg}} &= \\frac{1}{T} \\int_{0}^{T} \\frac{|v(t)|^{2}}{R}\\,\\mathrm{d}t\n   \\;=\\; \\frac{1}{R}\\, P(v) \\\\[6pt]\n&= \\frac{V_p^{2}}{2R} \\\\[6pt]\n&= \\frac{v_{\\mathrm{RMS}}^{2}}{R}.\n\\end{aligned}\n\n\nP(v) is a signal power, so its units are \\mathrm{V}^{2} — not joules. Dividing by R turns it into a physical power in watts.\n\nThis says that v_{\\mathrm{RMS}} is the equivalent DC voltage that delivers the same power across a nominal load.\nFor R = 23\\,\\Omega,\n P_{\\mathrm{avg}} = \\frac{230^{2}}{23} = 2300\\ \\text{W}, \\qquad\n   i_{\\mathrm{RMS}} = \\frac{230}{23} = 10\\ \\text{A}.",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#convolution-definition-and-properties",
-    "href": "weeks/week03/notes.html#convolution-definition-and-properties",
-    "title": "Week 3 — Lecture notes",
-    "section": "Convolution: definition and properties",
-    "text": "Convolution: definition and properties\n \\boxed{\\;\\text{The operation}\\quad h * u := \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau\\;} \nis called convolution.\nBasic properties of convolution:\n1. h * u = u * h (commutativity)\nProof:\n h * u = \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau. \nLet T = t - \\tau. Then \\tau = t - T and \\mathrm{d}T = -\\mathrm{d}\\tau.\n\n\\begin{aligned}\n&= -\\int_{\\infty}^{-\\infty}\\! h(T)\\,u(t-T)\\,\\mathrm{d}T \\\\[2pt]\n&= \\int_{-\\infty}^{\\infty}\\! u(t-T)\\,h(T)\\,\\mathrm{d}T \\;=\\; u * h.\n\\end{aligned}\n\n2. (h_1 + h_2) * u = h_1 * u + h_2 * u (additivity).\n3. h_1 * (h_2 * h_3) = (h_1 * h_2) * h_3 (associativity).\n4. \\displaystyle (u * \\delta)(t) = \\int_{-\\infty}^{\\infty}\\! u(t-\\tau)\\,\\delta(\\tau)\\,\\mathrm{d}\\tau = u(t).\n5. \\displaystyle (u * \\delta(t-T)) = \\int_{-\\infty}^{\\infty}\\! u(t-\\tau)\\,\\delta(\\tau-T)\\,\\mathrm{d}\\tau = u(t-T). \\qquad = \\text{pure delay!}\n6.\n\n\\begin{aligned}\n(f * g)' &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\int_{-\\infty}^{\\infty}\\! f(t-\\tau)\\,g(\\tau)\\,\\mathrm{d}\\tau \\\\[2pt]\n         &= \\int_{-\\infty}^{\\infty}\\! \\frac{\\mathrm{d}}{\\mathrm{d}t}f(t-\\tau)\\,g(\\tau)\\,\\mathrm{d}\\tau \\\\[2pt]\n         &= f' * g.\n\\end{aligned}\n\nBut also: (f * g)' = (g * f)' = g' * f.\nSo\n (f * g)' = f' * g = g' * f \n\nExample: a pulse convolved with itself\nExample: plot (2p_1 * 2p_1)(t)\n \\int_{-\\infty}^{\\infty}\\! 2p_1(t-\\tau)\\,2p_1(\\tau)\\,\\mathrm{d}\\tau \nThe value of (2p_1 * 2p_1)(t) is the area under the product: the heights multiply, so it is 2 \\times 2 times the width of the overlap.\n\n\n\nExample: radar\n\n\n  \n    \n      \n    \n  \n  \n  \n    \n    \n    \n    \n  \n  \n    \n    \n    \n    \n    \n    \n    \n  \n  \n    \n    \n    \n  \n  \n    \n    \n    \n  \n  r₁\n  r₂\n  r₃\n\n\nFor each object, the pulse is delayed by t_{d_i} = \\dfrac{2r_i}{c}.\nThis can be interpreted as a system impulse response.\ninput: \\delta(t)\nsystem: the scene\noutput: \\displaystyle \\sum_i \\delta(t - t_{d_i}).\n\\hookrightarrow output is a sum of delayed versions of the input.\nWhat system is this the impulse response of?\n \\sum_i D_{t_{d_i}} \\qquad \\text{: a sum of delays, one for each object.} \nWhat is the response if we inject a sinusoid:\nIntuitively: u(t) = \\cos(\\omega t), \\;y(t) = \\sum_i \\cos(\\omega t - \\omega t_{d_i}).\nLet’s check our intuition with what we just learnt:\n\n\\begin{aligned}\ny(t) &= u(t) * h(t) \\\\[2pt]\n     &= u(t) * \\sum_i \\delta(t - t_{d_i}) \\\\[2pt]\n     &= \\sum_i \\int_{-\\infty}^{\\infty}\\! u(t-\\tau)\\,\\delta(\\tau - t_{d_i})\\,\\mathrm{d}\\tau \\\\[2pt]\n     &= \\sum_i u(t - t_{d_i}) \\qquad \\text{(sifting property)} \\\\[2pt]\n     &= \\sum_i \\cos(\\omega t - \\omega t_{d_i}).\n\\end{aligned}",
+    "objectID": "weeks/week02/notes.html#the-angle-between-two-signals",
+    "href": "weeks/week02/notes.html#the-angle-between-two-signals",
+    "title": "Week 2 — Lecture notes",
+    "section": "The angle between two signals",
+    "text": "The angle between two signals\nWe can use this inner product to measure the angle between two signals using \\cos\\theta = \\dfrac{\\langle u, y\\rangle_{P}}{\\|u\\|_{P}\\,\\|y\\|_{P}}\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\left(\\omega t + \\frac{\\pi}{4}\\right) \n \\langle x_1(t), x_2(t)\\rangle_{P} \\;=\\; \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}}\n   12\\cos(\\omega t)\\cos\\!\\left(\\omega t + \\frac{\\pi}{4}\\right)\\mathrm{d}t \nPlug through to get \\;6\\cos\\!\\left(\\dfrac{\\pi}{4}\\right).\n \\|x_1\\|_{P} = \\frac{3}{\\sqrt{2}}, \\qquad \\|x_2\\|_{P} = \\frac{4}{\\sqrt{2}} \\qquad\n   \\text{using the previous example.} \nSo\n \\cos\\theta \\;=\\; \\frac{6\\cos\\!\\left(\\frac{\\pi}{4}\\right)}{6}, \\qquad \\theta = \\frac{\\pi}{4}. \n\nThe angle between two sinusoids is their phase shift.",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#the-impulse-response-of-circuits",
-    "href": "weeks/week03/notes.html#the-impulse-response-of-circuits",
-    "title": "Week 3 — Lecture notes",
-    "section": "② The impulse response of circuits",
-    "text": "② The impulse response of circuits\nNow let’s look at the impulse response of circuits.\n\n\n\n\n\nA series RC circuit.\n\n\nIn the RC circuit, a change in v_i causes gradual change in v_o.\n\n\n\n\n\n\nA voltage divider.\n\n\nIn the voltage divider, a change in v_i causes instantaneous change in v_o.\n\n\n\\hookrightarrow capacitor has memory:\nthe charge stored on its plates carries a memory of the current.\nThe impulse is a fictitious signal that deposits charge on the capacitor instantaneously:\n q_c = \\int i_c(t)\\,\\mathrm{d}t \nSo if i_c(t) = \\delta(t), \\;q_c(0) = \\displaystyle\\int_{0^-}^{0^+}\\!\\delta(t)\\,\\mathrm{d}t = 1.\nThis means an impulse response (inhomogeneous ODE) is equivalent to an initial condition response (homogeneous ODE).\nThis holds generally for LTI systems. Let’s see how on the RC circuit above.\n v_i(t) = v_R + v_C \n v_R = iR \n i = \\frac{\\mathrm{d}}{\\mathrm{d}t}C v_C. \nSo\n v_i(t) = v_C(t) + \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t). \nNow let v_i(t) = \\delta(t).\n \\delta(t) = v_C(t) + \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t). \nIntegrate both sides on [0^-, 0^+].\n \\int_{0^-}^{0^+}\\!\\delta(t)\\,\\mathrm{d}t = \\underbrace{\\int_{0^-}^{0^+}\\! v_C(t)\\,\\mathrm{d}t}_{=\\,0} + RC\\,v(0) \n 1 = RC\\,v(0) \n v(0) = \\frac{1}{RC}. \n\nImpulse at t=0 deposits an initial condition.\n\nWe can use this to calculate the impulse response, by solving\n \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t) + v_C(t) = 0, \\qquad v_C(0) = \\frac{1}{RC} \\qquad(3) \nLet v_C(t) = \\alpha e^{-\\beta t}.\n \\frac{\\mathrm{d}}{\\mathrm{d}t}v_C = -\\beta\\alpha e^{-\\beta t}. \nSub in (3):\n -RC\\beta\\alpha e^{-\\beta t} = -\\alpha e^{-\\beta t} \n RC\\beta = 1 \\iff \\beta = \\frac{1}{RC}. \nUse the initial condition to find \\alpha:\n v_C(0) = \\alpha e^{0} = \\frac{1}{RC}. \nSo the impulse response is\n v_C(t) = \\frac{1}{RC}\\,e^{-\\frac{1}{RC}t} =: h(t). \n\nh(t) is the usual notation we’ll use for impulse response.",
+    "objectID": "weeks/week02/notes.html#linear-systems-gain-and-delay",
+    "href": "weeks/week02/notes.html#linear-systems-gain-and-delay",
+    "title": "Week 2 — Lecture notes",
+    "section": "Linear systems, gain and delay",
+    "text": "Linear systems, gain and delay\nBack to our starting point, that a conformal matrix scales & rotates vectors.\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  ℝ²\n  \n    \n    \n  \n  \n  θ\n  u\n  Au\n\n\nA linear system performs these same operations on signals.\nFor example, a static gain scales a signal:\n\n\n  \n    \n      \n    \n  \n  u\n  \n  \n  k\n  \n  ku\n\n\nIf u = \\cos(\\omega t),\n\n\\begin{aligned}\n(ku)_{\\mathrm{RMS}} &= \\sqrt{P(ku)} \\\\[4pt]\n                    &= \\frac{k}{\\sqrt{2}} \\qquad \\text{from the previous example.}\n\\end{aligned}\n\n u_{\\mathrm{RMS}} \\;=\\; \\frac{1}{\\sqrt{2}}. \nThe gain of the system is\n \\frac{(ku)_{\\mathrm{RMS}}}{u_{\\mathrm{RMS}}} \\;=\\; k. \nWhat type of system rotates signals, that is, imparts phase lag?\nThe pure delay,\n\n\n  \n    \n      \n    \n  \n  u\n  \n  \n  D\n  τ\n  \n  y\n\n\n y(t) = u(t - \\tau). \nE.g. if u(t) = \\cos(\\omega t),\n\n\\begin{aligned}\ny(t) &= \\cos\\big(\\omega(t - \\tau)\\big) \\\\[2pt]\n     &= \\cos(\\omega t - \\omega\\tau).\n\\end{aligned}\n\nFrom the previous example,\n \\cos\\theta \\;=\\; \\cos(-\\omega\\tau) \\;=\\; \\cos(\\omega\\tau) \n \\underline{\\;\\theta = \\omega\\tau.\\;} \nThe pure delay gives a phase shift of \\omega\\tau, and gain \\underline{1}.\nPure delay and static gain are two simple examples of linear, time-invariant (LTI) systems. We will see many more next week!",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#ode-descriptions-of-lti-systems",
-    "href": "weeks/week03/notes.html#ode-descriptions-of-lti-systems",
-    "title": "Week 3 — Lecture notes",
-    "section": "④ ODE descriptions of LTI systems",
-    "text": "④ ODE descriptions of LTI systems\nThe same principle holds for nth order differential equations. For\n a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \\cdots + a_0 y(t) = \\delta(t) \nwith the system at rest before t=0, the impulse deposits an initial condition on the 2nd highest derivative:\n y^{(n-1)}(0^+) = \\frac{1}{a_n}, \\qquad y^{(n-2)}(0^+) = \\cdots = y(0^+) = 0. \nIf we also allow derivatives of the input:\n\n\\begin{aligned}\n&a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \\cdots + a_0 y(t) \\\\[2pt]\n&\\qquad = b_m u^{(m)}(t) + b_{m-1}u^{(m-1)}(t) + \\cdots + b_0 u(t)\n\\end{aligned}\n\nwith given initial conditions y^{(n-1)}(0), y^{(n-2)}(0), \\dots, y(0), we have a description for a large class of useful systems, including all of the circuits we’ve seen so far.\n\nn is called the order of the system,\nthe a_i and b_i are called the coefficients of the system,\nsuch systems are always time-invariant,\nif the initial conditions are all 0, the system is linear,\nthis gives an implicit description of the map from u to y. In weeks 5 & 6 we’ll develop an explicit description.",
+    "objectID": "weeks/week02/notes.html#linearity-and-time-invariance",
+    "href": "weeks/week02/notes.html#linearity-and-time-invariance",
+    "title": "Week 2 — Lecture notes",
+    "section": "Linearity and time invariance",
+    "text": "Linearity and time invariance\nWhat do linear and time invariant mean?\nLinear =\nhomogeneous (scale invariant): \\;A(\\alpha u) = \\alpha A(u).\nand additive: \\;A(u_1 + u_2) = A(u_1) + A(u_2). \\qquad Add inputs \\to add outputs.\nTogether, we have superposition: \\;A(\\alpha u_1 + \\beta u_2) = \\alpha A(u_1) + \\beta A(u_2).\nTime invariant: behaviour doesn’t depend on starting time:\n A(D_\\tau u) = D_\\tau A(u) \\quad \\text{for all } \\tau. \\qquad \\text{\\small shift input} \\to \\text{\\small shift output.} \nQuick quiz: which maps from u to y are linear?\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  u\n  y\n  \n  \n  ①\n  \n  \n  ②\n  \n  \n  ③\n\n\n\nExample: check the delay is linear:\n\n\\begin{aligned}\nD_\\tau(\\alpha u) &= \\alpha\\, u(t - \\tau) = \\alpha\\, D_\\tau(u)\n   &&\\Longrightarrow\\; \\text{homogeneous.} \\\\[6pt]\nD_\\tau(u_1 + u_2) &= u_1(t - \\tau) + u_2(t - \\tau) = D_\\tau(u_1) + D_\\tau(u_2)\n   &&\\Longrightarrow\\; \\text{additive.}\n\\end{aligned}\n\nIs it time invariant?\n D_\\tau\\big(D_\\mu u\\big) \\;=\\; D_\\tau\\big(u(t - \\mu)\\big) \\;=\\; u(t - \\mu - \\tau)\n   \\;=\\; D_\\mu\\big(D_\\tau(u)\\big) \\;\\checkmark",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#lti-systems-and-sinusoids",
-    "href": "weeks/week03/notes.html#lti-systems-and-sinusoids",
-    "title": "Week 3 — Lecture notes",
-    "section": "③ LTI systems and sinusoids",
-    "text": "③ LTI systems and sinusoids\nBack to our RC circuit. Let’s plug in a complex sinusoidal voltage and see what happens.\n v_i(t) = v_C(t) + \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t). \nLet v_i(t) = e^{j\\omega t} = \\cos(\\omega t) + j\\sin(\\omega t).\nGuess a solution v_C(t) = G e^{j\\omega t} for some G \\in \\mathbb{C} — a sinusoid of the same frequency.\n e^{j\\omega t} = G e^{j\\omega t} + \\frac{\\mathrm{d}}{\\mathrm{d}t}RCG e^{j\\omega t} \n e^{j\\omega t} = G e^{j\\omega t} + j\\omega RCG e^{j\\omega t} \n 1 = G + j\\omega RCG \\qquad (e^{j\\omega t} \\neq 0) \n G(j\\omega) = \\frac{1}{1 + j\\omega RC}. \n\nWhy is Ge^{j\\omega t} always such a good guess?\n\n\nConsider an arbitrary LTI system mapping u to y.\nLet u(t) = e^{j\\omega t} = \\cos(\\omega t) + j\\sin(\\omega t).\nTime invariance: u(t-\\tau) \\longmapsto y(t-\\tau).\nFor this input,\n\n\\begin{aligned}\nu(t-\\tau) &= e^{j\\omega(t-\\tau)} = e^{j\\omega t}e^{-j\\omega\\tau} \\\\[2pt]\n          &= e^{-j\\omega\\tau}u(t).\n\\end{aligned}\n\nThis is the input u scaled by e^{-j\\omega\\tau}.\nBy linearity, y(t-\\tau) = e^{-j\\omega\\tau}y(t).\nSet t=0 and relabel -\\tau = t, then\n y(t) = e^{j\\omega t}y(0), \nwhere y(0) is G(j\\omega) in the example above.\n\nLTI systems always map a sinusoid to a sinusoid of the same frequency.\n\nLet’s think about this in terms of our matrix \\longleftrightarrow system analogy.\n\n\n\n\n\n\n\nmatrix\nLTI system\n\n\n\n\ny = Au\ny(t) = G(u(t))\n\n\nIf u is an eigenvector, y = Au = \\lambda u\nIf u = e^{j\\omega t}, y = G(j\\omega)\\,e^{j\\omega t}\n\n\nA scales u to get y.\nG scales u to get y.\n\n\n\ne^{j\\omega t} is an eigenvector!\n\n\n\nMatrices are hard in general, but diagonal matrices are easy, they simply scale each entry of the vector. How do we diagonalise a matrix? We find a basis of eigenvectors.\nOver the last three weeks, we’ve seen that time domain signals & systems are hard to analyse. We’ve just discovered that the eigenvectors of an LTI system are sinusoids. Can we use this to somehow “diagonalise” the system and make the analysis less difficult, the same as we would do for a matrix?\nYES! This is what the Fourier Transform does. We will build this over the next three weeks.",
+    "objectID": "weeks/week02/notes.html#now-some-useful-signals",
+    "href": "weeks/week02/notes.html#now-some-useful-signals",
+    "title": "Week 2 — Lecture notes",
+    "section": "Now: some useful signals",
+    "text": "Now: some useful signals\nWe have already seen the most used signal in this course: u(t) = e^{st}, s \\in \\mathbb{C}, and all its components: e^{-t}, e^{t}, \\sin t, \\cos t.\nNow we’ll introduce three more signals which we will see many more times.\n\n① Dirac delta\n\nu_\\varepsilon(t) is the triangle of base \\varepsilon and height \\tfrac{2}{\\varepsilon}, so\n \\int_{-\\infty}^{\\infty} u_\\varepsilon(t)\\,\\mathrm{d}t\n   \\;=\\; \\frac{1}{2}\\,\\varepsilon\\,\\frac{2}{\\varepsilon}\n   \\;=\\; \\varepsilon\\,\\frac{1}{\\varepsilon} \\;=\\; 1. \nThe Dirac delta, or impulse, \\delta(t), may be defined as\n \\boxed{\\;\\delta(t) \\;=\\; \\lim_{\\varepsilon \\to 0} u_\\varepsilon(t)\\;} \n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n\n\ninfinite height, area 1.\nThe Dirac delta has an extremely important property: the sifting property.\nLet y(t) be an arbitrary continuous signal. Then\n \\boxed{\\;\\langle y, \\delta\\rangle \\;=\\; \\int_{-\\infty}^{\\infty} y(t)\\,\\bar \\delta(t)\\,\\mathrm{d}t\n   \\;=\\; y(0)\\;} \nSketch of proof:\nIf \\varepsilon is small, y(t) \\simeq y(0) on [0, \\varepsilon], so\n\n\\begin{aligned}\n\\int_{-\\infty}^{\\infty} \\delta(t)\\, y(t)\\,\\mathrm{d}t\n  &= \\lim_{\\varepsilon \\to 0} \\int_{0}^{\\varepsilon} u_\\varepsilon(t)\\, y(t)\\,\\mathrm{d}t \\\\[6pt]\n  &\\simeq y(0) \\lim_{\\varepsilon \\to 0} \\int_{0}^{\\varepsilon} u_\\varepsilon(t)\\,\\mathrm{d}t \\\\[6pt]\n  &= y(0).\n\\end{aligned}\n\n(Can be made precise using a continuity argument).\nWhat about \\displaystyle \\int_{-\\infty}^{\\infty} \\delta(t - \\tau)\\, y(t)\\,\\mathrm{d}t ?\nLet \\sigma = t - \\tau. \\;\\mathrm{d}t = \\mathrm{d}\\sigma.\nThen we have\n \\int_{-\\infty}^{\\infty} \\delta(\\sigma)\\, y(\\sigma + \\tau)\\,\\mathrm{d}\\sigma \\;=\\; y(\\tau). \n \\boxed{\\;\\int_{-\\infty}^{\\infty} \\delta(t - \\tau)\\, y(t)\\,\\mathrm{d}t \\;=\\; y(\\tau)\\;}\n   \\qquad \\text{\\small the sifting property.} \n\nNOTE: The above definition of the Dirac delta is not unique. It can be defined in many ways, for example using different limits, measures or distributions. The important thing (which really defines it) is the sifting property.\n\n\nNOTE: A Dirac delta only really makes sense inside an integral, so it represents an area of 1, rather than a height.\n\n\nThe scaling property\nWhat is \\delta(\\alpha t)?\n \\delta(\\alpha t) \\;=\\; \\lim_{\\varepsilon \\to 0} u_\\varepsilon(\\alpha t). \n\n\n  \n    \n      \n    \n  \n\n  \n  \n  αt\n  \n  0\n  ε\n  \n  2/ε\n  uε(αt)\n  α &gt; 0\n\n  \n  \n  αt\n  \n  0\n  ε\n  \n  2/ε\n  uε(αt)\n  α &lt; 0\n\n  \n  \n  t\n  \n  \n  2/ε\n  ε/α\n  area 1/|α|\n\n\nLet \\sigma = \\alpha t. Then \\sigma = \\varepsilon \\;\\Rightarrow\\; t = \\dfrac{\\varepsilon}{\\alpha}, so on the t axis the triangle has base \\left|\\dfrac{\\varepsilon}{\\alpha}\\right| and height \\dfrac{2}{\\varepsilon}, giving\n \\text{area} \\;=\\; \\frac{1}{2}\\left|\\frac{\\varepsilon}{\\alpha}\\right|\\frac{2}{\\varepsilon}\n   \\;=\\; \\frac{1}{|\\alpha|}. \nThe limit is therefore an impulse of area \\dfrac{1}{|\\alpha|} at the origin:\n \\boxed{\\;\\delta(\\alpha t) \\;=\\; \\frac{1}{|\\alpha|}\\,\\delta(t)\\;} \n\n\nExample: radar\nRadar systems emit a pulse train and measure its reflection to find the distance to objects. We can model this as a sequence of deltas.\n\n\n  \n    \n      \n    \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  r\n\n\nTotal path length: 2r. Round trip time: \\dfrac{2r}{c} = t_d. So\n r \\;=\\; \\frac{c\\,t_d}{2}. \nDelay \\Rightarrow distance. E.g. a 1\\,\\mu\\text{s} delay gives\n r = \\tfrac{1}{2}\\,(3\\times10^{8})(10^{-6}) = 150\\ \\text{m}. \nIf there are N targets at ranges r_i with reflectivities a_i, the reflected signal is\n y(t) \\;=\\; \\sum_{i=1}^{N} a_i\\, \\delta\\!\\left(t - \\frac{2 r_i}{c}\\right). \nUnambiguous range. Suppose we transmit radar pulses at a frequency f = \\dfrac{1}{T}:\n\n\n  \n    \n      \n    \n  \n  \n  \n    \n    \n    \n    \n  \n  \n  T\n\n\nSuppose we measure an echo at time t_d since the most recent pulse. Which pulse is it an echo of? The distance could be\n \\frac{c\\,t_d}{2}, \\qquad \\frac{c\\,(t_d + T)}{2}, \\qquad \\frac{c\\,(t_d + 2T)}{2},\n   \\qquad \\dots \nThe range is only known up to\n R_u \\;=\\; \\frac{cT}{2}, \nthe unambiguous range.\nHigher T: larger range, but slower updates.\nHow to deal with this? Transmit at two frequencies — the range has to be consistent with both measurements.\n\n\n\n\n② The unit step\nAnother important function is the unit step or Heaviside function:\n\n\\begin{aligned}\nH(t) &:= \\int_{-\\infty}^{t} \\delta(\\varsigma)\\,\\mathrm{d}\\varsigma \\\\[6pt]\n     &= \\begin{cases} 0, & t &lt; 0 \\\\[2pt] 1, & t \\geq 0. \\end{cases}\n\\end{aligned}\n\n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n  \n  \n  0\n  \n  \n  1\n\n\n\n\n③ The pulse\nFinally, the pulse function \\Pi_\\tau(t):\n\n\\Pi_\\tau(t) := \\begin{cases} 1, & -\\dfrac{\\tau}{2} \\leq t \\leq \\dfrac{\\tau}{2} \\\\[6pt]\n0, & \\text{otherwise.} \\end{cases}\n\n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  0\n  −τ/2\n  τ/2\n  1",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 2 — Signals as vectors, systems as maps",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#block-diagrams-and-interconnections",
-    "href": "weeks/week03/notes.html#block-diagrams-and-interconnections",
-    "title": "Week 3 — Lecture notes",
-    "section": "⑤ Block diagrams and interconnections",
-    "text": "⑤ Block diagrams and interconnections\nBlock diagrams or signal flow diagrams describe the exchange of signals between systems.\n\n\n\n\nSystem A with input u and output y.\n\n\n\n\n\n\nA static gain k.\n\n\n\n\n\n\nA cascade interconnection.\n\n\n\n\n\n\nThe sum of two signals.\n\n\n\n\n\n\nA parallel interconnection.\n\n\n\n\n\n\nA negative feedback interconnection (the subject of control systems).",
+    "objectID": "weeks/week01/notes.html",
+    "href": "weeks/week01/notes.html",
+    "title": "Week 1 — Lecture notes",
+    "section": "",
+    "text": "Other formats:\n📄 PDF\nSignals & Systems lives at the intersection of differential equations, linear algebra, complex numbers and trigonometry.",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 1 — Introduction",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week03/notes.html#extra-example-impulse-response-of-an-rlc-circuit",
-    "href": "weeks/week03/notes.html#extra-example-impulse-response-of-an-rlc-circuit",
-    "title": "Week 3 — Lecture notes",
-    "section": "Extra example: impulse response of an RLC circuit",
-    "text": "Extra example: impulse response of an RLC circuit\n\n\n\n\nSeries RLC circuit.\n\n\n\nLet’s consider v_C to be the output.\n v(t) = v_R + v_L + v_C \\qquad \\text{(KVL)} \n i = C\\frac{\\mathrm{d}}{\\mathrm{d}t}v_C \n v_L = L\\frac{\\mathrm{d}}{\\mathrm{d}t}i \n v_R = Ri \nCombining, KVL becomes:\n v(t) = L\\frac{\\mathrm{d}}{\\mathrm{d}t}i + Ri + v_C \\qquad(4) \nOr\n v(t) = LC\\frac{\\mathrm{d}^2}{\\mathrm{d}t^2}v_C(t) + RC\\frac{\\mathrm{d}}{\\mathrm{d}t}v_C(t) + v_C. \nNow assume the circuit is at rest and we apply an impulse voltage.\nImagine what v(t) = \\delta(t) does to the circuit around t=0.\nIntegrate (4):\n\n\\int_{0^-}^{0^+}\\!\\delta(t)\\,\\mathrm{d}t\n= \\int_{0^-}^{0^+}\\! L\\frac{\\mathrm{d}}{\\mathrm{d}t}i(t) + \\underbrace{Ri(t) + v_C(t)}_{\\text{assume finite}}\\,\\mathrm{d}t\n\nThe underbraced terms give 0, as we are integrating over an infinitesimal interval. So\n 1 = Li(0) \n i(0) = \\frac{1}{L}. \nNow,\n v_C(0) = \\frac{1}{C}\\int_{0^-}^{0^+}\\! i(t)\\,\\mathrm{d}t = 0. \nConclusion: the impulse at 0 deposits an initial condition on the inductor: the 2nd highest derivative of v_C.\nWe can now solve the impulse response of the circuit as an initial condition response:\n\n\\frac{\\mathrm{d}^2}{\\mathrm{d}t^2}v_C(t)\n+ \\underbrace{\\frac{R}{L}}_{2\\zeta\\omega_n}\\frac{\\mathrm{d}}{\\mathrm{d}t}v_C(t)\n+ \\underbrace{\\frac{1}{LC}}_{\\omega_n^2}v_C(t) = 0 \\qquad(5)\n\nwith v_C(0) = 0,\n v_C'(0) = \\frac{1}{C}i(0) = \\frac{1}{LC}. \nWe suspect the solution will be some kind of exponential/sinusoid combo, so let’s guess a solution\n e^{st} \\qquad \\text{for some } s \\in \\mathbb{C}. \nSubstituting in (5):\n s^2 e^{st} + 2\\zeta\\omega_n s\\, e^{st} + \\omega_n^2 e^{st} = 0 \ne^{st} \\neq 0, so\n s^2 + 2\\zeta\\omega_n s + \\omega_n^2 = 0 \\qquad(6) \n\n\\begin{aligned}\ns &= \\frac{-2\\zeta\\omega_n \\pm \\sqrt{4\\zeta^2\\omega_n^2 - 4\\omega_n^2}}{2} \\\\[2pt]\n  &= -\\zeta\\omega_n \\pm \\omega_n\\sqrt{\\zeta^2 - 1}.\n\\end{aligned}\n\nThe roots of (6) are called the poles of the system (recall pole position & behaviour from week 1).\nSuppose R = 6\\,\\Omega, L = 1\\,\\mathrm{H}, C = 40\\,\\mathrm{mF}.\nThen s = -3 \\pm 4j.\nso the response is\n v_C(t) = A e^{(-3+4j)t} + B e^{(-3-4j)t}. \nv_C(0) = 0, so A + B = 0. \\quad\\Rightarrow\\quad B = -A\nv_C'(0) = \\dfrac{1}{LC}, so\n (-3+4j)A - (-3-4j)A = \\frac{1}{LC} \n A = \\frac{1}{8j\\,LC} \n = -3.125j \nso we have\n\n\\begin{aligned}\nv_C(t) &= A e^{(-3+4j)t} + \\bar{A}\\, e^{(-3-4j)t} \\qquad\\text{(complex conjugates!)} \\\\[2pt]\n       &= 2\\operatorname{Re}\\!\\big(A e^{(-3+4j)t}\\big) \\\\[2pt]\n       &= 6.25\\, e^{-3t}\\sin(4t)\\,H(t)\n\\end{aligned}\n\nH(t) encodes that the signal is 0 before t=0.",
+    "objectID": "weeks/week01/notes.html#a-the-exponential-function",
+    "href": "weeks/week01/notes.html#a-the-exponential-function",
+    "title": "Week 1 — Lecture notes",
+    "section": "(a) The exponential function",
+    "text": "(a) The exponential function\nFor z \\in \\mathbb{C}, define the exponential by its power series:\n e^{z} := 1 + z + \\frac{z^{2}}{2!} + \\frac{z^{3}}{3!} + \\cdots \nProperties. First, e^{0} = 1 (straight from the definition) \\qquad(1)\n\n\\begin{aligned}\n\\frac{\\mathrm{d}}{\\mathrm{d}z}\\,e^{z}\n&= 0 + 1 + \\frac{2z}{2!} + \\frac{3z^{2}}{3!} + \\cdots \\\\[2pt]\n&= 1 + z + \\frac{z^{2}}{2!} + \\cdots \\\\[2pt]\n&= e^{z}\n\\end{aligned}\n\\qquad(2)\n\nCombining the two properties:\n \\boxed{\\,f(z) = f'(z), \\qquad f(0) = 1\\,} \nIt turns out f(z) = e^{z} is the unique solution to this differential equation, and in fact the differential equation can be used as an alternative definition.\nExtension of (2). By the chain rule,\n\n\\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{zt}\n= 0 + z + \\frac{2t\\,z^{2}}{2!} + \\frac{3t^{2}z^{3}}{3!} + \\cdots\n= z\\,e^{zt}.",
     "crumbs": [
-      "Week 3 — Linear, time-invariant systems",
+      "Week 1 — Introduction",
       "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#b-eulers-formula",
+    "href": "weeks/week01/notes.html#b-eulers-formula",
+    "title": "Week 1 — Lecture notes",
+    "section": "(b) Euler’s formula",
+    "text": "(b) Euler’s formula\nLet’s now represent sinusoids as complex numbers. Let\n g(\\theta) = \\frac{\\cos\\theta + j\\sin\\theta}{e^{j\\theta}} . \nThen\n\n\\begin{aligned}\ng'(\\theta)\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(\\cos\\theta + j\\sin\\theta\\big)\\,j\\,e^{-j\\theta} \\\\[2pt]\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta} \\\\[2pt]\n&= 0 .\n\\end{aligned}\n\nSo g(\\theta) = C (a constant):\n C\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta . \nSet \\theta = 0. Then C = 1, so we have\n \\boxed{\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta\\,} \nWhat does this mean graphically? e^{j\\theta} is the unit vector at angle \\theta; its real part is \\cos\\theta and its imaginary part is \\sin\\theta. Advance \\theta and the vector rotates, its shadow tracing a sinusoid.\n\nIn particular: \\;e^{j\\pi/2} = j, \\qquad e^{j\\pi} = -1.\n\nManipulating sinusoids using complex numbers\nWhy use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\big(\\omega t + \\tfrac{\\pi}{2}\\big),\n   \\qquad x_1(t) + x_2(t) = \\;? \nThe direct way uses the identity \\cos(\\theta + \\tfrac{\\pi}{2}) = -\\sin\\theta, so x_2(t) = -4\\sin\\omega t, giving\n 3\\cos\\omega t - 4\\sin\\omega t \\;\\equiv\\; A\\cos(\\omega t + \\varphi)\n   \\quad\\longrightarrow\\quad \\text{match coefficients} \\dots \nWith complex numbers:\n\n\\begin{aligned}\nx_1(t) &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_2(t) &= \\operatorname{Re}\\!\\big(4\\,e^{\\,j\\omega t + j\\pi/2}\\big)\n        = \\operatorname{Re}\\!\\big(4\\,e^{j\\pi/2}\\,e^{j\\omega t}\\big)\n        = \\operatorname{Re}\\!\\big(4j\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_1(t) + x_2(t)\n        &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t} + 4j\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big((3 + 4j)\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big(5\\,e^{j0.927}\\,e^{j\\omega t}\\big)\n        = 5\\cos(\\omega t + 0.927).\n\\end{aligned}\n\n\nThe triangle 3 + 4j = 5\\angle 53.1^{\\circ} rotates.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
+    "href": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
+    "title": "Week 1 — Lecture notes",
+    "section": "(c) Euler’s formula & differential equations",
+    "text": "(c) Euler’s formula & differential equations\nAnother differential equation:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,x(t) = j\\,x(t) \\qquad(3) \nWe’ve already seen \\dfrac{\\mathrm{d}}{\\mathrm{d}t}e^{zt} = z\\,e^{zt}. Set z = j:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{jt} = j\\,e^{jt}. \nThis solves (3). What does it look like in \\mathbb{C}, and what does the real part look like? What about other choices of z?\n z = -1:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{-t} = -e^{-t}. \\qquad\\text{No imaginary component.} \n z = -1 + j:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{(-1+j)t} = (-1+j)\\,e^{(-1+j)t}. \nThe widget below plots the trajectory of e^{zt} for several values of z.\n\n\nThe position of z determines the behaviour: oscillations, decay, growth.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
+    "href": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
+    "title": "Week 1 — Lecture notes",
+    "section": "(d) What has this got to do with electrical engineering?",
+    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit.\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t} + \\frac{K}{C},\n\\end{aligned}\n where K is a constant of integration. Matching coefficients of e^{j\\omega t}, we find K = 0 (K represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nThe widget below plots input and output sinusoids for several values of the reactance Z. For some values, the output lags the input, while for others, the output leads.\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
+    "crumbs": [
+      "Week 1 — Introduction",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "ELEC2302/9302 — Signals and Systems",
+    "section": "",
+    "text": "Lecture notes, tutorials and lab sheets will be posted here each week.\nThe course index lists every concept covered so far, with links to the relevant material.",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#lectures",
+    "href": "index.html#lectures",
+    "title": "ELEC2302/9302 — Signals and Systems",
+    "section": "Lectures",
+    "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes\n\n\n2\nSignals as vectors, systems as maps\nNotes · Tutorial · Solutions\n\n\n3\nLinear, time-invariant systems\nNotes · Tutorial · Solutions\n\n\n4\nPeriodic signals and the Fourier series\nNotes · Tutorial\n\n\n5\nAperiodic signals and the Fourier transform\nNotes",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "analytics.html",
+    "href": "analytics.html",
+    "title": "Analytics on this site",
+    "section": "",
+    "text": "This site collects a small amount of anonymous usage data, and this page explains exactly what and why. Nothing here is linked to you, to your student record, or to your marks."
+  },
+  {
+    "objectID": "analytics.html#what-is-collected",
+    "href": "analytics.html#what-is-collected",
+    "title": "Analytics on this site",
+    "section": "What is collected",
+    "text": "What is collected\nThe site uses GoatCounter, an open-source analytics tool that does not use cookies and does not track you across websites. For each page view it records:\n\nthe page you looked at, and the page you arrived from\nyour browser, operating system, screen size and country\nwhether you interacted with one of the interactive widgets in the notes, and which one\nwhether you opened the PDF version of a week’s notes, and which week\n\nThis is the reason for tracking: the widgets take effort to build, and I would like to know whether they are worth building for the remaining weeks. The count records that a widget was used, once per visit — not what you did with it, not how long for, and not in what order."
+  },
+  {
+    "objectID": "analytics.html#what-is-not-collected",
+    "href": "analytics.html#what-is-not-collected",
+    "title": "Analytics on this site",
+    "section": "What is not collected",
+    "text": "What is not collected\nNo cookies. No name, email, student ID, IP address or any other identifier is stored. GoatCounter distinguishes one visitor from another using a hash of your IP address and browser version that is held in memory for eight hours and then discarded; it is never written to disk and cannot be reversed. Nothing is shared with advertisers, and the data is not used for anything to do with assessment."
+  },
+  {
+    "objectID": "analytics.html#opting-out",
+    "href": "analytics.html#opting-out",
+    "title": "Analytics on this site",
+    "section": "Opting out",
+    "text": "Opting out\nAny ad blocker or tracker blocker will stop the counting, as will Do Not Track in some browsers. The widgets and the rest of the site work exactly the same either way, and nothing is lost by blocking it.\nIf you would rather not be counted and do not want to install anything, email me and I will tell you the one-line setting to paste into your browser console."
+  },
+  {
+    "objectID": "analytics.html#questions",
+    "href": "analytics.html#questions",
+    "title": "Analytics on this site",
+    "section": "Questions",
+    "text": "Questions\nAsk on Ed, or email thomas.chaffey@sydney.edu.au."
+  },
+  {
+    "objectID": "concepts.html",
+    "href": "concepts.html",
+    "title": "Course Index",
+    "section": "",
+    "text": "Use the search box to find a concept and click a column heading to sort.\n\nKey:   Pre = the primer on RLC circuits  ·  W1–W4 notes = the lecture notes for that week  ·  T1–T3 = tutorial sheets, with A, B, C the prework questions and Q1, Q2, … the tutorial questions\n\n\n\n\n  \n  \n\n\n\n\n\n\nWeek ▾\nConcept \nIntroduced \nPracticed",
+    "crumbs": [
+      "Course index"
+    ]
+  },
+  {
+    "objectID": "weeks/primer/notes.html",
+    "href": "weeks/primer/notes.html",
+    "title": "A primer on RLC circuits",
+    "section": "",
+    "text": "Other formats:\n📄 PDF\nRLC circuits are an important and useful class of LTI systems that are widely used in analogue signal processing.\nRLC circuits are interconnections of resistors (R), capacitors (C) and inductors (L) that manipulate voltages and currents.\nCurrent is the flow (rate of change) of charge (unit: Coulombs). It is measured in Amperes, which are Coulombs/second.\nVoltage is a difference in potential energy which forces current to flow. It is measured in Volts, which are Joules/Coulomb.\nRLC circuits are described by a couple of things:\nThe circuit is governed by two sets of laws:\nKirchhoff’s laws describe the interconnection structure of the circuit diagram: how are current and voltage related between components.\nThe device laws describe how the current and voltage are related across an individual component.\nCombining Kirchhoff’s laws and the device laws gives a complete description of the circuit behaviour.",
+    "crumbs": [
+      "Primer on RLC circuits"
+    ]
+  },
+  {
+    "objectID": "weeks/primer/notes.html#kirchhoffs-laws-for-series-parallel-circuits",
+    "href": "weeks/primer/notes.html#kirchhoffs-laws-for-series-parallel-circuits",
+    "title": "A primer on RLC circuits",
+    "section": "Kirchhoff’s laws for series & parallel circuits",
+    "text": "Kirchhoff’s laws for series & parallel circuits\nKirchhoff’s laws can be solved for an arbitrary circuit diagram, but in ELEC2302/9302, we will only use two special cases: series and parallel circuits.\n\n\n\n\n\n\n\nEach device has a current flowing through it and a voltage across it.\n\n\n\n\nA device with a current through it and a voltage across it.\n\n\n\nBy convention, current flows from + to −.\nThe current and voltage have a direction, which you can choose: the important thing is to be consistent. If the actual current flows the other way, you will get a minus sign in your analysis.\nFor series and parallel circuits, Kirchhoff’s laws say the following.\n\nSeries circuit\n\n\n\n\nSeries circuit.\n\n\n\nKirchhoff’s current law: the current through devices in series is equal. i_1 = i_2 = i_3.\nKirchhoff’s voltage law: the voltages around the loop sum to zero. -v + v_1 + v_2 + v_3 = 0. To get the sign of each voltage, follow i around the loop and take the sign of the terminal it enters for each device.\n\n\nParallel circuit\n\n\n\n\nParallel circuit.\n\n\n\nKirchhoff’s voltage law: the voltage across devices in parallel is equal. v_1 = v_2 = v_3.\nKirchhoff’s current law: the sum of the currents through the devices equals the total current i.\n i = i_1 + i_2 + i_3 .",
+    "crumbs": [
+      "Primer on RLC circuits"
+    ]
+  },
+  {
+    "objectID": "weeks/primer/notes.html#device-laws",
+    "href": "weeks/primer/notes.html#device-laws",
+    "title": "A primer on RLC circuits",
+    "section": "Device laws",
+    "text": "Device laws\nThere are four fundamental quantities in a circuit: current i(t), charge q(t), voltage v(t) and magnetic flux linkage \\phi(t).\nCurrent and charge are related by \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,q(t) = i(t).\nVoltage and flux are related by \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,\\phi(t) = v(t).\nResistors, capacitors and inductors each give a static linear relationship between two of these variables.\n\n\n\n\nThe four circuit quantities and the relationships between them.\n\n\n\nResistor: v = Ri (Ohm’s law).\nCapacitor: q = Cv, or i = \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,Cv.\nInductor: \\phi = Li, or v = \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,Li.\nBy combining Kirchhoff’s laws and the device laws, we can completely solve a circuit. Let’s see how on an example.",
+    "crumbs": [
+      "Primer on RLC circuits"
+    ]
+  },
+  {
+    "objectID": "weeks/primer/notes.html#example-series-rl",
+    "href": "weeks/primer/notes.html#example-series-rl",
+    "title": "A primer on RLC circuits",
+    "section": "Example: series RL",
+    "text": "Example: series RL\n\n\n\n\n\nSeries RL circuit.\n\n\n\nFor now, let’s solve in terms of arbitrary applied voltage and current, before choosing an input.\nAnnotate the diagram with voltages and currents for the resistor and inductor.\n\n\nNow follow the three standard steps: write down Kirchhoff’s laws, write down the device laws and combine.\nIn this case, the circuit is series, so we have:\n i = i_R = i_L. \\qquad \\text{(KCL)} \n v = v_R + v_L. \\qquad \\text{(KVL)} \nDevices:\n\n\\begin{aligned}\nv_R &= R\\,i_R \\\\[2pt]\nv_L &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i_L .\n\\end{aligned}\n\nCombine:\n\n\\begin{aligned}\nv_R &= R\\,i \\\\[2pt]\nv_L &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i \\\\[2pt]\nv   &= R\\,i + \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i .\n\\qquad(1)\n\\end{aligned}\n\nThis describes the circuit. We can now choose a particular input and output to get a system.\nFor example: input v, output v_R.\nv already features in equation (1). Let’s eliminate i and get an expression with v_R.\n i = \\frac{1}{R}\\,v_R . \nIn (1):\n \\boxed{\\; v = v_R + \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,\\frac{L}{R}\\,v_R \\;} \\qquad(2) \nThis is an equivalent description of the circuit with only the input and output variables we’re interested in.\nEvery circuit in the lectures and tutorials can be solved this way. Work through some examples: parallel, RC and RLC.",
+    "crumbs": [
+      "Primer on RLC circuits"
     ]
   },
   {
@@ -517,250 +622,222 @@
     ]
   },
   {
-    "objectID": "weeks/primer/notes.html",
-    "href": "weeks/primer/notes.html",
-    "title": "A primer on RLC circuits",
-    "section": "",
-    "text": "Other formats:\n📄 PDF\nRLC circuits are an important and useful class of LTI systems that are widely used in analogue signal processing.\nRLC circuits are interconnections of resistors (R), capacitors (C) and inductors (L) that manipulate voltages and currents.\nCurrent is the flow (rate of change) of charge (unit: Coulombs). It is measured in Amperes, which are Coulombs/second.\nVoltage is a difference in potential energy which forces current to flow. It is measured in Volts, which are Joules/Coulomb.\nRLC circuits are described by a couple of things:\nThe circuit is governed by two sets of laws:\nKirchhoff’s laws describe the interconnection structure of the circuit diagram: how are current and voltage related between components.\nThe device laws describe how the current and voltage are related across an individual component.\nCombining Kirchhoff’s laws and the device laws gives a complete description of the circuit behaviour.",
-    "crumbs": [
-      "Primer on RLC circuits"
-    ]
-  },
-  {
-    "objectID": "weeks/primer/notes.html#kirchhoffs-laws-for-series-parallel-circuits",
-    "href": "weeks/primer/notes.html#kirchhoffs-laws-for-series-parallel-circuits",
-    "title": "A primer on RLC circuits",
-    "section": "Kirchhoff’s laws for series & parallel circuits",
-    "text": "Kirchhoff’s laws for series & parallel circuits\nKirchhoff’s laws can be solved for an arbitrary circuit diagram, but in ELEC2302/9302, we will only use two special cases: series and parallel circuits.\n\n\n\n\n\n\n\nEach device has a current flowing through it and a voltage across it.\n\n\n\n\nA device with a current through it and a voltage across it.\n\n\n\nBy convention, current flows from + to −.\nThe current and voltage have a direction, which you can choose: the important thing is to be consistent. If the actual current flows the other way, you will get a minus sign in your analysis.\nFor series and parallel circuits, Kirchhoff’s laws say the following.\n\nSeries circuit\n\n\n\n\nSeries circuit.\n\n\n\nKirchhoff’s current law: the current through devices in series is equal. i_1 = i_2 = i_3.\nKirchhoff’s voltage law: the voltages around the loop sum to zero. -v + v_1 + v_2 + v_3 = 0. To get the sign of each voltage, follow i around the loop and take the sign of the terminal it enters for each device.\n\n\nParallel circuit\n\n\n\n\nParallel circuit.\n\n\n\nKirchhoff’s voltage law: the voltage across devices in parallel is equal. v_1 = v_2 = v_3.\nKirchhoff’s current law: the sum of the currents through the devices equals the total current i.\n i = i_1 + i_2 + i_3 .",
-    "crumbs": [
-      "Primer on RLC circuits"
-    ]
-  },
-  {
-    "objectID": "weeks/primer/notes.html#device-laws",
-    "href": "weeks/primer/notes.html#device-laws",
-    "title": "A primer on RLC circuits",
-    "section": "Device laws",
-    "text": "Device laws\nThere are four fundamental quantities in a circuit: current i(t), charge q(t), voltage v(t) and magnetic flux linkage \\phi(t).\nCurrent and charge are related by \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,q(t) = i(t).\nVoltage and flux are related by \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,\\phi(t) = v(t).\nResistors, capacitors and inductors each give a static linear relationship between two of these variables.\n\n\n\n\nThe four circuit quantities and the relationships between them.\n\n\n\nResistor: v = Ri (Ohm’s law).\nCapacitor: q = Cv, or i = \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,Cv.\nInductor: \\phi = Li, or v = \\dfrac{\\mathrm{d}}{\\mathrm{d}t}\\,Li.\nBy combining Kirchhoff’s laws and the device laws, we can completely solve a circuit. Let’s see how on an example.",
-    "crumbs": [
-      "Primer on RLC circuits"
-    ]
-  },
-  {
-    "objectID": "weeks/primer/notes.html#example-series-rl",
-    "href": "weeks/primer/notes.html#example-series-rl",
-    "title": "A primer on RLC circuits",
-    "section": "Example: series RL",
-    "text": "Example: series RL\n\n\n\n\n\nSeries RL circuit.\n\n\n\nFor now, let’s solve in terms of arbitrary applied voltage and current, before choosing an input.\nAnnotate the diagram with voltages and currents for the resistor and inductor.\n\n\nNow follow the three standard steps: write down Kirchhoff’s laws, write down the device laws and combine.\nIn this case, the circuit is series, so we have:\n i = i_R = i_L. \\qquad \\text{(KCL)} \n v = v_R + v_L. \\qquad \\text{(KVL)} \nDevices:\n\n\\begin{aligned}\nv_R &= R\\,i_R \\\\[2pt]\nv_L &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i_L .\n\\end{aligned}\n\nCombine:\n\n\\begin{aligned}\nv_R &= R\\,i \\\\[2pt]\nv_L &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i \\\\[2pt]\nv   &= R\\,i + \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,L\\,i .\n\\qquad(1)\n\\end{aligned}\n\nThis describes the circuit. We can now choose a particular input and output to get a system.\nFor example: input v, output v_R.\nv already features in equation (1). Let’s eliminate i and get an expression with v_R.\n i = \\frac{1}{R}\\,v_R . \nIn (1):\n \\boxed{\\; v = v_R + \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,\\frac{L}{R}\\,v_R \\;} \\qquad(2) \nThis is an equivalent description of the circuit with only the input and output variables we’re interested in.\nEvery circuit in the lectures and tutorials can be solved this way. Work through some examples: parallel, RC and RLC.",
-    "crumbs": [
-      "Primer on RLC circuits"
-    ]
-  },
-  {
-    "objectID": "concepts.html",
-    "href": "concepts.html",
-    "title": "Course Index",
-    "section": "",
-    "text": "Use the search box to find a concept and click a column heading to sort.\n\nKey:   Pre = the primer on RLC circuits  ·  W1–W4 notes = the lecture notes for that week  ·  T1–T3 = tutorial sheets, with A, B, C the prework questions and Q1, Q2, … the tutorial questions\n\n\n\n\n  \n  \n\n\n\n\n\n\nWeek ▾\nConcept \nIntroduced \nPracticed",
-    "crumbs": [
-      "Course index"
-    ]
-  },
-  {
-    "objectID": "analytics.html",
-    "href": "analytics.html",
-    "title": "Analytics on this site",
-    "section": "",
-    "text": "This site collects a small amount of anonymous usage data, and this page explains exactly what and why. Nothing here is linked to you, to your student record, or to your marks."
-  },
-  {
-    "objectID": "analytics.html#what-is-collected",
-    "href": "analytics.html#what-is-collected",
-    "title": "Analytics on this site",
-    "section": "What is collected",
-    "text": "What is collected\nThe site uses GoatCounter, an open-source analytics tool that does not use cookies and does not track you across websites. For each page view it records:\n\nthe page you looked at, and the page you arrived from\nyour browser, operating system, screen size and country\nwhether you interacted with one of the interactive widgets in the notes, and which one\nwhether you opened the PDF version of a week’s notes, and which week\n\nThis is the reason for tracking: the widgets take effort to build, and I would like to know whether they are worth building for the remaining weeks. The count records that a widget was used, once per visit — not what you did with it, not how long for, and not in what order."
-  },
-  {
-    "objectID": "analytics.html#what-is-not-collected",
-    "href": "analytics.html#what-is-not-collected",
-    "title": "Analytics on this site",
-    "section": "What is not collected",
-    "text": "What is not collected\nNo cookies. No name, email, student ID, IP address or any other identifier is stored. GoatCounter distinguishes one visitor from another using a hash of your IP address and browser version that is held in memory for eight hours and then discarded; it is never written to disk and cannot be reversed. Nothing is shared with advertisers, and the data is not used for anything to do with assessment."
-  },
-  {
-    "objectID": "analytics.html#opting-out",
-    "href": "analytics.html#opting-out",
-    "title": "Analytics on this site",
-    "section": "Opting out",
-    "text": "Opting out\nAny ad blocker or tracker blocker will stop the counting, as will Do Not Track in some browsers. The widgets and the rest of the site work exactly the same either way, and nothing is lost by blocking it.\nIf you would rather not be counted and do not want to install anything, email me and I will tell you the one-line setting to paste into your browser console."
-  },
-  {
-    "objectID": "analytics.html#questions",
-    "href": "analytics.html#questions",
-    "title": "Analytics on this site",
-    "section": "Questions",
-    "text": "Questions\nAsk on Ed, or email thomas.chaffey@sydney.edu.au."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "ELEC2302/9302 — Signals and Systems",
-    "section": "",
-    "text": "Lecture notes, tutorials and lab sheets will be posted here each week.\nThe course index lists every concept covered so far, with links to the relevant material.",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "index.html#lectures",
-    "href": "index.html#lectures",
-    "title": "ELEC2302/9302 — Signals and Systems",
-    "section": "Lectures",
-    "text": "Lectures\n\n\n\n\n\n\n\n\nWeek\nTopic\nMaterial\n\n\n\n\n1\nIntroduction; exponentials, Euler’s formula and the complex plane\nSlides · Notes\n\n\n2\nSignals as vectors, systems as maps\nNotes · Tutorial · Solutions\n\n\n3\nLinear, time-invariant systems\nNotes · Tutorial · Solutions\n\n\n4\nPeriodic signals and the Fourier series\nNotes · Tutorial",
-    "crumbs": [
-      "Home"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html",
-    "href": "weeks/week01/notes.html",
-    "title": "Week 1 — Lecture notes",
-    "section": "",
-    "text": "Other formats:\n📄 PDF\nSignals & Systems lives at the intersection of differential equations, linear algebra, complex numbers and trigonometry.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#a-the-exponential-function",
-    "href": "weeks/week01/notes.html#a-the-exponential-function",
-    "title": "Week 1 — Lecture notes",
-    "section": "(a) The exponential function",
-    "text": "(a) The exponential function\nFor z \\in \\mathbb{C}, define the exponential by its power series:\n e^{z} := 1 + z + \\frac{z^{2}}{2!} + \\frac{z^{3}}{3!} + \\cdots \nProperties. First, e^{0} = 1 (straight from the definition) \\qquad(1)\n\n\\begin{aligned}\n\\frac{\\mathrm{d}}{\\mathrm{d}z}\\,e^{z}\n&= 0 + 1 + \\frac{2z}{2!} + \\frac{3z^{2}}{3!} + \\cdots \\\\[2pt]\n&= 1 + z + \\frac{z^{2}}{2!} + \\cdots \\\\[2pt]\n&= e^{z}\n\\end{aligned}\n\\qquad(2)\n\nCombining the two properties:\n \\boxed{\\,f(z) = f'(z), \\qquad f(0) = 1\\,} \nIt turns out f(z) = e^{z} is the unique solution to this differential equation, and in fact the differential equation can be used as an alternative definition.\nExtension of (2). By the chain rule,\n\n\\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{zt}\n= 0 + z + \\frac{2t\\,z^{2}}{2!} + \\frac{3t^{2}z^{3}}{3!} + \\cdots\n= z\\,e^{zt}.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#b-eulers-formula",
-    "href": "weeks/week01/notes.html#b-eulers-formula",
-    "title": "Week 1 — Lecture notes",
-    "section": "(b) Euler’s formula",
-    "text": "(b) Euler’s formula\nLet’s now represent sinusoids as complex numbers. Let\n g(\\theta) = \\frac{\\cos\\theta + j\\sin\\theta}{e^{j\\theta}} . \nThen\n\n\\begin{aligned}\ng'(\\theta)\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(\\cos\\theta + j\\sin\\theta\\big)\\,j\\,e^{-j\\theta} \\\\[2pt]\n&= \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta}\n   - \\big(-\\sin\\theta + j\\cos\\theta\\big)e^{-j\\theta} \\\\[2pt]\n&= 0 .\n\\end{aligned}\n\nSo g(\\theta) = C (a constant):\n C\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta . \nSet \\theta = 0. Then C = 1, so we have\n \\boxed{\\,e^{j\\theta} = \\cos\\theta + j\\sin\\theta\\,} \nWhat does this mean graphically? e^{j\\theta} is the unit vector at angle \\theta; its real part is \\cos\\theta and its imaginary part is \\sin\\theta. Advance \\theta and the vector rotates, its shadow tracing a sinusoid.\n\nIn particular: \\;e^{j\\pi/2} = j, \\qquad e^{j\\pi} = -1.\n\nManipulating sinusoids using complex numbers\nWhy use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\big(\\omega t + \\tfrac{\\pi}{2}\\big),\n   \\qquad x_1(t) + x_2(t) = \\;? \nThe direct way uses the identity \\cos(\\theta + \\tfrac{\\pi}{2}) = -\\sin\\theta, so x_2(t) = -4\\sin\\omega t, giving\n 3\\cos\\omega t - 4\\sin\\omega t \\;\\equiv\\; A\\cos(\\omega t + \\varphi)\n   \\quad\\longrightarrow\\quad \\text{match coefficients} \\dots \nWith complex numbers:\n\n\\begin{aligned}\nx_1(t) &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_2(t) &= \\operatorname{Re}\\!\\big(4\\,e^{\\,j\\omega t + j\\pi/2}\\big)\n        = \\operatorname{Re}\\!\\big(4\\,e^{j\\pi/2}\\,e^{j\\omega t}\\big)\n        = \\operatorname{Re}\\!\\big(4j\\,e^{j\\omega t}\\big) \\\\[2pt]\nx_1(t) + x_2(t)\n        &= \\operatorname{Re}\\!\\big(3\\,e^{j\\omega t} + 4j\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big((3 + 4j)\\,e^{j\\omega t}\\big) \\\\[2pt]\n        &= \\operatorname{Re}\\!\\big(5\\,e^{j0.927}\\,e^{j\\omega t}\\big)\n        = 5\\cos(\\omega t + 0.927).\n\\end{aligned}\n\n\nThe triangle 3 + 4j = 5\\angle 53.1^{\\circ} rotates.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
-    "href": "weeks/week01/notes.html#c-eulers-formula-differential-equations",
-    "title": "Week 1 — Lecture notes",
-    "section": "(c) Euler’s formula & differential equations",
-    "text": "(c) Euler’s formula & differential equations\nAnother differential equation:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,x(t) = j\\,x(t) \\qquad(3) \nWe’ve already seen \\dfrac{\\mathrm{d}}{\\mathrm{d}t}e^{zt} = z\\,e^{zt}. Set z = j:\n \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{jt} = j\\,e^{jt}. \nThis solves (3). What does it look like in \\mathbb{C}, and what does the real part look like? What about other choices of z?\n z = -1:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{-t} = -e^{-t}. \\qquad\\text{No imaginary component.} \n z = -1 + j:\\quad \\frac{\\mathrm{d}}{\\mathrm{d}t}\\,e^{(-1+j)t} = (-1+j)\\,e^{(-1+j)t}. \nThe widget below plots the trajectory of e^{zt} for several values of z.\n\n\nThe position of z determines the behaviour: oscillations, decay, growth.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
-    "href": "weeks/week01/notes.html#d-what-has-this-got-to-do-with-electrical-engineering",
-    "title": "Week 1 — Lecture notes",
-    "section": "(d) What has this got to do with electrical engineering?",
-    "text": "(d) What has this got to do with electrical engineering?\nExample: an RLC circuit (the system) with a sinusoidal voltage input (the signal).\n\n\n\n\nSeries RLC circuit.\n\n\n\nKVL around the loop:\n v(t) = v_R + v_L + v_C \n v(t) = R\\,i(t) + L\\,\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t}\n   + \\frac{1}{C}\\!\\int_{-\\infty}^{t}\\! i(\\tau)\\,\\mathrm{d}\\tau \\qquad(4) \nwith the lower limit taken to -\\infty for the steady-state response. Let v(t) = V\\cos\\omega t = \\operatorname{Re}(V e^{j\\omega t}) and look for a current of the same form, i(t) = \\operatorname{Re}(I e^{j\\omega t}).\nSubstitute in (4):\n\n\\begin{aligned}\nV e^{j\\omega t}\n&= R I e^{j\\omega t} + L\\frac{\\mathrm{d}}{\\mathrm{d}t}I e^{j\\omega t}\n   + \\frac{1}{C}\\!\\int\\! I e^{j\\omega\\tau}\\,\\mathrm{d}\\tau \\\\[2pt]\n&= R I e^{j\\omega t} + j\\omega L\\, I e^{j\\omega t} + \\frac{I}{j\\omega C}\\,e^{j\\omega t} + \\frac{K}{C},\n\\end{aligned}\n where K is a constant of integration. Matching coefficients of e^{j\\omega t}, we find K = 0 (K represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).\nDivide through by e^{j\\omega t} (never zero):\n V = I\\underbrace{\\Big(R + j\\omega L + \\tfrac{1}{j\\omega C}\\Big)}_{\\text{impedance } Z(j\\omega)}\n   \\qquad\\Longrightarrow\\qquad I = \\frac{V}{Z}. \nSuppose R = 30\\,\\Omega and \\omega L - \\tfrac{1}{\\omega C} = 40\\,\\Omega. Then\n Z = 30 + 40j = 50\\,e^{j0.927}, \\qquad I = \\frac{V}{50\\,e^{j0.927}}, \n i(t) = \\operatorname{Re}(I e^{j\\omega t}) = \\frac{V}{50}\\cos(\\omega t - 0.927). \nThe widget below plots input and output sinusoids for several values of the reactance Z. For some values, the output lags the input, while for others, the output leads.\n\n\nThe RLC circuit maps a sinusoid to a sinusoid with the same frequency. This is the foundation of the rest of the course.",
-    "crumbs": [
-      "Week 1 — Introduction",
-      "Notes"
-    ]
-  },
-  {
-    "objectID": "weeks/week02/notes.html",
-    "href": "weeks/week02/notes.html",
-    "title": "Week 2 — Lecture notes",
+    "objectID": "weeks/week03/notes.html",
+    "href": "weeks/week03/notes.html",
+    "title": "Week 3 — Lecture notes",
     "section": "",
     "text": "Other formats:\n📄 PDF",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week02/notes.html#goals-for-this-week",
-    "href": "weeks/week02/notes.html#goals-for-this-week",
-    "title": "Week 2 — Lecture notes",
-    "section": "Goals for this week",
-    "text": "Goals for this week\n\nMake “signal” and “system” precise.\nUnderstand linearity.\nHow to measure the size of a signal: energy & power.\nHow to measure the angle between signals.\nUseful signals: Dirac delta and friends.",
+    "objectID": "weeks/week03/notes.html#goals",
+    "href": "weeks/week03/notes.html#goals",
+    "title": "Week 3 — Lecture notes",
+    "section": "Goals",
+    "text": "Goals\n① Convolution: calculate the output of an LTI system by breaking the input into pieces.\n② Impulse response: complete representation of an LTI system.\n③ LTI systems preserve frequency.\n④ ODE descriptions of LTI systems.\n⑤ Interconnections of systems.",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week02/notes.html#signals-as-vectors",
-    "href": "weeks/week02/notes.html#signals-as-vectors",
-    "title": "Week 2 — Lecture notes",
-    "section": "Signals as vectors",
-    "text": "Signals as vectors\nWe’ve seen signals & systems through examples. In this lecture, we’ll develop a language to represent these things mathematically. At first this may seem quite abstract, but it ends up being extremely powerful, as we’ll see throughout the semester.\nWe will build on what we know from linear algebra.\nA square matrix A maps a vector to another vector of the same dimension:\n\n\\underset{\\textstyle \\mathbb{R}^{n}}{y} \\;=\\;\n\\underset{\\textstyle \\mathbb{R}^{n\\times n}}{A}\\;\n\\underset{\\textstyle \\mathbb{R}^{n}}{u}\n\nIf n = 2, we can visualise A in the plane as scaling, rotating, skewing and reflecting u to produce y:\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  ℝ²\n  \n    \n    \n  \n  \n  \n  θ\n  u\n  Au\n\nScaling and rotating u to produce y = Au (drawn as sketched).\n\nWe measure the scaling using a norm:\n \\|u\\| \\;=\\; \\sqrt{u \\cdot u} \\;=\\; \\sqrt{u_1^{2} + u_2^{2}}. \nWe measure the rotation using the dot product:\n \\cos\\theta \\;=\\; \\frac{u \\cdot y}{\\|u\\|\\,\\|y\\|}. \nHow do we extend these ideas to signals?\nGiven a continuous signal, we can approximate one period as an infinite dimensional vector.\n\n \\dots\\; x_{-1}\\;\\; x_{0}\\;\\; x_{1}\\;\\; x_{2}\\;\\; x_{3}\\;\\; x_{4}\\;\\; x_{5}\\;\\; x_{6}\\;\\; x_{7}\\; \\dots \nThe dot product between these vectors is\n \\sum_{t=-\\infty}^{\\infty} u_t\\, y_t \\;=\\; u \\cdot y \nIf we let the sampling become infinitesimally fine, we integrate over the samples, and have an inner product:\n \\langle u, y\\rangle \\;:=\\; \\int_{-\\infty}^{\\infty} u(t)\\,y(t)\\,\\mathrm{d}t. \nFor complex signals, we add a complex conjugate:\n \\boxed{\\;\\langle u, y\\rangle \\;:=\\; \\int_{-\\infty}^{\\infty} u(t)\\,\\overline{y}(t)\\,\\mathrm{d}t\\;} \n\nSome useful properties of the inner product:\n\n\\langle u_1 + u_2,\\, y\\rangle \\;=\\; \\langle u_1, y\\rangle + \\langle u_2, y\\rangle\n\\langle \\alpha u,\\, y\\rangle \\;=\\; \\alpha\\,\\langle u, y\\rangle\n\\langle u,\\, \\beta y\\rangle \\;=\\; \\overline{\\beta}\\,\\langle u, y\\rangle\n\\langle u, y\\rangle \\;=\\; \\overline{\\langle y, u\\rangle}\n\nSo the inner product is linear in its first argument and conjugate-linear in its second.",
+    "objectID": "weeks/week03/notes.html#recap",
+    "href": "weeks/week03/notes.html#recap",
+    "title": "Week 3 — Lecture notes",
+    "section": "Recap",
+    "text": "Recap\nLinear \\iff superposition\n\n\n\n\n\n\nadd/scale input \\iff add/scale output",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week02/notes.html#the-size-of-a-signal-energy-power",
-    "href": "weeks/week02/notes.html#the-size-of-a-signal-energy-power",
-    "title": "Week 2 — Lecture notes",
-    "section": "The size of a signal: energy & power",
-    "text": "The size of a signal: energy & power\nWe can use the inner product to measure the size of a signal:\n \\boxed{\\;E(u) \\;=\\; \\int_{-\\infty}^{\\infty} |u(t)|^{2}\\,\\mathrm{d}t\\;} \nThis is the signal energy. The complex conjugate in \\langle u, y\\rangle guarantees E(u) is real.\nExample:\n\nu(t) = \\begin{cases} e^{-t}, & t \\geq 0 \\\\[2pt] 0, & t &lt; 0. \\end{cases}\n\n\n\\begin{aligned}\nE(u) &= \\int_{0}^{\\infty} e^{-2t}\\,\\mathrm{d}t \\\\[4pt]\n     &= \\left. \\frac{-1}{2}\\, e^{-2t} \\right|_{0}^{\\infty} \\\\[4pt]\n     &= \\frac{1}{2}\\, e^{0} \\;=\\; \\frac{1}{2}.\n\\end{aligned}\n\nWhat if u(t) = A\\cos(\\omega t)?\n \\int_{-\\infty}^{\\infty} A^{2}\\cos^{2}(\\omega t)\\,\\mathrm{d}t \\;=\\; \\infty \\;\\dots \nTake the average power:\n\n\\text{energy} = \\displaystyle\\int \\text{power}\\;\\mathrm{d}t\n\n \\boxed{\\;P(u) \\;=\\; \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t.\\;} \nIf u(t) = u(t + T) for some T, each period contributes the same, so we get the average.\n\n\\begin{aligned}\n\\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t\n&= \\lim_{k \\to \\infty} \\frac{1}{2kT}\\left( \\cdots\n   \\underbrace{\\int_{-kT}^{-(k-1)T} |u(t)|^{2}\\,\\mathrm{d}t}_{\\textstyle =\\int_{0}^{T}|u(t)|^{2}\\,\\mathrm{d}t}\n   + \\underbrace{\\int_{-(k-1)T}^{-(k-2)T} |u(t)|^{2}\\,\\mathrm{d}t}_{\\textstyle =\\int_{0}^{T}|u(t)|^{2}\\,\\mathrm{d}t}\n   + \\cdots + \\int_{-T}^{0} |u(t)|^{2}\\,\\mathrm{d}t + \\cdots\n   + \\int_{(k-1)T}^{kT} |u(t)|^{2}\\,\\mathrm{d}t \\right) \\\\[10pt]\n&= \\lim_{k \\to \\infty} \\frac{1}{2k} \\cdot 2k \\cdot \\frac{1}{T} \\int_{0}^{T} |u(t)|^{2}\\,\\mathrm{d}t \\\\[6pt]\n&= \\boxed{\\;P(u) = \\frac{1}{T} \\int_{0}^{T} |u(t)|^{2}\\,\\mathrm{d}t.\\;}\n\\end{aligned}\n\nThis is the average power of a periodic signal.\nExample: what is the power of u(t) = A\\cos(\\omega t)\n \\text{Period} = \\frac{2\\pi}{\\omega} \n\n\\begin{aligned}\nP(u) &= \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}} A^{2}\\cos(\\omega t)^{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}} A^{2}\\,\\frac{1 + \\cos(2\\omega t)}{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\left[ A^{2}\\,\\frac{t}{2} \\;+\\; A^{2}\\,\\frac{\\sin(2\\omega t)}{4\\omega} \\right]_{0}^{\\frac{2\\pi}{\\omega}} \\\\[6pt]\n     &= \\frac{\\omega}{2\\pi} \\left( A^{2}\\,\\frac{\\frac{2\\pi}{\\omega}}{2}\n        \\;+\\; A^{2}\\,\\frac{\\overset{\\textstyle 0}{\\overbrace{\\sin\\!\\left(\\tfrac{4\\pi}{\\omega}\\,\\omega\\right)}}}{4\\omega} \\right) \\\\[6pt]\n     &= \\frac{A^{2}}{2}\n\\end{aligned}\n\nExample: what is the power of u(t) = \\begin{cases} e^{-t}, & t \\geq 0 \\\\[2pt] 0, & t &lt; 0 \\end{cases} ?\n\n\\begin{aligned}\nP(u) &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{-W}^{W} |u(t)|^{2}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\int_{0}^{W} e^{-2t}\\,\\mathrm{d}t \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\frac{1}{2W} \\left[ \\frac{-1}{2}\\,e^{-2t} \\right]_{0}^{W} \\\\[6pt]\n     &= \\lim_{W \\to \\infty} \\underbrace{\\frac{1}{2W}}_{\\textstyle \\to 0}\n        \\left[ \\underbrace{\\frac{1}{2}\\,e^{0}}_{\\textstyle \\frac{1}{2}}\n        \\;-\\; \\underbrace{\\frac{1}{2}\\,e^{-2W}}_{\\textstyle \\to 0} \\right] \\\\[6pt]\n     &= 0.\n\\end{aligned}\n\n\nThrough the last two examples, we have discovered two types of signals:\nPower signals: infinite energy, finite power. \\qquad \\cos(\\omega t)\nEnergy signals: finite energy, zero power. \\qquad e^{-t}\nFor periodic signals, we can also define the rms (root mean square):\n \\boxed{\\;u_{\\mathrm{RMS}} \\;=\\; \\sqrt{P(u)}\\;} \nIt turns out P comes from a different inner product, which is finite for power signals,\n \\langle u, y\\rangle_{P} \\;:=\\; \\frac{1}{T} \\int_{0}^{T} u(t)\\, \\overline{y}(t)\\,\\mathrm{d}t. \nWe then have\n\n\\begin{aligned}\nP(u) &= \\langle u, u\\rangle_{P}, \\\\[4pt]\nu_{\\mathrm{RMS}} &= \\sqrt{\\langle u, u\\rangle_{P}} \\;=\\; \\|u\\|_{P}.\n\\end{aligned}\n\nExample: the RMS of mains power in Australia is 230 V. What is the peak voltage?\n v(t) = V_p \\cos(\\omega t), \\qquad \\omega = 2\\pi \\cdot 50 = 100\\pi \\;\\text{rad/s},\n   \\qquad T = \\tfrac{1}{50} = 20\\ \\text{ms}. \nFrom the earlier example, P(v) = \\dfrac{V_p^{2}}{2}, so\n v_{\\mathrm{RMS}} \\;=\\; \\sqrt{P(v)} \\;=\\; \\frac{V_p}{\\sqrt{2}}\n   \\qquad\\Longrightarrow\\qquad V_p \\;=\\; 230\\sqrt{2} \\;=\\; 325\\ \\text{V}. \nWhy do we use v_{\\mathrm{RMS}} as the nominal voltage? Let’s calculate the power delivered to a nominal resistive load R, such as a kettle.\nInstantaneous power is\n p(t) \\;=\\; v(t)\\, i(t) \\;=\\; \\frac{v(t)^{2}}{R} \\;=\\; \\frac{V_p^{2}}{R}\\cos^{2}(\\omega t). \nAverage over one period:\n\n\\begin{aligned}\nP_{\\mathrm{avg}} &= \\frac{1}{T} \\int_{0}^{T} \\frac{|v(t)|^{2}}{R}\\,\\mathrm{d}t\n   \\;=\\; \\frac{1}{R}\\, P(v) \\\\[6pt]\n&= \\frac{V_p^{2}}{2R} \\\\[6pt]\n&= \\frac{v_{\\mathrm{RMS}}^{2}}{R}.\n\\end{aligned}\n\n\nP(v) is a signal power, so its units are \\mathrm{V}^{2} — not joules. Dividing by R turns it into a physical power in watts.\n\nThis says that v_{\\mathrm{RMS}} is the equivalent DC voltage that delivers the same power across a nominal load.\nFor R = 23\\,\\Omega,\n P_{\\mathrm{avg}} = \\frac{230^{2}}{23} = 2300\\ \\text{W}, \\qquad\n   i_{\\mathrm{RMS}} = \\frac{230}{23} = 10\\ \\text{A}.",
+    "objectID": "weeks/week03/notes.html#convolution",
+    "href": "weeks/week03/notes.html#convolution",
+    "title": "Week 3 — Lecture notes",
+    "section": "① Convolution",
+    "text": "① Convolution\nIf we apply regular impulses to a system, what do we get at the output?\n\n\n\n\nEach input sample launches a scaled, shifted copy of the impulse response; the outputs superpose.\n\n\n\nWhat do we have at time 3?\nh started at \\tau = 2 and gone 1 time step: \\;\\overbrace{h(t-2)}^{h(1)}\\,u(2)\\;\nh started at \\tau = 1 and gone 2 time steps: \\;\\overbrace{h(t-1)}^{h(2)}\\,u(1)\\;\nh started at \\tau = 0 and gone 3 time steps: \\;\\overbrace{h(t-0)}^{h(3)}\\,u(0)\\;\nSo for fixed t: flip h and shift by t, then for each \\tau \\in [0, t], multiply with u(\\tau) and add to total.\n\n\n\n\nFor fixed t: flip h, shift by t, and add the products h(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t.\n\n\n\nThis gives the output to a sum of impulses. It turns out we can approximate any input as such a sum.\n\n\n\n\n\nApproximating u(t) by a train of impulses. The shaded rectangle at \\tau has area u(\\tau)\\,\\Delta t.\n\n\n\nArea of the shaded rectangle: u(\\tau)\\,\\Delta t.\nWe can represent this area by an impulse, \\delta(t-\\tau)\\,u(\\tau)\\,\\Delta t.\nThese impulses for each rectangle approximate u(t), just like a Riemann integral:\n u(t) \\approx \\sum_{k=-\\infty}^{\\infty} \\delta(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t \\qquad(1) \nThe corresponding output is a sum of delayed impulse responses that approximates the output of the system:\n y(t) \\approx \\sum_{k=-\\infty}^{\\infty} h(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t. \\qquad(2) \nWhat happens to (1) in the limit \\Delta t \\to 0?\n \\sum_{k=-\\infty}^{\\infty} \\delta(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t\n\\;\\longrightarrow\\; \\int_{-\\infty}^{\\infty}\\! \\delta(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau \nwith k\\Delta t \\to \\tau and \\Delta t \\to \\mathrm{d}\\tau. So we have\n \\boxed{\\,u(t) = \\int_{-\\infty}^{\\infty}\\! \\delta(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau\\,} \nThis is the sifting property! Read backwards, it says that the signal u(t) is equal to an integral of impulses with amplitude u(\\tau)\\,\\mathrm{d}\\tau.\nWhat about (2) in the limit \\Delta t \\to 0?\n \\sum_{k=-\\infty}^{\\infty} h(t-k\\Delta t)\\,u(k\\Delta t)\\,\\Delta t\n\\;\\longrightarrow\\; \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau. \nSo we have:\n \\boxed{\\,y(t) = \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau\\,} \nThe response to any input u(t) is determined by the impulse response! We will look more closely at how to calculate the impulse response soon, but first let’s understand the expression above.",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week02/notes.html#the-angle-between-two-signals",
-    "href": "weeks/week02/notes.html#the-angle-between-two-signals",
-    "title": "Week 2 — Lecture notes",
-    "section": "The angle between two signals",
-    "text": "The angle between two signals\nWe can use this inner product to measure the angle between two signals using \\cos\\theta = \\dfrac{\\langle u, y\\rangle_{P}}{\\|u\\|_{P}\\,\\|y\\|_{P}}\n x_1(t) = 3\\cos\\omega t, \\qquad x_2(t) = 4\\cos\\!\\left(\\omega t + \\frac{\\pi}{4}\\right) \n \\langle x_1(t), x_2(t)\\rangle_{P} \\;=\\; \\frac{\\omega}{2\\pi} \\int_{0}^{\\frac{2\\pi}{\\omega}}\n   12\\cos(\\omega t)\\cos\\!\\left(\\omega t + \\frac{\\pi}{4}\\right)\\mathrm{d}t \nPlug through to get \\;6\\cos\\!\\left(\\dfrac{\\pi}{4}\\right).\n \\|x_1\\|_{P} = \\frac{3}{\\sqrt{2}}, \\qquad \\|x_2\\|_{P} = \\frac{4}{\\sqrt{2}} \\qquad\n   \\text{using the previous example.} \nSo\n \\cos\\theta \\;=\\; \\frac{6\\cos\\!\\left(\\frac{\\pi}{4}\\right)}{6}, \\qquad \\theta = \\frac{\\pi}{4}. \n\nThe angle between two sinusoids is their phase shift.",
+    "objectID": "weeks/week03/notes.html#convolution-definition-and-properties",
+    "href": "weeks/week03/notes.html#convolution-definition-and-properties",
+    "title": "Week 3 — Lecture notes",
+    "section": "Convolution: definition and properties",
+    "text": "Convolution: definition and properties\n \\boxed{\\;\\text{The operation}\\quad h * u := \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau\\;} \nis called convolution.\nBasic properties of convolution:\n1. h * u = u * h (commutativity)\nProof:\n h * u = \\int_{-\\infty}^{\\infty}\\! h(t-\\tau)\\,u(\\tau)\\,\\mathrm{d}\\tau. \nLet T = t - \\tau. Then \\tau = t - T and \\mathrm{d}T = -\\mathrm{d}\\tau.\n\n\\begin{aligned}\n&= -\\int_{\\infty}^{-\\infty}\\! h(T)\\,u(t-T)\\,\\mathrm{d}T \\\\[2pt]\n&= \\int_{-\\infty}^{\\infty}\\! u(t-T)\\,h(T)\\,\\mathrm{d}T \\;=\\; u * h.\n\\end{aligned}\n\n2. (h_1 + h_2) * u = h_1 * u + h_2 * u (additivity).\n3. h_1 * (h_2 * h_3) = (h_1 * h_2) * h_3 (associativity).\n4. \\displaystyle (u * \\delta)(t) = \\int_{-\\infty}^{\\infty}\\! u(t-\\tau)\\,\\delta(\\tau)\\,\\mathrm{d}\\tau = u(t).\n5. \\displaystyle (u * \\delta(t-T)) = \\int_{-\\infty}^{\\infty}\\! u(t-\\tau)\\,\\delta(\\tau-T)\\,\\mathrm{d}\\tau = u(t-T). \\qquad = \\text{pure delay!}\n6.\n\n\\begin{aligned}\n(f * g)' &= \\frac{\\mathrm{d}}{\\mathrm{d}t}\\int_{-\\infty}^{\\infty}\\! f(t-\\tau)\\,g(\\tau)\\,\\mathrm{d}\\tau \\\\[2pt]\n         &= \\int_{-\\infty}^{\\infty}\\! \\frac{\\mathrm{d}}{\\mathrm{d}t}f(t-\\tau)\\,g(\\tau)\\,\\mathrm{d}\\tau \\\\[2pt]\n         &= f' * g.\n\\end{aligned}\n\nBut also: (f * g)' = (g * f)' = g' * f.\nSo\n (f * g)' = f' * g = g' * f \n\nExample: a pulse convolved with itself\nExample: plot (2p_1 * 2p_1)(t)\n \\int_{-\\infty}^{\\infty}\\! 2p_1(t-\\tau)\\,2p_1(\\tau)\\,\\mathrm{d}\\tau \nThe value of (2p_1 * 2p_1)(t) is the area under the product: the heights multiply, so it is 2 \\times 2 times the width of the overlap.\n\n\n\nExample: radar\n\n\n  \n    \n      \n    \n  \n  \n  \n    \n    \n    \n    \n  \n  \n    \n    \n    \n    \n    \n    \n    \n  \n  \n    \n    \n    \n  \n  \n    \n    \n    \n  \n  r₁\n  r₂\n  r₃\n\n\nFor each object, the pulse is delayed by t_{d_i} = \\dfrac{2r_i}{c}.\nThis can be interpreted as a system impulse response.\ninput: \\delta(t)\nsystem: the scene\noutput: \\displaystyle \\sum_i \\delta(t - t_{d_i}).\n\\hookrightarrow output is a sum of delayed versions of the input.\nWhat system is this the impulse response of?\n \\sum_i D_{t_{d_i}} \\qquad \\text{: a sum of delays, one for each object.} \nWhat is the response if we inject a sinusoid:\nIntuitively: u(t) = \\cos(\\omega t), \\;y(t) = \\sum_i \\cos(\\omega t - \\omega t_{d_i}).\nLet’s check our intuition with what we just learnt:\n\n\\begin{aligned}\ny(t) &= u(t) * h(t) \\\\[2pt]\n     &= u(t) * \\sum_i \\delta(t - t_{d_i}) \\\\[2pt]\n     &= \\sum_i \\int_{-\\infty}^{\\infty}\\! u(t-\\tau)\\,\\delta(\\tau - t_{d_i})\\,\\mathrm{d}\\tau \\\\[2pt]\n     &= \\sum_i u(t - t_{d_i}) \\qquad \\text{(sifting property)} \\\\[2pt]\n     &= \\sum_i \\cos(\\omega t - \\omega t_{d_i}).\n\\end{aligned}",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week02/notes.html#linear-systems-gain-and-delay",
-    "href": "weeks/week02/notes.html#linear-systems-gain-and-delay",
-    "title": "Week 2 — Lecture notes",
-    "section": "Linear systems, gain and delay",
-    "text": "Linear systems, gain and delay\nBack to our starting point, that a conformal matrix scales & rotates vectors.\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  ℝ²\n  \n    \n    \n  \n  \n  θ\n  u\n  Au\n\n\nA linear system performs these same operations on signals.\nFor example, a static gain scales a signal:\n\n\n  \n    \n      \n    \n  \n  u\n  \n  \n  k\n  \n  ku\n\n\nIf u = \\cos(\\omega t),\n\n\\begin{aligned}\n(ku)_{\\mathrm{RMS}} &= \\sqrt{P(ku)} \\\\[4pt]\n                    &= \\frac{k}{\\sqrt{2}} \\qquad \\text{from the previous example.}\n\\end{aligned}\n\n u_{\\mathrm{RMS}} \\;=\\; \\frac{1}{\\sqrt{2}}. \nThe gain of the system is\n \\frac{(ku)_{\\mathrm{RMS}}}{u_{\\mathrm{RMS}}} \\;=\\; k. \nWhat type of system rotates signals, that is, imparts phase lag?\nThe pure delay,\n\n\n  \n    \n      \n    \n  \n  u\n  \n  \n  D\n  τ\n  \n  y\n\n\n y(t) = u(t - \\tau). \nE.g. if u(t) = \\cos(\\omega t),\n\n\\begin{aligned}\ny(t) &= \\cos\\big(\\omega(t - \\tau)\\big) \\\\[2pt]\n     &= \\cos(\\omega t - \\omega\\tau).\n\\end{aligned}\n\nFrom the previous example,\n \\cos\\theta \\;=\\; \\cos(-\\omega\\tau) \\;=\\; \\cos(\\omega\\tau) \n \\underline{\\;\\theta = \\omega\\tau.\\;} \nThe pure delay gives a phase shift of \\omega\\tau, and gain \\underline{1}.\nPure delay and static gain are two simple examples of linear, time-invariant (LTI) systems. We will see many more next week!",
+    "objectID": "weeks/week03/notes.html#the-impulse-response-of-circuits",
+    "href": "weeks/week03/notes.html#the-impulse-response-of-circuits",
+    "title": "Week 3 — Lecture notes",
+    "section": "② The impulse response of circuits",
+    "text": "② The impulse response of circuits\nNow let’s look at the impulse response of circuits.\n\n\n\n\n\nA series RC circuit.\n\n\nIn the RC circuit, a change in v_i causes gradual change in v_o.\n\n\n\n\n\n\nA voltage divider.\n\n\nIn the voltage divider, a change in v_i causes instantaneous change in v_o.\n\n\n\\hookrightarrow capacitor has memory:\nthe charge stored on its plates carries a memory of the current.\nThe impulse is a fictitious signal that deposits charge on the capacitor instantaneously:\n q_c = \\int i_c(t)\\,\\mathrm{d}t \nSo if i_c(t) = \\delta(t), \\;q_c(0) = \\displaystyle\\int_{0^-}^{0^+}\\!\\delta(t)\\,\\mathrm{d}t = 1.\nThis means an impulse response (inhomogeneous ODE) is equivalent to an initial condition response (homogeneous ODE).\nThis holds generally for LTI systems. Let’s see how on the RC circuit above.\n v_i(t) = v_R + v_C \n v_R = iR \n i = \\frac{\\mathrm{d}}{\\mathrm{d}t}C v_C. \nSo\n v_i(t) = v_C(t) + \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t). \nNow let v_i(t) = \\delta(t).\n \\delta(t) = v_C(t) + \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t). \nIntegrate both sides on [0^-, 0^+].\n \\int_{0^-}^{0^+}\\!\\delta(t)\\,\\mathrm{d}t = \\underbrace{\\int_{0^-}^{0^+}\\! v_C(t)\\,\\mathrm{d}t}_{=\\,0} + RC\\,v(0) \n 1 = RC\\,v(0) \n v(0) = \\frac{1}{RC}. \n\nImpulse at t=0 deposits an initial condition.\n\nWe can use this to calculate the impulse response, by solving\n \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t) + v_C(t) = 0, \\qquad v_C(0) = \\frac{1}{RC} \\qquad(3) \nLet v_C(t) = \\alpha e^{-\\beta t}.\n \\frac{\\mathrm{d}}{\\mathrm{d}t}v_C = -\\beta\\alpha e^{-\\beta t}. \nSub in (3):\n -RC\\beta\\alpha e^{-\\beta t} = -\\alpha e^{-\\beta t} \n RC\\beta = 1 \\iff \\beta = \\frac{1}{RC}. \nUse the initial condition to find \\alpha:\n v_C(0) = \\alpha e^{0} = \\frac{1}{RC}. \nSo the impulse response is\n v_C(t) = \\frac{1}{RC}\\,e^{-\\frac{1}{RC}t} =: h(t). \n\nh(t) is the usual notation we’ll use for impulse response.",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week02/notes.html#linearity-and-time-invariance",
-    "href": "weeks/week02/notes.html#linearity-and-time-invariance",
-    "title": "Week 2 — Lecture notes",
-    "section": "Linearity and time invariance",
-    "text": "Linearity and time invariance\nWhat do linear and time invariant mean?\nLinear =\nhomogeneous (scale invariant): \\;A(\\alpha u) = \\alpha A(u).\nand additive: \\;A(u_1 + u_2) = A(u_1) + A(u_2). \\qquad Add inputs \\to add outputs.\nTogether, we have superposition: \\;A(\\alpha u_1 + \\beta u_2) = \\alpha A(u_1) + \\beta A(u_2).\nTime invariant: behaviour doesn’t depend on starting time:\n A(D_\\tau u) = D_\\tau A(u) \\quad \\text{for all } \\tau. \\qquad \\text{\\small shift input} \\to \\text{\\small shift output.} \nQuick quiz: which maps from u to y are linear?\n\n\n  \n    \n      \n    \n  \n  \n    \n    \n  \n  u\n  y\n  \n  \n  ①\n  \n  \n  ②\n  \n  \n  ③\n\n\n\nExample: check the delay is linear:\n\n\\begin{aligned}\nD_\\tau(\\alpha u) &= \\alpha\\, u(t - \\tau) = \\alpha\\, D_\\tau(u)\n   &&\\Longrightarrow\\; \\text{homogeneous.} \\\\[6pt]\nD_\\tau(u_1 + u_2) &= u_1(t - \\tau) + u_2(t - \\tau) = D_\\tau(u_1) + D_\\tau(u_2)\n   &&\\Longrightarrow\\; \\text{additive.}\n\\end{aligned}\n\nIs it time invariant?\n D_\\tau\\big(D_\\mu u\\big) \\;=\\; D_\\tau\\big(u(t - \\mu)\\big) \\;=\\; u(t - \\mu - \\tau)\n   \\;=\\; D_\\mu\\big(D_\\tau(u)\\big) \\;\\checkmark",
+    "objectID": "weeks/week03/notes.html#ode-descriptions-of-lti-systems",
+    "href": "weeks/week03/notes.html#ode-descriptions-of-lti-systems",
+    "title": "Week 3 — Lecture notes",
+    "section": "④ ODE descriptions of LTI systems",
+    "text": "④ ODE descriptions of LTI systems\nThe same principle holds for nth order differential equations. For\n a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \\cdots + a_0 y(t) = \\delta(t) \nwith the system at rest before t=0, the impulse deposits an initial condition on the 2nd highest derivative:\n y^{(n-1)}(0^+) = \\frac{1}{a_n}, \\qquad y^{(n-2)}(0^+) = \\cdots = y(0^+) = 0. \nIf we also allow derivatives of the input:\n\n\\begin{aligned}\n&a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \\cdots + a_0 y(t) \\\\[2pt]\n&\\qquad = b_m u^{(m)}(t) + b_{m-1}u^{(m-1)}(t) + \\cdots + b_0 u(t)\n\\end{aligned}\n\nwith given initial conditions y^{(n-1)}(0), y^{(n-2)}(0), \\dots, y(0), we have a description for a large class of useful systems, including all of the circuits we’ve seen so far.\n\nn is called the order of the system,\nthe a_i and b_i are called the coefficients of the system,\nsuch systems are always time-invariant,\nif the initial conditions are all 0, the system is linear,\nthis gives an implicit description of the map from u to y. In weeks 5 & 6 we’ll develop an explicit description.",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
       "Notes"
     ]
   },
   {
-    "objectID": "weeks/week02/notes.html#now-some-useful-signals",
-    "href": "weeks/week02/notes.html#now-some-useful-signals",
-    "title": "Week 2 — Lecture notes",
-    "section": "Now: some useful signals",
-    "text": "Now: some useful signals\nWe have already seen the most used signal in this course: u(t) = e^{st}, s \\in \\mathbb{C}, and all its components: e^{-t}, e^{t}, \\sin t, \\cos t.\nNow we’ll introduce three more signals which we will see many more times.\n\n① Dirac delta\n\nu_\\varepsilon(t) is the triangle of base \\varepsilon and height \\tfrac{2}{\\varepsilon}, so\n \\int_{-\\infty}^{\\infty} u_\\varepsilon(t)\\,\\mathrm{d}t\n   \\;=\\; \\frac{1}{2}\\,\\varepsilon\\,\\frac{2}{\\varepsilon}\n   \\;=\\; \\varepsilon\\,\\frac{1}{\\varepsilon} \\;=\\; 1. \nThe Dirac delta, or impulse, \\delta(t), may be defined as\n \\boxed{\\;\\delta(t) \\;=\\; \\lim_{\\varepsilon \\to 0} u_\\varepsilon(t)\\;} \n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n\n\ninfinite height, area 1.\nThe Dirac delta has an extremely important property: the sifting property.\nLet y(t) be an arbitrary continuous signal. Then\n \\boxed{\\;\\langle y, \\delta\\rangle \\;=\\; \\int_{-\\infty}^{\\infty} y(t)\\,\\bar \\delta(t)\\,\\mathrm{d}t\n   \\;=\\; y(0)\\;} \nSketch of proof:\nIf \\varepsilon is small, y(t) \\simeq y(0) on [0, \\varepsilon], so\n\n\\begin{aligned}\n\\int_{-\\infty}^{\\infty} \\delta(t)\\, y(t)\\,\\mathrm{d}t\n  &= \\lim_{\\varepsilon \\to 0} \\int_{0}^{\\varepsilon} u_\\varepsilon(t)\\, y(t)\\,\\mathrm{d}t \\\\[6pt]\n  &\\simeq y(0) \\lim_{\\varepsilon \\to 0} \\int_{0}^{\\varepsilon} u_\\varepsilon(t)\\,\\mathrm{d}t \\\\[6pt]\n  &= y(0).\n\\end{aligned}\n\n(Can be made precise using a continuity argument).\nWhat about \\displaystyle \\int_{-\\infty}^{\\infty} \\delta(t - \\tau)\\, y(t)\\,\\mathrm{d}t ?\nLet \\sigma = t - \\tau. \\;\\mathrm{d}t = \\mathrm{d}\\sigma.\nThen we have\n \\int_{-\\infty}^{\\infty} \\delta(\\sigma)\\, y(\\sigma + \\tau)\\,\\mathrm{d}\\sigma \\;=\\; y(\\tau). \n \\boxed{\\;\\int_{-\\infty}^{\\infty} \\delta(t - \\tau)\\, y(t)\\,\\mathrm{d}t \\;=\\; y(\\tau)\\;}\n   \\qquad \\text{\\small the sifting property.} \n\nNOTE: The above definition of the Dirac delta is not unique. It can be defined in many ways, for example using different limits, measures or distributions. The important thing (which really defines it) is the sifting property.\n\n\nNOTE: A Dirac delta only really makes sense inside an integral, so it represents an area of 1, rather than a height.\n\n\nThe scaling property\nWhat is \\delta(\\alpha t)?\n \\delta(\\alpha t) \\;=\\; \\lim_{\\varepsilon \\to 0} u_\\varepsilon(\\alpha t). \n\n\n  \n    \n      \n    \n  \n\n  \n  \n  αt\n  \n  0\n  ε\n  \n  2/ε\n  uε(αt)\n  α &gt; 0\n\n  \n  \n  αt\n  \n  0\n  ε\n  \n  2/ε\n  uε(αt)\n  α &lt; 0\n\n  \n  \n  t\n  \n  \n  2/ε\n  ε/α\n  area 1/|α|\n\n\nLet \\sigma = \\alpha t. Then \\sigma = \\varepsilon \\;\\Rightarrow\\; t = \\dfrac{\\varepsilon}{\\alpha}, so on the t axis the triangle has base \\left|\\dfrac{\\varepsilon}{\\alpha}\\right| and height \\dfrac{2}{\\varepsilon}, giving\n \\text{area} \\;=\\; \\frac{1}{2}\\left|\\frac{\\varepsilon}{\\alpha}\\right|\\frac{2}{\\varepsilon}\n   \\;=\\; \\frac{1}{|\\alpha|}. \nThe limit is therefore an impulse of area \\dfrac{1}{|\\alpha|} at the origin:\n \\boxed{\\;\\delta(\\alpha t) \\;=\\; \\frac{1}{|\\alpha|}\\,\\delta(t)\\;} \n\n\nExample: radar\nRadar systems emit a pulse train and measure its reflection to find the distance to objects. We can model this as a sequence of deltas.\n\n\n  \n    \n      \n    \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  r\n\n\nTotal path length: 2r. Round trip time: \\dfrac{2r}{c} = t_d. So\n r \\;=\\; \\frac{c\\,t_d}{2}. \nDelay \\Rightarrow distance. E.g. a 1\\,\\mu\\text{s} delay gives\n r = \\tfrac{1}{2}\\,(3\\times10^{8})(10^{-6}) = 150\\ \\text{m}. \nIf there are N targets at ranges r_i with reflectivities a_i, the reflected signal is\n y(t) \\;=\\; \\sum_{i=1}^{N} a_i\\, \\delta\\!\\left(t - \\frac{2 r_i}{c}\\right). \nUnambiguous range. Suppose we transmit radar pulses at a frequency f = \\dfrac{1}{T}:\n\n\n  \n    \n      \n    \n  \n  \n  \n    \n    \n    \n    \n  \n  \n  T\n\n\nSuppose we measure an echo at time t_d since the most recent pulse. Which pulse is it an echo of? The distance could be\n \\frac{c\\,t_d}{2}, \\qquad \\frac{c\\,(t_d + T)}{2}, \\qquad \\frac{c\\,(t_d + 2T)}{2},\n   \\qquad \\dots \nThe range is only known up to\n R_u \\;=\\; \\frac{cT}{2}, \nthe unambiguous range.\nHigher T: larger range, but slower updates.\nHow to deal with this? Transmit at two frequencies — the range has to be consistent with both measurements.\n\n\n\n\n② The unit step\nAnother important function is the unit step or Heaviside function:\n\n\\begin{aligned}\nH(t) &:= \\int_{-\\infty}^{t} \\delta(\\varsigma)\\,\\mathrm{d}\\varsigma \\\\[6pt]\n     &= \\begin{cases} 0, & t &lt; 0 \\\\[2pt] 1, & t \\geq 0. \\end{cases}\n\\end{aligned}\n\n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n  \n  \n  0\n  \n  \n  1\n\n\n\n\n③ The pulse\nFinally, the pulse function \\Pi_\\tau(t):\n\n\\Pi_\\tau(t) := \\begin{cases} 1, & -\\dfrac{\\tau}{2} \\leq t \\leq \\dfrac{\\tau}{2} \\\\[6pt]\n0, & \\text{otherwise.} \\end{cases}\n\n\n\n  \n    \n      \n    \n  \n  \n  t\n  \n  \n  \n  \n  \n  \n  \n  \n  \n  \n  0\n  −τ/2\n  τ/2\n  1",
+    "objectID": "weeks/week03/notes.html#lti-systems-and-sinusoids",
+    "href": "weeks/week03/notes.html#lti-systems-and-sinusoids",
+    "title": "Week 3 — Lecture notes",
+    "section": "③ LTI systems and sinusoids",
+    "text": "③ LTI systems and sinusoids\nBack to our RC circuit. Let’s plug in a complex sinusoidal voltage and see what happens.\n v_i(t) = v_C(t) + \\frac{\\mathrm{d}}{\\mathrm{d}t}RC v_C(t). \nLet v_i(t) = e^{j\\omega t} = \\cos(\\omega t) + j\\sin(\\omega t).\nGuess a solution v_C(t) = G e^{j\\omega t} for some G \\in \\mathbb{C} — a sinusoid of the same frequency.\n e^{j\\omega t} = G e^{j\\omega t} + \\frac{\\mathrm{d}}{\\mathrm{d}t}RCG e^{j\\omega t} \n e^{j\\omega t} = G e^{j\\omega t} + j\\omega RCG e^{j\\omega t} \n 1 = G + j\\omega RCG \\qquad (e^{j\\omega t} \\neq 0) \n G(j\\omega) = \\frac{1}{1 + j\\omega RC}. \n\nWhy is Ge^{j\\omega t} always such a good guess?\n\n\nConsider an arbitrary LTI system mapping u to y.\nLet u(t) = e^{j\\omega t} = \\cos(\\omega t) + j\\sin(\\omega t).\nTime invariance: u(t-\\tau) \\longmapsto y(t-\\tau).\nFor this input,\n\n\\begin{aligned}\nu(t-\\tau) &= e^{j\\omega(t-\\tau)} = e^{j\\omega t}e^{-j\\omega\\tau} \\\\[2pt]\n          &= e^{-j\\omega\\tau}u(t).\n\\end{aligned}\n\nThis is the input u scaled by e^{-j\\omega\\tau}.\nBy linearity, y(t-\\tau) = e^{-j\\omega\\tau}y(t).\nSet t=0 and relabel -\\tau = t, then\n y(t) = e^{j\\omega t}y(0), \nwhere y(0) is G(j\\omega) in the example above.\n\nLTI systems always map a sinusoid to a sinusoid of the same frequency.\n\nLet’s think about this in terms of our matrix \\longleftrightarrow system analogy.\n\n\n\n\n\n\n\nmatrix\nLTI system\n\n\n\n\ny = Au\ny(t) = G(u(t))\n\n\nIf u is an eigenvector, y = Au = \\lambda u\nIf u = e^{j\\omega t}, y = G(j\\omega)\\,e^{j\\omega t}\n\n\nA scales u to get y.\nG scales u to get y.\n\n\n\ne^{j\\omega t} is an eigenvector!\n\n\n\nMatrices are hard in general, but diagonal matrices are easy, they simply scale each entry of the vector. How do we diagonalise a matrix? We find a basis of eigenvectors.\nOver the last three weeks, we’ve seen that time domain signals & systems are hard to analyse. We’ve just discovered that the eigenvectors of an LTI system are sinusoids. Can we use this to somehow “diagonalise” the system and make the analysis less difficult, the same as we would do for a matrix?\nYES! This is what the Fourier Transform does. We will build this over the next three weeks.",
     "crumbs": [
-      "Week 2 — Signals as vectors, systems as maps",
+      "Week 3 — Linear, time-invariant systems",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week03/notes.html#block-diagrams-and-interconnections",
+    "href": "weeks/week03/notes.html#block-diagrams-and-interconnections",
+    "title": "Week 3 — Lecture notes",
+    "section": "⑤ Block diagrams and interconnections",
+    "text": "⑤ Block diagrams and interconnections\nBlock diagrams or signal flow diagrams describe the exchange of signals between systems.\n\n\n\n\nSystem A with input u and output y.\n\n\n\n\n\n\nA static gain k.\n\n\n\n\n\n\nA cascade interconnection.\n\n\n\n\n\n\nThe sum of two signals.\n\n\n\n\n\n\nA parallel interconnection.\n\n\n\n\n\n\nA negative feedback interconnection (the subject of control systems).",
+    "crumbs": [
+      "Week 3 — Linear, time-invariant systems",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week03/notes.html#extra-example-impulse-response-of-an-rlc-circuit",
+    "href": "weeks/week03/notes.html#extra-example-impulse-response-of-an-rlc-circuit",
+    "title": "Week 3 — Lecture notes",
+    "section": "Extra example: impulse response of an RLC circuit",
+    "text": "Extra example: impulse response of an RLC circuit\n\n\n\n\nSeries RLC circuit.\n\n\n\nLet’s consider v_C to be the output.\n v(t) = v_R + v_L + v_C \\qquad \\text{(KVL)} \n i = C\\frac{\\mathrm{d}}{\\mathrm{d}t}v_C \n v_L = L\\frac{\\mathrm{d}}{\\mathrm{d}t}i \n v_R = Ri \nCombining, KVL becomes:\n v(t) = L\\frac{\\mathrm{d}}{\\mathrm{d}t}i + Ri + v_C \\qquad(4) \nOr\n v(t) = LC\\frac{\\mathrm{d}^2}{\\mathrm{d}t^2}v_C(t) + RC\\frac{\\mathrm{d}}{\\mathrm{d}t}v_C(t) + v_C. \nNow assume the circuit is at rest and we apply an impulse voltage.\nImagine what v(t) = \\delta(t) does to the circuit around t=0.\nIntegrate (4):\n\n\\int_{0^-}^{0^+}\\!\\delta(t)\\,\\mathrm{d}t\n= \\int_{0^-}^{0^+}\\! L\\frac{\\mathrm{d}}{\\mathrm{d}t}i(t) + \\underbrace{Ri(t) + v_C(t)}_{\\text{assume finite}}\\,\\mathrm{d}t\n\nThe underbraced terms give 0, as we are integrating over an infinitesimal interval. So\n 1 = Li(0) \n i(0) = \\frac{1}{L}. \nNow,\n v_C(0) = \\frac{1}{C}\\int_{0^-}^{0^+}\\! i(t)\\,\\mathrm{d}t = 0. \nConclusion: the impulse at 0 deposits an initial condition on the inductor: the 2nd highest derivative of v_C.\nWe can now solve the impulse response of the circuit as an initial condition response:\n\n\\frac{\\mathrm{d}^2}{\\mathrm{d}t^2}v_C(t)\n+ \\underbrace{\\frac{R}{L}}_{2\\zeta\\omega_n}\\frac{\\mathrm{d}}{\\mathrm{d}t}v_C(t)\n+ \\underbrace{\\frac{1}{LC}}_{\\omega_n^2}v_C(t) = 0 \\qquad(5)\n\nwith v_C(0) = 0,\n v_C'(0) = \\frac{1}{C}i(0) = \\frac{1}{LC}. \nWe suspect the solution will be some kind of exponential/sinusoid combo, so let’s guess a solution\n e^{st} \\qquad \\text{for some } s \\in \\mathbb{C}. \nSubstituting in (5):\n s^2 e^{st} + 2\\zeta\\omega_n s\\, e^{st} + \\omega_n^2 e^{st} = 0 \ne^{st} \\neq 0, so\n s^2 + 2\\zeta\\omega_n s + \\omega_n^2 = 0 \\qquad(6) \n\n\\begin{aligned}\ns &= \\frac{-2\\zeta\\omega_n \\pm \\sqrt{4\\zeta^2\\omega_n^2 - 4\\omega_n^2}}{2} \\\\[2pt]\n  &= -\\zeta\\omega_n \\pm \\omega_n\\sqrt{\\zeta^2 - 1}.\n\\end{aligned}\n\nThe roots of (6) are called the poles of the system (recall pole position & behaviour from week 1).\nSuppose R = 6\\,\\Omega, L = 1\\,\\mathrm{H}, C = 40\\,\\mathrm{mF}.\nThen s = -3 \\pm 4j.\nso the response is\n v_C(t) = A e^{(-3+4j)t} + B e^{(-3-4j)t}. \nv_C(0) = 0, so A + B = 0. \\quad\\Rightarrow\\quad B = -A\nv_C'(0) = \\dfrac{1}{LC}, so\n (-3+4j)A - (-3-4j)A = \\frac{1}{LC} \n A = \\frac{1}{8j\\,LC} \n = -3.125j \nso we have\n\n\\begin{aligned}\nv_C(t) &= A e^{(-3+4j)t} + \\bar{A}\\, e^{(-3-4j)t} \\qquad\\text{(complex conjugates!)} \\\\[2pt]\n       &= 2\\operatorname{Re}\\!\\big(A e^{(-3+4j)t}\\big) \\\\[2pt]\n       &= 6.25\\, e^{-3t}\\sin(4t)\\,H(t)\n\\end{aligned}\n\nH(t) encodes that the signal is 0 before t=0.",
+    "crumbs": [
+      "Week 3 — Linear, time-invariant systems",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html",
+    "href": "weeks/week04/notes.html",
+    "title": "Week 4 — Lecture notes",
+    "section": "",
+    "text": "Other formats:\n📄 PDF",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#from-impulses-to-sinusoids",
+    "href": "weeks/week04/notes.html#from-impulses-to-sinusoids",
+    "title": "Week 4 — Lecture notes",
+    "section": "From impulses to sinusoids",
+    "text": "From impulses to sinusoids\nThis week we start to develop frequency-domain tools.\nSo far, we have seen that any (integrable) signal can be represented as an integral (“sum”) of impulses. This week we develop an alternative representation for periodic signals, by changing the basis signals from impulses to sinusoids. This is the Fourier series.\n\nRecap. If a system is LTI, it preserves the frequency of a sinusoidal input:\n u = e^{\\,j\\omega t} \\;\\longmapsto\\; G(j\\omega)\\,e^{\\,j\\omega t}, \\qquad G(j\\omega) \\in \\mathbb{C}. \nIn other words, e^{\\,j\\omega t} is an eigenvector of the system. If we can express any u in this basis, as a sum of sinusoids, this will “diagonalise the system” and “simplify analysis”, in ways that we will soon see.\nThis also gives a quick test of whether a system is LTI: inject a sinusoid and see what comes out at the output.",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#approximating-a-periodic-signal",
+    "href": "weeks/week04/notes.html#approximating-a-periodic-signal",
+    "title": "Week 4 — Lecture notes",
+    "section": "Approximating a periodic signal",
+    "text": "Approximating a periodic signal\nA signal u(t) is T-periodic if u(t)=u(t−T). The fundamental frequency of u is the frequency corresponding to smallest T such that u(t) is T-periodic. For example, sin(t) is 2\\pi periodic, but also 4\\pi periodic, 6\\pi periodic, etc. The fundamental frequency is the frequency corresponding to period 2\\pi, that is, 1 rad/s.\nFor the sum of two signals to be T-periodic, the individual signals must both be T-periodic, so we want to find the minimum common period of the two sinusoids.\nLet u(t) be an arbitrary periodic signal with fundamental frequency \\frac{2\\pi}{T}.\n \\phi(t) := e^{\\,j\\left(\\frac{2\\pi}{T}t\\right)} \\quad\\text{also periodic on } [0,T]. \\qquad \\text{Let } \\tfrac{2\\pi}{T} =: \\omega. \nHow well can we approximate u(t) by scaling & rotating e^{j\\omega t}?\nWe already have a measure of the size of a periodic signal:\n P(u) := \\frac{1}{T}\\int_0^T |u(t)|^2\\,\\mathrm{d}t = \\langle u, u\\rangle_P = \\|u\\|_P^2 \\qquad (\\text{see Lecture 2}). \nMultiplying \\phi by c \\in \\mathbb{C} gives us a scaling and rotation of \\phi:\n c = a\\,e^{\\,j\\vartheta} \\;(\\text{polar form}) \\quad\\text{so}\\quad c\\phi = a\\,e^{\\,j(\\omega t + \\vartheta)}. \nHere a is the scale, and the rotation = phase shift.\nLet’s minimise J(c) = \\|u - c\\phi\\|_P^2 over c \\in \\mathbb{C}, then u \\approx c\\phi.\n\n\\begin{aligned}\nJ(c) &= \\langle u - c\\phi,\\; u - c\\phi\\rangle_P \\\\[2pt]\n&= \\langle u, u\\rangle_P - \\langle u, c\\phi\\rangle_P - \\langle c\\phi, u\\rangle_P + \\langle c\\phi, c\\phi\\rangle_P \\\\[2pt]\n&= \\|u\\|_P^2 - \\bar{c}\\,\\langle u,\\phi\\rangle_P - c\\,\\overline{\\langle u,\\phi\\rangle}_P + |c|^2\\,\\|\\phi\\|_P^2 . \\qquad(1)\n\\end{aligned}\n\nWe can simplify \\|\\phi\\|_P^2:\n\n\\|\\phi\\|_P^2 = \\frac{1}{T}\\int_0^T e^{\\,j\\omega t}\\,e^{-j\\omega t}\\,\\mathrm{d}t\n= \\frac{1}{T}\\int_0^T 1\\,\\mathrm{d}t = 1 .\n\nLet \\gamma := \\langle u,\\phi\\rangle. Then we can write (1) as\n J(c) = \\|u\\|_P^2 - \\bar{c}\\gamma - c\\bar{\\gamma} + |c|^2 . \nNow notice that\n\n\\begin{aligned}\n|c-\\gamma|^2 &= (c-\\gamma)\\overline{(c-\\gamma)} \\\\[2pt]\n&= |c|^2 - \\gamma\\bar{c} - c\\bar{\\gamma} + |\\gamma|^2 .\n\\end{aligned}\n\nSo\n J(c) = \\|u\\|_P^2 + |c-\\gamma|^2 - |\\gamma|^2 . \nAll terms are positive. This is minimised when |c-\\gamma|^2 = 0, that is,\n \\boxed{\\,c = \\langle u,\\phi\\rangle_P = \\frac{1}{T}\\int_0^T u(t)\\,e^{-j\\omega t}\\,\\mathrm{d}t\\,} \nThe least-squares approximation of u(t) by \\phi(t) is therefore\n \\boxed{\\,c\\phi = \\frac{\\langle u,\\phi\\rangle_P}{\\|\\phi\\|_P^2}\\,\\phi\\,} \nThis is the projection of u onto \\phi.\n\n\n\n\n(a) The least-squares approximation of u by \\phi is the projection c\\phi, and the error u - c\\phi is perpendicular to \\phi. (b) The same construction for signals: a square wave of period 2\\pi and its best approximation by a single sinusoid at the fundamental frequency, \\tfrac{4}{\\pi}\\cos\\omega t = \\Re(\\tfrac{4}{\\pi}\\exp(j\\omega t)).\n\n\n\nThis procedure is exactly the same for \\phi_k = e^{\\,jk\\omega t} for any k \\in \\mathbb{Z}, so we define\n \\boxed{\\,c_k = \\langle u,\\phi_k\\rangle_P = \\frac{1}{T}\\int_0^T u(t)\\,e^{-jk\\omega t}\\,\\mathrm{d}t\\,} \nThese are the complex Fourier coefficients.",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#the-fourier-series",
+    "href": "weeks/week04/notes.html#the-fourier-series",
+    "title": "Week 4 — Lecture notes",
+    "section": "The Fourier series",
+    "text": "The Fourier series\nEach coefficient gives a least-squares approximation of u(t) by \\phi_k(t), calculated as\n u(t) \\approx c_k \\phi_k = \\frac{\\langle u,\\phi_k\\rangle_P}{\\|\\phi_k\\|_P^2}\\,\\phi_k, \nthe projection of u onto \\phi_k.\nIt turns out that the sum of all these approximations is an exact representation of u(t) (provided it is sufficiently well-behaved):\n \\boxed{\\,u = \\sum_{k=-\\infty}^{\\infty} c_k \\phi_k = \\sum_{k=-\\infty}^{\\infty} \\langle u,\\phi_k\\rangle_P\\,\\phi_k, \\qquad \\phi_k(t) = e^{\\,jk\\omega t}\\,} \nThis is the Fourier series of u. It also turns out that each c_k is independent, as \\phi_k are orthogonal, so the finite sum \\displaystyle\\sum_{k=-n}^{n} \\langle u,\\phi_k\\rangle_P\\,\\phi_k is a least-squares approximation of u by \\{\\phi_k\\}_{k=-n,\\dots,n}. See the extension section below for the full details.\nFor k = 0, we have\n\n\\begin{aligned}\nc_0 = \\langle u,\\phi_0\\rangle &= \\frac{1}{T}\\int_0^T u\\,e^{0}\\,\\mathrm{d}t \\\\[2pt]\n&= \\frac{1}{T}\\int_0^T u(t)\\,\\mathrm{d}t . \\qquad \\text{Average value of } u = \\text{DC offset.}\n\\end{aligned}\n\n\nExtension material\n\nWhy are the c_k independent?\nFirst, let’s calculate\n\n\\begin{aligned}\n\\langle \\phi_k, \\phi_\\ell\\rangle &= \\frac{1}{T}\\int_0^T e^{\\,jk\\omega t}\\,e^{-j\\ell\\omega t}\\,\\mathrm{d}t \\\\[2pt]\n&= \\frac{1}{T}\\int_0^T e^{\\,+j(k-\\ell)\\omega t}\\,\\mathrm{d}t \\\\[2pt]\n&= 1 \\quad \\text{if } k = \\ell \\quad\\text{or} \\\\[6pt]\n&= \\left[\\frac{1}{+j(k-\\ell)\\omega}\\,e^{\\,+j(k-\\ell)\\omega t}\\right]_0^{T} \\\\[6pt]\n&= 0 \\quad \\text{as } e^{\\,+j(k-\\ell)\\omega t} \\text{ is } T\\text{-periodic.}\n\\end{aligned}\n\nThis means the \\phi_k are orthogonal.\nNow let’s minimise \\left\\|u - \\sum_k c_k \\phi_k\\right\\|_P^2.\n\n\\begin{aligned}\n\\left\\|u - \\sum_k c_k \\phi_k\\right\\|_P^2\n&= \\left\\langle u - \\sum_k c_k \\phi_k,\\; u - \\sum_k c_k \\phi_k\\right\\rangle_P \\\\[6pt]\n&= \\|u\\|_P^2 + \\left\\langle u,\\, -\\sum_k c_k \\phi_k\\right\\rangle + \\left\\langle -\\sum_k c_k \\phi_k,\\, u\\right\\rangle \\\\&+ \\left\\langle \\sum_k c_k \\phi_k,\\, \\sum_k c_k \\phi_k\\right\\rangle \\\\[6pt]\n&= \\|u\\|_P^2 - \\sum_k \\bar{c}_k \\underbrace{\\langle u,\\phi_k\\rangle}_{:=\\,\\gamma_k} - \\sum_k c_k \\overline{\\langle u,\\phi_k\\rangle} + \\underbrace{\\sum_k \\sum_\\ell c_k \\bar{c}_\\ell \\langle \\phi_k,\\phi_\\ell\\rangle}_{=\\,0 \\text{ for } k \\neq \\ell} \\\\[6pt]\n&= \\|u\\|_P^2 - \\sum_k \\left(\\bar{c}_k \\gamma_k + c_k \\bar{\\gamma}_k\\right) + \\sum_k c_k \\bar{c}_k \\langle \\phi_k,\\phi_k\\rangle .\n\\end{aligned}\n\nFollowing the same completion of squares argument as before, we have\n = \\|u\\|_P^2 + \\sum_k |c_k - \\gamma_k|^2 - \\sum_k |\\gamma_k|^2 . \nThis is minimised when c_k = \\gamma_k for all k. These are the Fourier coefficients we derived earlier with individual minimisations!\n\n\nIf u(t) is real, its Fourier series must be real:\n \\operatorname{Im}\\!\\left(\\sum_k c_k \\phi_k\\right) = 0. \nThis is achieved if\n\n\\begin{aligned}\nc_k \\phi_k &= \\overline{c_{-k}\\,\\phi_{-k}} \\\\[2pt]\n&= \\overline{c_{-k}}\\,\\phi_k .\n\\end{aligned}\n\nSo c_k = \\overline{c_{-k}}. In particular, c_0 = \\overline{c_0}, so c_0 is real.",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#the-sinecosine-form-for-a-real-signal",
+    "href": "weeks/week04/notes.html#the-sinecosine-form-for-a-real-signal",
+    "title": "Week 4 — Lecture notes",
+    "section": "The sine–cosine form for a real signal",
+    "text": "The sine–cosine form for a real signal\nIn the real case, we can also derive a sin/cosine form of the Fourier series.\n \\frac{e^{\\,j\\omega t} + e^{-j\\omega t}}{2} = \\cos\\omega t, \\qquad \\frac{e^{\\,j\\omega t} - e^{-j\\omega t}}{2j} = \\sin\\omega t. \nLet c_k = \\tfrac{1}{2}(a_k - j b_k), k \\geq 0. Then\n\n\\begin{aligned}\nc_k e^{\\,jk\\omega t} + c_{-k} e^{-jk\\omega t}\n&= c_k e^{\\,jk\\omega t} + \\bar{c}_k e^{-jk\\omega t} \\\\[2pt]\n&= \\tfrac{1}{2}(a_k - j b_k)\\big(\\cos(k\\omega t) + j\\sin(k\\omega t)\\big) + \\tfrac{1}{2}(a_k + j b_k)\\big(\\cos(k\\omega t) - j\\sin(k\\omega t)\\big) \\\\[2pt]\n&= a_k \\cos(k\\omega t) + b_k \\sin(k\\omega t) .\n\\end{aligned}\n\nSo we have an alternative form for the Fourier series of a real function u:\n\n\\boxed{\\;u(t) = a_0 + \\sum_{k=1}^{\\infty} a_k \\cos(k\\omega t) + b_k \\sin(k\\omega t),\\;}\n\nwhere\n\n\\begin{aligned}\na_0 &= c_0 \\\\[4pt]\na_k &= 2\\operatorname{Re}(c_k) = \\frac{2}{T}\\int_0^T u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[4pt]\nb_k &= -2\\operatorname{Im}(c_k) = \\frac{2}{T}\\int_0^T u(t)\\sin(k\\omega t)\\,\\mathrm{d}t .\n\\end{aligned}",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#example-the-bridge-rectifier",
+    "href": "weeks/week04/notes.html#example-the-bridge-rectifier",
+    "title": "Week 4 — Lecture notes",
+    "section": "Example: the bridge rectifier",
+    "text": "Example: the bridge rectifier\nExample: Compute the Fourier series of the output of a bridge rectifier driven by a 1000\\,Hz sinusoid,\n u(t) = \\left|\\sin(2000\\pi t)\\right| . \n\n\n\n\nThe rectifier output u(t) = |\\sin(2000\\pi t)|. Rectification folds the negative half-cycles up, so the period is half that of the input.\n\n\n\nThe input frequency is 1000\\,\\text{Hz} = 2000\\pi\\,rad/s. Rectification doubles this, so the fundamental frequency of u is\n \\omega_0 = 4000\\pi \\;\\text{rad/s}, \\qquad T = \\frac{2\\pi}{\\omega_0} = \\frac{1}{2000}\\,\\text{s}. \nOn [0,T] the argument 2000\\pi t runs from 0 to \\pi, where the sine is non-negative, so u(t) = \\sin\\!\\left(\\tfrac{\\omega_0}{2}t\\right) there and the absolute value can be dropped.\nStart with the DC term:\n\n\\begin{aligned}\nc_0 = \\frac{1}{T}\\int_0^T u(t)\\,\\mathrm{d}t\n&= 2000\\int_0^{1/2000} \\sin(2000\\pi t)\\,\\mathrm{d}t \\\\[6pt]\n&= 2000\\left[\\frac{-\\cos(2000\\pi t)}{2000\\pi}\\right]_0^{1/2000} \\\\[6pt]\n&= \\frac{1}{\\pi}\\Big(\\cos(0) - \\cos(\\pi)\\Big) = \\frac{2}{\\pi} .\n\\end{aligned}\n\nNow the general coefficient:\n\n\\begin{aligned}\nc_k = \\frac{1}{T}\\int_0^T u(t)\\,e^{-jk\\omega_0 t}\\,\\mathrm{d}t\n&= \\frac{\\omega_0}{2\\pi}\\int_0^{2\\pi/\\omega_0} \\sin\\!\\left(\\frac{\\omega_0}{2}t\\right) e^{-jk\\omega_0 t}\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{\\omega_0}{2\\pi}\\int_0^{2\\pi/\\omega_0} \\frac{1}{2j}\\left(e^{\\,j\\frac{\\omega_0}{2}t} - e^{-j\\frac{\\omega_0}{2}t}\\right) e^{-jk\\omega_0 t}\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{\\omega_0}{4\\pi j}\\int_0^{2\\pi/\\omega_0} \\left(e^{\\,j\\frac{\\omega_0}{2}(1-2k)t} - e^{-j\\frac{\\omega_0}{2}(1+2k)t}\\right)\\mathrm{d}t \\\\[6pt]\n&= \\frac{\\omega_0}{4\\pi j}\\left[\\frac{2\\,e^{\\,j\\frac{\\omega_0}{2}(1-2k)t}}{j\\omega_0(1-2k)} + \\frac{2\\,e^{-j\\frac{\\omega_0}{2}(1+2k)t}}{j\\omega_0(1+2k)}\\right]_0^{2\\pi/\\omega_0} .\n\\end{aligned}\n\nAt t = 2\\pi/\\omega_0 the two exponentials are e^{\\,j\\pi(1-2k)} and e^{-j\\pi(1+2k)}. Both 1-2k and 1+2k are odd, so both exponentials equal -1:\n\n\\begin{aligned}\nc_k &= \\frac{\\omega_0}{4\\pi j}\\left(-\\frac{4}{j\\omega_0}\\right)\\left(\\frac{1}{1-2k} + \\frac{1}{1+2k}\\right) \\\\[6pt]\n&= -\\frac{1}{\\pi j^2}\\cdot\\frac{(1+2k) + (1-2k)}{(1-2k)(1+2k)} \\\\[6pt]\n&= \\boxed{\\;\\frac{2}{\\pi\\left(1-4k^2\\right)}\\;}\n\\end{aligned}\n\nSetting k=0 recovers c_0 = 2/\\pi.\n\n\n\n\nThe Fourier coefficients c_k = \\dfrac{2}{\\pi(1-4k^2)} of the rectifier output, with the phase below. Every coefficient with |k|\\geq 1 is negative, so its phase is \\pi; the phase is drawn as an odd function of k, taking -\\pi for k &gt; 0 and +\\pi for k &lt; 0.\n\n\n\nIn sine–cosine form, b_k = -2\\operatorname{Im}(c_k) = 0 and a_k = 2\\operatorname{Re}(c_k), so\n u(t) = \\frac{2}{\\pi} + \\sum_{k=1}^{\\infty} \\frac{4}{\\pi\\left(1-4k^2\\right)}\\cos(k\\omega_0 t) . \nIt turns out that the fact the sine series is zero is something we can see straight away from the symmetry of the signal.",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#symmetry-properties-of-the-fourier-series",
+    "href": "weeks/week04/notes.html#symmetry-properties-of-the-fourier-series",
+    "title": "Week 4 — Lecture notes",
+    "section": "Symmetry properties of the Fourier series",
+    "text": "Symmetry properties of the Fourier series\n★ Odd functions: \\;f(-x) = -f(x). Rotational symmetry (180^\\circ).\n\n\n\n\nAn odd function: rotational (180^\\circ) symmetry about the origin.\n\n\n\n★ Even functions: \\;f(-x) = f(x). Symmetry about y-axis.\n\n\n\n\nAn even function: symmetry about the y-axis.\n\n\n\nThe Fourier series simplifies for even and odd functions.\n① Odd u(t): calculate a_k.\n a_k = \\frac{2}{T}\\int_0^T u(t)\\cos(k\\omega t)\\,\\mathrm{d}t . \n u(-t)\\cos(-k\\omega t) = -u(t)\\cos(k\\omega t) \\quad(\\text{odd}). \nSince u(t) & \\cos(k\\omega t) are T-periodic, we can shift the limits of integration:\n\n\\begin{aligned}\na_k &= \\frac{2}{T}\\int_{-T/2}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{2}{T}\\int_{-T/2}^{0} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[6pt]\n&= -\\frac{2}{T}\\int_{0}^{-T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t .\n\\end{aligned}\n\nLet \\tau = -t. \\;\\mathrm{d}\\tau = -\\mathrm{d}t.\n\n\\begin{aligned}\n&= +\\frac{2}{T}\\int_{0}^{T/2} u(-\\tau)\\cos(-k\\omega\\tau)\\,\\mathrm{d}\\tau + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t \\\\[6pt]\n&= -\\frac{2}{T}\\int_{0}^{T/2} u(\\tau)\\cos(k\\omega\\tau)\\,\\mathrm{d}\\tau + \\frac{2}{T}\\int_{0}^{T/2} u(t)\\cos(k\\omega t)\\,\\mathrm{d}t = 0 \\\\\n&\\hphantom{=} \\quad (\\text{as } u(\\tau)\\cos(k\\omega\\tau) \\text{ is odd}),\n\\end{aligned}\n\nSo for odd functions, \\boxed{a_k = 0}. Similarly, a_0 = 0, so we get a pure sine series.\nFor even functions, a similar argument shows that \\boxed{b_k = 0} and we get a cosine series + DC term.",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#example-fourier-series-of-a-square-wave",
+    "href": "weeks/week04/notes.html#example-fourier-series-of-a-square-wave",
+    "title": "Week 4 — Lecture notes",
+    "section": "Example: Fourier series of a square wave",
+    "text": "Example: Fourier series of a square wave\nExample: Compute the Fourier series of the square wave illustrated below:\n\n\n\n\nThe square wave u(t) (period 2\\pi, amplitude \\pm 1). The red bracket marks one period, [\\tfrac{\\pi}{2}, \\tfrac{5\\pi}{2}], used for the coefficient integral.\n\n\n\nThe wave is even, so we only need to compute the cosine terms. Here the period is T = 2\\pi, so \\omega = \\tfrac{2\\pi}{T} = 1, giving \\cos(k\\omega t) = \\cos(kt) and \\tfrac{2}{T} = \\tfrac{1}{\\pi}.\n a_0 = \\frac{1}{2\\pi}\\int_0^{2\\pi} u(t)\\,\\mathrm{d}t = 0. \\qquad \\text{No DC offset!} \\iff \\text{mean is zero.} \nCompute the coefficients over the red interval in the figure:\n\n\\begin{aligned}\na_k &= \\frac{1}{\\pi}\\int_{\\pi/2}^{5\\pi/2} u(t)\\cos(kt)\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{1}{\\pi}\\int_{\\pi/2}^{3\\pi/2} -\\cos(kt)\\,\\mathrm{d}t + \\frac{1}{\\pi}\\int_{3\\pi/2}^{5\\pi/2} \\cos(kt)\\,\\mathrm{d}t .\n\\end{aligned}\n\n\n\\begin{aligned}\n&= \\frac{1}{\\pi}\\left[-\\frac{1}{k}\\sin(kt)\\right]_{\\pi/2}^{3\\pi/2} + \\frac{1}{\\pi}\\left[\\frac{1}{k}\\sin(kt)\\right]_{3\\pi/2}^{5\\pi/2} \\\\[8pt]\n&= \\frac{1}{\\pi k}\\left(\\sin\\!\\left(\\frac{k\\pi}{2}\\right) + \\sin\\!\\left(\\frac{5k\\pi}{2}\\right) - 2\\sin\\!\\left(\\frac{3k\\pi}{2}\\right)\\right) \\\\[8pt]\n&= \\frac{2}{\\pi k}\\left(\\sin\\!\\left(\\frac{k\\pi}{2}\\right) - \\sin\\!\\left(\\frac{3k\\pi}{2}\\right)\\right) .\n\\end{aligned}\n\nNow,\n\n\\begin{aligned}\n\\sin\\!\\left(\\frac{3k\\pi}{2}\\right) &= \\sin\\!\\left(\\frac{k\\pi}{2} + k\\pi\\right) \\\\[4pt]\n&= (-1)^k \\sin\\!\\left(\\frac{k\\pi}{2}\\right) .\n\\end{aligned}\n\nSo if k is even, a_k = 0.\nIf k is odd,\n a_k = \\frac{4}{\\pi k}\\sin\\!\\left(\\frac{k\\pi}{2}\\right) = 2\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right), \\qquad \\text{where } \\operatorname{sinc}(x) := \\frac{\\sin(\\pi x)}{\\pi x} . \nLet k = 2\\ell + 1 for \\ell \\in \\mathbb{Z}.\nThen we have the Fourier series\n u(t) = \\sum_{k\\;\\text{odd}} 2\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right)\\cos(kt) . \n\n\n\n\nThe Fourier coefficients a_k = 2\\operatorname{sinc}(k/2) for the odd harmonics k = 2\\ell + 1, \\ell = -6,\\dots,6.\n\n\n\n\n\n\n\nThe phase of the same coefficients. Each a_k is real, so the phase is 0 where a_k &gt; 0 and \\pi where a_k &lt; 0. It is drawn as an odd function of k, taking -\\pi for k&gt;0 and +\\pi for k&lt;0.\n\n\n\nBelow is the square-wave builder for the square wave of this example — drag the slider to add harmonics and watch the Gibbs overshoot near the jumps (the red dot marks the persistent overshoot peak).",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#properties-of-the-fourier-series",
+    "href": "weeks/week04/notes.html#properties-of-the-fourier-series",
+    "title": "Week 4 — Lecture notes",
+    "section": "Properties of the Fourier series",
+    "text": "Properties of the Fourier series\n1. Coefficients depend linearly on signal:\n c_{1,k} = \\frac{1}{T}\\int_0^T u_1(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t, \\qquad c_{2,k} = \\frac{1}{T}\\int_0^T u_2(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t . \nThe Fourier coefficient of \\alpha u_1 + \\beta u_2 is\n\n\\begin{aligned}\n&\\frac{1}{T}\\int_0^T \\alpha u_1(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t + \\frac{1}{T}\\int_0^T \\beta u_2(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t \\\\[4pt]\n&= \\alpha c_{1,k} + \\beta c_{2,k} .\n\\end{aligned}\n\n\nAdd and scale signals \\longrightarrow add and scale Fourier coefficients.\n\n2. Time shift \\rightsquigarrow rotation. (Remember the pure delay!)\nIf c_k = \\dfrac{1}{T}\\displaystyle\\int_0^T u(t)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t, then\n\n\\begin{aligned}\n\\frac{1}{T}\\int_0^T u(t-\\tau)\\,\\overline{\\phi}_k(t)\\,\\mathrm{d}t\n&= \\frac{1}{T}\\int_{-\\tau}^{T-\\tau} u(\\mu)\\,\\overline{\\phi}_k(\\mu+\\tau)\\,\\mathrm{d}\\mu\n&& \\left[\\text{let } \\mu = t-\\tau,\\; \\mathrm{d}\\mu = \\mathrm{d}t,\\; t = \\mu+\\tau\\right] \\\\[6pt]\n&= \\frac{1}{T}\\int_{-\\tau}^{T-\\tau} u(\\mu)\\,e^{-jk\\omega(\\mu+\\tau)}\\,\\mathrm{d}\\mu \\\\[6pt]\n&= e^{-jk\\omega\\tau}\\,c_k .\n\\end{aligned}\n\n\nRotates the vector c_k by e^{-jk\\omega\\tau}.\n\n3. Parseval’s theorem.\nCan we calculate \\|u\\|_P directly from the Fourier coefficients of u?\n\n\\begin{aligned}\n\\|u\\|_P^2 &= \\frac{1}{T}\\int_0^T |u(t)|^2\\,\\mathrm{d}t \\\\[6pt]\n&= \\frac{1}{T}\\int_0^T \\left(\\sum_k c_k \\phi_k(t)\\right)\\overline{\\left(\\sum_\\ell c_\\ell \\phi_\\ell(t)\\right)}\\,\\mathrm{d}t \\\\[6pt]\n&= \\sum_k \\sum_\\ell c_k \\bar{c}_\\ell\\, \\underbrace{\\frac{1}{T}\\int_0^T \\phi_k(t)\\,\\overline{\\phi_\\ell(t)}\\,\\mathrm{d}t}_{=\\,\\langle \\phi_k, \\phi_\\ell\\rangle\\, =\\, 0 \\text{ for } k \\neq \\ell} \\\\[6pt]\n&= \\sum_k |c_k|^2\\, \\underbrace{\\langle \\phi_k, \\phi_k\\rangle}_{=\\,1} \\\\[6pt]\n&= \\sum_k |c_k|^2 .\n\\end{aligned}\n\nThis is Parseval’s theorem:\n \\boxed{\\;\\|u\\|_P^2 = \\sum_{k=-\\infty}^{\\infty} |c_k|^2\\;}",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
+      "Notes"
+    ]
+  },
+  {
+    "objectID": "weeks/week04/notes.html#example-the-rlc-circuit",
+    "href": "weeks/week04/notes.html#example-the-rlc-circuit",
+    "title": "Week 4 — Lecture notes",
+    "section": "Example: the RLC circuit",
+    "text": "Example: the RLC circuit\nExample: Consider the RLC circuit from Lecture 1.\n v(t) = R\\,i(t) + L\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t} + \\frac{1}{C}\\int_{-\\infty}^{t} i(\\tau)\\,\\mathrm{d}\\tau \nFirst, let’s see how a single harmonic voltage maps through the system. Let v(t) = e^{\\,jk\\omega t} = \\phi_k(t) and search for i(t) = I_k e^{\\,jk\\omega t}.\n e^{\\,jk\\omega t} = R I_k e^{\\,jk\\omega t} + I_k\\,jk\\omega L\\,e^{\\,jk\\omega t} + \\frac{1}{C}\\frac{I_k}{jk\\omega}\\,e^{\\,jk\\omega t} . \n 1 = I_k \\underbrace{\\left(R + jk\\omega L + \\frac{1}{C\\,jk\\omega}\\right)}_{Z(jk\\omega)} \n I_k = \\frac{1}{Z(jk\\omega)} . \\qquad\\text{So}\\qquad \\phi_k \\;\\longmapsto\\; \\frac{\\phi_k}{Z(j\\omega k)} . \nNow, let’s use this result to solve for i(t) when v(t) is the square wave from the previous example.\n v(t) = \\sum_{k\\;\\text{odd}} 2\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right)\\cos(kt) \n\n\\left.\\begin{aligned}\na_k &= 2\\operatorname{Re}(c_k) \\\\\nb_k &= -2\\operatorname{Im}(c_k)\n\\end{aligned}\\right\\}\n\\implies c_k = \\tfrac{1}{2}\\left(a_k - j b_k\\right) .\n\nSo\n v(t) = \\sum_{k\\;\\text{odd}} \\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right) e^{\\,jk\\omega t} . \nThen we have, by superposition,\n i(t) = \\sum_{k\\;\\text{odd}} \\frac{\\operatorname{sinc}\\!\\left(\\frac{k}{2}\\right) e^{\\,jk\\omega t}}{Z(jk\\omega)} . \nThe widget below builds this output current harmonic by harmonic. The component values put the natural frequency at \\omega_n = 1/\\sqrt{LC} = 2 rad/s, between the first and third harmonics, so the first few odd harmonics pass with decreasing weight. Drag the slider to add harmonics and watch both waveforms build up: the input (navy) sharpens towards the square wave (with Gibbs overshoot), while the output (brick) — each harmonic scaled by 1/Z(jk\\omega) — grows into a smooth, filtered wave that never develops the sharp edges.",
+    "crumbs": [
+      "Week 4 — Periodic signals and the Fourier series",
       "Notes"
     ]
   }
