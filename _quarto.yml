@@ -54,6 +54,9 @@ website:
           - text: "Tutorial"
             href: weeks/week04/tutorial3.pdf
             target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week04/tutorial3-solutions.pdf
+            target: _blank
       - section: "Week 5 — Aperiodic signals and the Fourier transform"
         contents:
           - text: "Notes"
