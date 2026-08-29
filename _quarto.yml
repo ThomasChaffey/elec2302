@@ -58,6 +58,9 @@ website:
         contents:
           - text: "Notes"
             href: weeks/week05/notes.qmd
+          - text: "Tutorial"
+            href: weeks/week05/tutorial4.pdf
+            target: _blank
       - text: "Course index"
         href: concepts.qmd
       - text: "Quiz 1 formula sheet"
