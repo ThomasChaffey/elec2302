@@ -792,10 +792,10 @@ $$
 
 ### ③ The pulse
 
-Finally, the pulse function $\Pi_\tau(t)$:
+Finally, the pulse function $p_\tau(t)$:
 
 $$
-\Pi_\tau(t) := \begin{cases} 1, & -\dfrac{\tau}{2} \leq t \leq \dfrac{\tau}{2} \\[6pt]
+p_\tau(t) := \begin{cases} 1, & -\dfrac{\tau}{2} \leq t \leq \dfrac{\tau}{2} \\[6pt]
 0, & \text{otherwise.} \end{cases}
 $$
 
