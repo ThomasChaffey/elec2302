@@ -302,6 +302,7 @@ Treat this as the limit of a wide rectangle:
 
 <!-- CHECK: the source sketch labels the rectangle edges −τ and τ; the transform used on the next line, τ sinc(ωτ/2π), is that of the width-τ pulse, so the edges are drawn at ∓τ/2. -->
 
+
 We already have the Fourier transform of the rectangle:
 $\;\tau\operatorname{sinc}\!\left(\dfrac{\tau\omega}{2\pi}\right)$.
 
