@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ELEC2302 L5 — w-sample</title>
+<style>
+  html, body { height: 100%; }
+  body { margin: 0; background: #fff; color: #222; overflow: hidden;
+         display: flex; align-items: center; justify-content: center;
+         font: 16px/1.5 Arial, Helvetica, sans-serif; }
+  #stage { transform-origin: 50% 50%; }
+  .widget { width: 720px; }
+  .widget canvas { display: block; }
+</style>
+</head>
+<body>
+
+<div id="stage"><div id="w-sample" class="widget"></div></div>
+
+<script>
+  // Render the canvases at a higher backing-store resolution than the display,
+  // so the whole slide can be scaled up for projection without softening.
+  (function () {
+    var base = window.devicePixelRatio || 1;
+    try {
+      Object.defineProperty(window, "devicePixelRatio", { get: function () { return base * 3; } });
+    } catch (e) {}
+  })();
+</script>
+<script src="fourier-widgets.js"></script>
+<script>
+  (function () {
+    var stage = document.getElementById("stage");
+    function fit() {
+      stage.style.transform = "none";
+      var w = stage.offsetWidth, h = stage.offsetHeight;
+      if (!w || !h) return;
+      var k = Math.min(window.innerWidth * 0.96 / w, window.innerHeight * 0.96 / h);
+      stage.style.transform = "scale(" + k + ")";
+    }
+    fit();
+    window.addEventListener("resize", fit);
+    new MutationObserver(fit).observe(stage, { subtree: true, childList: true, characterData: true });
+  })();
+</script>
+</body>
+</html>
