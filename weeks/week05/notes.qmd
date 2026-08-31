@@ -170,7 +170,7 @@ $$
 <!-- CHECK: the source writes φ_k(t) = e^{jkωt}; here the fundamental is ω₀, so typeset as e^{jkω₀t}. -->
 
 ::: {.note}
-Week 4 lecture.
+From the week 4 lecture.
 :::
 
 Do we get something similar in the Fourier transform limit?
@@ -291,10 +291,6 @@ $$
 [Extension material]{.extension-label}
 
 ### $u(t) = 1$
-
-::: {.note}
-<span class="out">Skip this in lecture. Starred section in notes.</span>
-:::
 
 **(c)** $u(t) = 1$.
 
@@ -501,8 +497,6 @@ $$ \boxed{\; \frac{\mathrm{d}}{\mathrm{d}t}u(t) \;\longleftrightarrow\; j\omega\
 | ⑧ Parseval | $\displaystyle\int_{-\infty}^{\infty} u(t)\overline{y(t)}\,\mathrm{d}t$ | $\displaystyle\frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\overline{Y(j\omega)}\,\mathrm{d}\omega$ |
 
 ### Other properties
-
-(Proofs in lecture notes.)
 
 **⑦ Duality:** if $x(t) \rightsquigarrow X(j\omega)$, then
 
