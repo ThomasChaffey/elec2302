@@ -355,7 +355,6 @@ window.Quarto = {
 <li>Fourier transform vs Fourier series: what changed?</li>
 <li>Fourier transform pairs</li>
 <li>Properties of the Fourier transform.</li>
-<li>Examples: radar, optics, RLC.</li>
 </ol>
 <hr>
 <p><u>Last week</u>: we represented a <u>periodic</u> signal as the sum of sinusoids, using the Fourier series.</p>
@@ -393,9 +392,6 @@ c_k &amp;= \frac{1}{T}\int_{-T/2}^{T/2} u_T(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t
 </span></p>
 <p><span class="math inline">k = 0</span>:</p>
 <p><span class="math display"> c_0 = \frac{A}{T}\int_{-\tau/2}^{\tau/2} 1\,\mathrm{d}t = \frac{A\tau}{T}. </span></p>
-<div class="note">
-<p><span class="out">Use evenness — only need cos series.</span></p>
-</div>
 <p><span class="math inline">k \neq 0</span>:</p>
 <p><span class="math display">
 \begin{aligned}
@@ -460,7 +456,7 @@ u_T = \sum_{k=-\infty}^{\infty} c_k \phi_k
 </span></p>
 <!-- CHECK: the source writes φ_k(t) = e^{jkωt}; here the fundamental is ω₀, so typeset as e^{jkω₀t}. -->
 <div class="note">
-<p>Week 4 lecture.</p>
+<p>From the week 4 lecture.</p>
 </div>
 <p>Do we get something similar in the Fourier transform limit?</p>
 <p>We can rewrite the Fourier series as</p>
@@ -546,9 +542,6 @@ U(j\omega) &amp;= \int_{-\infty}^{\infty} e^{-at}H(t)\,e^{-j\omega t}\,\mathrm{d
 <p><span class="extension-label">Extension material</span></p>
 <section id="ut-1" class="level3">
 <h3 class="anchored" data-anchor-id="ut-1"><span class="math inline">u(t) = 1</span></h3>
-<div class="note">
-<p><span class="out">Skip this in lecture. Starred section in notes.</span></p>
-</div>
 <p><strong>(c)</strong> <span class="math inline">u(t) = 1</span>.</p>
 <p>Treat this as the limit of a wide rectangle:</p>
 <div style="text-align:center">
@@ -796,7 +789,6 @@ Y(j\omega) &amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty}
 </section>
 <section id="other-properties" class="level3">
 <h3 class="anchored" data-anchor-id="other-properties">Other properties</h3>
-<p>(Proofs in lecture notes.)</p>
 <p><strong>⑦ Duality:</strong> if <span class="math inline">x(t) \rightsquigarrow X(j\omega)</span>, then</p>
 <p><span class="math display"> X(jt) \;\rightsquigarrow\; 2\pi x(-\omega). </span></p>
 <div class="note">
