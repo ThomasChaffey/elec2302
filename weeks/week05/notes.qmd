@@ -14,19 +14,12 @@ subtitle: "Aperiodic signals and the Fourier transform"
 :::
 :::
 
-::: {.content-visible when-format="pdf"}
-The figures below are snapshots of interactive widgets. The live versions, where
-you can move the sliders yourself, are at
-[tchaffey.com/elec2302](https://tchaffey.com/elec2302/?ref=notes-pdf-week5).
-:::
-
 1. Quiz 1 review/questions
 2. Periodic $\longrightarrow$ aperiodic: motivation
 3. Fourier transform as the limit of the Fourier series
 4. Fourier transform vs Fourier series: what changed?
 5. Fourier transform pairs
 6. Properties of the Fourier transform.
-7. Examples: radar, optics, RLC.
 
 ---
 
@@ -79,10 +72,6 @@ $$
 $k = 0$:
 
 $$ c_0 = \frac{A}{T}\int_{-\tau/2}^{\tau/2} 1\,\mathrm{d}t = \frac{A\tau}{T}. $$
-
-::: {.note}
-<span class="out">Use evenness — only need cos series.</span>
-:::
 
 $k \neq 0$:
 
