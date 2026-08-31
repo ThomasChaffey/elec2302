@@ -7,6 +7,7 @@ project:
   resources:
     - "weeks/*.pdf"
     - "weeks/**/*.pdf"     # per-week notes PDFs, built by tools/build-pdf.sh
+    - "weeks/**/slide-*.html"   # widget-only slide pages: no sidebar entry, noindex
 
 website:
   title: ""
