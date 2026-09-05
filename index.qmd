@@ -18,5 +18,6 @@ the relevant material.
 | 3 | Linear, time-invariant systems | [Notes](weeks/week03/notes.qmd) · [Tutorial](weeks/week03/tutorial2.pdf) · [Solutions](weeks/week03/tutorial2-solutions.pdf) |
 | 4 | Periodic signals and the Fourier series | [Notes](weeks/week04/notes.qmd) · [Tutorial](weeks/week04/tutorial3.pdf) · [Solutions](weeks/week04/tutorial3-solutions.pdf) |
 | 5 | Aperiodic signals and the Fourier transform | [Notes](weeks/week05/notes.qmd) · [Tutorial](weeks/week05/tutorial4.pdf) |
+| 6 | Frequency response | [Tutorial](weeks/week06/tutorial5.pdf) · [Lab 1](weeks/week06/lab1.pdf) |
 
 : {tbl-colwidths="[8,57,35]"}
