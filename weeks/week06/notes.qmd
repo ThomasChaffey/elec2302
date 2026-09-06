@@ -77,7 +77,7 @@ $\qquad\qquad\qquad\qquad\;\,$ (2) — calculate output to any input once we hav
 Let's see how. $\;$ <u>RLC circuit</u>
 
 ::: {style="text-align:center"}
-![Series RLC circuit, with the drop across each element marked (drawn with circuitikz).](circuit-rlc.svg){width=560}
+![Series RLC circuit.](circuit-rlc.svg){width=560}
 :::
 
 $$ g(t) = 6.25\,e^{-3t}\sin(4t)\,H(t). $$
@@ -208,7 +208,7 @@ $$ Y(j\omega) = H_1(j\omega)E(j\omega)
 RC circuit:
 
 ::: {style="text-align:center"}
-![Series RC circuit driven by $v(t)$ (drawn with circuitikz).](circuit-rc.svg){width=380}
+![Series RC circuit driven by $v(t)$.](circuit-rc.svg){width=380}
 :::
 
 $$
