@@ -1,6 +1,6 @@
 ---
 title: "Week 6 — Lecture notes"
-subtitle: "Transfer functions, Bode diagrams and resonance"
+subtitle: "Frequency response"
 ---
 
 ::: {.content-visible when-format="html"}
