@@ -24,7 +24,7 @@ const ROOT = path.resolve(__dirname, "..");
 const WEEK = process.argv[2] || "week01";
 // Most weeks keep their widgets in phasor-widgets.js; the ones that do not are
 // listed here.
-const SRC_FILE = { week05: "fourier-widgets.js" };
+const SRC_FILE = { week05: "fourier-widgets.js", week06: "bode-widgets.js" };
 const SRC = path.join(ROOT, `weeks/${WEEK}/${SRC_FILE[WEEK] || "phasor-widgets.js"}`);
 const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
@@ -96,6 +96,23 @@ const WIDGETS_BY_WEEK = {
     {
       id: "w-tau",
       caption: "width-tau pulse and its transform at tau = 1, first null 2 pi",
+      state: () => {}                                   // defaults are fine
+    }
+  ],
+  week06: [
+    {
+      id: "w-pulse-rlc",
+      caption: "pulse in, RLC output out, at tau = 1.5 s",
+      state: () => {}                                   // defaults are fine
+    },
+    {
+      id: "w-bode-probe",
+      caption: "marker at w0 = 5.01 rad/s: gain 0.831 (-1.6 dB), phase -90 deg",
+      state: ({ slider }) => { slider(0, 0.7); }        // the slider carries log10(w0)
+    },
+    {
+      id: "w-resonant-peak",
+      caption: "resonant peak at zeta = 0.2: 8.1 dB at 0.959 wn",
       state: () => {}                                   // defaults are fine
     }
   ]

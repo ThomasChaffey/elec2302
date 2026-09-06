@@ -65,8 +65,10 @@ website:
           - text: "Tutorial"
             href: weeks/week05/tutorial4.pdf
             target: _blank
-      - section: "Week 6 — Frequency response"
+      - section: "Week 6 — Transfer functions, Bode diagrams and resonance"
         contents:
+          - text: "Notes"
+            href: weeks/week06/notes.qmd
           - text: "Tutorial"
             href: weeks/week06/tutorial5.pdf
             target: _blank

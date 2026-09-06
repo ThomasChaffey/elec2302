@@ -1,11 +1,11 @@
-# PDF settings for the Week 5 notes, kept out of notes.qmd on purpose.
+# PDF settings for the Week 6 notes, kept out of notes.qmd on purpose.
 #
 # If the qmd declares a pdf format, `quarto preview` builds the PDF on every
 # save as well as the HTML, so any PDF-only problem (a missing snapshot, an SVG
 # that needs rsvg-convert) breaks the web page too. Keeping these settings here
 # means HTML is the only thing the site build touches, and the PDF is opt-in:
 #
-#   quarto render weeks/week05/notes.qmd --to pdf --metadata-file weeks/week05/_pdf.yml
+#   quarto render weeks/week06/notes.qmd --to pdf --metadata-file weeks/week06/_pdf.yml
 #
 # The leading underscore keeps Quarto from treating this file as site content.
 #
