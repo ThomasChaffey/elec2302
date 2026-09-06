@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 1 — Lecture notes</title>
+<title>Week 6 — Lecture notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,8 +28,8 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/week02/notes.html" rel="next">
-<link href="../../weeks/week01/slides.html" rel="prev">
+<link href="../../weeks/week06/tutorial5.pdf" rel="next">
+<link href="../../weeks/week05/tutorial4.pdf" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -149,7 +149,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week01/slides.html">Week 1 — Introduction</a></li><li class="breadcrumb-item"><a href="../../weeks/week01/notes.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week06/notes.html">Week 6 — Transfer functions, Bode diagrams and resonance</a></li><li class="breadcrumb-item"><a href="../../weeks/week06/notes.html">Notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -184,7 +184,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week01/notes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../weeks/week01/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -311,7 +311,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week06/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week06/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -356,10 +356,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week01/slides.html">Week 1 — Introduction</a></li><li class="breadcrumb-item"><a href="../../weeks/week01/notes.html">Notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week06/notes.html">Week 6 — Transfer functions, Bode diagrams and resonance</a></li><li class="breadcrumb-item"><a href="../../weeks/week06/notes.html">Notes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 1 — Lecture notes</h1>
-<p class="subtitle lead">The core: exponentials, Euler’s formula and the complex plane</p>
+<h1 class="title">Week 6 — Lecture notes</h1>
+<p class="subtitle lead">Transfer functions, Bode diagrams and resonance</p>
 </div>
 
 
@@ -378,133 +378,439 @@ window.Quarto = {
 
 <div class="format-links">
 <p><span class="label">Other formats:</span></p>
-<a href="notes.pdf" title="Week 1 lecture notes as a PDF">📄&nbsp;PDF</a>
+<a href="notes.pdf" title="Week 6 lecture notes as a PDF" data-goatcounter-click="pdf-week6" data-goatcounter-title="Week 6 notes PDF opened">📄&nbsp;PDF</a>
 </div>
-<p>Signals &amp; Systems lives at the intersection of <strong>differential equations</strong>, <strong>linear algebra</strong>, <strong>complex numbers</strong> and <strong>trigonometry</strong>.</p>
-<section id="a-the-exponential-function" class="level2">
-<h2 class="anchored" data-anchor-id="a-the-exponential-function">(a) The exponential function</h2>
-<p>For <span class="math inline">z \in \mathbb{C}</span>, define the exponential by its power series:</p>
-<p><span class="math display"> e^{z} := 1 + z + \frac{z^{2}}{2!} + \frac{z^{3}}{3!} + \cdots </span></p>
-<p><strong>Properties.</strong> First, <span class="math inline">e^{0} = 1</span> (straight from the definition) <span class="math inline">\qquad(1)</span></p>
-<p><span class="math display">
-\begin{aligned}
-\frac{\mathrm{d}}{\mathrm{d}z}\,e^{z}
-&amp;= 0 + 1 + \frac{2z}{2!} + \frac{3z^{2}}{3!} + \cdots \\[2pt]
-&amp;= 1 + z + \frac{z^{2}}{2!} + \cdots \\[2pt]
-&amp;= e^{z}
-\end{aligned}
-\qquad(2)
-</span></p>
-<p>Combining the two properties:</p>
-<p><span class="math display"> \boxed{\,f(z) = f'(z), \qquad f(0) = 1\,} </span></p>
-<p>It turns out <span class="math inline">f(z) = e^{z}</span> is the unique solution to this differential equation, and in fact the differential equation can be used as an alternative definition.</p>
-<p><strong>Extension of (2).</strong> By the chain rule,</p>
-<p><span class="math display">
-\frac{\mathrm{d}}{\mathrm{d}t}\,e^{zt}
-= 0 + z + \frac{2t\,z^{2}}{2!} + \frac{3t^{2}z^{3}}{3!} + \cdots
-= z\,e^{zt}.
-</span></p>
+<section id="lecture-outline" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-outline">Lecture outline</h2>
+<ol start="0" type="1">
+<li>Recap of Fourier transform</li>
+<li>Response to arbitrary inputs.</li>
+<li>Impulse response &amp; convolution with exponentials.</li>
+<li>Finding the impulse response</li>
+<li>Interconnection</li>
+<li>Plotting the impulse response</li>
+<li>First order systems</li>
+<li>Second order systems &amp; resonance</li>
+<li>Periodic inputs.</li>
+<li>Cascades &amp; string instability.</li>
+</ol>
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
 </section>
-<section id="b-eulers-formula" class="level2">
-<h2 class="anchored" data-anchor-id="b-eulers-formula">(b) Euler’s formula</h2>
-<p>Let’s now represent sinusoids as complex numbers. Let</p>
-<p><span class="math display"> g(\theta) = \frac{\cos\theta + j\sin\theta}{e^{j\theta}} . </span></p>
-<p>Then</p>
-<p><span class="math display">
-\begin{aligned}
-g'(\theta)
-&amp;= \big(-\sin\theta + j\cos\theta\big)e^{-j\theta}
-   - \big(\cos\theta + j\sin\theta\big)\,j\,e^{-j\theta} \\[2pt]
-&amp;= \big(-\sin\theta + j\cos\theta\big)e^{-j\theta}
-   - \big(-\sin\theta + j\cos\theta\big)e^{-j\theta} \\[2pt]
-&amp;= 0 .
-\end{aligned}
-</span></p>
-<p>So <span class="math inline">g(\theta) = C</span> (a constant):</p>
-<p><span class="math display"> C\,e^{j\theta} = \cos\theta + j\sin\theta . </span></p>
-<p>Set <span class="math inline">\theta = 0</span>. Then <span class="math inline">C = 1</span>, so we have</p>
-<p><span class="math display"> \boxed{\,e^{j\theta} = \cos\theta + j\sin\theta\,} </span></p>
-<p><strong>What does this mean graphically?</strong> <span class="math inline">e^{j\theta}</span> is the unit vector at angle <span class="math inline">\theta</span>; its real part is <span class="math inline">\cos\theta</span> and its imaginary part is <span class="math inline">\sin\theta</span>. Advance <span class="math inline">\theta</span> and the vector rotates, its shadow tracing a sinusoid.</p>
-<div id="w-euler" class="widget"></div>
-<p>In particular: <span class="math inline">\;e^{j\pi/2} = j, \qquad e^{j\pi} = -1.</span></p>
-<section id="manipulating-sinusoids-using-complex-numbers" class="level3">
-<h3 class="anchored" data-anchor-id="manipulating-sinusoids-using-complex-numbers">Manipulating sinusoids using complex numbers</h3>
-<p>Why use complex numbers to represent sinusoids? Because it makes the algebra easier. For example,</p>
-<p><span class="math display"> x_1(t) = 3\cos\omega t, \qquad x_2(t) = 4\cos\!\big(\omega t + \tfrac{\pi}{2}\big),
-   \qquad x_1(t) + x_2(t) = \;? </span></p>
-<p>The direct way uses the identity <span class="math inline">\cos(\theta + \tfrac{\pi}{2}) = -\sin\theta</span>, so <span class="math inline">x_2(t) = -4\sin\omega t</span>, giving</p>
-<p><span class="math display"> 3\cos\omega t - 4\sin\omega t \;\equiv\; A\cos(\omega t + \varphi)
-   \quad\longrightarrow\quad \text{match coefficients} \dots </span></p>
-<p>With complex numbers:</p>
-<p><span class="math display">
-\begin{aligned}
-x_1(t) &amp;= \operatorname{Re}\!\big(3\,e^{j\omega t}\big) \\[2pt]
-x_2(t) &amp;= \operatorname{Re}\!\big(4\,e^{\,j\omega t + j\pi/2}\big)
-        = \operatorname{Re}\!\big(4\,e^{j\pi/2}\,e^{j\omega t}\big)
-        = \operatorname{Re}\!\big(4j\,e^{j\omega t}\big) \\[2pt]
-x_1(t) + x_2(t)
-        &amp;= \operatorname{Re}\!\big(3\,e^{j\omega t} + 4j\,e^{j\omega t}\big) \\[2pt]
-        &amp;= \operatorname{Re}\!\big((3 + 4j)\,e^{j\omega t}\big) \\[2pt]
-        &amp;= \operatorname{Re}\!\big(5\,e^{j0.927}\,e^{j\omega t}\big)
-        = 5\cos(\omega t + 0.927).
-\end{aligned}
-</span></p>
-<div id="w-sum" class="widget"></div>
-<p>The triangle <span class="math inline">3 + 4j = 5\angle 53.1^{\circ}</span> rotates.</p>
+<section id="recap-the-fourier-transform" class="level2">
+<h2 class="anchored" data-anchor-id="recap-the-fourier-transform">Recap: the Fourier transform</h2>
+<p>★ Expresses a signal as an <u>integral</u> of <u>sinusoidal</u> components.</p>
+<p><span class="math display"> U(j\omega) = \int_{-\infty}^{\infty} u(t)\,e^{-j\omega t}\,\mathrm{d}t </span></p>
+<p>(The Fourier transform, generalises Fourier series coefficients).</p>
+<p><span class="math display"> u(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\,e^{\,j\omega t}\,\mathrm{d}\omega </span></p>
+<p>(The inverse Fourier transform, generalises the Fourier series).</p>
+<p><strong>Transform pairs.</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><span class="math inline">u(t)</span></th>
+<th><span class="math inline">U(j\omega)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">A\,p_\tau(t)</span></td>
+<td><span class="math inline">A\tau\operatorname{sinc}\!\left(\dfrac{\omega\tau}{2\pi}\right)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\delta(t)</span></td>
+<td><span class="math inline">1</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">e^{-at}H(t)</span></td>
+<td><span class="math inline">\dfrac{1}{a+j\omega}</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">1</span></td>
+<td><span class="math inline">2\pi\delta(\omega)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">e^{\,j\omega_0 t}</span></td>
+<td><span class="math inline">2\pi\delta(\omega-\omega_0)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\cos(\omega_0 t)</span></td>
+<td><span class="math inline">\pi\delta(\omega-\omega_0) + \pi\delta(\omega+\omega_0)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Two most important properties:</p>
+<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}u(t) \;\rightsquigarrow\; j\omega\,U(j\omega)
+\qquad(1) </span></p>
+<p><span class="math display"> u * y \;\rightsquigarrow\; U(j\omega)\,Y(j\omega) \qquad(2) </span></p>
+<p>Why are these useful? <span class="math inline">\;</span> (1) — find <span class="math inline">h(t)</span>.</p>
+<p><span class="math inline">\qquad\qquad\qquad\qquad\;\,</span> (2) — calculate output to any input once we have <span class="math inline">h(t)</span>.</p>
 </section>
-</section>
-<section id="c-eulers-formula-differential-equations" class="level2">
-<h2 class="anchored" data-anchor-id="c-eulers-formula-differential-equations">(c) Euler’s formula &amp; differential equations</h2>
-<p>Another differential equation:</p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}\,x(t) = j\,x(t) \qquad(3) </span></p>
-<p>We’ve already seen <span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}e^{zt} = z\,e^{zt}</span>. Set <span class="math inline">z = j</span>:</p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}\,e^{jt} = j\,e^{jt}. </span></p>
-<p>This solves (3). What does it look like in <span class="math inline">\mathbb{C}</span>, and what does the real part look like? What about other choices of <span class="math inline">z</span>?</p>
-<p><span class="math display"> z = -1:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{-t} = -e^{-t}. \qquad\text{No imaginary component.} </span></p>
-<p><span class="math display"> z = -1 + j:\quad \frac{\mathrm{d}}{\mathrm{d}t}\,e^{(-1+j)t} = (-1+j)\,e^{(-1+j)t}. </span></p>
-<p>The widget below plots the trajectory of <span class="math inline">e^{zt}</span> for several values of <span class="math inline">z</span>.</p>
-<div id="w-ezt" class="widget"></div>
-<div class="note">
-<p>The position of <span class="math inline">z</span> determines the behaviour: oscillations, decay, growth.</p>
-</div>
-</section>
-<section id="d-what-has-this-got-to-do-with-electrical-engineering" class="level2">
-<h2 class="anchored" data-anchor-id="d-what-has-this-got-to-do-with-electrical-engineering">(d) What has this got to do with electrical engineering?</h2>
-<p>Example: an RLC circuit (the <strong>system</strong>) with a sinusoidal voltage input (the <strong>signal</strong>).</p>
+<section id="finding-the-impulse-response" class="level2">
+<h2 class="anchored" data-anchor-id="finding-the-impulse-response">Finding the impulse response</h2>
+<p>Let’s see how. <span class="math inline">\;</span> <u>RLC circuit</u></p>
 <div style="text-align:center">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="circuit-rlc.svg" class="img-fluid figure-img" width="540"></p>
-<figcaption>Series RLC circuit.</figcaption>
+<p><img src="circuit-rlc.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>Series RLC circuit, with the drop across each element marked (drawn with circuitikz).</figcaption>
 </figure>
 </div>
 </div>
-<p>KVL around the loop:</p>
-<p><span class="math display"> v(t) = v_R + v_L + v_C </span></p>
-<p><span class="math display"> v(t) = R\,i(t) + L\,\frac{\mathrm{d}i(t)}{\mathrm{d}t}
-   + \frac{1}{C}\!\int_{-\infty}^{t}\! i(\tau)\,\mathrm{d}\tau \qquad(4) </span></p>
-<p>with the lower limit taken to <span class="math inline">-\infty</span> for the steady-state response. Let <span class="math inline">v(t) = V\cos\omega t = \operatorname{Re}(V e^{j\omega t})</span> and look for a current of the same form, <span class="math inline">i(t) = \operatorname{Re}(I e^{j\omega t})</span>.</p>
-<p>Substitute in (4):</p>
+<p><span class="math display"> g(t) = 6.25\,e^{-3t}\sin(4t)\,H(t). </span></p>
+<p><span class="math inline">v</span> input, <span class="math inline">v_C</span> output.</p>
+<p>KVL: <span class="math inline">\;v_R + v_L + v_C = v</span>.</p>
 <p><span class="math display">
 \begin{aligned}
-V e^{j\omega t}
-&amp;= R I e^{j\omega t} + L\frac{\mathrm{d}}{\mathrm{d}t}I e^{j\omega t}
-   + \frac{1}{C}\!\int\! I e^{j\omega\tau}\,\mathrm{d}\tau \\[2pt]
-&amp;= R I e^{j\omega t} + j\omega L\, I e^{j\omega t} + \frac{I}{j\omega C}\,e^{j\omega t} + \frac{K}{C},
+i &amp;= \frac{\mathrm{d}}{\mathrm{d}t}C v_C \\[6pt]
+v_L &amp;= \frac{\mathrm{d}}{\mathrm{d}t}L i \\[6pt]
+    &amp;= \frac{\mathrm{d}^2}{\mathrm{d}t^2}LC v_C \\[6pt]
+v_R &amp;= Ri \\[6pt]
+    &amp;= RC\frac{\mathrm{d}}{\mathrm{d}t}v_C .
 \end{aligned}
-</span> where <span class="math inline">K</span> is a constant of integration. Matching coefficients of <span class="math inline">e^{j\omega t}</span>, we find <span class="math inline">K = 0</span> (<span class="math inline">K</span> represents a residual charge on the capacitor, which a sinuosoidal voltage is not able to maintain at steady state).</p>
-<p>Divide through by <span class="math inline">e^{j\omega t}</span> (never zero):</p>
-<p><span class="math display"> V = I\underbrace{\Big(R + j\omega L + \tfrac{1}{j\omega C}\Big)}_{\text{impedance } Z(j\omega)}
-   \qquad\Longrightarrow\qquad I = \frac{V}{Z}. </span></p>
-<p>Suppose <span class="math inline">R = 30\,\Omega</span> and <span class="math inline">\omega L - \tfrac{1}{\omega C} = 40\,\Omega</span>. Then</p>
-<p><span class="math display"> Z = 30 + 40j = 50\,e^{j0.927}, \qquad I = \frac{V}{50\,e^{j0.927}}, </span></p>
-<p><span class="math display"> i(t) = \operatorname{Re}(I e^{j\omega t}) = \frac{V}{50}\cos(\omega t - 0.927). </span></p>
-<p>The widget below plots input and output sinusoids for several values of the reactance <span class="math inline">Z</span>. For some values, the output lags the input, while for others, the output leads.</p>
-<div id="w-rlc" class="widget"></div>
+</span></p>
+<p>All together: <span class="math inline">\;LC\dfrac{\mathrm{d}^2}{\mathrm{d}t^2}v_C + RC\dfrac{\mathrm{d}}{\mathrm{d}t}v_C + v_C = v</span>.</p>
+<p>Now Fourier transform both sides:</p>
+<p><span class="math display"> LC(j\omega)^2 V_C(j\omega) + RC\,j\omega\,V_C(j\omega) + V_C(j\omega) = V(j\omega) </span></p>
+<p>If <span class="math inline">u(t) = \delta(t)</span>, <span class="math inline">V(j\omega) = 1</span>.</p>
+<p><span class="math display"> G(j\omega) = V_C(j\omega) = \frac{1}{(j\omega)^2 LC + j\omega RC + 1} </span></p>
 <div class="note">
-<p>The RLC circuit maps a sinusoid to a sinusoid with the <strong>same frequency</strong>. This is the foundation of the rest of the course.</p>
+<p>Check: same as the end of last lecture!</p>
 </div>
-<script src="phasor-widgets.js"></script>
+<p>This is the Fourier transform of the impulse response, which is called the <u>transfer function</u>. Often we’ll use <span class="math inline">G(j\omega)</span> as notation.</p>
+<p>Now, given any other input <span class="math inline">u(t) \rightsquigarrow U(j\omega)</span>, we know the output is <span class="math inline">y(t) = (u * h)(t) \rightsquigarrow Y(j\omega) = U(j\omega)G(j\omega)</span>.</p>
+</section>
+<section id="response-to-arbitrary-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="response-to-arbitrary-inputs">Response to arbitrary inputs</h2>
+<p>Let’s see an example. With the values from last week,</p>
+<p><span class="math display"> G(j\omega) = \frac{25}{(j\omega)^2 + 6j\omega + 25}. </span></p>
+<div class="note">
+<p><span class="out">Do hand example here?</span></p>
+</div>
+<p>We also have the spectrum of the Pulse:</p>
+<p><span class="math display"> p_\tau(t) \;\rightsquigarrow\; \tau\operatorname{sinc}\!\left(\frac{\omega\tau}{2\pi}\right). </span></p>
+<p>Let’s shift the pulse so it starts at <span class="math inline">t = 0</span>, not <span class="math inline">t = -\dfrac{\tau}{2}</span>.</p>
+<p><span class="math display"> u(t - t_0) \;\rightsquigarrow\; e^{-j\omega t_0}\,U(j\omega), </span></p>
+<p>So</p>
+<p><span class="math display"> p_\tau\!\left(t - \frac{\tau}{2}\right) \;\rightsquigarrow\;
+e^{-j\omega\frac{\tau}{2}}\,\tau\operatorname{sinc}\!\left(\frac{\omega\tau}{2\pi}\right). </span></p>
+<p>If we plug this into the circuit as the supply voltage <span class="math inline">v(t)</span>, the output has Fourier Transform</p>
+<p><span class="math display"> Y(j\omega) = \frac{25}{(j\omega)^2 + 6j\omega + 25}\;
+e^{-j\omega\frac{\tau}{2}}\,\tau\operatorname{sinc}\!\left(\frac{\omega\tau}{2\pi}\right). </span></p>
+<p>To get the time domain output, inverse Fourier transform.</p>
+<p>Painful by hand, but easy on a computer.</p>
+<div id="w-pulse-rlc" class="widget"></div>
+</section>
+<section id="convolution-with-exponentials" class="level2">
+<h2 class="anchored" data-anchor-id="convolution-with-exponentials">Convolution with exponentials</h2>
+<p>What happens to a sinusoidal input <span class="math inline">v(t) = e^{\,j\omega_0 t}</span>?</p>
+<p>In the time domain:</p>
+<p><span class="math display">
+\begin{aligned}
+y = h * v &amp;= \int_{-\infty}^{\infty} v(t-\tau)\,h(\tau)\,\mathrm{d}\tau \\[6pt]
+&amp;= \int_{-\infty}^{\infty} e^{\,j\omega_0 t}\,e^{-j\omega_0\tau}\,h(\tau)\,\mathrm{d}\tau \\[6pt]
+&amp;= \int_{-\infty}^{\infty} e^{-j\omega_0\tau}\,h(\tau)\,\mathrm{d}\tau\; e^{\,j\omega_0 t} \\[6pt]
+&amp;= G(j\omega_0)\,e^{\,j\omega_0 t}.
+\end{aligned}
+</span></p>
+<p>Transfer function scales each frequency!</p>
+</section>
+<section id="interconnections-and-transfer-functions" class="level2">
+<h2 class="anchored" data-anchor-id="interconnections-and-transfer-functions">Interconnections and transfer functions</h2>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-cascade.svg" class="img-fluid figure-img" width="520"></p>
+<figcaption>Two systems in cascade.</figcaption>
+</figure>
+</div>
+</div>
+<p>In the frequency domain, this is just a product: <span class="math inline">\;Y(j\omega) = H_2(j\omega)H_1(j\omega)U(j\omega)</span>.</p>
+<p>What about feedback?</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-feedback.svg" class="img-fluid figure-img" width="420"></p>
+<figcaption>Negative feedback around <span class="math inline">H_1</span>, with <span class="math inline">H_2</span> in the return path.</figcaption>
+</figure>
+</div>
+</div>
+<p><span class="math display">
+\begin{aligned}
+E(j\omega) &amp;= U(j\omega) - H_2(j\omega)Y(j\omega) \\[6pt]
+&amp;= U(j\omega) - H_2(j\omega)H_1(j\omega)E(j\omega)
+\end{aligned}
+</span></p>
+<p><span class="math display"> E(j\omega) = \frac{1}{1 + H_2(j\omega)H_1(j\omega)}\,U(j\omega). </span></p>
+<p><span class="math display"> Y(j\omega) = H_1(j\omega)E(j\omega)
+= \frac{H_1(j\omega)}{1 + H_2(j\omega)H_1(j\omega)}\,U(j\omega). </span></p>
+<p><u>Example</u>: good question from last week’s lecture.</p>
+<p>RC circuit:</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-rc.svg" class="img-fluid figure-img" width="380"></p>
+<figcaption>Series RC circuit driven by <span class="math inline">v(t)</span> (drawn with circuitikz).</figcaption>
+</figure>
+</div>
+</div>
+<p><span class="math display">
+\begin{aligned}
+v_R &amp;= Ri, &amp; V_R(j\omega) &amp;= R\,I(j\omega). \\[6pt]
+i &amp;= \frac{\mathrm{d}}{\mathrm{d}t}C v_C, &amp; I(j\omega) &amp;= j\omega C\,V_C(j\omega), \\[6pt]
+&amp; &amp; V_C(j\omega) &amp;= \frac{1}{j\omega C}\,I(j\omega).
+\end{aligned}
+</span></p>
+<p>KVL: <span class="math inline">\;v = v_C + v_R</span></p>
+<p><span class="math display">
+\begin{aligned}
+V(j\omega) &amp;= V_C(j\omega) + V_R(j\omega) &amp;&amp; \text{(Fourier transform is linear)}. \\[6pt]
+&amp;= \left(R + \frac{1}{j\omega C}\right)I(j\omega).
+\end{aligned}
+</span></p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-rc-parallel.svg" class="img-fluid figure-img" width="460"></p>
+<figcaption>The same relation as a block diagram: <span class="math inline">I</span> into two parallel branches, summed to give <span class="math inline">V</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>What about <span class="math inline">I</span> to <span class="math inline">V</span>?</p>
+<div class="columns">
+<div class="column" style="width:62%;">
+<p><span class="math display">
+\begin{aligned}
+I(j\omega) &amp;= \frac{1}{R + \dfrac{1}{j\omega C}}\,V(j\omega) \\[10pt]
+&amp;= \frac{j\omega C}{j\omega RC + 1}\,V(j\omega).
+\end{aligned}
+</span></p>
+</div><div class="column" style="width:38%;">
+<p><span class="math display"> \frac{\dfrac{1}{j\omega C}}{1 + \dfrac{R}{j\omega C}} </span></p>
+</div>
+</div>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-rc-feedback.svg" class="img-fluid figure-img" width="420"></p>
+<figcaption>The same relation as feedback: <span class="math inline">j\omega C</span> in the forward path, <span class="math inline">R</span> in the return path.</figcaption>
+</figure>
+</div>
+</div>
+<p>feedback of <span class="math inline">j\omega C</span> (capacitor maps voltage to current). with <span class="math inline">R</span> (resistor maps current to voltage).</p>
+</section>
+<section id="decibels" class="level2">
+<h2 class="anchored" data-anchor-id="decibels">Decibels</h2>
+<p>Power &amp; amplitude.</p>
+<p>Power gain is measured in power decibels:</p>
+<p><span class="math display"> \alpha^2\;(\mathrm{V}^2) \;\rightsquigarrow\; 10\log_{10}\alpha^2 \quad (\mathrm{dB}). </span></p>
+<p>Amplitude gain is measured in amplitude decibels:</p>
+<p><span class="math display"> \alpha\;(\mathrm{V}) \;\rightsquigarrow\; 20\log_{10}\alpha \quad (\mathrm{dB}). </span></p>
+<p>Why the factor of 2? <span class="math inline">\;10\log_{10}\alpha^2 = 20\log_{10}\alpha</span>.</p>
+<p>Makes power and amplitude consistent.</p>
+</section>
+<section id="plotting-the-impulse-response" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-the-impulse-response">Plotting the impulse response</h2>
+<p>There are a few ways to plot the impulse response.</p>
+<p>The most common is the <u>Bode Diagram</u>, which plots the argument and amplitude of <span class="math inline">G(j\omega)</span> on two separate plots.</p>
+<p>Amplitude is measured in decibels, <span class="math inline">20\log_{10}|G(j\omega)|</span>.</p>
+<p>Frequency is plotted on a log scale.</p>
+<p>For example,</p>
+<p><span class="math display"> \frac{25}{(j\omega)^2 + 6j\omega + 25} </span></p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/bode-rlc.svg" class="img-fluid figure-img" width="660"></p>
+<figcaption>Bode diagram of <span class="math inline">G(j\omega) = \dfrac{25}{(j\omega)^2+6j\omega+25}</span>, over <span class="math inline">0.01</span> to <span class="math inline">100</span> rad/s.</figcaption>
+</figure>
+</div>
+</div>
+<p>What does this plot say?</p>
+<div id="w-bode-probe" class="widget"></div>
+</section>
+<section id="first-order-systems" class="level2">
+<h2 class="anchored" data-anchor-id="first-order-systems">First order systems</h2>
+<p>(one memory component).</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p>Differential equation:</p>
+<p><span class="math display"> \tau\dot{y} = -y + \beta u </span></p>
+<p><span class="math display"> \tau j\omega Y(j\omega) = -Y(j\omega) + \beta U(j\omega). </span></p>
+<p><span class="math display"> Y(j\omega) = \frac{\beta}{\tau j\omega + 1}U(j\omega). </span></p>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-first-order.svg" class="img-fluid figure-img" width="270"></p>
+<figcaption>One memory component: an inductor or a capacitor with a resistor.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>What does the impulse response look like? (Quiz 1).</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/first-order-impulse.svg" class="img-fluid figure-img" width="420"></p>
+<figcaption>The impulse response of the first order system.</figcaption>
+</figure>
+</div>
+</div>
+<section id="bode-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="bode-diagram">Bode diagram</h3>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/bode-first-order.svg" class="img-fluid figure-img" width="660"></p>
+<figcaption>Bode diagram of <span class="math inline">\dfrac{\beta}{\tau j\omega + 1}</span>: the corner is at <span class="math inline">1/\tau</span>, the roll-off is <span class="math inline">-20</span> dB/dec, and the phase runs from <span class="math inline">0^\circ</span> to <span class="math inline">-90^\circ</span> over the two decades <span class="math inline">0.1/\tau</span> to <span class="math inline">10/\tau</span>.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+</section>
+<section id="second-order-systems" class="level2">
+<h2 class="anchored" data-anchor-id="second-order-systems">Second order systems</h2>
+<p>Second order systems have two <u>poles</u>.</p>
+<p>We can write a second order system in a standard form:</p>
+<p><span class="math display"> G(j\omega) = \frac{K\omega_n^2}{(j\omega)^2 + 2\omega_n\zeta(j\omega) + \omega_n^2} </span></p>
+<div class="note">
+<p><span class="out"><span class="math inline">K</span>, then assumed <span class="math inline">1</span>.</span></p>
+</div>
+<p><span class="math inline">\omega_n</span> is called the <u>natural frequency</u>.</p>
+<p><span class="math inline">\zeta</span> is called the <u>damping ratio</u>.</p>
+<p>The roots of the polynomial <span class="math inline">(j\omega)^2 + 2\omega_n\zeta(j\omega) + \omega_n^2</span> are the <u>poles</u>:</p>
+<p><span class="math display">
+\begin{aligned}
+j\omega &amp;= \frac{-2\omega_n\zeta \pm \sqrt{4\omega_n^2\zeta^2 - 4\omega_n^2}}{2} \\[8pt]
+&amp;= -\omega_n\left(\zeta \pm \sqrt{\zeta^2 - 1}\right).
+\end{aligned}
+</span></p>
+<p>Three cases:</p>
+<p><span class="math inline">\zeta &gt; 1</span>: two distinct real poles (overdamped)</p>
+<p><span class="math inline">\zeta = 1</span>: two identical real poles (critically damped)</p>
+<p><span class="math inline">\zeta &lt; 1</span>: complex conjugate poles (underdamped).</p>
+<p>Recall from lecture 1: imaginary part gives rotation/oscillation.</p>
+<p>Are these the same poles as lecture 1? Yes!</p>
+<p><span class="math display"> G(j\omega) = \frac{A}{(j\omega + p_1)} + \frac{B}{(j\omega + p_2)}. </span></p>
+<p>Each pole <span class="math inline">\overset{\text{I.F.T.}}{\rightsquigarrow} e^{-p_i t}</span>.</p>
+<p>We can get the Bode diagram of a critically/over damped system by cascading two first order systems:</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-cascade-g.svg" class="img-fluid figure-img" width="340"></p>
+<figcaption>Two first order systems in cascade.</figcaption>
+</figure>
+</div>
+</div>
+<p><span class="math display"> |G(j\omega)| = |G_1(j\omega)G_2(j\omega)| </span></p>
+<p><span class="math display">
+\begin{aligned}
+20\log_{10}|G_1(j\omega)G_2(j\omega)| &amp;= 20\log_{10}|G_1(j\omega)||G_2(j\omega)| \\[6pt]
+&amp;= 20\log_{10}|G_1(j\omega)| + 20\log_{10}|G_2(j\omega)|
+\end{aligned}
+</span></p>
+<p><span class="math display"> \angle G_1(j\omega)G_2(j\omega) = \angle G_1(j\omega) + \angle G_2(j\omega) </span></p>
+<p>Cascade <span class="math inline">\rightsquigarrow</span> add magnitudes, add phases.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/bode-cascade-1.svg" class="img-fluid figure-img" width="330"></p>
+<figcaption>1st order.</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/bode-cascade-2.svg" class="img-fluid figure-img" width="330"></p>
+<figcaption>The cascade of two.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>What about complex poles?</p>
+<p>If the damping is low enough, the system <u>amplifies</u> some frequencies.</p>
+<p><span class="math display"> |G(j\omega)|^2 = \left|\frac{\omega_n^2}{(j\omega)^2 + 2\zeta\omega_n(j\omega) + \omega_n^2}\right|^2
+= \frac{\omega_n^4}{(\omega_n^2-\omega^2)^2 + 4\zeta^2\omega_n^2\omega^2} </span></p>
+<p>Let <span class="math inline">x = \omega^2</span>.</p>
+<p><span class="math display"> |G(j\omega)|^2 = \frac{\omega_n^4}{(\omega_n^2 - x)^2 + 4\zeta^2\omega_n^2 x}. </span></p>
+<p>Let’s minimise the denominator to find the maximum gain:</p>
+<p><span class="math display"> \min_x\left[(\omega_n^2 - x)^2 + 4\zeta^2\omega_n^2 x\right] </span></p>
+<p>Diff. w.r.t. <span class="math inline">x</span> and set to <span class="math inline">0</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+-2(\omega_n^2 - x) + 4\zeta^2\omega_n^2 &amp;= 0. \\[6pt]
+x &amp;= \omega_n^2\left(1 - 2\zeta^2\right).
+\end{aligned}
+</span></p>
+<p>This is positive only when <span class="math inline">\zeta &lt; \dfrac{1}{\sqrt{2}}</span>.</p>
+<p>In this case, <span class="math inline">\omega_r = \sqrt{x} = \omega_n\sqrt{1 - 2\zeta^2}</span> is the <u>resonant frequency</u>.</p>
+<p>The lower the damping ratio, the more the resonant frequency is amplified.</p>
+<div id="w-resonant-peak" class="widget"></div>
+</section>
+<section id="periodic-inputs" class="level2">
+<h2 class="anchored" data-anchor-id="periodic-inputs">Periodic inputs</h2>
+<p>We developed the Fourier transform for aperiodic inputs. But if we have a periodic input to a system with aperiodic impulse response, we need to convolve a periodic signal with an aperiodic one. For this, we need the Fourier transform of a periodic signal.</p>
+<p>From last week, we know that <span class="math inline">e^{\,j\omega_0 t} \rightsquigarrow 2\pi\delta(\omega - \omega_0)</span>.</p>
+<p>The Fourier series (week 4 lecture) is</p>
+<p><span class="math display"> u(t) = \sum_{k=-\infty}^{\infty} c_k\,e^{\,jk\omega_0 t}. </span></p>
+<p>Combining, we have</p>
+<p><span class="math display"> U(j\omega) = \sum_{k=-\infty}^{\infty} c_k\,2\pi\,\delta(\omega - k\omega_0).
+\qquad(3) </span></p>
+<p>Check:</p>
+<p><span class="math display">
+\begin{aligned}
+\cos(\omega_0 t) &amp;= \tfrac{1}{2}\left(e^{\,j\omega_0 t} + e^{-j\omega_0 t}\right) \\[6pt]
+c_{-1} &amp;= \tfrac{1}{2}, \qquad c_1 = \tfrac{1}{2}.
+\end{aligned}
+</span></p>
+<p>In (3): <span class="math inline">\;U(j\omega) = \pi\delta(\omega - \omega_0) + \pi\delta(\omega + \omega_0)</span>.</p>
+</section>
+<section id="example-cascading-resonant-systems-traffic-dynamics" class="level2">
+<h2 class="anchored" data-anchor-id="example-cascading-resonant-systems-traffic-dynamics">Example: cascading resonant systems &amp; traffic dynamics</h2>
+<p>Setup: one car following another.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/cars.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>Car <span class="math inline">i</span> follows car <span class="math inline">i-1</span>; <span class="math inline">x_i</span> and <span class="math inline">x_{i-1}</span> are their positions.</figcaption>
+</figure>
+</div>
+</div>
+<p>Car is a mass with acceleration governed by throttle &amp; brakes:</p>
+<p><span class="math display">
+\begin{aligned}
+M\ddot{x}_i &amp;= a_i \\[6pt]
+\ddot{x}_i &amp;= \frac{a_i}{M}.
+\end{aligned}
+</span></p>
+<p>Normalise so <span class="math inline">M = 1</span>.</p>
+<p>The driver tries to maintain a constant gap <span class="math inline">d</span> with the car in front.</p>
+<p>If gap is too small/large, driver brakes/accelerates.</p>
+<p><span class="math display"> a_i = k_p\left(x_{i-1} - x_i - d\right). </span></p>
+<p>If gap is closing/opening too fast, driver brakes/accelerates more or less:</p>
+<p><span class="math display"> a_i = k_p\left(x_{i-1} - x_i - d\right) + k_d\left(\dot{x}_{i-1} - \dot{x}_i\right) </span></p>
+<p>Together:</p>
+<p><span class="math display"> \ddot{x}_i + k_d\dot{x}_i + k_p x_i = k_d\dot{x}_{i-1} + k_p x_{i-1} - k_p d. </span></p>
+<p>Let’s find the transfer function from <span class="math inline">x_{i-1}</span> to <span class="math inline">x_i</span>.</p>
+<p>Offset <span class="math inline">x_{i-1}</span> by <span class="math inline">d</span> to get rid of the constant term.</p>
+<p><span class="math display"> (j\omega)^2 X_i + k_d\,j\omega X_i + k_p X_i = k_d\,j\omega X_{i-1} + k_p X_{i-1}. </span></p>
+<p><span class="math display"> X_i = \underbrace{\frac{k_d\,j\omega + k_p}{(j\omega)^2 + k_d\,j\omega + k_p}}_{T(j\omega)}\,X_{i-1}. </span></p>
+<p>Now, judging a distance is much easier than judging a rate, so <span class="math inline">k_d \ll k_p</span>.</p>
+<p>The damping ratio is <span class="math inline">\dfrac{k_d}{2\sqrt{k_p}} \ll 1</span>: underdamped.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/bode-traffic.svg" class="img-fluid figure-img" width="480"></p>
+<figcaption><span class="math inline">|T(j\omega)|</span> for <span class="math inline">k_p = 1</span>, <span class="math inline">k_d = 0.25</span>: a resonant peak above <span class="math inline">1</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>What happens if we have many cars following each other? Cascade transfer functions — resonant peaks add. <span class="math inline">\;(T(j\omega))^N</span>. <span class="math inline">\;|T(j\omega)| &gt; 1</span> when <span class="math inline">k_p^2 &gt; (k_p - \omega^2)^2</span>.</p>
+<p><u>Disturbance is amplified</u>: driver at the front tapping their brakes becomes a big oscillation further back in the queue.</p>
+<script src="bode-widgets.js"></script>
 
 
 </section>
@@ -917,13 +1223,13 @@ V e^{j\omega t}
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../weeks/week01/slides.html" class="pagination-link" aria-label="Slides">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Slides</span>
+      <a href="../../weeks/week05/tutorial4.pdf" class="pagination-link" aria-label="Tutorial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../weeks/week02/notes.html" class="pagination-link" aria-label="Notes">
-        <span class="nav-page-text">Notes</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../weeks/week06/tutorial5.pdf" class="pagination-link" aria-label="Tutorial">
+        <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
