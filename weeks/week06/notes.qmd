@@ -122,9 +122,6 @@ Let's see an example. With the values from last week,
 
 $$ G(j\omega) = \frac{25}{(j\omega)^2 + 6j\omega + 25}. $$
 
-::: {.note}
-<span class="out">Do hand example here?</span>
-:::
 
 We also have the spectrum of the Pulse:
 
