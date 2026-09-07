@@ -339,7 +339,7 @@ We can write a second order system in a standard form:
 $$ G(j\omega) = \frac{K\omega_n^2}{(j\omega)^2 + 2\omega_n\zeta(j\omega) + \omega_n^2} $$
 
 ::: {.note}
-<span class="out">$K$, then assumed $1$.</span>
+<span class="out">We will often assume $K =1$.</span>
 :::
 
 $\omega_n$ is called the <u>natural frequency</u>.
