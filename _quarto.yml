@@ -65,6 +65,9 @@ website:
           - text: "Tutorial"
             href: weeks/week05/tutorial4.pdf
             target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week05/tutorial4-solutions.pdf
+            target: _blank
       - section: "Week 6 — Transfer functions, Bode diagrams and resonance"
         contents:
           - text: "Notes"
