@@ -13,6 +13,13 @@
   The states below are the ones quoted in the figure captions in each week's
   notes.qmd. If you change a state here, change the caption to match, or the
   text and the picture will disagree.
+
+  A widget that animates itself is otherwise caught on its first frame, before
+  it has drawn anything worth printing. Such a spec carries a settle, in
+  milliseconds: the driver waits that long after setting the state and before
+  compositing, so the widget's own animation frames run first. jsdom is booted
+  with pretendToBeVisual, so requestAnimationFrame fires on a timer and the
+  wait is real elapsed time, roughly the seconds of motion you will see.
 */
 
 const fs = require("fs");
@@ -24,7 +31,8 @@ const ROOT = path.resolve(__dirname, "..");
 const WEEK = process.argv[2] || "week01";
 // Most weeks keep their widgets in phasor-widgets.js; the ones that do not are
 // listed here.
-const SRC_FILE = { week05: "fourier-widgets.js", week06: "bode-widgets.js" };
+const SRC_FILE = { week05: "fourier-widgets.js", week06: "bode-widgets.js",
+                   week07: "stability-widgets.js" };
 const SRC = path.join(ROOT, `weeks/${WEEK}/${SRC_FILE[WEEK] || "phasor-widgets.js"}`);
 const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
@@ -114,6 +122,19 @@ const WIDGETS_BY_WEEK = {
       id: "w-resonant-peak",
       caption: "resonant peak at zeta = 0.2: 8.1 dB at 0.959 wn",
       state: () => {}                                   // defaults are fine
+    }
+  ],
+  week07: [
+    {
+      id: "w-population",
+      caption: "k_r = 0.30, k_d = 0.50: decaying h(t), pole at p = -0.20, left half plane",
+      state: () => {}                                   // defaults are fine
+    },
+    {
+      id: "w-pendulum-undamped",
+      caption: "theta(0) = 0.80 rad, left running: about 8 s of the 12 s trace filled",
+      state: () => {},                                  // defaults, and it autoplays
+      settle: 8000                                      // let the trace build before capture
     }
   ]
 };
@@ -238,6 +259,7 @@ function composite(w, id) {
   for (const spec of WIDGETS) {
     try {
       spec.state(controls(w, spec.id));
+      if (spec.settle) await new Promise(r => setTimeout(r, spec.settle));
       const c = composite(w, spec.id);
       const buf = c.canvas.toBuffer("image/png");
       if (buf.length < 1000) throw new Error("suspiciously small PNG — blank canvas?");
@@ -257,5 +279,7 @@ function composite(w, id) {
 
   console.table(rows);
   console.log(`${rows.length}/${WIDGETS.length} widgets written to ${path.relative(ROOT, OUTDIR)}/ at ${SCALE}x`);
-  if (failed) process.exit(1);
+  // a widget that animates itself leaves a requestAnimationFrame loop running,
+  // and that holds the event loop open, so exit rather than wait on it.
+  process.exit(failed ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

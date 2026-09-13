@@ -78,10 +78,17 @@ website:
           - text: "Lab 1"
             href: weeks/week06/lab1.pdf
             target: _blank
+      - section: "Week 7 — System response and stability"
+        contents:
+          - text: "Notes"
+            href: weeks/week07/notes.qmd
       - text: "Course index"
         href: concepts.qmd
       - text: "Quiz 1 formula sheet"
         href: weeks/formula-sheet.pdf
+        target: _blank
+      - text: "Quiz 2 formula sheet"
+        href: weeks/formula-sheet-quiz2.pdf
         target: _blank
       - text: "Primer on RLC circuits"
         href: weeks/primer/notes.qmd
