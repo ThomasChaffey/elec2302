@@ -29,7 +29,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <link href="./weeks/formula-sheet.pdf" rel="next">
-<link href="./weeks/week06/lab1.pdf" rel="prev">
+<link href="./weeks/week07/notes.html" rel="prev">
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -75,15 +75,16 @@ ul.task-list li input[type="checkbox"] {
   widget-week4-rect and widget-week4-rlc-out; week 5 uses fourier-widgets.js,
   giving widget-week5-sample and widget-week5-tau; week 6 uses bode-widgets.js,
   giving widget-week6-pulse-rlc, widget-week6-bode-probe and
-  widget-week6-resonant-peak). See the "usage tracking" comment block at the top
+  widget-week6-resonant-peak; week 7 uses stability-widgets.js, giving
+  widget-week7-population and widget-week7-pendulum-undamped). See the "usage tracking" comment block at the top
   of any of those files for how to read them and what the numbers do and do
   not mean.
 
   A PDF cannot report on itself: nothing runs when a reader opens one. Two
   proxies stand in for it. Clicking the "PDF" link on a notes page fires a
   click event, named pdf-week3 and so on, via the data-goatcounter-click
-  attribute count.js looks for (pdf-week5 and pdf-week6 for the week 5 and
-  week 6 notes). And the site address printed inside each PDF
+  attribute count.js looks for (pdf-week5, pdf-week6 and pdf-week7 for the
+  week 5, week 6 and week 7 notes). And the site address printed inside each PDF
   carries ?ref=notes-pdf-week3, so a reader who types it in or follows it back
   shows up under that referrer. The first counts opening the file, the second
   counts returning to the site from it; neither counts reading it. The primer
@@ -292,6 +293,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7 — System response and stability</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./weeks/week07/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./concepts.html" class="sidebar-item-text sidebar-link active">
@@ -302,6 +320,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Quiz 1 formula sheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./weeks/formula-sheet-quiz2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 formula sheet</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -340,7 +364,7 @@ ul.task-list li input[type="checkbox"] {
 
 <p>Use the search box to find a concept and click a column heading to sort.</p>
 <div class="note">
-<p><strong>Key:</strong> &nbsp; <strong>Pre</strong> = the <a href="./weeks/primer/notes.html">primer on RLC circuits</a> &nbsp;·&nbsp; <strong>W1–W4 notes</strong> = the lecture notes for that week &nbsp;·&nbsp; <strong>T1–T3</strong> = tutorial sheets, with <strong>A, B, C</strong> the prework questions and <strong>Q1, Q2, …</strong> the tutorial questions</p>
+<p><strong>Key:</strong> &nbsp; <strong>Pre</strong> = the <a href="./weeks/primer/notes.html">primer on RLC circuits</a> &nbsp;·&nbsp; <strong>W1–W6 notes</strong> = the lecture notes for that week &nbsp;·&nbsp; <strong>T1–T5</strong> = tutorial sheets, with <strong>A, B, C</strong> the prework questions and <strong>Q1, Q2, …</strong> the tutorial questions (<strong>Q1.3</strong> is part 3 of question 1)</p>
 </div>
 <style>
   #cx-controls { margin: 0.8em 0; }
@@ -419,9 +443,13 @@ const S1 = 'weeks/week01/slides.html';
 const N2 = 'weeks/week02/notes.html';
 const N3 = 'weeks/week03/notes.html';
 const N4 = 'weeks/week04/notes.html';
+const N5 = 'weeks/week05/notes.html';
+const N6 = 'weeks/week06/notes.html';
 const T1 = 'weeks/week02/tutorial1.pdf';
 const T2 = 'weeks/week03/tutorial2.pdf';
 const T3 = 'weeks/week04/tutorial3.pdf';
+const T4 = 'weeks/week05/tutorial4.pdf';
+const T5 = 'weeks/week06/tutorial5.pdf';
 
 // section anchors
 const P_KIRCH = P + '#kirchhoffs-laws-for-series-parallel-circuits';
@@ -464,6 +492,28 @@ const N4_SQ   = N4 + '#example-fourier-series-of-a-square-wave';
 const N4_PROP = N4 + '#properties-of-the-fourier-series';
 const N4_RLC  = N4 + '#example-the-rlc-circuit';
 
+const N5_MOT  = N5 + '#periodic-longrightarrow-aperiodic-motivation';
+const N5_LIM  = N5 + '#fourier-transform-as-the-limit-of-the-fourier-series';
+const N5_CHG  = N5 + '#what-has-changed-versus-the-fourier-series';
+const N5_PAIR = N5 + '#fourier-transform-pairs';
+const N5_ONE  = N5 + '#ut-1';
+const N5_PROP = N5 + '#properties-of-the-fourier-transform';
+const N5_SUM  = N5 + '#summary';
+const N5_OTH  = N5 + '#other-properties';
+const N5_RLC  = N5 + '#example-the-rlc-circuit';
+
+const N6_IMP  = N6 + '#finding-the-impulse-response';
+const N6_ARB  = N6 + '#response-to-arbitrary-inputs';
+const N6_EXP  = N6 + '#convolution-with-exponentials';
+const N6_INT  = N6 + '#interconnections-and-transfer-functions';
+const N6_DB   = N6 + '#decibels';
+const N6_PLT  = N6 + '#plotting-the-impulse-response';
+const N6_FO   = N6 + '#first-order-systems';
+const N6_BODE = N6 + '#bode-diagram';
+const N6_SO   = N6 + '#second-order-systems';
+const N6_PER  = N6 + '#periodic-inputs';
+const N6_CAR  = N6 + '#example-cascading-resonant-systems-traffic-dynamics';
+
 // ---- the index -------------------------------------------------------------
 // [concept, week, introduced, practiced]   week 0 = primer
 const CONCEPTS = [
@@ -501,9 +551,9 @@ const CONCEPTS = [
   ["The trajectory of e<sup>zt</sup>: growth, decay and oscillation", 1,
     [["W1 notes", N1_ODE]], [["T1 Q3", T1], ["T1 Q4", T1]]],
   ["The series RLC circuit", 1,
-    [["W1 notes", N1_EE]], [["T1 Q4", T1], ["W3 notes", N3_RLC], ["W4 notes", N4_RLC]]],
+    [["W1 notes", N1_EE]], [["T1 Q4", T1], ["W3 notes", N3_RLC], ["W4 notes", N4_RLC], ["W5 notes", N5_RLC], ["W6 notes", N6_IMP], ["T5 A", T5]]],
   ["Impedance and reactance Z(j&omega;)", 1,
-    [["W1 notes", N1_EE]], [["W4 notes", N4_RLC]]],
+    [["W1 notes", N1_EE]], [["W4 notes", N4_RLC], ["T4 Q4", T4]]],
   ["Steady-state (phasor) circuit analysis", 1,
     [["W1 notes", N1_EE]], [["W4 notes", N4_RLC]]],
   ["Magnitude and phase of a complex function of &omega;", 1,
@@ -539,7 +589,7 @@ const CONCEPTS = [
   ["Signal power (V<sup>2</sup>) against physical power (W)", 2,
     [["W2 notes", N2_EP]], []],
   ["Half-wave and full-wave rectification", 2,
-    [["T1 Q5", T1]], [["T3 Q1", T3]]],
+    [["T1 Q5", T1]], [["T3 Q1", T3], ["T5 Q1.1", T5]]],
   ["The angle between two signals", 2,
     [["W2 notes", N2_ANG]], [["T2 Q4", T2]]],
   ["Homogeneity and additivity", 2,
@@ -557,19 +607,19 @@ const CONCEPTS = [
   ["Pure delay and the phase shift it imparts", 2,
     [["W2 notes", N2_GD]], [["T2 A", T2], ["T2 Q3", T2]]],
   ["The Dirac delta &delta;(t)", 2,
-    [["W2 notes", N2_DEL]], [["T1 Q6", T1], ["T2 B", T2]]],
+    [["W2 notes", N2_DEL]], [["T1 Q6", T1], ["T2 B", T2], ["T4 A", T4]]],
   ["The sifting property", 2,
-    [["W2 notes", N2_DEL]], [["T2 B", T2], ["T2 Q3", T2], ["W3 notes", N3_CONV]]],
+    [["W2 notes", N2_DEL]], [["T2 B", T2], ["T2 Q3", T2], ["W3 notes", N3_CONV], ["T5 Q1.7", T5]]],
   ["Delta scaling &delta;(&alpha;t) = &delta;(t)/|&alpha;|", 2,
     [["W2 notes", N2_SCA]], [["T1 Q6", T1], ["T2 B", T2]]],
   ["Radar ranging: delay gives distance", 2,
-    [["W2 notes", N2_RAD]], [["W3 notes", N3_RAD]]],
+    [["W2 notes", N2_RAD]], [["W3 notes", N3_RAD], ["W5 notes", N5_CHG], ["T4 Q5", T4]]],
   ["Pulse trains and the unambiguous range", 2,
-    [["W2 notes", N2_RAD]], []],
+    [["W2 notes", N2_RAD]], [["W5 notes", N5_MOT], ["T4 Q5", T4]]],
   ["The unit step H(t)", 2,
     [["W2 notes", N2_STE]], [["T2 Q2", T2], ["T2 Q3", T2]]],
   ["The pulse p<sub>&tau;</sub>(t)", 2,
-    [["W2 notes", N2_PUL]], [["T2 A", T2], ["T2 Q3", T2]]],
+    [["W2 notes", N2_PUL]], [["T2 A", T2], ["T2 Q3", T2], ["T4 Q3", T4], ["T4 Q5", T4]]],
   ["Shifting and reflecting a signal", 3,
     [["T2 A", T2]], [["T2 Q3", T2]]],
 
@@ -581,7 +631,7 @@ const CONCEPTS = [
   ["Flip and shift: reading the convolution integral", 3,
     [["W3 notes", N3_CONV]], [["T2 Q3", T2]]],
   ["Convolution", 3,
-    [["W3 notes", N3_DEF]], [["T2 Q3", T2]]],
+    [["W3 notes", N3_DEF]], [["T2 Q3", T2], ["W5 notes", N5_PROP], ["T4 Q3", T4]]],
   ["Commutativity, additivity and associativity of convolution", 3,
     [["W3 notes", N3_DEF]], [["T2 Q5", T2]]],
   ["Convolution with &delta;(t) and with &delta;(t &minus; T)", 3,
@@ -591,7 +641,7 @@ const CONCEPTS = [
   ["A pulse convolved with itself", 3,
     [["W3 notes", N3_PP]], [["T2 Q3", T2]]],
   ["Impulse response", 3,
-    [["W3 notes", N3_IMP]], [["T2 Q2", T2], ["T2 Q5", T2]]],
+    [["W3 notes", N3_IMP]], [["T2 Q2", T2], ["T2 Q5", T2], ["W6 notes", N6_IMP], ["T4 Q4", T4]]],
   ["Capacitor memory: an impulse deposits charge", 3,
     [["W3 notes", N3_IMP]], [["T2 Q2", T2]]],
   ["Impulse response as an initial-condition response", 3,
@@ -601,25 +651,25 @@ const CONCEPTS = [
   ["ODE description of an LTI system: order and coefficients", 3,
     [["W3 notes", N3_ODE]], [["T1 Q4", T1], ["T2 Q1", T2], ["T2 Q2", T2]]],
   ["Step response", 3,
-    [["T2 Q2", T2]], [["T2 Q3", T2]]],
+    [["T2 Q2", T2]], [["T2 Q3", T2], ["T4 Q4", T4]]],
   ["Step response as the convolution h * H", 3,
     [["T2 Q3", T2]], [["T2 Q3", T2]]],
   ["The frequency response G(j&omega;)", 3,
-    [["W3 notes", N3_SIN]], [["T2 Q6", T2], ["W4 notes", N4_RLC]]],
+    [["W3 notes", N3_SIN]], [["T2 Q6", T2], ["W4 notes", N4_RLC], ["W5 notes", N5_RLC], ["W6 notes", N6_IMP], ["T5 A", T5]]],
   ["Frequency response as an integral of the impulse response", 3,
     [["T2 Q6", T2]], []],
   ["An LTI system maps a sinusoid to a sinusoid of the same frequency", 3,
     [["W3 notes", N3_SIN]], [["T2 Q6", T2]]],
   ["e<sup>j&omega;t</sup> as an eigenfunction of an LTI system", 3,
-    [["W3 notes", N3_SIN]], [["T2 Q6", T2], ["W4 notes", N4_RLC]]],
+    [["W3 notes", N3_SIN]], [["T2 Q6", T2], ["W4 notes", N4_RLC], ["W6 notes", N6_EXP]]],
   ["Block diagrams: cascade, sum, parallel and feedback", 3,
-    [["W3 notes", N3_BLK]], [["T2 Q5", T2]]],
+    [["W3 notes", N3_BLK]], [["T2 Q5", T2], ["W6 notes", N6_INT], ["T5 Q1.8", T5]]],
   ["Impulse response of a series RLC circuit", 3,
     [["W3 notes", N3_RLC]], []],
   ["Characteristic equation and poles", 3,
-    [["W3 notes", N3_RLC]], [["T1 Q3", T1], ["T1 Q4", T1]]],
+    [["W3 notes", N3_RLC]], [["T1 Q3", T1], ["T1 Q4", T1], ["W6 notes", N6_SO]]],
   ["Damping ratio &zeta; and natural frequency &omega;<sub>n</sub>", 3,
-    [["W3 notes", N3_RLC]], [["W4 notes", N4_RLC]]],
+    [["W3 notes", N3_RLC]], [["W4 notes", N4_RLC], ["W6 notes", N6_SO], ["T5 Q1.3", T5], ["T5 Q1.6", T5]]],
 
   // ---- Week 4 ----
   ["Least-squares approximation of a signal", 4,
@@ -629,9 +679,9 @@ const CONCEPTS = [
   ["The harmonics &phi;<sub>k</sub> = e<sup>jk&omega;t</sup> and the fundamental frequency &omega; = 2&pi;/T", 4,
     [["W4 notes", N4_APP]], [["T3 A", T3]]],
   ["Complex Fourier coefficients c<sub>k</sub>", 4,
-    [["W4 notes", N4_APP]], [["T3 B", T3], ["T3 Q2", T3], ["T3 Q3", T3]]],
+    [["W4 notes", N4_APP]], [["T3 B", T3], ["T3 Q2", T3], ["T3 Q3", T3], ["W6 notes", N6_PER], ["T5 Q1.1", T5], ["T5 Q1.2", T5]]],
   ["The Fourier series", 4,
-    [["W4 notes", N4_FS]], [["T3 B", T3], ["T3 C", T3], ["T3 Q1", T3]]],
+    [["W4 notes", N4_FS]], [["T3 B", T3], ["T3 C", T3], ["T3 Q1", T3], ["W5 notes", N5_LIM], ["W6 notes", N6_PER], ["T5 Q1.1", T5]]],
   ["c<sub>0</sub> as the DC offset", 4,
     [["W4 notes", N4_FS]], [["T3 Q1", T3]]],
   ["Orthogonality of the harmonics &phi;<sub>k</sub>", 4,
@@ -647,11 +697,11 @@ const CONCEPTS = [
   ["Fourier series of a square wave", 4,
     [["W4 notes", N4_SQ]], [["T3 Q2", T3]]],
   ["The sinc function", 4,
-    [["W4 notes", N4_SQ]], [["T3 Q2", T3]]],
+    [["W4 notes", N4_SQ]], [["T3 Q2", T3], ["W5 notes", N5_MOT], ["T4 Q3", T4]]],
   ["The Gibbs phenomenon", 4,
     [["W4 notes", N4_SQ]], []],
   ["Magnitude and phase spectrum", 4,
-    [["T3 A", T3]], [["T3 Q3", T3]]],
+    [["T3 A", T3]], [["T3 Q3", T3], ["T4 A", T4], ["T5 Q1.2", T5], ["T5 Q1.7", T5]]],
   ["Linearity of the Fourier coefficients", 4,
     [["W4 notes", N4_PROP]], [["T3 Q1", T3]]],
   ["A time shift rotates the Fourier coefficients", 4,
@@ -666,6 +716,116 @@ const CONCEPTS = [
     [["T3 C", T3]], [["T3 Q4", T3]]],
   ["Harmonic response of a circuit via Z(jk&omega;)", 4,
     [["W4 notes", N4_RLC]], []],
+
+  // ---- Week 5 ----
+  ["The pulse train and its duty cycle d = &tau;/T", 5,
+    [["W5 notes", N5_MOT]], [["T4 Q5", T4]]],
+  ["Fourier coefficients of a pulse train, c<sub>k</sub> = Ad&nbsp;sinc(kd)", 5,
+    [["W5 notes", N5_MOT]], [["T4 Q5", T4]]],
+  ["The transform pair p<sub>&tau;</sub>(t) &harr; &tau;&nbsp;sinc(&omega;&tau;/2&pi;)", 5,
+    [["W5 notes", N5_MOT]], [["T4 Q1", T4], ["T4 Q3", T4], ["T4 Q5", T4]]],
+  ["The envelope E(&omega;) = Tc<sub>k</sub>, sampled at spacing &omega;<sub>0</sub>", 5,
+    [["W5 notes", N5_LIM]], [["T4 Q5", T4]]],
+  ["Letting T &rarr; &infin;: the envelope is fixed and the line spacing shrinks", 5,
+    [["W5 notes", N5_LIM]], [["T4 Q5", T4]]],
+  ["The Fourier transform U(j&omega;)", 5,
+    [["W5 notes", N5_LIM]], [["T4 A", T4], ["T4 Q1", T4], ["T4 Q5", T4]]],
+  ["The inverse Fourier transform", 5,
+    [["W5 notes", N5_LIM]], [["T4 Q4", T4]]],
+  ["Absolute integrability as a sufficient condition for the transform to exist", 5,
+    [["W5 notes", N5_LIM]], []],
+  ["The spectrum as a density: the units of U(j&omega;)", 5,
+    [["W5 notes", N5_CHG]], []],
+  ["Range resolution &Delta;r = c&tau;/2", 5,
+    [["W5 notes", N5_CHG]], [["T4 Q5", T4]]],
+  ["Bandwidth of a pulse and the cost of shortening it", 5,
+    [["W5 notes", N5_CHG]], [["T4 Q5", T4]]],
+  ["The transform pair &delta;(t) &harr; 1", 5,
+    [["W5 notes", N5_PAIR]], [["T4 A", T4], ["T4 Q5", T4]]],
+  ["The transform pair e<sup>&minus;at</sup>H(t) &harr; 1/(a + j&omega;)", 5,
+    [["W5 notes", N5_PAIR]], [["T4 Q1", T4], ["T4 Q2", T4], ["T4 Q4", T4]]],
+  ["The transform pair 1 &harr; 2&pi;&delta;(&omega;)", 5,
+    [["W5 notes", N5_ONE]], []],
+  ["The transform pair e<sup>j&omega;<sub>0</sub>t</sup> &harr; 2&pi;&delta;(&omega; &minus; &omega;<sub>0</sub>)", 5,
+    [["W5 notes", N5_PAIR]], [["W6 notes", N6_PER]]],
+  ["The spectrum of cos(&omega;<sub>0</sub>t): two impulses of weight &pi;", 5,
+    [["W5 notes", N5_PAIR]], [["T4 Q2", T4], ["W6 notes", N6_PER]]],
+  ["Frequency shift: e<sup>j&omega;<sub>0</sub>t</sup>u(t) &harr; U(j(&omega; &minus; &omega;<sub>0</sub>))", 5,
+    [["W5 notes", N5_PROP]], [["T4 Q2", T4]]],
+  ["Time shift: u(t &minus; t<sub>0</sub>) &harr; e<sup>&minus;j&omega;t<sub>0</sub></sup>U(j&omega;)", 5,
+    [["W5 notes", N5_PROP]], [["T4 A", T4], ["T4 Q1", T4], ["T4 Q2", T4], ["W6 notes", N6_ARB]]],
+  ["Time scaling: u(at) &harr; U(j&omega;/a)/|a|", 5,
+    [["W5 notes", N5_PROP]], [["T4 Q2", T4]]],
+  ["Linearity of the Fourier transform", 5,
+    [["W5 notes", N5_PROP]], [["T4 Q1", T4]]],
+  ["Convolution in time is multiplication in frequency, Y = HU", 5,
+    [["W5 notes", N5_PROP]], [["T4 Q3", T4], ["T4 Q4", T4], ["W6 notes", N6_IMP]]],
+  ["Differentiation: du/dt &harr; j&omega;U(j&omega;)", 5,
+    [["W5 notes", N5_PROP]], [["T4 Q4", T4], ["W6 notes", N6_IMP]]],
+  ["Duality: X(jt) &harr; 2&pi;x(&minus;&omega;)", 5,
+    [["W5 notes", N5_OTH]], [["T4 Q2", T4]]],
+  ["Parseval's theorem for the Fourier transform", 5,
+    [["W5 notes", N5_OTH]], []],
+  ["Table of Fourier transform pairs and properties", 5,
+    [["W5 notes", N5_SUM]], []],
+  ["The spectrum of the RLC impulse response", 5,
+    [["W5 notes", N5_RLC]], [["W6 notes", N6_IMP], ["T5 A", T5]]],
+  ["Identifying the system, input and output in a physical example", 5,
+    [["T4 B", T4]], []],
+
+  // ---- Week 6 ----
+  ["The transfer function G(j&omega;)", 6,
+    [["W6 notes", N6_IMP]], [["T5 A", T5], ["T5 Q1.3", T5]]],
+  ["Finding a transfer function by transforming the circuit ODE", 6,
+    [["W6 notes", N6_IMP]], [["T4 Q4", T4], ["T5 Q1.3", T5]]],
+  ["Impulse response as the inverse transform of G(j&omega;)", 6,
+    [["W6 notes", N6_IMP]], [["T4 Q4", T4]]],
+  ["Output of any input from Y(j&omega;) = G(j&omega;)U(j&omega;)", 6,
+    [["W6 notes", N6_ARB]], [["T4 Q4", T4], ["T5 Q1.7", T5]]],
+  ["Pulse response of the RLC circuit by inverse transform", 6,
+    [["W6 notes", N6_ARB]], [["T4 Q4", T4]]],
+  ["Convolving h with e<sup>j&omega;<sub>0</sub>t</sup> gives G(j&omega;<sub>0</sub>)e<sup>j&omega;<sub>0</sub>t</sup>", 6,
+    [["W6 notes", N6_EXP]], []],
+  ["Cascade: transfer functions multiply", 6,
+    [["W6 notes", N6_INT]], [["T5 B", T5], ["T5 Q1.8", T5]]],
+  ["Feedback: Y = H<sub>1</sub>U/(1 + H<sub>1</sub>H<sub>2</sub>)", 6,
+    [["W6 notes", N6_INT]], []],
+  ["An RC circuit drawn as a parallel interconnection and as feedback", 6,
+    [["W6 notes", N6_INT]], [["T4 Q4", T4]]],
+  ["Decibels: 20log<sub>10</sub> for amplitude, 10log<sub>10</sub> for power", 6,
+    [["W6 notes", N6_DB]], [["T5 A", T5], ["T5 B", T5], ["T5 Q1.4", T5], ["T5 Q1.5", T5]]],
+  ["Converting between a gain ratio and a level in decibels", 6,
+    [["W6 notes", N6_DB]], [["T5 B", T5]]],
+  ["The Bode diagram: magnitude in decibels and phase against log frequency", 6,
+    [["W6 notes", N6_PLT]], [["T5 A", T5], ["T5 Q1.4", T5]]],
+  ["Reading gain and phase at one frequency off a Bode diagram", 6,
+    [["W6 notes", N6_PLT]], [["T5 A", T5], ["T5 Q1.5", T5]]],
+  ["First order systems: G(j&omega;) = &beta;/(&tau;j&omega; + 1)", 6,
+    [["W6 notes", N6_FO]], [["T4 Q4", T4]]],
+  ["Corner frequency 1/&tau; and the &minus;20 dB/decade roll-off", 6,
+    [["W6 notes", N6_BODE]], []],
+  ["Phase of a first order system: 0&deg; to &minus;90&deg; over two decades", 6,
+    [["W6 notes", N6_BODE]], []],
+  ["Standard second order form with K, &omega;<sub>n</sub> and &zeta;", 6,
+    [["W6 notes", N6_SO]], [["T5 Q1.3", T5]]],
+  ["Overdamped, critically damped and underdamped poles", 6,
+    [["W6 notes", N6_SO]], [["T5 Q1.6", T5]]],
+  ["Partial fractions: each pole contributes e<sup>&minus;p<sub>i</sub>t</sup>", 6,
+    [["W6 notes", N6_SO]], []],
+  ["Cascaded Bode diagrams: magnitudes and phases add", 6,
+    [["W6 notes", N6_SO]], [["T5 B", T5], ["T5 Q1.8", T5]]],
+  ["Resonant frequency &omega;<sub>r</sub> = &omega;<sub>n</sub>&radic;(1 &minus; 2&zeta;<sup>2</sup>), which exists only for &zeta; &lt; 1/&radic;2", 6,
+    [["W6 notes", N6_SO]], [["T5 Q1.6", T5]]],
+  ["Fourier transform of a periodic signal: impulses of weight 2&pi;c<sub>k</sub>", 6,
+    [["W6 notes", N6_PER]], [["T5 Q1.2", T5], ["T5 Q1.7", T5]]],
+  ["Output spectrum of a periodic input: G(j&omega;) weights each line", 6,
+    [["W6 notes", N6_PER]], [["T5 Q1.7", T5]]],
+  ["Car following: the transfer function from x<sub>i&minus;1</sub> to x<sub>i</sub>", 6,
+    [["W6 notes", N6_CAR]], []],
+  ["String instability: cascaded resonant peaks amplify a disturbance", 6,
+    [["W6 notes", N6_CAR]], [["T5 Q1.8", T5]]],
+  ["Designing a filter to a ripple specification", 6,
+    [["T5 Q1.5", T5]], [["T5 Q1.8", T5]]],
 ];
 
 // ---- rendering -------------------------------------------------------------
@@ -1148,8 +1308,8 @@ render();
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./weeks/week06/lab1.pdf" class="pagination-link" aria-label="Lab 1">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 1</span>
+      <a href="./weeks/week07/notes.html" class="pagination-link" aria-label="Notes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

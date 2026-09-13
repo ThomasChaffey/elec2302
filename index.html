@@ -74,15 +74,16 @@ ul.task-list li input[type="checkbox"] {
   widget-week4-rect and widget-week4-rlc-out; week 5 uses fourier-widgets.js,
   giving widget-week5-sample and widget-week5-tau; week 6 uses bode-widgets.js,
   giving widget-week6-pulse-rlc, widget-week6-bode-probe and
-  widget-week6-resonant-peak). See the "usage tracking" comment block at the top
+  widget-week6-resonant-peak; week 7 uses stability-widgets.js, giving
+  widget-week7-population and widget-week7-pendulum-undamped). See the "usage tracking" comment block at the top
   of any of those files for how to read them and what the numbers do and do
   not mean.
 
   A PDF cannot report on itself: nothing runs when a reader opens one. Two
   proxies stand in for it. Clicking the "PDF" link on a notes page fires a
   click event, named pdf-week3 and so on, via the data-goatcounter-click
-  attribute count.js looks for (pdf-week5 and pdf-week6 for the week 5 and
-  week 6 notes). And the site address printed inside each PDF
+  attribute count.js looks for (pdf-week5, pdf-week6 and pdf-week7 for the
+  week 5, week 6 and week 7 notes). And the site address printed inside each PDF
   carries ?ref=notes-pdf-week3, so a reader who types it in or follows it back
   shows up under that referrer. The first counts opening the file, the second
   counts returning to the site from it; neither counts reading it. The primer
@@ -291,6 +292,23 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7 — System response and stability</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./weeks/week07/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./concepts.html" class="sidebar-item-text sidebar-link">
@@ -301,6 +319,12 @@ ul.task-list li input[type="checkbox"] {
   <div class="sidebar-item-container"> 
   <a href="./weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Quiz 1 formula sheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./weeks/formula-sheet-quiz2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 formula sheet</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -385,6 +409,11 @@ ul.task-list li input[type="checkbox"] {
 <td style="text-align: left;">6</td>
 <td style="text-align: left;">Frequency response</td>
 <td style="text-align: left;"><a href="./weeks/week06/notes.html">Notes</a> · <a href="weeks/week06/tutorial5.pdf">Tutorial</a> · <a href="weeks/week06/lab1.pdf">Lab 1</a></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">7</td>
+<td style="text-align: left;">System response and stability</td>
+<td style="text-align: left;"><a href="./weeks/week07/notes.html">Notes</a></td>
 </tr>
 </tbody>
 </table>

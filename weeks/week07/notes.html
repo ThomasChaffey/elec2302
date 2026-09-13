@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 3 — Lecture notes</title>
+<title>Week 7 — Lecture notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,8 +28,8 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/week03/tutorial2.pdf" rel="next">
-<link href="../../weeks/week02/tutorial1-solutions.pdf" rel="prev">
+<link href="../../concepts.html" rel="next">
+<link href="../../weeks/week06/lab1.pdf" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -150,7 +150,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Week 3 — Linear, time-invariant systems</a></li><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week07/notes.html">Week 7 — System response and stability</a></li><li class="breadcrumb-item"><a href="../../weeks/week07/notes.html">Notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -231,7 +231,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -347,7 +347,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week07/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week07/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -386,10 +386,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Week 3 — Linear, time-invariant systems</a></li><li class="breadcrumb-item"><a href="../../weeks/week03/notes.html">Notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week07/notes.html">Week 7 — System response and stability</a></li><li class="breadcrumb-item"><a href="../../weeks/week07/notes.html">Notes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 3 — Lecture notes</h1>
-<p class="subtitle lead">Linear, time-invariant systems</p>
+<h1 class="title">Week 7 — Lecture notes</h1>
+<p class="subtitle lead">System response and stability</p>
 </div>
 
 
@@ -408,451 +408,407 @@ window.Quarto = {
 
 <div class="format-links">
 <p><span class="label">Other formats:</span></p>
-<a href="notes.pdf" title="Week 3 lecture notes as a PDF" data-goatcounter-click="pdf-week3" data-goatcounter-title="Week 3 notes PDF opened">📄&nbsp;PDF</a>
+<a href="notes.pdf" title="Week 7 lecture notes as a PDF" data-goatcounter-click="pdf-week7" data-goatcounter-title="Week 7 notes PDF opened">📄&nbsp;PDF</a>
 </div>
-<!-- CHECK: the revised page 1 heads the lecture "linear, time-invariant systems", so I
-     have used that as the subtitle. The previous version, and the Week 3 tutorial sheet,
-     use "LTI systems, impulse response and convolution". -->
-<section id="goals" class="level2">
-<h2 class="anchored" data-anchor-id="goals">Goals</h2>
-<p>① Convolution: calculate the output of an LTI system by breaking the input into pieces.</p>
-<p>② Impulse response: complete representation of an LTI system.</p>
-<p>③ LTI systems preserve frequency.</p>
-<p>④ ODE descriptions of LTI systems.</p>
-<p>⑤ Interconnections of systems.</p>
+<section id="lecture-outline" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-outline">Lecture outline</h2>
+<ol type="1">
+<li>Recap: frequency response &amp; transfer functions.</li>
+<li>First &amp; second order systems in the time domain.</li>
+<li>Exponential stability</li>
+<li>Marginal stability</li>
+<li>Bounded input, bounded output stability.</li>
+</ol>
+<p>Question of the lecture: how can we use the frequency response of a system to understand qualitatively what happens when we give an input to a system?</p>
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
 </section>
-<section id="recap" class="level2">
-<h2 class="anchored" data-anchor-id="recap">Recap</h2>
-<p>Linear <span class="math inline">\iff</span> superposition</p>
-<div style="text-align:center">
-<p><img src="fig-recap-gain.svg" class="img-fluid" width="560"></p>
-</div>
-<div style="text-align:center">
-<p><img src="fig-recap-sum.svg" class="img-fluid" width="560"></p>
-</div>
-<p>add/scale input <span class="math inline">\iff</span> add/scale output</p>
-</section>
-<section id="convolution" class="level2">
-<h2 class="anchored" data-anchor-id="convolution">① Convolution</h2>
-<p>If we apply regular impulses to a system, what do we get at the output?</p>
+<section id="recap-frequency-response-and-transfer-functions" class="level2">
+<h2 class="anchored" data-anchor-id="recap-frequency-response-and-transfer-functions">Recap: frequency response and transfer functions</h2>
+<p>Recap: in week 6, we introduced a very important characterisation of a system: the transfer function.</p>
 <div style="text-align:center">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fig-superpose.svg" class="img-fluid figure-img" width="520"></p>
-<figcaption>Each input sample launches a scaled, shifted copy of the impulse response; the outputs superpose.</figcaption>
+<p><img src="fig-domains.svg" class="img-fluid figure-img" width="420"></p>
+<figcaption>Impulse response and transfer function.</figcaption>
 </figure>
 </div>
 </div>
-<p>What do we have at time <span class="math inline">3</span>?</p>
-<p><span class="math inline">h</span> started at <span class="math inline">\tau = 2</span> and gone <span class="math inline">1</span> time step: <span class="math inline">\;\overbrace{h(t-2)}^{h(1)}\,u(2)\;</span></p>
-<p><span class="math inline">h</span> started at <span class="math inline">\tau = 1</span> and gone <span class="math inline">2</span> time steps: <span class="math inline">\;\overbrace{h(t-1)}^{h(2)}\,u(1)\;</span></p>
-<p><span class="math inline">h</span> started at <span class="math inline">\tau = 0</span> and gone <span class="math inline">3</span> time steps: <span class="math inline">\;\overbrace{h(t-0)}^{h(3)}\,u(0)\;</span></p>
-<p>So for fixed <span class="math inline">t</span>: flip <span class="math inline">h</span> and shift by <span class="math inline">t</span>, then for each <span class="math inline">\tau \in [0, t]</span>, multiply with <span class="math inline">u(\tau)</span> and add to total.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig-flipshift.svg" class="img-fluid figure-img" width="520"></p>
-<figcaption>For fixed <span class="math inline">t</span>: flip <span class="math inline">h</span>, shift by <span class="math inline">t</span>, and add the products <span class="math inline">h(t-k\Delta t)\,u(k\Delta t)\,\Delta t</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>This gives the output to a sum of impulses. It turns out we can approximate any input as such a sum.</p>
-<div id="w-comb" class="widget"></div>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig-approx.svg" class="img-fluid figure-img" width="520"></p>
-<figcaption>Approximating <span class="math inline">u(t)</span> by a train of impulses. The shaded rectangle at <span class="math inline">\tau</span> has area <span class="math inline">u(\tau)\,\Delta t</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>Area of the shaded rectangle: <span class="math inline">u(\tau)\,\Delta t.</span></p>
-<p>We can represent this area by an impulse, <span class="math inline">\delta(t-\tau)\,u(\tau)\,\Delta t.</span></p>
-<p>These impulses for each rectangle approximate <span class="math inline">u(t)</span>, just like a Riemann integral:</p>
-<p><span class="math display"> u(t) \approx \sum_{k=-\infty}^{\infty} \delta(t-k\Delta t)\,u(k\Delta t)\,\Delta t \qquad(1) </span></p>
-<p>The corresponding output is a sum of delayed <strong>impulse responses</strong> that approximates the output of the system:</p>
-<p><span class="math display"> y(t) \approx \sum_{k=-\infty}^{\infty} h(t-k\Delta t)\,u(k\Delta t)\,\Delta t. \qquad(2) </span></p>
-<p>What happens to (1) in the limit <span class="math inline">\Delta t \to 0</span>?</p>
-<p><span class="math display"> \sum_{k=-\infty}^{\infty} \delta(t-k\Delta t)\,u(k\Delta t)\,\Delta t
-\;\longrightarrow\; \int_{-\infty}^{\infty}\! \delta(t-\tau)\,u(\tau)\,\mathrm{d}\tau </span></p>
-<p>with <span class="math inline">k\Delta t \to \tau</span> and <span class="math inline">\Delta t \to \mathrm{d}\tau</span>. So we have</p>
-<p><span class="math display"> \boxed{\,u(t) = \int_{-\infty}^{\infty}\! \delta(t-\tau)\,u(\tau)\,\mathrm{d}\tau\,} </span></p>
-<p>This is the <strong>sifting property</strong>! Read backwards, it says that the signal <span class="math inline">u(t)</span> is equal to an integral of impulses with amplitude <span class="math inline">u(\tau)\,\mathrm{d}\tau</span>.</p>
-<p>What about (2) in the limit <span class="math inline">\Delta t \to 0</span>?</p>
-<p><span class="math display"> \sum_{k=-\infty}^{\infty} h(t-k\Delta t)\,u(k\Delta t)\,\Delta t
-\;\longrightarrow\; \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau. </span></p>
-<p>So we have:</p>
-<p><span class="math display"> \boxed{\,y(t) = \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau\,} </span></p>
-<p>The response to <strong>any input</strong> <span class="math inline">u(t)</span> is <strong>determined by the impulse response</strong>! We will look more closely at how to calculate the impulse response soon, but first let’s understand the expression above.</p>
+<p>For a linear, constant coefficient differential equation</p>
+<p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \dots + a_0 y(t)
+   = b_m u^{(m)}(t) + \dots + b_0 u(t) </span></p>
+<p>the transfer function is the rational function</p>
+<p><span class="math display"> \frac{b_m (j\omega)^m + \dots + b_0}
+        {a_n (j\omega)^n + a_{n-1}(j\omega)^{n-1} + \dots + a_0}. </span></p>
+<p>The roots of the denominator polynomial <span class="math inline">a_n s^n + a_{n-1}s^{n-1} + \dots + a_0</span>, (or more generally the points <span class="math inline">s \in \mathbb{C}</span> where <span class="math inline">G(s) = \infty</span>), are called the <u>poles</u> of the system. They tell us a lot about the system behaviour, as we started to see last week.</p>
 </section>
-<section id="convolution-definition-and-properties" class="level2">
-<h2 class="anchored" data-anchor-id="convolution-definition-and-properties">Convolution: definition and properties</h2>
-<p><span class="math display"> \boxed{\;\text{The operation}\quad h * u := \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau\;} </span></p>
-<p>is called <strong>convolution</strong>.</p>
-<p>Basic properties of convolution:</p>
-<p><strong>1.</strong> <span class="math inline">h * u = u * h</span> (commutativity)</p>
-<p>Proof:</p>
-<p><span class="math display"> h * u = \int_{-\infty}^{\infty}\! h(t-\tau)\,u(\tau)\,\mathrm{d}\tau. </span></p>
-<p>Let <span class="math inline">T = t - \tau</span>. Then <span class="math inline">\tau = t - T</span> and <span class="math inline">\mathrm{d}T = -\mathrm{d}\tau.</span></p>
+<section id="first-and-second-order-systems-in-the-time-domain" class="level2">
+<h2 class="anchored" data-anchor-id="first-and-second-order-systems-in-the-time-domain">First and second order systems in the time domain</h2>
+<p>Last lecture, we looked at the frequency response of 1st and 2nd order systems.</p>
+<p>This lecture, we’ll start by looking at how these systems behave in the time domain.</p>
+<p>We already know what the impulse response of a first order system looks like (from quiz 1):</p>
+<div class="columns">
+<div class="column" style="width:48%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/first-order-impulse.svg" class="img-fluid figure-img" width="340"></p>
+<figcaption>First order impulse response.</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:52%;">
+<p><span class="math display"> \tau\dot{y} = -y + \beta u. \qquad(1) </span></p>
 <p><span class="math display">
 \begin{aligned}
-&amp;= -\int_{\infty}^{-\infty}\! h(T)\,u(t-T)\,\mathrm{d}T \\[2pt]
-&amp;= \int_{-\infty}^{\infty}\! u(t-T)\,h(T)\,\mathrm{d}T \;=\; u * h.
+\text{Impulse:}\quad \tau y(0) &amp;= \beta \\[4pt]
+y(0) &amp;= \beta/\tau
 \end{aligned}
 </span></p>
-<p><strong>2.</strong> <span class="math inline">(h_1 + h_2) * u = h_1 * u + h_2 * u</span> (additivity).</p>
-<p><strong>3.</strong> <span class="math inline">h_1 * (h_2 * h_3) = (h_1 * h_2) * h_3</span> (associativity).</p>
-<p><strong>4.</strong> <span class="math inline">\displaystyle (u * \delta)(t) = \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau)\,\mathrm{d}\tau = u(t).</span></p>
-<p><strong>5.</strong> <span class="math inline">\displaystyle (u * \delta(t-T)) = \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau-T)\,\mathrm{d}\tau = u(t-T). \qquad = \text{pure delay!}</span></p>
-<p><strong>6.</strong></p>
+<p><span class="math display"> h(t) = \alpha e^{-t/\tau} \quad (t &gt; 0). </span></p>
+<p><span class="math display"> h(0) = \alpha = \frac{\beta}{\tau}. </span></p>
+<p>So <span class="math inline">h(t) = \dfrac{\beta}{\tau}e^{-t/\tau}H(t)</span>.</p>
+</div>
+</div>
+<p>What about the step response?</p>
+<p>Convolve the impulse response with the step.</p>
+<!-- KaTeX takes a hex colour; LaTeX cannot, so the red annotations are HTML only. -->
 <p><span class="math display">
 \begin{aligned}
-(f * g)' &amp;= \frac{\mathrm{d}}{\mathrm{d}t}\int_{-\infty}^{\infty}\! f(t-\tau)\,g(\tau)\,\mathrm{d}\tau \\[2pt]
-         &amp;= \int_{-\infty}^{\infty}\! \frac{\mathrm{d}}{\mathrm{d}t}f(t-\tau)\,g(\tau)\,\mathrm{d}\tau \\[2pt]
-         &amp;= f' * g.
+y(t) &amp;= H(t) * h(t) \\[6pt]
+     &amp;= \int_{-\infty}^{\infty}
+        \underbrace{H(t-\mu)}_{\textcolor{#C0392B}{0 \text{ for } \mu &gt; t}}\,
+        \frac{\beta}{\tau}e^{-\frac{\mu}{\tau}}\,
+        \underbrace{H(\mu)}_{\textcolor{#C0392B}{0 \text{ for } \mu &lt; 0}}\,\mathrm{d}\mu \\[6pt]
+     &amp;= \int_0^t \frac{\beta}{\tau}e^{-\frac{\mu}{\tau}}\,\mathrm{d}\mu \\[6pt]
+     &amp;= \left[-\beta e^{-\frac{\mu}{\tau}}\right]_0^t
+      \;=\; \beta - \beta e^{-\frac{t}{\tau}}.
 \end{aligned}
 </span></p>
-<p>But also: <span class="math inline">(f * g)' = (g * f)' = g' * f.</span></p>
+<p>Does this answer make sense? Set <span class="math inline">\dot{y} = 0</span> in (1): <span class="math inline">0 = -y + \beta u</span>, <span class="math inline">u = 1</span>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/first-order-step.svg" class="img-fluid figure-img" width="380"></p>
+<figcaption>First order step response.</figcaption>
+</figure>
+</div>
+</div>
+<p>What is the significance of the <u>time constant</u> <span class="math inline">\tau</span>?</p>
+<p>It tells us how <u>quickly</u> the system rises.</p>
+<p>At <span class="math inline">t = \tau</span>,</p>
+<p><span class="math display">
+\begin{aligned}
+y(t) &amp;= \beta - \beta e^{-1} \\[4pt]
+     &amp;= \beta\left(1 - e^{-1}\right) \\[4pt]
+     &amp;\approx 0.63\beta.
+\end{aligned}
+</span></p>
+<p><span class="math inline">\tau</span> is the time taken for a 1st order system to reach 63% of its final value.</p>
+<p>Two other common metrics are <u>rise time</u> &amp; <u>settling time</u>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/rise-time.svg" class="img-fluid figure-img" width="400"></p>
+<figcaption>Rise time.</figcaption>
+</figure>
+</div>
+</div>
+<p>rise time: time to go from 10% to 90% of final value, <span class="math inline">\approx 2.2\tau</span>.</p>
+<p>settling time: time until output reaches and stays within a specified band, e.g.&nbsp;5% of final value.</p>
+<p>These performance metrics also apply to second order (and higher order) step responses (where there isn’t a clear time constant).</p>
+<p>How do second order step responses look?</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/step-overdamped.svg" class="img-fluid figure-img" width="320"></p>
+<figcaption>Over/critically damped.</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/step-underdamped.svg" class="img-fluid figure-img" width="320"></p>
+<figcaption>Underdamped.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>How do these relate to pole locations?</p>
+<p><span class="math display"> \frac{1}{p + j\omega} \;\rightsquigarrow\; e^{-pt}
+= e^{-\operatorname{Re}(p)t}\left(\cos(\operatorname{Im}(p)t) - j\sin(\operatorname{Im}(p)t)\right) </span></p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/pole-plane-arrows.svg" class="img-fluid figure-img" width="400"></p>
+<figcaption>Pole location, decay and oscillation.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="exponential-stability" class="level2">
+<h2 class="anchored" data-anchor-id="exponential-stability">Exponential stability</h2>
+<p>Recall pole locations from week 1.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img src="fig/phase-stable.svg" class="img-fluid" width="280"></p>
+<p><span class="math inline">\dot{x} = px</span></p>
+<p><span class="math inline">p</span> in left half plane</p>
+<p><span class="math inline">(\operatorname{Re}(p) &lt; 0)</span></p>
+<p>“stable”</p>
+</div><div class="column" style="width:50%;">
+<p><img src="fig/phase-unstable.svg" class="img-fluid" width="280"></p>
+<p><span class="math inline">\dot{x} = px</span></p>
+<p><span class="math inline">p</span> in right half plane</p>
+<p><span class="math inline">(\operatorname{Re}(p) &gt; 0)</span>.</p>
+<p>“unstable”</p>
+</div>
+</div>
+<p>“Stable” here means <u>exponential decay from initial conditions</u>.</p>
+<p>Formally:</p>
+<div class="note">
+<p>A differential equation</p>
+<p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \dots + a_0 y(t)
+   = b_m u^{(m)}(t) + \dots + b_0 u(t) </span></p>
+<p>is said to be <u>exponentially stable</u> if there exist <span class="math inline">\alpha &gt; 0</span>, <span class="math inline">M &gt; 0</span> such that, for any initial conditions and <span class="math inline">u(t) = 0</span>,</p>
+<p><span class="math display"> |y(t)| \le Me^{-\alpha t}\left(|y(0)| + |y'(0)| + \dots + |y^{(n-1)}(0)|\right)
+   \quad\text{for all } t &gt; 0. </span></p>
+</div>
+<p>How do we check for stability?</p>
+<p>We’ve already seen that poles in the left half plane give decaying exponentials in the time domain. It turns out this is enough, although we won’t see exactly why until we have the Laplace transform.</p>
+<div class="note">
+<p>An LTI system defined by a differential equation is <u>exponentially stable</u> if and only if all its poles are in the left half plane.</p>
+</div>
+<section id="example-a-damped-pendulum-with-torque-input" class="level3">
+<h3 class="anchored" data-anchor-id="example-a-damped-pendulum-with-torque-input">Example: a damped pendulum with torque input</h3>
+<div class="columns">
+<div class="column" style="width:58%;">
+<p><span class="math display"> mL^2\ddot{\theta} + b\dot{\theta} + mgL\sin\theta = \tau </span></p>
+<p>Near <span class="math inline">\theta = 0</span>,</p>
+<p><span class="math inline">\sin\theta \approx \theta</span>, so</p>
+<p><span class="math display"> mL^2\ddot{\theta} + b\dot{\theta} + mgL\,\theta = \tau. </span></p>
+</div><div class="column" style="width:42%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-pendulum.svg" class="img-fluid figure-img" width="200"></p>
+<figcaption>Damped pendulum with torque input.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="note">
+<p>Looks like an RLC circuit?</p>
+</div>
+<p>Find the transfer function:</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><span class="math display"> mL^2(j\omega)^2\Theta + b\,j\omega\,\Theta + mgL\,\Theta = 1. </span></p>
+<div class="note">
+<p><span class="out">F.T. of impulse is 1.</span></p>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/sin-linearisation.svg" class="img-fluid figure-img" width="300"></p>
+<figcaption><span class="math inline">\sin\theta</span> and its linearisations.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>So</p>
-<p><span class="math display"> (f * g)' = f' * g = g' * f </span></p>
-<section id="example-a-pulse-convolved-with-itself" class="level3">
-<h3 class="anchored" data-anchor-id="example-a-pulse-convolved-with-itself">Example: a pulse convolved with itself</h3>
-<p>Example: plot <span class="math inline">(2p_1 * 2p_1)(t)</span></p>
-<p><span class="math display"> \int_{-\infty}^{\infty}\! 2p_1(t-\tau)\,2p_1(\tau)\,\mathrm{d}\tau </span></p>
-<p>The value of <span class="math inline">(2p_1 * 2p_1)(t)</span> is the area under the product: the heights multiply, so it is <span class="math inline">2 \times 2</span> times the width of the overlap.</p>
-<div id="w-conv" class="widget"></div>
-</section>
-<section id="example-radar" class="level3">
-<h3 class="anchored" data-anchor-id="example-radar">Example: radar</h3>
-<div style="text-align:center">
-<svg viewbox="0 0 540 200" width="520" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A train of transmitted pulses on the left; on the right a radar mast with
-                 three rays out to three objects at ranges r1, r2 and r3.">
-  <defs>
-    <marker id="ahRD" viewbox="0 0 10 10" refx="9" refy="5" markerwidth="7" markerheight="7" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00468C"></path>
-    </marker>
-  </defs>
-  <line x1="20" y1="120" x2="215" y2="120" stroke="#00468C" stroke-width="1.8"></line>
-  <g stroke="#00468C" stroke-width="1.6" marker-end="url(#ahRD)">
-    <line x1="45" y1="120" x2="45" y2="60"></line>
-    <line x1="95" y1="120" x2="95" y2="60"></line>
-    <line x1="145" y1="120" x2="145" y2="60"></line>
-    <line x1="195" y1="120" x2="195" y2="60"></line>
-  </g>
-  <g stroke="#00468C" fill="none" stroke-width="1.2">
-    <path d="M 300 175 L 320 95 L 340 175"></path>
-    <line x1="296" y1="175" x2="344" y2="175"></line>
-    <line x1="306" y1="151" x2="334" y2="151"></line>
-    <line x1="311" y1="131" x2="329" y2="131"></line>
-    <line x1="304" y1="163" x2="331" y2="139"></line>
-    <line x1="309" y1="139" x2="336" y2="163"></line>
-    <path d="M 320 95 A 20 20 0 0 1 320 63"></path>
-  </g>
-  <g stroke="#00468C" fill="none" stroke-width="1.2">
-    <line x1="320" y1="79" x2="470" y2="30"></line>
-    <line x1="320" y1="79" x2="480" y2="62"></line>
-    <line x1="320" y1="79" x2="472" y2="96"></line>
-  </g>
-  <g fill="#00468C">
-    <circle cx="474" cy="28" r="4"></circle>
-    <circle cx="484" cy="61" r="4"></circle>
-    <circle cx="476" cy="97" r="4"></circle>
-  </g>
-  <text x="386" y="49" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₁</text>
-  <text x="398" y="66" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₂</text>
-  <text x="390" y="99" font-family="Arial" font-size="13" fill="#00468C" font-style="italic">r₃</text>
-</svg>
-</div>
-<p>For each object, the pulse is delayed by <span class="math inline">t_{d_i} = \dfrac{2r_i}{c}.</span></p>
-<p>This can be interpreted as a <strong>system impulse response</strong>.</p>
-<p>input: <span class="math inline">\delta(t)</span></p>
-<p>system: the scene</p>
-<p>output: <span class="math inline">\displaystyle \sum_i \delta(t - t_{d_i}).</span></p>
-<p><span class="math inline">\hookrightarrow</span> output is a sum of delayed versions of the input.</p>
-<p>What system is this the impulse response of?</p>
-<p><span class="math display"> \sum_i D_{t_{d_i}} \qquad \text{: a sum of delays, one for each object.} </span></p>
-<p>What is the response if we inject a sinusoid:</p>
-<p>Intuitively: <span class="math inline">u(t) = \cos(\omega t)</span>, <span class="math inline">\;y(t) = \sum_i \cos(\omega t - \omega t_{d_i}).</span></p>
-<p>Let’s check our intuition with what we just learnt:</p>
-<p><span class="math display">
-\begin{aligned}
-y(t) &amp;= u(t) * h(t) \\[2pt]
-     &amp;= u(t) * \sum_i \delta(t - t_{d_i}) \\[2pt]
-     &amp;= \sum_i \int_{-\infty}^{\infty}\! u(t-\tau)\,\delta(\tau - t_{d_i})\,\mathrm{d}\tau \\[2pt]
-     &amp;= \sum_i u(t - t_{d_i}) \qquad \text{(sifting property)} \\[2pt]
-     &amp;= \sum_i \cos(\omega t - \omega t_{d_i}).
-\end{aligned}
-</span></p>
+<p><span class="math display"> G(j\omega) = \frac{1}{mL^2(j\omega)^2 + b(j\omega) + mgL}. </span></p>
+<p>Poles are at <span class="math inline">\dfrac{-b \pm \sqrt{b^2 - 4m^2L^3g}}{2mL^2}</span>.</p>
+<p>Two cases: If <span class="math inline">b^2 - 4m^2L^3g &lt; 0</span>, (underdamped), real part is <span class="math inline">\dfrac{-b}{2mL^2}</span>. Stable!</p>
+<p>If <span class="math inline">b^2 - 4m^2L^3g \ge 0</span>, (critically/overdamped),</p>
+<p>Where is the real part?</p>
+<p><span class="math display"> b^2 - 4m^2L^3g \le b^2, \quad\text{so}\quad -b \pm \sqrt{b^2 - 4m^2L^3g} \le 0.
+   \quad\text{Stable!} </span></p>
+<p>What about at <span class="math inline">\theta = \pi</span>?</p>
+<p><span class="math inline">\sin\theta \approx \pi - \theta</span>, so we have</p>
+<p><span class="math display"> mL^2\ddot{\theta} + b\dot{\theta} + mgL(\pi - \theta) = \tau. </span></p>
+<p>Let <span class="math inline">\theta - \pi = \phi</span>. Then we have</p>
+<p><span class="math display"> mL^2\ddot{\phi} + b\dot{\phi} - mgL\phi = \tau. </span></p>
+<p>Transfer function is</p>
+<p><span class="math display"> G(j\omega) = \frac{1}{mL^2(j\omega)^2 + b(j\omega) - mgL}. </span></p>
+<p>So poles are now at <span class="math inline">\dfrac{1}{2mL^2}\left(-b \pm \underbrace{\sqrt{b^2 + 4m^2L^3g}}_{&gt;\,b}\right)</span>. Unstable!</p>
 </section>
 </section>
-<section id="the-impulse-response-of-circuits" class="level2">
-<h2 class="anchored" data-anchor-id="the-impulse-response-of-circuits">② The impulse response of circuits</h2>
-<p>Now let’s look at the impulse response of circuits.</p>
-<div class="columns">
-<div class="column" style="width:49%;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="circuit-rc.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>A series RC circuit.</figcaption>
-</figure>
-</div>
-<p>In the RC circuit, a change in <span class="math inline">v_i</span> causes <strong>gradual</strong> change in <span class="math inline">v_o</span>.</p>
-</div><div class="column" style="width:2%;">
-
-</div><div class="column" style="width:49%;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="circuit-divider.svg" class="img-fluid figure-img" style="width:100.0%"></p>
-<figcaption>A voltage divider.</figcaption>
-</figure>
-</div>
-<p>In the voltage divider, a change in <span class="math inline">v_i</span> causes <strong>instantaneous</strong> change in <span class="math inline">v_o</span>.</p>
-</div>
-</div>
-<p><span class="math inline">\hookrightarrow</span> capacitor has memory:</p>
-<p>the charge stored on its plates carries a memory of the current.</p>
-<p>The impulse is a fictitious signal that deposits charge on the capacitor instantaneously:</p>
-<p><span class="math display"> q_c = \int i_c(t)\,\mathrm{d}t </span></p>
-<p>So if <span class="math inline">i_c(t) = \delta(t)</span>, <span class="math inline">\;q_c(0) = \displaystyle\int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t = 1.</span></p>
-<p>This means an impulse response (inhomogeneous ODE) is equivalent to an initial condition response (homogeneous ODE).</p>
-<p>This holds generally for LTI systems. Let’s see how on the RC circuit above.</p>
-<p><span class="math display"> v_i(t) = v_R + v_C </span></p>
-<p><span class="math display"> v_R = iR </span></p>
-<p><span class="math display"> i = \frac{\mathrm{d}}{\mathrm{d}t}C v_C. </span></p>
-<p>So</p>
-<p><span class="math display"> v_i(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
-<p>Now let <span class="math inline">v_i(t) = \delta(t)</span>.</p>
-<p><span class="math display"> \delta(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
-<p>Integrate both sides on <span class="math inline">[0^-, 0^+]</span>.</p>
-<p><span class="math display"> \int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t = \underbrace{\int_{0^-}^{0^+}\! v_C(t)\,\mathrm{d}t}_{=\,0} + RC\,v(0) </span></p>
-<p><span class="math display"> 1 = RC\,v(0) </span></p>
-<p><span class="math display"> v(0) = \frac{1}{RC}. </span></p>
-<div class="note">
-<p>Impulse at <span class="math inline">t=0</span> deposits an <strong>initial condition</strong>.</p>
-</div>
-<p>We can use this to calculate the impulse response, by solving</p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t) + v_C(t) = 0, \qquad v_C(0) = \frac{1}{RC} \qquad(3) </span></p>
-<p>Let <span class="math inline">v_C(t) = \alpha e^{-\beta t}.</span></p>
-<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}v_C = -\beta\alpha e^{-\beta t}. </span></p>
-<p>Sub in (3):</p>
-<p><span class="math display"> -RC\beta\alpha e^{-\beta t} = -\alpha e^{-\beta t} </span></p>
-<p><span class="math display"> RC\beta = 1 \iff \beta = \frac{1}{RC}. </span></p>
-<p>Use the initial condition to find <span class="math inline">\alpha</span>:</p>
-<p><span class="math display"> v_C(0) = \alpha e^{0} = \frac{1}{RC}. </span></p>
-<p>So the impulse response is</p>
-<p><span class="math display"> v_C(t) = \frac{1}{RC}\,e^{-\frac{1}{RC}t} =: h(t). </span></p>
-<!-- CHECK: the exponent in the source reads e^{-(1/C)t}; with beta = 1/RC from the line
-     above it should be e^{-(1/RC)t}, which is what I have used. -->
-<p><span class="math inline">h(t)</span> is the usual notation we’ll use for impulse response.</p>
-</section>
-<section id="ode-descriptions-of-lti-systems" class="level2">
-<h2 class="anchored" data-anchor-id="ode-descriptions-of-lti-systems">④ ODE descriptions of LTI systems</h2>
-<p>The same principle holds for <span class="math inline">n</span>th order differential equations. For</p>
-<p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) = \delta(t) </span></p>
-<p>with the system at rest before <span class="math inline">t=0</span>, the impulse deposits an initial condition on the 2nd highest derivative:</p>
-<p><span class="math display"> y^{(n-1)}(0^+) = \frac{1}{a_n}, \qquad y^{(n-2)}(0^+) = \cdots = y(0^+) = 0. </span></p>
-<p>If we also allow derivatives of the input:</p>
-<p><span class="math display">
-\begin{aligned}
-&amp;a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \cdots + a_0 y(t) \\[2pt]
-&amp;\qquad = b_m u^{(m)}(t) + b_{m-1}u^{(m-1)}(t) + \cdots + b_0 u(t)
-\end{aligned}
-</span></p>
-<p>with given initial conditions <span class="math inline">y^{(n-1)}(0), y^{(n-2)}(0), \dots, y(0)</span>, we have a description for a large class of useful systems, including all of the circuits we’ve seen so far.</p>
-<ul>
-<li><span class="math inline">n</span> is called the <strong>order</strong> of the system,</li>
-<li>the <span class="math inline">a_i</span> and <span class="math inline">b_i</span> are called the <strong>coefficients</strong> of the system,</li>
-<li>such systems are always <strong>time-invariant</strong>,</li>
-<li>if the initial conditions are all <span class="math inline">0</span>, the system is <strong>linear</strong>,</li>
-<li>this gives an implicit description of the map from <span class="math inline">u</span> to <span class="math inline">y</span>. In weeks 5 &amp; 6 we’ll develop an explicit description.</li>
-</ul>
-</section>
-<section id="lti-systems-and-sinusoids" class="level2">
-<h2 class="anchored" data-anchor-id="lti-systems-and-sinusoids">③ LTI systems and sinusoids</h2>
-<p>Back to our RC circuit. Let’s plug in a complex sinusoidal voltage and see what happens.</p>
-<p><span class="math display"> v_i(t) = v_C(t) + \frac{\mathrm{d}}{\mathrm{d}t}RC v_C(t). </span></p>
-<p>Let <span class="math inline">v_i(t) = e^{j\omega t} = \cos(\omega t) + j\sin(\omega t).</span></p>
-<p>Guess a solution <span class="math inline">v_C(t) = G e^{j\omega t}</span> for some <span class="math inline">G \in \mathbb{C}</span> — a sinusoid of the same frequency.</p>
-<p><span class="math display"> e^{j\omega t} = G e^{j\omega t} + \frac{\mathrm{d}}{\mathrm{d}t}RCG e^{j\omega t} </span></p>
-<p><span class="math display"> e^{j\omega t} = G e^{j\omega t} + j\omega RCG e^{j\omega t} </span></p>
-<p><span class="math display"> 1 = G + j\omega RCG \qquad (e^{j\omega t} \neq 0) </span></p>
-<p><span class="math display"> G(j\omega) = \frac{1}{1 + j\omega RC}. </span></p>
-<div class="note">
-<p>Why is <span class="math inline">Ge^{j\omega t}</span> always such a good guess?</p>
-</div>
-<!-- CHECK: the circuit redrawn beside this calculation appears to label the shunt element
-     L, but the equation above it is the RC circuit. I have kept the RC circuit. -->
-<p>Consider an arbitrary LTI system mapping <span class="math inline">u</span> to <span class="math inline">y</span>.</p>
-<p>Let <span class="math inline">u(t) = e^{j\omega t} = \cos(\omega t) + j\sin(\omega t).</span></p>
-<p>Time invariance: <span class="math inline">u(t-\tau) \longmapsto y(t-\tau).</span></p>
-<p>For this input,</p>
-<p><span class="math display">
-\begin{aligned}
-u(t-\tau) &amp;= e^{j\omega(t-\tau)} = e^{j\omega t}e^{-j\omega\tau} \\[2pt]
-          &amp;= e^{-j\omega\tau}u(t).
-\end{aligned}
-</span></p>
-<p>This is the input <span class="math inline">u</span> scaled by <span class="math inline">e^{-j\omega\tau}</span>.</p>
-<p>By linearity, <span class="math inline">y(t-\tau) = e^{-j\omega\tau}y(t).</span></p>
-<p>Set <span class="math inline">t=0</span> and relabel <span class="math inline">-\tau = t</span>, then</p>
-<p><span class="math display"> y(t) = e^{j\omega t}y(0), </span></p>
-<p>where <span class="math inline">y(0)</span> is <span class="math inline">G(j\omega)</span> in the example above.</p>
-<div class="note">
-<p>LTI systems always map a sinusoid to a sinusoid of the same frequency.</p>
-</div>
-<p>Let’s think about this in terms of our matrix <span class="math inline">\longleftrightarrow</span> system analogy.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>matrix</th>
-<th>LTI system</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">y = Au</span></td>
-<td><span class="math inline">y(t) = G(u(t))</span></td>
-</tr>
-<tr class="even">
-<td>If <span class="math inline">u</span> is an eigenvector, <span class="math inline">y = Au = \lambda u</span></td>
-<td>If <span class="math inline">u = e^{j\omega t}</span>, <span class="math inline">y = G(j\omega)\,e^{j\omega t}</span></td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">A</span> scales <span class="math inline">u</span> to get <span class="math inline">y</span>.</td>
-<td><span class="math inline">G</span> scales <span class="math inline">u</span> to get <span class="math inline">y</span>.</td>
-</tr>
-<tr class="even">
-<td></td>
-<td><span class="math inline">e^{j\omega t}</span> is an eigenvector!</td>
-</tr>
-</tbody>
-</table>
-<p>Matrices are hard in general, but diagonal matrices are easy, they simply scale each entry of the vector. How do we diagonalise a matrix? We find a basis of eigenvectors.</p>
-<p>Over the last three weeks, we’ve seen that time domain signals &amp; systems are hard to analyse. We’ve just discovered that the eigenvectors of an LTI system are sinusoids. Can we use this to somehow “diagonalise” the system and make the analysis less difficult, the same as we would do for a matrix?</p>
-<p>YES! This is what the Fourier Transform does. We will build this over the next three weeks.</p>
-</section>
-<section id="block-diagrams-and-interconnections" class="level2">
-<h2 class="anchored" data-anchor-id="block-diagrams-and-interconnections">⑤ Block diagrams and interconnections</h2>
-<p>Block diagrams or signal flow diagrams describe the exchange of signals between systems.</p>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-system.svg" class="img-fluid" width="260"></p>
-</div><div class="column" style="width:45%;">
-<p>System <span class="math inline">A</span> with input <span class="math inline">u</span> and output <span class="math inline">y</span>.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-gain.svg" class="img-fluid" width="260"></p>
-</div><div class="column" style="width:45%;">
-<p>A static gain <span class="math inline">k</span>.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-cascade.svg" class="img-fluid" width="320"></p>
-</div><div class="column" style="width:45%;">
-<p>A cascade interconnection.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-sum.svg" class="img-fluid" width="120"></p>
-</div><div class="column" style="width:45%;">
-<p>The sum of two signals.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-parallel.svg" class="img-fluid" width="320"></p>
-</div><div class="column" style="width:45%;">
-<p>A parallel interconnection.</p>
-</div>
-</div>
-<div class="columns">
-<div class="column" style="width:55%;">
-<p><img src="fig-block-feedback.svg" class="img-fluid" width="320"></p>
-</div><div class="column" style="width:45%;">
-<p>A negative feedback interconnection (the subject of control systems).</p>
-</div>
-</div>
-</section>
-<section id="extra-example-impulse-response-of-an-rlc-circuit" class="level2">
-<h2 class="anchored" data-anchor-id="extra-example-impulse-response-of-an-rlc-circuit">Extra example: impulse response of an RLC circuit</h2>
+<section id="marginal-stability" class="level2">
+<h2 class="anchored" data-anchor-id="marginal-stability">Marginal stability</h2>
+<p>What about a (downwards pointing) pendulum with no damping?</p>
+<!-- \cancel is not in the minimal LaTeX install, so the PDF underbraces instead. -->
+<p><span class="math display"> mL^2\ddot{\theta} + \underset{\textcolor{#C0392B}{0}}{\cancel{b\dot{\theta}}}
+   + mgL\,\theta = \tau. </span></p>
+<p><span class="math display"> \left(mL^2(j\omega)^2 + mgL\right)\Theta = T </span></p>
+<p><span class="math display"> G(j\omega) = \frac{1}{mL^2(j\omega)^2 + mgL}
+= \frac{\dfrac{1}{mL^2}}{(j\omega)^2 + \dfrac{g}{L}} </span></p>
+<p>Poles at <span class="math inline">j\omega = \pm j\sqrt{\dfrac{g}{L}}</span>.</p>
+<p>Let’s inverse Fourier transform to see what the impulse response looks like.</p>
+<p>From the transform table (quiz 2 formula sheet):</p>
+<p><span class="math display"> \frac{\omega_0}{(a + j\omega)^2 + \omega_0^2}
+   \;\xrightarrow{\;\text{i.f.t.}\;}\;
+   e^{-at}\sin(\omega_0 t)H(t) </span></p>
+<p>We have <span class="math inline">a = 0</span>, <span class="math inline">\omega_0 = \sqrt{\dfrac{g}{L}}</span>, and an extra factor of <span class="math inline">\dfrac{1}{mL^2\omega_0}</span>. So in the time domain, we have</p>
+<p><span class="math display"> h(t) = \frac{\sin(\omega_0 t)}{mL^2\omega_0}H(t), \qquad \omega_0 = \sqrt{\frac{g}{L}}. </span></p>
 <div style="text-align:center">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="circuit-rlc.svg" class="img-fluid figure-img" width="540"></p>
-<figcaption>Series RLC circuit.</figcaption>
+<p><img src="fig/undamped-oscillation.svg" class="img-fluid figure-img" width="400"></p>
+<figcaption>Impulse response of the undamped pendulum.</figcaption>
 </figure>
 </div>
 </div>
-<p>Let’s consider <span class="math inline">v_C</span> to be the output.</p>
-<p><span class="math display"> v(t) = v_R + v_L + v_C \qquad \text{(KVL)} </span></p>
-<p><span class="math display"> i = C\frac{\mathrm{d}}{\mathrm{d}t}v_C </span></p>
-<p><span class="math display"> v_L = L\frac{\mathrm{d}}{\mathrm{d}t}i </span></p>
-<p><span class="math display"> v_R = Ri </span></p>
-<p>Combining, KVL becomes:</p>
-<p><span class="math display"> v(t) = L\frac{\mathrm{d}}{\mathrm{d}t}i + Ri + v_C \qquad(4) </span></p>
-<p>Or</p>
-<p><span class="math display"> v(t) = LC\frac{\mathrm{d}^2}{\mathrm{d}t^2}v_C(t) + RC\frac{\mathrm{d}}{\mathrm{d}t}v_C(t) + v_C. </span></p>
-<p>Now assume the circuit is at rest and we apply an impulse voltage.</p>
-<p>Imagine what <span class="math inline">v(t) = \delta(t)</span> does to the circuit around <span class="math inline">t=0</span>.</p>
-<p>Integrate (4):</p>
+<div id="w-pendulum-undamped" class="widget"></div>
+<p>Should we consider this to be stable? Unstable?</p>
+<p>↳ it is in the middle: <u>marginally stable</u>.</p>
+<div class="note">
+<p>A differential equation</p>
+<p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \dots + a_0 y(t)
+   = b_m u^{(m)}(t) + \dots + b_0 u(t) </span></p>
+<p>is said to be <u>marginally stable</u> if</p>
+<ol type="1">
+<li><p>it is not exponentially stable and</p></li>
+<li><p>there exists <span class="math inline">M &gt; 0</span> such that, for <span class="math inline">u(t) = 0</span> and any initial conditions,</p></li>
+</ol>
+<p><span class="math display"> |y(t)| \le Me^{-\alpha t}\left(|y(0)| + |y'(0)| + \dots + |y^{(n-1)}(0)|\right)
+   \quad\text{for all } t &gt; 0. </span></p>
+</div>
+<section id="example" class="level3">
+<h3 class="anchored" data-anchor-id="example">Example</h3>
+<div class="columns">
+<div class="column" style="width:55%;">
 <p><span class="math display">
-\int_{0^-}^{0^+}\!\delta(t)\,\mathrm{d}t
-= \int_{0^-}^{0^+}\! L\frac{\mathrm{d}}{\mathrm{d}t}i(t) + \underbrace{Ri(t) + v_C(t)}_{\text{assume finite}}\,\mathrm{d}t
+\left.
+\begin{aligned}
+q &amp;= Cv \\
+\dot{q} &amp;= i
+\end{aligned}
+\right\}
+\quad i = \frac{\mathrm{d}}{\mathrm{d}t}Cv.
 </span></p>
-<p>The underbraced terms give <span class="math inline">0</span>, as we are integrating over an infinitesimal interval. So</p>
-<p><span class="math display"> 1 = Li(0) </span></p>
-<p><span class="math display"> i(0) = \frac{1}{L}. </span></p>
-<p>Now,</p>
-<p><span class="math display"> v_C(0) = \frac{1}{C}\int_{0^-}^{0^+}\! i(t)\,\mathrm{d}t = 0. </span></p>
-<p>Conclusion: the impulse at <span class="math inline">0</span> deposits an <strong>initial condition</strong> on the inductor: the 2nd highest derivative of <span class="math inline">v_C</span>.</p>
-<p>We can now solve the impulse response of the circuit as an initial condition response:</p>
-<p><span class="math display">
-\frac{\mathrm{d}^2}{\mathrm{d}t^2}v_C(t)
-+ \underbrace{\frac{R}{L}}_{2\zeta\omega_n}\frac{\mathrm{d}}{\mathrm{d}t}v_C(t)
-+ \underbrace{\frac{1}{LC}}_{\omega_n^2}v_C(t) = 0 \qquad(5)
-</span></p>
-<p>with <span class="math inline">v_C(0) = 0,</span></p>
-<p><span class="math display"> v_C'(0) = \frac{1}{C}i(0) = \frac{1}{LC}. </span></p>
-<p>We suspect the solution will be some kind of exponential/sinusoid combo, so let’s guess a solution</p>
-<p><span class="math display"> e^{st} \qquad \text{for some } s \in \mathbb{C}. </span></p>
-<p>Substituting in (5):</p>
-<p><span class="math display"> s^2 e^{st} + 2\zeta\omega_n s\, e^{st} + \omega_n^2 e^{st} = 0 </span></p>
-<p><span class="math inline">e^{st} \neq 0</span>, so</p>
-<p><span class="math display"> s^2 + 2\zeta\omega_n s + \omega_n^2 = 0 \qquad(6) </span></p>
+<p>If <span class="math inline">i(t) = 0</span>, <span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}v(t) = 0</span>: <span class="math inline">\;\boxed{v(t) = v(0)}</span>.</p>
+</div><div class="column" style="width:45%;">
+<p><img src="circuit-capacitor.svg" class="img-fluid" width="170"></p>
+<p><span class="math inline">i(t)</span> input, <span class="math inline">v(t)</span> output.</p>
+</div>
+</div>
+<p>Is this system exponentially stable? Marginally stable?</p>
+<p>We can check marginal stability again by looking at the poles of the system:</p>
+<div class="note">
+<p>An LTI system is <u>marginally stable</u> if and only if:</p>
+<ol type="1">
+<li><p>all poles <span class="math inline">p</span> have <span class="math inline">\operatorname{Re}(p) \le 0</span>;</p></li>
+<li><p>at least one pole has <span class="math inline">\operatorname{Re}(p) = 0</span>;</p></li>
+<li><p>there are no repeated poles with <span class="math inline">\operatorname{Re}(p) = 0</span>.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="bibo-stability" class="level2">
+<h2 class="anchored" data-anchor-id="bibo-stability">BIBO stability</h2>
+<p>Our definitions of stability so far are <u>internal</u>: they ignore input and output. But a <u>system</u> is a map from an input signal to an output signal. It doesn’t need to come from a differential equation.</p>
+<p>Can we define stability in terms of the inputs and outputs of a system?</p>
+<p>One way to do this is “Bounded Input, Bounded Output” stability.</p>
+<div class="note">
+<p>A system is <u>bounded input, bounded output</u> (BIBO) stable if there exists <span class="math inline">\gamma &gt; 0</span> such that</p>
+<p><span class="math display"> \max_t |y(t)| \le \gamma \max_t |u(t)| </span></p>
+<p>whenever <span class="math inline">\max_t |u(t)| &lt; \infty</span>.</p>
+</div>
+<section id="example-insulin-delivery" class="level3">
+<h3 class="anchored" data-anchor-id="example-insulin-delivery">Example: insulin delivery</h3>
+<p>Insulin blood delivery can be modelled using a “single compartment model”.</p>
+<p>Let <span class="math inline">u(t)</span> be intravenous insulin infusion rate in mU/min and <span class="math inline">y(t)</span> be the plasma insulin concentration in mU/L.</p>
+<p>Let <span class="math inline">V</span> be plasma volume in L, and <span class="math inline">C</span> be the rate at which plasma is cleared of insulin by the body’s metabolism, in L/min.</p>
+<p>Plasma insulin concentration can be modelled as</p>
+<p><span class="math display"> V\dot{y}(t) = u(t) - Cy(t). </span></p>
+<p>The transfer function is</p>
+<p><span class="math display"> G(j\omega) = \frac{1}{Vj\omega + C}. </span></p>
+<div class="columns">
+<div class="column" style="width:60%;">
+<div class="note">
+<p>Note: this is equivalent to an RC circuit. <span class="math inline">i(t)</span> is the insulin injection, <span class="math inline">v(t)</span> the concentration. The plasma is a capacitor with capacitance <span class="math inline">V</span>, and clearance <span class="math inline">C</span> is the conductance <span class="math inline">\frac{1}{R}</span> of the resistor.</p>
+</div>
+</div><div class="column" style="width:40%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-rc-parallel.svg" class="img-fluid figure-img" width="230"></p>
+<figcaption>Insulin as an RC circuit.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The pole is at <span class="math inline">\dfrac{-C}{V}</span>, so the system is exponentially stable: if we stop insulin injection, it will gradually decay to zero.</p>
+<p>What about BIBO stability?</p>
+<p>The impulse response is the inverse Fourier transform of <span class="math inline">G(j\omega)</span>: <span class="math inline">h(t) = \dfrac{1}{V}e^{-\frac{C}{V}t}H(t)</span> (This tells us what a shot of insulin at <span class="math inline">t = 0</span> does). For any insulin input <span class="math inline">u(t)</span>,</p>
+<p><span class="math display"> y(t) = h(t) * u(t). </span></p>
+<p>We want to show a bound on <span class="math inline">|y(t)|</span> given one on <span class="math inline">|u(t)|</span>.</p>
 <p><span class="math display">
 \begin{aligned}
-s &amp;= \frac{-2\zeta\omega_n \pm \sqrt{4\zeta^2\omega_n^2 - 4\omega_n^2}}{2} \\[2pt]
-  &amp;= -\zeta\omega_n \pm \omega_n\sqrt{\zeta^2 - 1}.
+|y(t)| &amp;= \left|\int_{-\infty}^{\infty} h(t - \tau)u(\tau)\,\mathrm{d}\tau\right| \\[6pt]
+       &amp;\le \int_{-\infty}^{\infty} \left|h(t - \tau)u(\tau)\right|\,\mathrm{d}\tau \\[6pt]
+       &amp;= \int_{-\infty}^{\infty} |h(t - \tau)||u(\tau)|\,\mathrm{d}\tau \\[6pt]
+       &amp;\le \max_t|u(t)| \int_{-\infty}^{\infty} |h(t)|\,\mathrm{d}t.
 \end{aligned}
 </span></p>
-<p>The roots of (6) are called the <strong>poles</strong> of the system (recall pole position &amp; behaviour from week 1).</p>
-<p>Suppose <span class="math inline">R = 6\,\Omega</span>, <span class="math inline">L = 1\,\mathrm{H}</span>, <span class="math inline">C = 40\,\mathrm{mF}</span>.</p>
-<p>Then <span class="math inline">s = -3 \pm 4j.</span></p>
-<p>so the response is</p>
-<p><span class="math display"> v_C(t) = A e^{(-3+4j)t} + B e^{(-3-4j)t}. </span></p>
-<p><span class="math inline">v_C(0) = 0</span>, so <span class="math inline">A + B = 0. \quad\Rightarrow\quad B = -A</span></p>
-<p><span class="math inline">v_C'(0) = \dfrac{1}{LC}</span>, so</p>
-<p><span class="math display"> (-3+4j)A - (-3-4j)A = \frac{1}{LC} </span></p>
-<p><span class="math display"> A = \frac{1}{8j\,LC} </span></p>
-<p><span class="math display"> = -3.125j </span></p>
-<p>so we have</p>
+<p>In our case,</p>
 <p><span class="math display">
 \begin{aligned}
-v_C(t) &amp;= A e^{(-3+4j)t} + \bar{A}\, e^{(-3-4j)t} \qquad\text{(complex conjugates!)} \\[2pt]
-       &amp;= 2\operatorname{Re}\!\big(A e^{(-3+4j)t}\big) \\[2pt]
-       &amp;= 6.25\, e^{-3t}\sin(4t)\,H(t)
+\int_{-\infty}^{\infty}|h(t)|\,\mathrm{d}t
+  &amp;= \int_0^{\infty} \frac{1}{V}e^{-\frac{C}{V}t}\,\mathrm{d}t \\[6pt]
+  &amp;= \left[\frac{-1}{C}e^{-\frac{C}{V}t}\right]_0^{\infty} = \frac{1}{C}.
 \end{aligned}
 </span></p>
-<p><span class="math inline">H(t)</span> encodes that the signal is <span class="math inline">0</span> before <span class="math inline">t=0</span>.</p>
-<script src="convolution-widgets.js"></script>
+<p>So <span class="math inline">\max_t |y(t)| &lt; \dfrac{1}{C}\max_t|u(t)|</span>.</p>
+<p>It turns out, the condition <span class="math inline">\int|h(t)|\,\mathrm{d}t &lt; \infty</span> completely characterises BIBO stability.</p>
+<div class="note">
+<p>An LTI system is BIBO stable <span class="math inline">\iff \displaystyle\int_{-\infty}^{\infty}|h(t)|\,\mathrm{d}t &lt; \infty</span>.</p>
+</div>
+<p>(Same condition that guarantees existence of the Fourier transform).</p>
+<p>Are BIBO stability and exponential stability equivalent? Yes, under mild conditions.</p>
+<div class="note">
+<p>For the differential equation</p>
+<p><span class="math display"> a_n y^{(n)}(t) + a_{n-1}y^{(n-1)}(t) + \dots + a_0 y(t)
+   = b_m u^{(m)}(t) + \dots + b_0 u(t), </span></p>
+<p>exponential stability and BIBO stability are equivalent if <span class="math inline">m \le n</span> and the polynomials</p>
+<p><span class="math display"> a_n s^n + a_{n-1}s^{n-1} + \dots + a_0 \quad\text{and}\quad
+   b_m s^m + b_{m-1}s^{m-1} + \dots + b_0 </span></p>
+<p>share no common roots.</p>
+</div>
+<p>In practice, they are usually equivalent.</p>
+<p>We also should give a definition for instability.</p>
+<div class="note">
+<p>A system is <u>unstable</u> if it is not stable, in any of the senses we have defined so far.</p>
+</div>
+</section>
+<section id="example-population-dynamics" class="level3">
+<h3 class="anchored" data-anchor-id="example-population-dynamics">Example: population dynamics</h3>
+<p>Let <span class="math inline">u(t)</span> be net migration rate, <span class="math inline">k_r</span> be reproduction rate per capita, <span class="math inline">k_d</span> be death rate per capita and <span class="math inline">y(t)</span> be population.</p>
+<p>As a differential equation:</p>
+<p><span class="math display"> \dot{y}(t) = u(t) - k_d y(t) + k_r y(t). </span></p>
+<p>Transfer function:</p>
+<p><span class="math display"> G(j\omega) = \frac{1}{j\omega + (k_d - k_r)} </span></p>
+<p>The pole is at <span class="math inline">k_r - k_d</span>.</p>
+<p><span class="math inline">k_r = k_d</span>: marginally stable</p>
+<p><span class="math inline">k_r &gt; k_d</span>: unstable</p>
+<p><span class="math inline">k_d &gt; k_r</span>: stable.</p>
+<div id="w-population" class="widget"></div>
+</section>
+</section>
+<section id="unstable-poles-and-the-fourier-transform" class="level2">
+<h2 class="anchored" data-anchor-id="unstable-poles-and-the-fourier-transform">Unstable poles and the Fourier transform</h2>
+<p>Now let’s look a bit closer at unstable poles. We have glossed over something important.</p>
+<p>For a stable 1st order sys., <span class="math inline">h(t) = e^{-at}H(t)</span>, we have the Fourier transform</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^{\infty} e^{-at}e^{-j\omega t}\,\mathrm{d}t
+&amp;= \left[\frac{-1}{a + j\omega}e^{-t(a + j\omega)}\right]_0^{\infty} \\[6pt]
+&amp;= \lim_{T \to \infty} \frac{-1}{a + j\omega}e^{-Ta}e^{-Tj\omega}
+    + \frac{1}{a + j\omega}e^0
+\end{aligned}
+</span></p>
+<p><span class="math inline">\lim_{T \to \infty} e^{-Ta} = 0</span>, so we only have the second term.</p>
+<p>But for an unstable system, <span class="math inline">h(t) = e^{at}H(t)</span>.</p>
+<p><span class="math inline">\lim_{T \to \infty} e^{Ta} = \infty</span>. The Fourier transform doesn’t converge, so how can we ever have unstable poles in our transfer function, or look at the frequency response of an unstable system?</p>
+<p>We need a more sophisticated transform that still converges: the Laplace Transform.</p>
+<script src="stability-widgets.js"></script>
 
 
 </section>
@@ -1265,13 +1221,13 @@ v_C(t) &amp;= A e^{(-3+4j)t} + \bar{A}\, e^{(-3-4j)t} \qquad\text{(complex conju
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../weeks/week02/tutorial1-solutions.pdf" class="pagination-link" aria-label="Tutorial solutions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial solutions</span>
+      <a href="../../weeks/week06/lab1.pdf" class="pagination-link" aria-label="Lab 1">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 1</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../weeks/week03/tutorial2.pdf" class="pagination-link" aria-label="Tutorial">
-        <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../concepts.html" class="pagination-link" aria-label="Course index">
+        <span class="nav-page-text">Course index</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
