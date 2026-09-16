@@ -90,6 +90,12 @@ website:
       - text: "Quiz 2 formula sheet"
         href: weeks/formula-sheet-quiz2.pdf
         target: _blank
+      - text: "Quiz 2 question bank"
+        href: weeks/quiz2-practice-questions.pdf
+        target: _blank
+      - text: "Quiz 2 answers and feedback"
+        href: weeks/quiz2-practice-feedback.pdf
+        target: _blank
       - text: "Primer on RLC circuits"
         href: weeks/primer/notes.qmd
   page-footer:
