@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 5 — Lecture notes</title>
+<title>Week 8 — Lecture notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,8 +28,8 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/week05/tutorial4.pdf" rel="next">
-<link href="../../weeks/week04/tutorial3-solutions.pdf" rel="prev">
+<link href="../../weeks/week08/tutorial6.pdf" rel="next">
+<link href="../../weeks/week07/notes.html" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -151,7 +151,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Week 5 — Aperiodic signals and the Fourier transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week08/notes.html">Week 8 — The Laplace transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week08/notes.html">Notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -290,7 +290,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week05/notes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../weeks/week05/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -371,7 +371,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week08/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week08/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -434,10 +434,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Week 5 — Aperiodic signals and the Fourier transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week05/notes.html">Notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week08/notes.html">Week 8 — The Laplace transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week08/notes.html">Notes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 5 — Lecture notes</h1>
-<p class="subtitle lead">Aperiodic signals and the Fourier transform</p>
+<h1 class="title">Week 8 — Lecture notes</h1>
+<p class="subtitle lead">The Laplace transform</p>
 </div>
 
 
@@ -456,343 +456,123 @@ window.Quarto = {
 
 <div class="format-links">
 <p><span class="label">Other formats:</span></p>
-<a href="notes.pdf" title="Week 5 lecture notes as a PDF" data-goatcounter-click="pdf-week5" data-goatcounter-title="Week 5 notes PDF opened">📄&nbsp;PDF</a>
+<a href="notes.pdf" title="Week 8 lecture notes as a PDF" data-goatcounter-click="pdf-week8" data-goatcounter-title="Week 8 notes PDF opened">📄&nbsp;PDF</a>
 </div>
+<section id="lecture-outline" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-outline">Lecture outline</h2>
 <ol type="1">
-<li>Quiz 1 review/questions</li>
-<li>Periodic <span class="math inline">\longrightarrow</span> aperiodic: motivation</li>
-<li>Fourier transform as the limit of the Fourier series</li>
-<li>Fourier transform vs Fourier series: what changed?</li>
-<li>Fourier transform pairs</li>
-<li>Properties of the Fourier transform.</li>
+<li>Motivation: unstable systems</li>
+<li>Making the Fourier transform converge — the bilateral Laplace transform.</li>
+<li>Least-squares approximation and inverse Laplace transform.</li>
+<li>Initial conditions and the unilateral Laplace transform.</li>
+<li>Example</li>
+<li>Laplace transform properties.</li>
 </ol>
-<hr>
-<p><u>Last week</u>: we represented a <u>periodic</u> signal as the sum of sinusoids, using the Fourier series.</p>
-<p>This gave us a <u>spectrum</u>: the frequency content of the signal.</p>
-<p><u>But</u>: most signals are not periodic: a radar pulse, a plucked note, a spoken word …</p>
-<p><u>Question of the lecture</u>: what does the spectrum of a one-off signal look like?</p>
-<p><u>Core idea</u>: we can take the Fourier series of a <span class="math inline">T</span>-periodic signal and let <span class="math inline">T \to \infty</span> to get an aperiodic signal.</p>
-<section id="periodic-longrightarrow-aperiodic-motivation" class="level2">
-<h2 class="anchored" data-anchor-id="periodic-longrightarrow-aperiodic-motivation">Periodic <span class="math inline">\longrightarrow</span> aperiodic: motivation</h2>
-<p>Let’s illustrate this by example: a pulse train, like a radar signal.</p>
-<p>Take</p>
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
+</section>
+<section id="motivation-unstable-systems" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-unstable-systems">Motivation: unstable systems</h2>
+<p>Last week we saw that exponential and marginal stability can be determined from the system poles:</p>
+<ul>
+<li>poles in LHP: stable</li>
+<li>poles (non-repeated) on imaginary axis: marginally stable.</li>
+</ul>
+<p>For a single left half plane pole, we have</p>
+<p><span class="math display"> \frac{1}{p + j\omega} \;\xrightarrow[\text{F.T.}]{\text{Inverse}}\; e^{-pt}H(t) </span></p>
+<p>We would guess that, for a right half plane pole,</p>
+<p><span class="math display"> \frac{1}{-p + j\omega} \;\rightsquigarrow\; e^{pt}H(t). </span></p>
+<p>But: The Fourier transform of <span class="math inline">e^{pt}H(t)</span> is</p>
+<p><span class="math display"> \int_0^{\infty} e^{pt}e^{-j\omega t}\,\mathrm{d}t = \infty\ldots </span></p>
+<p>We need a trick to make this converge, and that is the Laplace transform.</p>
+<p>Remember what the Fourier transform is: for each <span class="math inline">\omega</span>,</p>
+<p><span class="math display"> \int_{-\infty}^{\infty} u(t)e^{-j\omega t}\,\mathrm{d}t </span></p>
+<p>projects <span class="math inline">u(t)</span> onto <span class="math inline">e^{+j\omega t}</span>.</p>
+<p>If <span class="math inline">u(t)</span> decays, this converges. If <span class="math inline">u(t)</span> grows, it does not.</p>
+</section>
+<section id="making-the-fourier-transform-converge-the-bilateral-laplace-transform" class="level2">
+<h2 class="anchored" data-anchor-id="making-the-fourier-transform-converge-the-bilateral-laplace-transform">Making the Fourier transform converge: the bilateral Laplace transform</h2>
+<p>The trick in the Laplace transform is to change the basis function: choose a basis function that <u>decays</u> at least as fast as <u><span class="math inline">u(t)</span></u> grows, then the projection converges.</p>
+<p>For <span class="math inline">u(t) = e^{pt}H(t)</span>, what can we do?</p>
+<p>Shift <span class="math inline">e^{j\omega t}</span> <u>to the right</u>:</p>
+<p><span class="math display"> e^{(\sigma + j\omega)t} = e^{\sigma t}e^{j\omega t}. </span></p>
+<p>Then the projection becomes</p>
+<p><span class="math display"> \int_{-\infty}^{\infty} e^{pt}e^{-\sigma t}e^{-j\omega t}H(t)\,\mathrm{d}t
+= \int_0^{\infty} e^{(p-\sigma)t}e^{-j\omega t}\,\mathrm{d}t. </span></p>
+<p>If <span class="math inline">\sigma &gt; p</span>, this converges:</p>
 <p><span class="math display">
-u_T(t) = A\sum_{m\in\mathbb{Z}} p_\tau(t-mT), \qquad
-p_\tau(t) = \begin{cases} 1, &amp; |t| &lt; \dfrac{\tau}{2} \\[6pt] 0, &amp; |t| &gt; \dfrac{\tau}{2}\end{cases},
-\qquad 0 &lt; \tau &lt; T .
+\begin{aligned}
+\int_0^{\infty} e^{(p-\sigma)t}e^{-j\omega t}\,\mathrm{d}t
+&amp;= \left[\frac{-1}{\sigma - p + j\omega}\,e^{(p-\sigma-j\omega)t}\right]_0^{\infty} \\[8pt]
+&amp;= \frac{1}{-p + \sigma + j\omega} \\[8pt]
+&amp;= \frac{1}{-p + s}, \qquad \text{where } s = \sigma + j\omega.
+\end{aligned}
 </span></p>
+<p>This shifted Fourier transform is called the bilateral Laplace transform:</p>
+<p><span class="math display"> \boxed{\; \mathcal{B}(u(t))(s) = \int_{-\infty}^{\infty} u(t)e^{-st}\,\mathrm{d}t \;} </span></p>
 <div style="text-align:center">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="fig/pulse-train.svg" class="img-fluid figure-img" width="680"></p>
-<figcaption>The pulse train <span class="math inline">u_T(t)</span>: amplitude <span class="math inline">A</span>, pulse width <span class="math inline">\tau</span>, period <span class="math inline">T</span>. The red bracket marks the period <span class="math inline">[-\tfrac{T}{2},\tfrac{T}{2}]</span> used for the coefficient integral.</figcaption>
+<p><img src="fig/roc.svg" class="img-fluid figure-img" width="300"></p>
+<figcaption>Region of convergence for <span class="math inline">u(t) = e^{pt}H(t)</span>.</figcaption>
 </figure>
 </div>
 </div>
-<p><span class="math inline">\tau</span> varies on time. <span class="math inline">\;</span> <span class="math inline">T</span> varies the period. <span class="math inline">\;</span> The ratio <span class="math inline">\dfrac{\tau}{T}</span> is called the “duty cycle”.</p>
-<!-- CHECK: the source line reads "τ varies on time." — presumably "τ varies the *on time*" (the pulse-on duration). Transcribed as written. -->
-<p>Let’s calculate the Fourier series coefficients over the red period, <span class="math inline">[-\tfrac{T}{2}, \tfrac{T}{2}]</span>. This contains a single pulse.</p>
-<p><span class="math display">
-\begin{aligned}
-c_k &amp;= \frac{1}{T}\int_{-T/2}^{T/2} u_T(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t
-&amp;&amp; \left(\omega_0 = \frac{2\pi}{T}\right) \\[8pt]
-&amp;= \frac{A}{T}\int_{-\tau/2}^{\tau/2} e^{-jk\omega_0 t}\,\mathrm{d}t
-&amp;&amp; \left(T = \frac{2\pi}{\omega_0}\right)
-\end{aligned}
-</span></p>
-<p><span class="math inline">k = 0</span>:</p>
-<p><span class="math display"> c_0 = \frac{A}{T}\int_{-\tau/2}^{\tau/2} 1\,\mathrm{d}t = \frac{A\tau}{T}. </span></p>
-<p><span class="math inline">k \neq 0</span>:</p>
-<p><span class="math display">
-\begin{aligned}
-c_k &amp;= \frac{A}{T}\left[\frac{e^{-jk\omega_0 t}}{-jk\omega_0}\right]_{-\tau/2}^{\tau/2}
-= \frac{A\omega_0}{2\pi}\,\frac{1}{-jk\omega_0}
-   \left(e^{-jk\omega_0 \frac{\tau}{2}} - e^{\,jk\omega_0 \frac{\tau}{2}}\right) \\[8pt]
-&amp;= \frac{Aj}{2\pi k}\left(-2j\sin\!\left(\frac{k\omega_0\tau}{2}\right)\right) \\[8pt]
-&amp;= \frac{A}{\pi k}\sin\!\left(k\,\frac{\pi\tau}{T}\right) \\[8pt]
-&amp;= A\,\frac{\sin(\pi k d)}{\pi k}
-&amp;&amp; \left(d = \frac{\tau}{T}\right)
-\end{aligned}
-</span></p>
-<p><span class="math display"> \boxed{\; c_k = A\,d\,\operatorname{sinc}(kd). \;} </span></p>
+<p><span class="math inline">\sigma &gt; p</span> defines the <u>Region of Convergence</u> (ROC), the set <span class="math inline">s \in \mathbb{C}</span> such that, for a given <span class="math inline">u(t)</span>,</p>
+<p><span class="math display"> \int_{-\infty}^{\infty} u(t)e^{-st}\,\mathrm{d}t </span></p>
+<p>converges.</p>
+<p>For a fixed <span class="math inline">\sigma \in \text{ROC}</span>, <span class="math inline">\mathcal{B}</span> is the Fourier transform of the weighted signal <span class="math inline">u(t)e^{-\sigma t}</span>. Fixing <span class="math inline">\omega</span>, <span class="math inline">\mathcal{B}</span> projects this weighted signal onto the basis function <span class="math inline">e^{+j\omega t}</span>.</p>
+<p>If the region of convergence contains the imaginary axis (the signal decays), then we can take <span class="math inline">\sigma = 0</span> and</p>
+<p><span class="math display"> \mathcal{B}(u) = \int_{-\infty}^{\infty} u(t)e^{-j\omega t}\,\mathrm{d}t </span></p>
+<p>which is precisely the Fourier transform.</p>
+</section>
+<section id="least-squares-approximation-and-the-inverse-laplace-transform" class="level2">
+<h2 class="anchored" data-anchor-id="least-squares-approximation-and-the-inverse-laplace-transform">Least-squares approximation and the inverse Laplace transform</h2>
+<p>Given a signal <span class="math inline">u(t)</span> and its Laplace transform <span class="math inline">U(s)</span>, as well as its region of convergence, we can find the corresponding time domain signal by fixing <span class="math inline">\sigma \in \text{ROC}</span> and computing the inverse Fourier transform of the weighted signal <span class="math inline">u(t)e^{-\sigma t}</span>.</p>
+<p>Note first that the Fourier transform of <span class="math inline">u(t)e^{-\sigma t}</span> is <span class="math inline">U(j\omega + \sigma)</span> from the Fourier transform properties.</p>
+<p>Now, taking the inverse Fourier transform,</p>
+<p><span class="math display"> u(t)e^{-\sigma t} = \frac{1}{2\pi}\int_{-\infty}^{\infty}
+   U(j\omega + \sigma)\,e^{\,j\omega t}\,\mathrm{d}\omega. </span></p>
+<p>Divide by <span class="math inline">e^{-\sigma t}</span> to get</p>
+<p><span class="math display"> \boxed{\; u(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty}
+   U(j\omega + \sigma)\,e^{(\sigma + j\omega)t}\,\mathrm{d}\omega \;} </span></p>
+<p>This is the Inverse Laplace Transform. Any <span class="math inline">\sigma \in \text{ROC}</span> can be used.</p>
+<div id="w-growing" class="widget"></div>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="weighted-periodicity.png" class="img-fluid figure-img" width="700"></p>
+<figcaption>The weighted signal <span class="math inline">u(t)e^{-\sigma t}</span> and its truncated Fourier sum over a wider time window. Discretising the inversion integral on <span class="math inline">\omega_k = k\Delta\omega</span> makes the reconstruction periodic with period <span class="math inline">T = 2\pi/\Delta\omega</span>.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="initial-conditions-and-the-unilateral-laplace-transform" class="level2">
+<h2 class="anchored" data-anchor-id="initial-conditions-and-the-unilateral-laplace-transform">Initial conditions and the unilateral Laplace transform</h2>
+<p>Bilateral refers to the fact that we integrate from <span class="math inline">t = -\infty</span> to <span class="math inline">t = \infty</span>. Often, however, we’re only interested in a system after we turn it on at <span class="math inline">t = 0</span>, we don’t want to have to keep track of the infinite past. Also, the impulse response of a real system starts at <span class="math inline">t = 0</span> (that is, the system is causal, and the output depends only on the past, not the future). This motivates the <u>unilateral Laplace transform</u>, which only looks at what happens from <span class="math inline">t = 0^- = 0 - \varepsilon</span>.</p>
+<p><span class="math display"> \boxed{\; \mathcal{L}(u(t)) = \int_{0^-}^{\infty} u(t)e^{-st}\,\mathrm{d}t
+   = \mathcal{B}(u(t)H(t)), \;} </span></p>
 <div class="note">
-<p>Recall: <span class="math inline">\operatorname{sinc}(x) = \dfrac{\sin(\pi x)}{\pi x}</span>.</p>
+<p>The second equality requires <span class="math inline">u</span> continuous at <span class="math inline">0</span>.</p>
 </div>
-</section>
-<section id="fourier-transform-as-the-limit-of-the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="fourier-transform-as-the-limit-of-the-fourier-series">Fourier transform as the limit of the Fourier series</h2>
-<p>Now, how does this depend on the period <span class="math inline">T</span>?</p>
+<p>This transform lets us account for <u>initial conditions</u> as well as inputs. Let’s see how by looking at the Laplace transform of the derivative.</p>
+<p><span class="math display"> \int_0^{\infty} \frac{\mathrm{d}}{\mathrm{d}t}u(t)\,e^{-st}\,\mathrm{d}t. </span></p>
+<p>Integrate by parts:</p>
+<p><span class="math display"> = u(t)e^{-st}\Big|_0^{\infty} - \int_0^{\infty} -s\,u(t)e^{-st}\,\mathrm{d}t. </span></p>
+<p><span class="math inline">\lim_{t \to \infty} e^{-st} = 0</span> for <span class="math inline">s \in \text{ROC}</span>, so we have</p>
+<p><span class="math display"> = -u(0) + s\,U(s). </span></p>
+<p>What about the second derivative?</p>
+<p>Let <span class="math inline">v(t) = \dfrac{\mathrm{d}}{\mathrm{d}t}u(t)</span>.</p>
+<p>Then</p>
 <p><span class="math display">
 \begin{aligned}
-c_k &amp;= A\,\frac{\tau}{T}\operatorname{sinc}\!\left(k\,\frac{\tau}{T}\right) \\[6pt]
-    &amp;= A\,\frac{\tau}{T}\operatorname{sinc}\!\left(k\,\frac{\tau\omega_0}{2\pi}\right).
+\mathcal{L}(v(t)) &amp;= -v(0) + s\,V(s) \\[6pt]
+&amp;= -\frac{\mathrm{d}}{\mathrm{d}t}u(0) - s\,u(0) + s^2\,U(s).
 \end{aligned}
 </span></p>
-<p>Call <span class="math inline">k\omega_0 = \omega</span>. Then</p>
-<p><span class="math display"> T c_k = A\tau \operatorname{sinc}\!\left(\frac{\tau\omega}{2\pi}\right) =: E(\omega)
-\qquad \text{("envelope")} </span></p>
-<div id="w-sample" class="widget"></div>
-<p>Where are the zeros?</p>
-<p><span class="math display">
-\begin{aligned}
-\operatorname{sinc}\!\left(\frac{\tau\omega}{2\pi}\right) &amp;= 0 \\[6pt]
-\sin\!\left(\frac{\tau\omega}{2}\right) &amp;= 0 \\[6pt]
-\frac{\tau\omega}{2} &amp;= n\pi \quad \text{for } n \in \mathbb{Z} \\[6pt]
-\omega &amp;= \frac{n2\pi}{\tau}.
-\end{aligned}
-</span></p>
-<p>What happens as <span class="math inline">T \to \infty</span>?</p>
-<p>★ <span class="math inline">E(\omega)</span> doesn’t change</p>
-<p>★ Spacing becomes smaller.</p>
-<p>What happens to the coefficients <span class="math inline">c_k</span>?</p>
-<p>Let’s define <span class="math inline">u(t) = \displaystyle\lim_{T\to\infty} u_T(t)</span>.</p>
-<p><span class="math display"> c_k = \frac{1}{T}\int_{-T/2}^{T/2} u_T(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t </span></p>
-<!-- CHECK: the source writes the integrand as x_T(t) here (and "the Fourier transform of x(t)" below), while the surrounding pages use u_T / u. Transcribed with u throughout, per the course notation. -->
-<p>We define the <u>Fourier transform</u> of <span class="math inline">u(t)</span> by</p>
-<p><span class="math display">
-\boxed{\;
-U(j\omega) := \lim_{T\to\infty} T c_k \Big|_{k\omega_0 \to \omega}
-= \int_{-\infty}^{\infty} u(t)\,e^{-j\omega t}\,\mathrm{d}t .
-\;}
-</span></p>
-<p>This can be calculated for <u>any signal</u> for which the integral converges.</p>
-<p>We know that the Fourier series can be used to reconstruct the original signal:</p>
-<p><span class="math display">
-\boxed{\;
-u_T = \sum_{k=-\infty}^{\infty} c_k \phi_k
-    = \sum_{k=-\infty}^{\infty} \langle u_T, \phi_k\rangle_P\,\phi_k,
-\qquad \phi_k(t) = e^{\,jk\omega_0 t}
-\;}
-</span></p>
-<!-- CHECK: the source writes φ_k(t) = e^{jkωt}; here the fundamental is ω₀, so typeset as e^{jkω₀t}. -->
-<div class="note">
-<p>From the week 4 lecture.</p>
-</div>
-<p>Do we get something similar in the Fourier transform limit?</p>
-<p>We can rewrite the Fourier series as</p>
-<p><span class="math display">
-\begin{aligned}
-u_T(t) &amp;= \sum_{k=-\infty}^{\infty} T c_k\, e^{\,jk\omega_0 t}\,\frac{1}{T}
-&amp;&amp; \left[\text{trying to get a “}\mathrm{d}\omega\text{” on the RHS}\right] \\[8pt]
-&amp;= \sum_{k=-\infty}^{\infty} T c_k\, e^{\,jk\omega_0 t}\,\frac{\omega_0}{2\pi}
-&amp;&amp; \left[\omega_0 = \text{spacing between samples}\right] \\[8pt]
-&amp;= \sum_{k=-\infty}^{\infty} T c_k\, e^{\,j\omega t}\,\frac{\Delta\omega}{2\pi}.
-\end{aligned}
-</span></p>
-<p>Then in the limit,</p>
-<p><span class="math display"> u(t) = \lim_{T\to\infty} \sum_{k=-\infty}^{\infty} T c_k\, e^{\,j\omega t}\,
-   \frac{\Delta\omega}{2\pi}. </span></p>
-<p><span class="math display">
-\boxed{\;
-u(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\,e^{\,j\omega t}\,\mathrm{d}\omega
-\;}
-\qquad \text{(the Inverse Fourier transform).}
-</span></p>
-<p>We have illustrated this above for a pulse chain, but it holds for <u>any signal</u> for which the Fourier transform integral converges <span class="math inline">\left(\int_{-\infty}^{\infty}|u(t)|\,\mathrm{d}t &lt; \infty \text{ is sufficient}\right)</span>.</p>
-</section>
-<section id="what-has-changed-versus-the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="what-has-changed-versus-the-fourier-series">What has changed versus the Fourier series?</h2>
-<ol type="1">
-<li><p>Sum <span class="math inline">\longmapsto</span> integral, discrete index <span class="math inline">k \longmapsto</span> continuous variable, <span class="math inline">k\omega_0 \longmapsto \omega</span>.</p></li>
-<li><p>Units change. <span class="math inline">c_k</span> has the same units as <span class="math inline">u</span>. <span class="math inline">U(j\omega)</span> has units of <span class="math inline">u \times \text{time}</span>: it is a density. Must be integrated to get anything.</p></li>
-</ol>
-<!-- CHECK: the source writes X(jω) in point 2; transcribed as U(jω) for consistency with the boxed definition. -->
-<p><u>Example</u>: the Kurnell weather radar from the week 2 tutorial.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/kurnell-single-pulse.svg" class="img-fluid figure-img" width="460"></p>
-<figcaption>A single transmitted pulse: amplitude <span class="math inline">5</span> kV, width <span class="math inline">\tau = 1\,\mu</span>s.</figcaption>
-</figure>
-</div>
-</div>
-<p>The parameters <span class="math inline">\tau</span> and <span class="math inline">T</span> are varied independently:</p>
-<p><span class="math inline">\tau</span> adjusts range resolution:</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/radar-two-targets.svg" class="img-fluid figure-img" width="460"></p>
-<figcaption>Two targets at ranges <span class="math inline">r_1</span> and <span class="math inline">r_2</span>, separated by <span class="math inline">\Delta r</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>Consider two targets at ranges <span class="math inline">r_1</span> and <span class="math inline">r_2</span>, with <span class="math inline">\Delta r := r_2 - r_1</span>.</p>
-<p>The round trip time for each pulse <span class="math inline">t_d = \dfrac{2r}{c}</span> <span class="math inline">\;(c = 3\times10^{8}\ \mathrm{m\,s^{-1}})</span>.</p>
-<p><span class="math display"> \Delta t_d = \frac{2\Delta r}{c}. </span></p>
-<p>If <span class="math inline">\Delta t_d &lt; \tau</span>, the returning pulses overlap and can’t be distinguished.</p>
-<p>The minimum distance that can be measured is therefore <span class="math inline">\Delta r = \dfrac{c\tau}{2}</span>. For Kurnell, <span class="math inline">\tau = 1\,\mu</span>s, so <span class="math inline">\Delta r \approx 150\,</span>m.</p>
-<p><u>Why not make <span class="math inline">\tau</span> even smaller?</u></p>
-<p>Let’s check the spectrum again.</p>
-<div id="w-tau" class="widget"></div>
-<div class="note">
-<p>(Higher lobes are filtered — week 10.)</p>
-</div>
-<p>Small <span class="math inline">\tau</span> makes <span class="math inline">\dfrac{2\pi}{\tau}</span> big, so the lobe spreads and we need more bandwidth to transmit the pulse. Bandwidth is tightly regulated and very expensive!</p>
-</section>
-<section id="fourier-transform-pairs" class="level2">
-<h2 class="anchored" data-anchor-id="fourier-transform-pairs">Fourier transform pairs</h2>
-<p>The square <span class="math inline">\longleftrightarrow</span> sinc Fourier transform pair is useful for radar design. Let’s derive some other useful pairs.</p>
-<p><strong>(a)</strong> <span class="math inline">u(t) = \delta(t)</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-U(j\omega) &amp;= \int_{-\infty}^{\infty} \delta(t)\,e^{-j\omega t}\,\mathrm{d}t \\[6pt]
-&amp;= 1 \qquad \text{(sifting property)}.
-\end{aligned}
-</span></p>
-<p><strong>(b)</strong> <span class="math inline">u(t) = e^{-at}H(t)</span></p>
-<p><span class="math display">
-\begin{aligned}
-U(j\omega) &amp;= \int_{-\infty}^{\infty} e^{-at}H(t)\,e^{-j\omega t}\,\mathrm{d}t \\[6pt]
-&amp;= \int_{0}^{\infty} e^{-(a+j\omega)t}\,\mathrm{d}t \\[6pt]
-&amp;= \left[\frac{-1}{a+j\omega}\,e^{-(a+j\omega)t}\right]_{0}^{\infty} \\[6pt]
-&amp;= \frac{1}{a+j\omega}.
-\end{aligned}
-</span></p>
-<div class="extension">
-<p><span class="extension-label">Extension material</span></p>
-<section id="ut-1" class="level3">
-<h3 class="anchored" data-anchor-id="ut-1"><span class="math inline">u(t) = 1</span></h3>
-<p><strong>(c)</strong> <span class="math inline">u(t) = 1</span>.</p>
-<p>Treat this as the limit of a wide rectangle:</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/wide-rect.svg" class="img-fluid figure-img" width="280"></p>
-<figcaption>The rectangle widened to a constant.</figcaption>
-</figure>
-</div>
-</div>
-<!-- CHECK: the source sketch labels the rectangle edges −τ and τ; the transform used on the next line, τ sinc(ωτ/2π), is that of the width-τ pulse, so the edges are drawn at ∓τ/2. -->
-<p>We already have the Fourier transform of the rectangle: <span class="math inline">\;\tau\operatorname{sinc}\!\left(\dfrac{\tau\omega}{2\pi}\right)</span>.</p>
-<p>What is the area under this curve?</p>
-<p><span class="math display">
-\begin{aligned}
-A &amp;= \int_{-\infty}^{\infty} \tau\,
-     \frac{\sin\!\left(\frac{\tau\omega}{2}\right)}{\frac{\tau\omega}{2}}\,\mathrm{d}\omega \\[8pt]
-  &amp;= \int_{-\infty}^{\infty} \frac{2\sin\!\left(\frac{\tau\omega}{2}\right)}{\omega}\,\mathrm{d}\omega .
-\end{aligned}
-</span></p>
-<p>Let <span class="math inline">\mu = \dfrac{\tau\omega}{2} \iff \omega = \dfrac{2\mu}{\tau}</span>.</p>
-<p><span class="math inline">\mathrm{d}\mu = \dfrac{\tau}{2}\,\mathrm{d}\omega \iff
-\mathrm{d}\omega = \dfrac{2\,\mathrm{d}\mu}{\tau}</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-A &amp;= \int_{-\infty}^{\infty} \frac{2\sin(\mu)}{\frac{2\mu}{\tau}}\,\frac{2\,\mathrm{d}\mu}{\tau} \\[8pt]
-&amp;= \int_{-\infty}^{\infty} \frac{2\sin(\mu)}{\mu}\,\mathrm{d}\mu \\[8pt]
-&amp;= \int_{0}^{\infty} \frac{4\sin(\mu)}{\mu}\,\mathrm{d}\mu
-\qquad \text{(even function)}.
-\end{aligned}
-</span></p>
-<p>Fact: <span class="math inline">\displaystyle\int_{0}^{\infty}\frac{\sin(\mu)}{\mu}\,\mathrm{d}\mu = \frac{\pi}{2}</span> (full derivation in the notes).</p>
-<p>So the Fourier transform of the width <span class="math inline">\tau</span> pulse has <u>constant area <span class="math inline">2\pi</span></u>.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/sinc-area.svg" class="img-fluid figure-img" width="520"></p>
-<figcaption>The transform of the width-<span class="math inline">\tau</span> pulse, with the main lobe half-width <span class="math inline">\tfrac{2\pi}{\tau}</span> marked.</figcaption>
-</figure>
-</div>
-</div>
-<p>As we increase <span class="math inline">\tau</span>, the sinc gets taller and narrower.</p>
-<p>In the limit <span class="math inline">\tau \to \infty</span>, we have <u>an impulse with area <span class="math inline">2\pi</span></u>.</p>
-<!-- CHECK: the source reads "As we reduce τ, the sinc gets taller and narrower. In the limit τ → 0, we have an impulse with area 2π." The height of the transform is τ and its lobe width is 2π/τ, so it is *increasing* τ that makes it taller and narrower, and u(t) = 1 is the τ → ∞ limit. Typeset in the direction consistent with the algebra above. -->
-<p>So <span class="math inline">\; 1 \;\overset{\text{FT}}{\longrightarrow}\; 2\pi\delta(\omega)</span>.</p>
-</section>
-</div>
-<p><strong>(d)</strong> <span class="math inline">e^{\,j\omega_0 t} \longrightarrow 2\pi\delta(\omega - \omega_0)</span></p>
-<p>We already have the Fourier transform of <span class="math inline">1</span>:</p>
-<p><span class="math display"> \int_{-\infty}^{\infty} 1\cdot e^{-j\omega t}\,\mathrm{d}t = 2\pi\delta(\omega). </span></p>
-<p><span class="math display"> \int_{-\infty}^{\infty} e^{\,j\omega_0 t}e^{-j\omega t}\,\mathrm{d}t
-= \int_{-\infty}^{\infty} e^{-j(\omega-\omega_0)t}\,\mathrm{d}t
-= 2\pi\delta(\omega-\omega_0). </span></p>
-<!-- CHECK: the source writes the middle integrand as e^{+j(ω−ω₀)t}; collecting the two exponentials gives e^{−j(ω−ω₀)t}. The value is the same either way since δ is even. -->
-<p>So</p>
-<p><span class="math display"> \cos(\omega_0 t) = \tfrac{1}{2}\left(e^{\,j\omega_0 t} + e^{-j\omega_0 t}\right)
-\;\overset{\text{FT}}{\rightsquigarrow}
-\pi\delta(\omega-\omega_0) + \pi\delta(\omega+\omega_0) </span></p>
-<!-- CHECK: the source writes cos(ωt) = ½(e^{jωt} − e^{−jωt}); the identity with the minus sign is sin, and the right-hand side is a cosine pair, so typeset with "+" and with ω₀ to match the deltas. -->
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/cos-lines.svg" class="img-fluid figure-img" width="330"></p>
-<figcaption>The spectrum of <span class="math inline">\cos(\omega_0 t)</span>: two impulses of weight <span class="math inline">\pi</span> at <span class="math inline">\pm\omega_0</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>The Fourier series!</p>
-</section>
-<section id="properties-of-the-fourier-transform" class="level2">
-<h2 class="anchored" data-anchor-id="properties-of-the-fourier-transform">Properties of the Fourier transform</h2>
-<p>This is also a useful general property of the Fourier transform:</p>
-<p><strong>①</strong> <span class="math inline">\; e^{\,j\omega_0 t}u(t) \;\longleftrightarrow\; U\big(j(\omega-\omega_0)\big)</span> <span class="math inline">\qquad</span> (frequency shift)</p>
-<!-- CHECK: the source writes "e^{−ω₀t} u(t) ⟷ U(ω−ω₀)". A shift of the spectrum to ω−ω₀ comes from multiplying by e^{+jω₀t}, so the exponent is typeset as +jω₀t, and the argument as j(ω−ω₀) to match the U(jω) notation. -->
-<p>There are several other useful properties:</p>
-<p><strong>②</strong> <span class="math inline">u(t-t_0)</span>:</p>
-<p><span class="math display">
-\begin{aligned}
-\int_{-\infty}^{\infty} u(t-t_0)\,e^{-j\omega t}\,\mathrm{d}t
-&amp;= \int_{-\infty}^{\infty} u(\tau)\,e^{-j\omega(\tau+t_0)}\,\mathrm{d}\tau
-&amp;&amp; \left[\tau = t - t_0,\; t = \tau + t_0,\; \mathrm{d}\tau = \mathrm{d}t\right] \\[6pt]
-&amp;= e^{-j\omega t_0}\,U(j\omega).
-\end{aligned}
-</span></p>
-<p><span class="math display"> u(t-t_0) \;\longleftrightarrow\; e^{-j\omega t_0}\,U(j\omega) \qquad \text{(time shift)}. </span></p>
-<p><strong>③</strong> <span class="math inline">u(at)</span>:</p>
-<p><span class="math display"> \int_{-\infty}^{\infty} u(at)\,e^{-j\omega t}\,\mathrm{d}t. \qquad
-\text{Let } \tau = at, \;\; \mathrm{d}\tau = a\,\mathrm{d}t, \;\; t = \frac{\tau}{a}. </span></p>
-<p><span class="math display">
-\begin{aligned}
-&amp;= \frac{a}{|a|}\int_{-\infty}^{\infty} u(\tau)\,e^{-j\omega\frac{\tau}{a}}\,\frac{\mathrm{d}\tau}{a}
-&amp;&amp; \left[\text{to get the limits the right way}\right] \\[6pt]
-&amp;= \frac{1}{|a|}\int_{-\infty}^{\infty} u(\tau)\,e^{-j\frac{\omega}{a}\tau}\,\mathrm{d}\tau \\[6pt]
-&amp;= \frac{1}{|a|}\,U\!\left(\frac{j\omega}{a}\right).
-\end{aligned}
-</span></p>
-<p><span class="math display"> u(at) \;\longleftrightarrow\; \frac{1}{|a|}U\!\left(\frac{j\omega}{a}\right)
-\qquad \text{(time scaling)}. </span></p>
-<p><strong>④</strong> <span class="math inline">\;\alpha u_1(t) + \beta u_2(t) \;\longleftrightarrow\;
-\alpha U_1(j\omega) + \beta U_2(j\omega) \qquad</span> (linearity).</p>
-<p><strong>⑤</strong> <span class="math inline">y = h * u</span>.</p>
-<p><span class="math display"> y(t) = \int_{-\infty}^{\infty} h(t-\tau)\,u(\tau)\,\mathrm{d}\tau </span></p>
-<p><span class="math display">
-\begin{aligned}
-Y(j\omega) &amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty} h(t-\tau)u(\tau)\,\mathrm{d}\tau\;
-   e^{-j\omega t}\,\mathrm{d}t \\[6pt]
-&amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty} h(t-\tau)\,e^{-j\omega t}\,\mathrm{d}t\;
-   u(\tau)\,\mathrm{d}\tau
-&amp;&amp; \left[\text{using Fubini's theorem}\right]
-\end{aligned}
-</span></p>
-<p>Let <span class="math inline">\mu = t - \tau</span>. <span class="math inline">\;\mathrm{d}t = \mathrm{d}\mu</span>. <span class="math inline">\;t = \mu + \tau</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-Y(j\omega) &amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty}
-   h(\mu)\,e^{-j\omega(\mu+\tau)}\,\mathrm{d}\mu\; u(\tau)\,\mathrm{d}\tau \\[6pt]
-&amp;= \int_{-\infty}^{\infty} h(\mu)\,e^{-j\omega\mu}\,\mathrm{d}\mu
-   \int_{-\infty}^{\infty} u(\tau)\,e^{-j\omega\tau}\,\mathrm{d}\tau
-\end{aligned}
-</span></p>
-<p><span class="math display"> Y(j\omega) = H(j\omega)\,U(j\omega) </span></p>
-<p><span class="math display"> \boxed{\; y = h*u \;\longleftrightarrow\; Y = HU \;}
-\qquad \text{(convolution)} </span></p>
-<p>This is the foundation of the rest of the course.</p>
-<p><strong>⑥</strong> <span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}u(t) \;\rightsquigarrow\;
-\displaystyle\int_{-\infty}^{\infty}\frac{\mathrm{d}}{\mathrm{d}t}u(t)\,e^{-j\omega t}\,\mathrm{d}t</span></p>
-<p>Integrate by parts: <span class="math inline">\displaystyle\int u'v = uv - \int uv'</span></p>
-<p><span class="math display">
-\begin{aligned}
-\int_{-\infty}^{\infty}\frac{\mathrm{d}}{\mathrm{d}t}u(t)\,e^{-j\omega t}\,\mathrm{d}t
-&amp;= \underbrace{\left[u(t)e^{-j\omega t}\right]_{-\infty}^{\infty}}_{=\,0 \text{ if } u(-\infty) = u(\infty) = 0}
-+ j\omega\int_{-\infty}^{\infty} u(t)\,e^{-j\omega t}\,\mathrm{d}t \\[6pt]
-&amp;= j\omega\,U(j\omega).
-\end{aligned}
-</span></p>
-<p>So</p>
-<p><span class="math display"> \boxed{\; \frac{\mathrm{d}}{\mathrm{d}t}u(t) \;\longleftrightarrow\; j\omega\,U(j\omega). \;} </span></p>
-<section id="summary" class="level3">
-<h3 class="anchored" data-anchor-id="summary">Summary</h3>
-<!-- CHECK: the source says "Include summary table here." — the table below is assembled from the pairs and properties derived above, with nothing added. -->
-<p><strong>Transform pairs.</strong></p>
+<p>By induction,</p>
+<p><span class="math display"> \boxed{\; \mathcal{L}\left(u^{(n)}(t)\right) = -u^{(n-1)}(0) - s\,u^{(n-2)}(0)
+   - \cdots - s^{n-1}u(0) + s^n\,U(s) \;} </span></p>
+<p>As with the Fourier transform, we have a table of standard Laplace transforms. The derivations are very similar to those for the Fourier transforms.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -802,44 +582,213 @@ Y(j\omega) &amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty}
 <thead>
 <tr class="header">
 <th><span class="math inline">u(t)</span></th>
-<th><span class="math inline">U(j\omega)</span></th>
-<th>derived in</th>
+<th><span class="math inline">U(s)</span></th>
+<th>ROC</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><span class="math inline">A\,p_\tau(t)</span></td>
-<td><span class="math inline">A\tau\operatorname{sinc}\!\left(\dfrac{\omega\tau}{2\pi}\right)</span></td>
-<td>§2</td>
-</tr>
-<tr class="even">
 <td><span class="math inline">\delta(t)</span></td>
 <td><span class="math inline">1</span></td>
-<td>(a)</td>
+<td>all <span class="math inline">s</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">H(t)</span></td>
+<td><span class="math inline">\dfrac{1}{s}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; 0</span></td>
 </tr>
 <tr class="odd">
+<td><span class="math inline">t\,H(t)</span></td>
+<td><span class="math inline">\dfrac{1}{s^2}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; 0</span></td>
+</tr>
+<tr class="even">
 <td><span class="math inline">e^{-at}H(t)</span></td>
-<td><span class="math inline">\dfrac{1}{a+j\omega}</span></td>
-<td>(b)</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">1</span></td>
-<td><span class="math inline">2\pi\delta(\omega)</span></td>
-<td>(c)</td>
+<td><span class="math inline">\dfrac{1}{s + a}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; -a</span></td>
 </tr>
 <tr class="odd">
-<td><span class="math inline">e^{\,j\omega_0 t}</span></td>
-<td><span class="math inline">2\pi\delta(\omega-\omega_0)</span></td>
-<td>(d)</td>
+<td><span class="math inline">t\,e^{-at}H(t)</span></td>
+<td><span class="math inline">\dfrac{1}{(s + a)^2}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; -a</span></td>
 </tr>
 <tr class="even">
-<td><span class="math inline">\cos(\omega_0 t)</span></td>
-<td><span class="math inline">\pi\delta(\omega-\omega_0) + \pi\delta(\omega+\omega_0)</span></td>
-<td>(d)</td>
+<td><span class="math inline">\cos(\omega_0 t)H(t)</span></td>
+<td><span class="math inline">\dfrac{s}{s^2 + \omega_0^2}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; 0</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\sin(\omega_0 t)H(t)</span></td>
+<td><span class="math inline">\dfrac{\omega_0}{s^2 + \omega_0^2}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; 0</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">e^{-at}\cos(\omega_0 t)H(t)</span></td>
+<td><span class="math inline">\dfrac{s + a}{(s + a)^2 + \omega_0^2}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; -a</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">e^{-at}\sin(\omega_0 t)H(t)</span></td>
+<td><span class="math inline">\dfrac{\omega_0}{(s + a)^2 + \omega_0^2}</span></td>
+<td><span class="math inline">\operatorname{Re}(s) &gt; -a</span></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Properties.</strong></p>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="circuit-crowbar.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>Supply feeding a resistive load through an LC filter with parasitic resistance, with a crowbar overload protector across the source.</figcaption>
+</figure>
+</div>
+</div>
+<p>A crowbar is an overvoltage protector, which shorts the source if the load voltage exceeds a given threshold.</p>
+<p>Suppose the circuit is at steady state and the crowbar is activated at <span class="math inline">t = 0</span>. What is the capacitor voltage <span class="math inline">v(t)</span> for <span class="math inline">t &gt; 0</span>?</p>
+<p>The current splits through the capacitor and load:</p>
+<p><span class="math display"> i = C\dot{v} + \frac{v}{R_L}. </span></p>
+<p>It is equal to the current through the inductor and resistor.</p>
+<p><span class="math display"> i = \frac{1}{R}v_R. </span></p>
+<p><span class="math display"> v_L = L\frac{\mathrm{d}}{\mathrm{d}t}i </span></p>
+<p>KVL around the loop:</p>
+<p><span class="math display"> v(t) + v_L + v_R = 0. </span></p>
+<p>Combining:</p>
+<!-- KaTeX takes a hex colour; LaTeX cannot, so the red annotations are HTML only. -->
+<p><span class="math display">
+\begin{aligned}
+v + LC\ddot{v} + \frac{L}{R_L}\dot{v} + RC\dot{v} + \frac{R}{R_L}v &amp;= 0
+  &amp;&amp;\textcolor{#C0392B}{\text{source is shorted}} \\[8pt]
+LC\ddot{v} + \left(\frac{L}{R_L} + RC\right)\dot{v} + \left(1 + \frac{R}{R_L}\right)v &amp;= 0.
+\end{aligned}
+</span></p>
+<p>Take the Laplace transform:</p>
+<p><span class="math display">
+\begin{aligned}
+LC\left(-\dot{v}(0) - s\,v(0) + s^2V(s)\right)
+&amp;+ \left(\frac{L}{R_L} + RC\right)\left(-v(0) + s\,V(s)\right) \\[4pt]
+&amp;+ \left(1 + \frac{R}{R_L}\right)V(s) = 0.
+\end{aligned}
+</span></p>
+<p>Circuit is at steady state at <span class="math inline">t = 0</span>. At DC the inductor is a short and the capacitor carries no current, so the source drives <span class="math inline">R</span> and <span class="math inline">R_L</span> in series:</p>
+<p><span class="math display"> v(0) = 10\,\frac{R_L}{R + R_L} = 10 \times \frac{100}{102} = 9.804\,\mathrm{V},
+   \qquad i(0) = \frac{10}{R + R_L} = 98.04\,\mathrm{mA}. </span></p>
+<p>The capacitor current is <span class="math inline">i(0) - v(0)/R_L = 0</span>, so <span class="math inline">\dot{v}(0) = 0</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+s^2LC\,V(s) + \left(\frac{L}{R_L} + RC\right)s\,V(s) + \left(1 + \frac{R}{R_L}\right)V(s)
+&amp;= LCs\,v(0) + \left(\frac{L}{R_L} + RC\right)v(0)
+\end{aligned}
+</span></p>
+<p><span class="math display"> V(s) = \frac{LCs\,v(0) + \left(\dfrac{L}{R_L} + RC\right)v(0)}
+               {s^2LC + \left(\dfrac{L}{R_L} + RC\right)s + \left(1 + \dfrac{R}{R_L}\right)} </span></p>
+<p>We now want to inverse transform this expression by breaking it into parts that match entries in the Laplace transform table.</p>
+<p>Normalise so the coefficient of <span class="math inline">s^2</span> is 1:</p>
+<p><span class="math display"> V(s) = \frac{v(0)\,s + v(0)\left(\dfrac{1}{CR_L} + \dfrac{R}{L}\right)}
+               {s^2 + \left(\dfrac{1}{CR_L} + \dfrac{R}{L}\right)s
+                + \left(\dfrac{1}{LC} + \dfrac{R}{R_L LC}\right)} </span></p>
+<p>Denote</p>
+<p><span class="math display"> 2\alpha = \frac{1}{R_L C} + \frac{R}{L}, \qquad
+   \omega_0^2 = \frac{1 + R/R_L}{LC}. </span></p>
+<p>With the values above, <span class="math inline">\alpha = 5100\,\mathrm{s}^{-1}</span> and <span class="math inline">\omega_0 \approx 10100</span>.</p>
+<p>We now have</p>
+<p><span class="math display"> V(s) = \frac{v(0)\,s + 2\alpha\,v(0)}{s^2 + 2\alpha s + \omega_0^2} </span></p>
+<p>Is the discriminant <span class="math inline">&gt; 0</span> or <span class="math inline">&lt; 0</span>?</p>
+<p><span class="math display"> 4\alpha^2 - 4\omega_0^2 = 4(\alpha - \omega_0)(\alpha + \omega_0). </span></p>
+<p><span class="math inline">\alpha &lt; \omega_0</span>, so the system is <u>underdamped</u>.</p>
+<p>Complete the square in the denominator:</p>
+<p><span class="math display"> s^2 + 2\alpha s + \omega_0^2 = (s + \alpha)^2 + (\omega_0^2 - \alpha^2). </span></p>
+<p>Let <span class="math inline">\omega^2 = \omega_0^2 - \alpha^2</span>.</p>
+<p>Then</p>
+<p><span class="math display">
+\begin{aligned}
+V(s) &amp;= \frac{v(0)(s + \alpha) + v(0)\,\alpha}{(s + \alpha)^2 + \omega^2} \\[10pt]
+     &amp;= \frac{v(0)(s + \alpha)}{(s + \alpha)^2 + \omega^2}
+      + \frac{v(0)\,\alpha}{\omega}\,\frac{\omega}{(s + \alpha)^2 + \omega^2}.
+\end{aligned}
+</span></p>
+<p>Now use the table entries</p>
+<p><span class="math display"> e^{-\alpha t}\cos\omega t \;\rightsquigarrow\; \frac{s + \alpha}{(s + \alpha)^2 + \omega^2} </span></p>
+<p>and</p>
+<p><span class="math display"> e^{-\alpha t}\sin\omega t \;\rightsquigarrow\; \frac{\omega}{(s + \alpha)^2 + \omega^2} </span></p>
+<p>to get</p>
+<p><span class="math display"> v(t) = e^{-\alpha t}\left(v(0)\cos\omega t
+   + \frac{v(0)\,\alpha}{\omega}\sin\omega t\right)H(t). </span></p>
+<p>With numbers,</p>
+<p><span class="math display"> v(t) = e^{-5100t}\left(9.804\cos 8717t + 5.736\sin 8717t\right)H(t). </span></p>
+</section>
+<section id="properties-of-the-laplace-transform" class="level2">
+<h2 class="anchored" data-anchor-id="properties-of-the-laplace-transform">Properties of the Laplace transform</h2>
+<p>The Laplace transform inherits many useful properties of the Fourier transform. We have already seen the derivative property. Let’s now check convolution.</p>
+<p>Let <span class="math inline">y(t) = h(t) * u(t)</span>. Suppose <span class="math inline">h(t) = u(t) = 0</span> for <span class="math inline">t &lt; 0</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+h(t) * u(t) &amp;= \int_{-\infty}^{\infty} h(t - \tau)u(\tau)\,\mathrm{d}\tau \\[6pt]
+            &amp;= \int_0^t h(t - \tau)u(\tau)\,\mathrm{d}\tau.
+\end{aligned}
+</span></p>
+<p><span class="math display"> \mathcal{L}\left(h(t) * u(t)\right)
+= \int_0^{\infty}\int_0^t h(t - \tau)u(\tau)\,\mathrm{d}\tau\; e^{-st}\,\mathrm{d}t. </span></p>
+<p>If we are in the ROC of both signals, we can swap the order of integration.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/conv-region-outer-t.svg" class="img-fluid figure-img" width="320"></p>
+<figcaption><span class="math inline">t</span> from <span class="math inline">0</span> to <span class="math inline">\infty</span>, <span class="math inline">\tau</span> from <span class="math inline">0</span> to <span class="math inline">t</span>.</figcaption>
+</figure>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/conv-region-outer-tau.svg" class="img-fluid figure-img" width="320"></p>
+<figcaption><span class="math inline">\tau</span> from <span class="math inline">0</span> to <span class="math inline">\infty</span>, <span class="math inline">t</span> from <span class="math inline">\tau</span> to <span class="math inline">\infty</span>.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><span class="math display"> = \int_0^{\infty}\int_{\tau}^{\infty} h(t - \tau)e^{-st}\,\mathrm{d}t\; u(\tau)\,\mathrm{d}\tau
+   \qquad \textcolor{#C0392B}{\text{(allowed in the ROC)}}. </span></p>
+<p>Let <span class="math inline">\mu = t - \tau</span>.</p>
+<p><span class="math display">
+\begin{aligned}
+\mathrm{d}\mu &amp;= \mathrm{d}t \\[4pt]
+t = \infty &amp;\;\Rightarrow\; \mu = \infty \\[4pt]
+t = \tau &amp;\;\Rightarrow\; \mu = 0.
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\begin{aligned}
+&amp;= \int_0^{\infty}\int_0^{\infty} h(\mu)e^{-s(\mu + \tau)}\,\mathrm{d}\mu\; u(\tau)\,\mathrm{d}\tau \\[8pt]
+&amp;= \int_0^{\infty} h(\mu)e^{-s\mu}\,\mathrm{d}\mu \int_0^{\infty} u(\tau)e^{-s\tau}\,\mathrm{d}\tau \\[8pt]
+&amp;= H(s)\,U(s).
+\end{aligned}
+</span></p>
+<section id="integration" class="level3">
+<h3 class="anchored" data-anchor-id="integration">Integration</h3>
+<p>We can use the convolution property to get the Laplace transform of an integrator:</p>
+<p><span class="math display">
+\begin{aligned}
+y(t) &amp;= \int_0^t u(\tau)\,\mathrm{d}\tau \\[6pt]
+     &amp;= \int_0^{\infty} H(t - \tau)u(\tau)\,\mathrm{d}\tau \\[6pt]
+     &amp;= H * u.
+\end{aligned}
+</span></p>
+<p>So <span class="math inline">Y(s) = H(s)U(s)</span>.</p>
+<p>What is the Laplace transform of <span class="math inline">H(t)</span>?</p>
+<p><span class="math display">
+\begin{aligned}
+\int_0^{\infty} H(t)e^{-st}\,\mathrm{d}t
+&amp;= \int_0^{\infty} e^{-st}\,\mathrm{d}t \\[6pt]
+&amp;= \left.\frac{-1}{s}e^{-st}\right|_0^{\infty} = \frac{1}{s}.
+\end{aligned}
+</span></p>
+<p>So</p>
+<p><span class="math display"> \int_0^t u(\tau)\,\mathrm{d}\tau \;\rightsquigarrow\; \frac{1}{s}U(s). </span></p>
+</section>
+<section id="other-properties" class="level3">
+<h3 class="anchored" data-anchor-id="other-properties">Other properties</h3>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -850,127 +799,54 @@ Y(j\omega) &amp;= \int_{-\infty}^{\infty}\!\int_{-\infty}^{\infty}
 <tr class="header">
 <th></th>
 <th><span class="math inline">u(t)</span></th>
-<th><span class="math inline">U(j\omega)</span></th>
+<th><span class="math inline">U(s)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>① frequency shift</td>
-<td><span class="math inline">e^{\,j\omega_0 t}u(t)</span></td>
-<td><span class="math inline">U\big(j(\omega-\omega_0)\big)</span></td>
-</tr>
-<tr class="even">
-<td>② time shift</td>
-<td><span class="math inline">u(t-t_0)</span></td>
-<td><span class="math inline">e^{-j\omega t_0}U(j\omega)</span></td>
-</tr>
-<tr class="odd">
-<td>③ time scaling</td>
-<td><span class="math inline">u(at)</span></td>
-<td><span class="math inline">\dfrac{1}{\lvert a\rvert}U\!\left(\dfrac{j\omega}{a}\right)</span></td>
-</tr>
-<tr class="even">
-<td>④ linearity</td>
+<td>linearity</td>
 <td><span class="math inline">\alpha u_1(t) + \beta u_2(t)</span></td>
-<td><span class="math inline">\alpha U_1(j\omega) + \beta U_2(j\omega)</span></td>
-</tr>
-<tr class="odd">
-<td>⑤ convolution</td>
-<td><span class="math inline">y = h*u</span></td>
-<td><span class="math inline">Y = HU</span></td>
+<td><span class="math inline">\alpha U_1(s) + \beta U_2(s)</span></td>
 </tr>
 <tr class="even">
-<td>⑥ differentiation</td>
-<td><span class="math inline">\dfrac{\mathrm{d}}{\mathrm{d}t}u(t)</span></td>
-<td><span class="math inline">j\omega\,U(j\omega)</span></td>
+<td>time shift</td>
+<td><span class="math inline">u(t - \tau)H(t - \tau)</span></td>
+<td><span class="math inline">e^{-s\tau}U(s)</span></td>
 </tr>
 <tr class="odd">
-<td>⑦ duality</td>
-<td><span class="math inline">X(jt)</span></td>
-<td><span class="math inline">2\pi x(-\omega)</span></td>
-</tr>
-<tr class="even">
-<td>⑧ Parseval</td>
-<td><span class="math inline">\displaystyle\int_{-\infty}^{\infty} u(t)\overline{y(t)}\,\mathrm{d}t</span></td>
-<td><span class="math inline">\displaystyle\frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\overline{Y(j\omega)}\,\mathrm{d}\omega</span></td>
+<td>frequency shift</td>
+<td><span class="math inline">e^{at}u(t)</span></td>
+<td><span class="math inline">U(s - a)</span></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="other-properties" class="level3">
-<h3 class="anchored" data-anchor-id="other-properties">Other properties</h3>
-<p><strong>⑦ Duality:</strong> if <span class="math inline">x(t) \rightsquigarrow X(j\omega)</span>, then</p>
-<p><span class="math display"> X(jt) \;\rightsquigarrow\; 2\pi x(-\omega). </span></p>
-<div class="note">
-<p><strong>Proof:</strong></p>
-<p><span class="math display">
-\begin{aligned}
-x(-\omega) &amp;= \frac{1}{2\pi}\int_{-\infty}^{\infty} X(js)\,e^{-j\omega s}\,\mathrm{d}s \\[6pt]
-&amp;= \frac{1}{2\pi}\,\mathcal{F}\{X(jt)\}(\omega).
-\end{aligned}
-</span></p>
-</div>
-<!-- CHECK: the source writes the left-hand side as x(−t) with the integrand e^{−jωs}; for the second line to read F{X(jt)}(ω) the left-hand side must be x(−ω). Typeset as x(−ω). -->
-<p><u>Example</u>: we know <span class="math inline">\delta(t) \rightsquigarrow 1</span>.</p>
-<p>The dual gives us another pair: <span class="math inline">\;1 \rightsquigarrow 2\pi\delta(\omega)</span>.</p>
-<p><strong>⑧ Parseval’s theorem:</strong></p>
-<p><span class="math display"> \int_{-\infty}^{\infty} u(t)\,\overline{y(t)}\,\mathrm{d}t
-= \frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\,\overline{Y(j\omega)}\,\mathrm{d}\omega. </span></p>
-<p>Special case: if <span class="math inline">y = u</span>:</p>
-<p><span class="math display"> \int_{-\infty}^{\infty} |u(t)|^2\,\mathrm{d}t
-= \frac{1}{2\pi}\int_{-\infty}^{\infty} |U(j\omega)|^2\,\mathrm{d}\omega. </span></p>
-<div class="note">
-<p><strong>Proof:</strong></p>
-<p><span class="math display">
-\begin{aligned}
-\int u\bar{y}\,\mathrm{d}t
-&amp;= \int u(t)\,\frac{1}{2\pi}\int \overline{Y(j\omega)\,e^{\,j\omega t}}\,\mathrm{d}\omega\;\mathrm{d}t \\[6pt]
-&amp;= \frac{1}{2\pi}\int\left[\int u(t)\,e^{-j\omega t}\,\mathrm{d}t\right]\overline{Y(j\omega)}\,\mathrm{d}\omega \\[6pt]
-&amp;= \frac{1}{2\pi}\int U(j\omega)\,\overline{Y(j\omega)}\,\mathrm{d}\omega .
-\end{aligned}
-</span></p>
-</div>
-</section>
-</section>
-<section id="example-the-rlc-circuit" class="level2">
-<h2 class="anchored" data-anchor-id="example-the-rlc-circuit">Example: the RLC circuit</h2>
-<p><u>Example</u>: RLC circuit with <span class="math inline">v_C</span> as output.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="circuit-rlc-vc.svg" class="img-fluid figure-img" width="540"></p>
-<figcaption>Series RLC circuit with <span class="math inline">v_C</span> as the output (drawn with circuitikz).</figcaption>
-</figure>
-</div>
-</div>
-<p>We know the impulse response is</p>
-<p><span class="math display"> g(t) = 6.25\,e^{-3t}\sin(4t)\,H(t). </span></p>
-<p>What is the spectrum of this signal?</p>
-<p><span class="math display"> \sin(4t) = \frac{1}{2j}\left(e^{\,j4t} - e^{-j4t}\right) </span></p>
+<section id="initial-value-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="initial-value-theorem">Initial value theorem</h3>
+<p><span class="math display"> \mathcal{L}\left(\frac{\mathrm{d}}{\mathrm{d}t}u(t)\right)(s) = s\,U(s) - u(0). </span></p>
 <p>So</p>
-<p><span class="math display"> g(t) = \frac{6.25}{2j}\left(e^{(-3+4j)t} - e^{(-3-4j)t}\right). </span></p>
-<p>Use the Fourier transform pair <span class="math inline">e^{-at}H(t) = \dfrac{1}{a+j\omega}</span>:</p>
+<p><span class="math display"> s\,U(s) = u(0) + \int_0^{\infty} u'(t)e^{-st}\,\mathrm{d}t. </span></p>
+<p>Now, if <span class="math inline">|u'(t)| \le Me^{ct}</span> for some <span class="math inline">M, c &gt; 0</span>, the rightmost term <span class="math inline">\to 0</span> as <span class="math inline">s \to \infty</span> along the real axis, so we have</p>
+<p><span class="math display"> \lim_{s \to \infty} s\,U(s) = u(0). </span></p>
+</section>
+<section id="final-value-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="final-value-theorem">Final value theorem</h3>
+<p>Again take</p>
+<p><span class="math display"> s\,U(s) = u(0) + \int_0^{\infty} u'(t)e^{-st}\,\mathrm{d}t. </span></p>
+<p>Let <span class="math inline">s \to 0</span> along the real axis. Then</p>
+<p><span class="math display"> \int_0^{\infty} u'(t)e^{-st}\,\mathrm{d}t = \int_0^{\infty} u'(t)\,\mathrm{d}t
+= \lim_{T \to \infty} u(T) - u(0). </span></p>
+<p>So</p>
 <p><span class="math display">
 \begin{aligned}
-G(j\omega) &amp;= -3.125j\left(\frac{1}{-(-3+4j)+j\omega} - \frac{1}{-(-3-4j)+j\omega}\right) \\[10pt]
-&amp;= -3.125j\left(\frac{(+3+4j+j\omega) - (+3-4j+j\omega)}{(+3-4j+j\omega)(+3+4j+j\omega)}\right) \\[10pt]
-&amp;= -3.125j\left(\frac{8j}{(+3-4j)(+3+4j) + j\omega(+3-4j) + (+3+4j)j\omega - \omega^2}\right) \\[10pt]
-&amp;= \frac{25}{-\omega^2 + 6j\omega + 25}.
+\lim_{s \to 0} s\,U(s) &amp;= \lim_{T \to \infty} u(T) - u(0) + u(0) \\[6pt]
+&amp;= \lim_{T \to \infty} u(T), \quad \underline{\text{provided this limit exists}}.
 \end{aligned}
 </span></p>
-<!-- CHECK: two sign slips in the source's middle lines. (i) The first denominator is written "(−3+4j)+jω" without the leading minus, although the line below expands it as (+3−4j+jω); typeset with the minus. (ii) The combined numerator is written "−3−4j+jω − (−3+4j+jω)" = −8j; combining 1/(3−4j+jω) − 1/(3+4j+jω) gives (3+4j+jω) − (3−4j+jω) = +8j, which is what produces the +25 in the author's final answer (−3.125j × 8j = +25). -->
-<p>What does the spectrum look like?</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/rlc-bode.svg" class="img-fluid figure-img" width="620"></p>
-<figcaption>Magnitude and phase of <span class="math inline">G(j\omega) = \dfrac{25}{-\omega^2 + 6j\omega + 25}</span>.</figcaption>
-</figure>
-</div>
-</div>
-<script src="fourier-widgets.js"></script>
+<script src="laplace-widgets.js"></script>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1381,12 +1257,12 @@ G(j\omega) &amp;= -3.125j\left(\frac{1}{-(-3+4j)+j\omega} - \frac{1}{-(-3-4j)+j\
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../weeks/week04/tutorial3-solutions.pdf" class="pagination-link" aria-label="Tutorial solutions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial solutions</span>
+      <a href="../../weeks/week07/notes.html" class="pagination-link" aria-label="Notes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../weeks/week05/tutorial4.pdf" class="pagination-link" aria-label="Tutorial">
+      <a href="../../weeks/week08/tutorial6.pdf" class="pagination-link" aria-label="Tutorial">
         <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
