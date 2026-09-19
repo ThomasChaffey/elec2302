@@ -32,7 +32,7 @@ const WEEK = process.argv[2] || "week01";
 // Most weeks keep their widgets in phasor-widgets.js; the ones that do not are
 // listed here.
 const SRC_FILE = { week05: "fourier-widgets.js", week06: "bode-widgets.js",
-                   week07: "stability-widgets.js" };
+                   week07: "stability-widgets.js", week08: "laplace-widgets.js" };
 const SRC = path.join(ROOT, `weeks/${WEEK}/${SRC_FILE[WEEK] || "phasor-widgets.js"}`);
 const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
@@ -135,6 +135,15 @@ const WIDGETS_BY_WEEK = {
       caption: "theta(0) = 0.80 rad, left running: about 8 s of the 12 s trace filled",
       state: () => {},                                  // defaults, and it autoplays
       settle: 8000                                      // let the trace build before capture
+    }
+  ],
+  week08: [
+    {
+      id: "w-growing",
+      caption: "sigma = 1.00, N = 130: 261 terms over |w| <= 6.50 rad/s, spacing 0.05",
+      // N is raised from its default 40 so that all three basis curves the top
+      // panel labels (w = 1, 3, 6 rad/s) are inside |w| <= N dw and get drawn.
+      state: ({ slider }) => { slider(1, 130); }        // slider 1 is N
     }
   ]
 };
