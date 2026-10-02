@@ -21,6 +21,7 @@ the relevant material.
 | 6 | Frequency response | [Notes](weeks/week06/notes.qmd) · [Tutorial](weeks/week06/tutorial5.pdf) · [Solutions](weeks/week06/tutorial5-solutions.pdf) · [Lab 1](weeks/week06/lab1.pdf) |
 | 7 | System response and stability | [Notes](weeks/week07/notes.qmd) |
 | 8 | The Laplace transform | [Notes](weeks/week08/notes.qmd) · [Tutorial](weeks/week08/tutorial6.pdf) · [Lab 2](weeks/week08/lab2.pdf) |
+| 9 | System analysis with the Laplace transform | [Notes](weeks/week09/notes.qmd) |
 |  | Quiz 2 resources | [Question bank](weeks/quiz2-practice-questions.pdf) · [Answers and feedback](weeks/quiz2-practice-feedback.pdf) · [Formula sheet](weeks/formula-sheet-quiz2.pdf) |
 
 : {tbl-colwidths="[8,57,35]"}

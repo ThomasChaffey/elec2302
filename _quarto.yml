@@ -95,6 +95,10 @@ website:
           - text: "Lab 2"
             href: weeks/week08/lab2.pdf
             target: _blank
+      - section: "Week 9 — System analysis with the Laplace transform"
+        contents:
+          - text: "Notes"
+            href: weeks/week09/notes.qmd
       - text: "Course index"
         href: concepts.qmd
       - text: "Quiz 1 formula sheet"
