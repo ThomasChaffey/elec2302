@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Week 4 — Lecture notes</title>
+<title>Week 9 — Lecture notes</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -28,8 +28,8 @@ ul.task-list li input[type="checkbox"] {
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<link href="../../weeks/week04/tutorial3.pdf" rel="next">
-<link href="../../weeks/week03/tutorial2-solutions.pdf" rel="prev">
+<link href="../../concepts.html" rel="next">
+<link href="../../weeks/week08/lab2.pdf" rel="prev">
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -151,7 +151,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Week 4 — Periodic signals and the Fourier series</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Notes</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week09/notes.html">Week 9 — System analysis with the Laplace transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week09/notes.html">Notes</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -261,7 +261,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -400,7 +400,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../weeks/week09/notes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../weeks/week09/notes.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Notes</span></a>
   </div>
 </li>
@@ -451,10 +451,10 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Week 4 — Periodic signals and the Fourier series</a></li><li class="breadcrumb-item"><a href="../../weeks/week04/notes.html">Notes</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week09/notes.html">Week 9 — System analysis with the Laplace transform</a></li><li class="breadcrumb-item"><a href="../../weeks/week09/notes.html">Notes</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Week 4 — Lecture notes</h1>
-<p class="subtitle lead">Periodic signals and the Fourier series</p>
+<h1 class="title">Week 9 — Lecture notes</h1>
+<p class="subtitle lead">System analysis with the Laplace transform</p>
 </div>
 
 
@@ -473,380 +473,413 @@ window.Quarto = {
 
 <div class="format-links">
 <p><span class="label">Other formats:</span></p>
-<a href="notes.pdf" title="Week 4 lecture notes as a PDF" data-goatcounter-click="pdf-week4" data-goatcounter-title="Week 4 notes PDF opened">📄&nbsp;PDF</a>
+<a href="notes.pdf" title="Week 9 lecture notes as a PDF" data-goatcounter-click="pdf-week9" data-goatcounter-title="Week 9 notes PDF opened">📄&nbsp;PDF</a>
 </div>
-<section id="from-impulses-to-sinusoids" class="level2">
-<h2 class="anchored" data-anchor-id="from-impulses-to-sinusoids">From impulses to sinusoids</h2>
-<p>This week we start to develop frequency-domain tools.</p>
-<p>So far, we have seen that any (integrable) signal can be represented as an integral (“sum”) of impulses. This week we develop an alternative representation for <u>periodic</u> signals, by changing the basis signals from impulses to sinusoids. This is the <u>Fourier series</u>.</p>
-<!-- Demo: impulse response of a nonlinear system. -->
-<p><strong>Recap.</strong> If a system is LTI, it preserves the frequency of a sinusoidal input:</p>
-<p><span class="math display"> u = e^{\,j\omega t} \;\longmapsto\; G(j\omega)\,e^{\,j\omega t}, \qquad G(j\omega) \in \mathbb{C}. </span></p>
-<p>In other words, <span class="math inline">e^{\,j\omega t}</span> is an eigenvector of the system. If we can express any <span class="math inline">u</span> in this basis, as a sum of sinusoids, this will “diagonalise the system” and “simplify analysis”, in ways that we will soon see.</p>
-<p>This also gives a quick test of whether a system is LTI: inject a sinusoid and see what comes out at the output.</p>
+<section id="lecture-outline" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-outline">Lecture outline</h2>
+<p><u>Last week:</u></p>
+<ul>
+<li>Laplace transform converges for unstable poles.</li>
+<li>Unilateral Laplace transform integrates from <span class="math inline">0</span> to <span class="math inline">\infty</span>, and allows us to take care of initial conditions.</li>
+</ul>
+<p><u>This week:</u></p>
+<ul>
+<li>Laplace transform &amp; stability</li>
+<li>Inverse Laplace transforms using partial fractions</li>
+<li>System zeros.</li>
+</ul>
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
 </section>
-<section id="approximating-a-periodic-signal" class="level2">
-<h2 class="anchored" data-anchor-id="approximating-a-periodic-signal">Approximating a periodic signal</h2>
-<p>A signal <span class="math inline">u(t)</span> is <span class="math inline">T</span>-periodic if <span class="math inline">u(t)=u(t−T)</span>. The fundamental frequency of <span class="math inline">u</span> is the frequency corresponding to smallest <span class="math inline">T</span> such that <span class="math inline">u(t)</span> is <span class="math inline">T</span>-periodic. For example, <span class="math inline">sin(t)</span> is <span class="math inline">2\pi</span> periodic, but also <span class="math inline">4\pi</span> periodic, <span class="math inline">6\pi</span> periodic, etc. The fundamental frequency is the frequency corresponding to period <span class="math inline">2\pi</span>, that is, <span class="math inline">1</span> rad/s.</p>
-<p>For the sum of two signals to be <span class="math inline">T</span>-periodic, the individual signals must both be <span class="math inline">T</span>-periodic, so we want to find the minimum common period of the two sinusoids.</p>
-<p>Let <span class="math inline">u(t)</span> be an arbitrary periodic signal with fundamental frequency <span class="math inline">\frac{2\pi}{T}</span>.</p>
-<p><span class="math display"> \phi(t) := e^{\,j\left(\frac{2\pi}{T}t\right)} \quad\text{also periodic on } [0,T]. \qquad \text{Let } \tfrac{2\pi}{T} =: \omega. </span></p>
-<p>How well can we approximate <span class="math inline">u(t)</span> by scaling &amp; rotating <span class="math inline">e^{j\omega t}</span>?</p>
-<p>We already have a measure of the size of a periodic signal:</p>
-<p><span class="math display"> P(u) := \frac{1}{T}\int_0^T |u(t)|^2\,\mathrm{d}t = \langle u, u\rangle_P = \|u\|_P^2 \qquad (\text{see Lecture 2}). </span></p>
-<p>Multiplying <span class="math inline">\phi</span> by <span class="math inline">c \in \mathbb{C}</span> gives us a <u>scaling and rotation</u> of <span class="math inline">\phi</span>:</p>
-<p><span class="math display"> c = a\,e^{\,j\vartheta} \;(\text{polar form}) \quad\text{so}\quad c\phi = a\,e^{\,j(\omega t + \vartheta)}. </span></p>
-<p>Here <span class="math inline">a</span> is the <span class="out">scale</span>, and the <span class="out">rotation <span class="math inline">=</span> phase shift</span>.</p>
-<p>Let’s minimise <span class="math inline">J(c) = \|u - c\phi\|_P^2</span> over <span class="math inline">c \in \mathbb{C}</span>, then <span class="math inline">u \approx c\phi</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-J(c) &amp;= \langle u - c\phi,\; u - c\phi\rangle_P \\[2pt]
-&amp;= \langle u, u\rangle_P - \langle u, c\phi\rangle_P - \langle c\phi, u\rangle_P + \langle c\phi, c\phi\rangle_P \\[2pt]
-&amp;= \|u\|_P^2 - \bar{c}\,\langle u,\phi\rangle_P - c\,\overline{\langle u,\phi\rangle}_P + |c|^2\,\|\phi\|_P^2 . \qquad(1)
-\end{aligned}
-</span></p>
-<p>We can simplify <span class="math inline">\|\phi\|_P^2</span>:</p>
-<p><span class="math display">
-\|\phi\|_P^2 = \frac{1}{T}\int_0^T e^{\,j\omega t}\,e^{-j\omega t}\,\mathrm{d}t
-= \frac{1}{T}\int_0^T 1\,\mathrm{d}t = 1 .
-</span></p>
-<p>Let <span class="math inline">\gamma := \langle u,\phi\rangle</span>. Then we can write <span class="math inline">(1)</span> as</p>
-<p><span class="math display"> J(c) = \|u\|_P^2 - \bar{c}\gamma - c\bar{\gamma} + |c|^2 . </span></p>
-<p>Now notice that</p>
-<p><span class="math display">
-\begin{aligned}
-|c-\gamma|^2 &amp;= (c-\gamma)\overline{(c-\gamma)} \\[2pt]
-&amp;= |c|^2 - \gamma\bar{c} - c\bar{\gamma} + |\gamma|^2 .
-\end{aligned}
-</span></p>
-<p>So</p>
-<p><span class="math display"> J(c) = \|u\|_P^2 + |c-\gamma|^2 - |\gamma|^2 . </span></p>
-<p>All terms are positive. This is minimised when <span class="math inline">|c-\gamma|^2 = 0</span>, that is,</p>
-<p><span class="math display"> \boxed{\,c = \langle u,\phi\rangle_P = \frac{1}{T}\int_0^T u(t)\,e^{-j\omega t}\,\mathrm{d}t\,} </span></p>
-<p>The least-squares approximation of <span class="math inline">u(t)</span> by <span class="math inline">\phi(t)</span> is therefore</p>
-<p><span class="math display"> \boxed{\,c\phi = \frac{\langle u,\phi\rangle_P}{\|\phi\|_P^2}\,\phi\,} </span></p>
-<p>This is <u>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi</span></u>.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/projection.svg" class="img-fluid figure-img" width="680"></p>
-<figcaption>(a) The least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\phi</span> is the projection <span class="math inline">c\phi</span>, and the error <span class="math inline">u - c\phi</span> is perpendicular to <span class="math inline">\phi</span>. (b) The same construction for signals: a square wave of period <span class="math inline">2\pi</span> and its best approximation by a single sinusoid at the fundamental frequency, <span class="math inline">\tfrac{4}{\pi}\cos\omega t = \Re(\tfrac{4}{\pi}\exp(j\omega t))</span>.</figcaption>
-</figure>
+<section id="laplace-transform-stability" class="level2">
+<h2 class="anchored" data-anchor-id="laplace-transform-stability">Laplace transform &amp; stability</h2>
+<p>Previously, we have used the Fourier transform of the impulse response as a transfer function. The transfer function lets us compute the output by multiplication with the input:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><u>Time domain</u></p>
+<p><span class="math display"> y(t) = \underbrace{h(t)}_{\substack{\text{impulse}\\\text{response}}} * \underbrace{u(t)}_{\text{input}} </span></p>
+</div><div class="column" style="width:50%;">
+<p><u>Frequency domain</u></p>
+<p><span class="math display"> Y(j\omega) = \underbrace{H(j\omega)}_{\substack{\text{transfer}\\\text{function}}}\,\underbrace{U(j\omega)}_{\text{input}} </span></p>
 </div>
 </div>
-<p>This procedure is exactly the same for <span class="math inline">\phi_k = e^{\,jk\omega t}</span> for any <span class="math inline">k \in \mathbb{Z}</span>, so we define</p>
-<p><span class="math display"> \boxed{\,c_k = \langle u,\phi_k\rangle_P = \frac{1}{T}\int_0^T u(t)\,e^{-jk\omega t}\,\mathrm{d}t\,} </span></p>
-<p>These are the <u>complex Fourier coefficients</u>.</p>
-</section>
-<section id="the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="the-fourier-series">The Fourier series</h2>
-<p>Each coefficient gives a least-squares approximation of <span class="math inline">u(t)</span> by <span class="math inline">\phi_k(t)</span>, calculated as</p>
-<p><span class="math display"> u(t) \approx c_k \phi_k = \frac{\langle u,\phi_k\rangle_P}{\|\phi_k\|_P^2}\,\phi_k, </span></p>
-<p>the projection of <span class="math inline">u</span> onto <span class="math inline">\phi_k</span>.</p>
-<p>It turns out that the sum of all these approximations is an <u>exact</u> representation of <span class="math inline">u(t)</span> (provided it is sufficiently well-behaved):</p>
-<p><span class="math display"> \boxed{\,u = \sum_{k=-\infty}^{\infty} c_k \phi_k = \sum_{k=-\infty}^{\infty} \langle u,\phi_k\rangle_P\,\phi_k, \qquad \phi_k(t) = e^{\,jk\omega t}\,} </span></p>
-<p>This is the <u>Fourier series</u> of <span class="math inline">u</span>. It also turns out that each <span class="math inline">c_k</span> is independent, as <span class="math inline">\phi_k</span> are orthogonal, so the finite sum <span class="math inline">\displaystyle\sum_{k=-n}^{n} \langle u,\phi_k\rangle_P\,\phi_k</span> is a least-squares approximation of <span class="math inline">u</span> by <span class="math inline">\{\phi_k\}_{k=-n,\dots,n}</span>. See the extension section below for the full details.</p>
-<p>For <span class="math inline">k = 0</span>, we have</p>
-<p><span class="math display">
-\begin{aligned}
-c_0 = \langle u,\phi_0\rangle &amp;= \frac{1}{T}\int_0^T u\,e^{0}\,\mathrm{d}t \\[2pt]
-&amp;= \frac{1}{T}\int_0^T u(t)\,\mathrm{d}t . \qquad \text{Average value of } u = \text{DC offset.}
-\end{aligned}
-</span></p>
-<div class="extension">
-<p><span class="extension-label">Extension material</span></p>
-<section id="why-are-the-c_k-independent" class="level3">
-<h3 class="anchored" data-anchor-id="why-are-the-c_k-independent">Why are the <span class="math inline">c_k</span> independent?</h3>
-<p>First, let’s calculate</p>
-<p><span class="math display">
-\begin{aligned}
-\langle \phi_k, \phi_\ell\rangle &amp;= \frac{1}{T}\int_0^T e^{\,jk\omega t}\,e^{-j\ell\omega t}\,\mathrm{d}t \\[2pt]
-&amp;= \frac{1}{T}\int_0^T e^{\,+j(k-\ell)\omega t}\,\mathrm{d}t \\[2pt]
-&amp;= 1 \quad \text{if } k = \ell \quad\text{or} \\[6pt]
-&amp;= \left[\frac{1}{+j(k-\ell)\omega}\,e^{\,+j(k-\ell)\omega t}\right]_0^{T} \\[6pt]
-&amp;= 0 \quad \text{as } e^{\,+j(k-\ell)\omega t} \text{ is } T\text{-periodic.}
-\end{aligned}
-</span></p>
-<p>This means the <span class="math inline">\phi_k</span> are <u>orthogonal</u>.</p>
-<p>Now let’s minimise <span class="math inline">\left\|u - \sum_k c_k \phi_k\right\|_P^2</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-\left\|u - \sum_k c_k \phi_k\right\|_P^2
-&amp;= \left\langle u - \sum_k c_k \phi_k,\; u - \sum_k c_k \phi_k\right\rangle_P \\[6pt]
-&amp;= \|u\|_P^2 + \left\langle u,\, -\sum_k c_k \phi_k\right\rangle + \left\langle -\sum_k c_k \phi_k,\, u\right\rangle \\&amp;+ \left\langle \sum_k c_k \phi_k,\, \sum_k c_k \phi_k\right\rangle \\[6pt]
-&amp;= \|u\|_P^2 - \sum_k \bar{c}_k \underbrace{\langle u,\phi_k\rangle}_{:=\,\gamma_k} - \sum_k c_k \overline{\langle u,\phi_k\rangle} + \underbrace{\sum_k \sum_\ell c_k \bar{c}_\ell \langle \phi_k,\phi_\ell\rangle}_{=\,0 \text{ for } k \neq \ell} \\[6pt]
-&amp;= \|u\|_P^2 - \sum_k \left(\bar{c}_k \gamma_k + c_k \bar{\gamma}_k\right) + \sum_k c_k \bar{c}_k \langle \phi_k,\phi_k\rangle .
-\end{aligned}
-</span></p>
-<p>Following the same completion of squares argument as before, we have</p>
-<p><span class="math display"> = \|u\|_P^2 + \sum_k |c_k - \gamma_k|^2 - \sum_k |\gamma_k|^2 . </span></p>
-<p>This is minimised when <span class="math inline">c_k = \gamma_k</span> for all <span class="math inline">k</span>. These are the Fourier coefficients we derived earlier with individual minimisations!</p>
-</section>
-</div>
-<p>If <span class="math inline">u(t)</span> is real, its Fourier series must be real:</p>
-<p><span class="math display"> \operatorname{Im}\!\left(\sum_k c_k \phi_k\right) = 0. </span></p>
-<p>This is achieved if</p>
-<p><span class="math display">
-\begin{aligned}
-c_k \phi_k &amp;= \overline{c_{-k}\,\phi_{-k}} \\[2pt]
-&amp;= \overline{c_{-k}}\,\phi_k .
-\end{aligned}
-</span></p>
-<p>So <span class="math inline">c_k = \overline{c_{-k}}</span>. In particular, <span class="math inline">c_0 = \overline{c_0}</span>, so <span class="math inline">c_0</span> is real.</p>
-</section>
-<section id="the-sinecosine-form-for-a-real-signal" class="level2">
-<h2 class="anchored" data-anchor-id="the-sinecosine-form-for-a-real-signal">The sine–cosine form for a real signal</h2>
-<p>In the real case, we can also derive a sin/cosine form of the Fourier series.</p>
-<p><span class="math display"> \frac{e^{\,j\omega t} + e^{-j\omega t}}{2} = \cos\omega t, \qquad \frac{e^{\,j\omega t} - e^{-j\omega t}}{2j} = \sin\omega t. </span></p>
-<p>Let <span class="math inline">c_k = \tfrac{1}{2}(a_k - j b_k)</span>, <span class="math inline">k \geq 0</span>. Then</p>
-<p><span class="math display">
-\begin{aligned}
-c_k e^{\,jk\omega t} + c_{-k} e^{-jk\omega t}
-&amp;= c_k e^{\,jk\omega t} + \bar{c}_k e^{-jk\omega t} \\[2pt]
-&amp;= \tfrac{1}{2}(a_k - j b_k)\big(\cos(k\omega t) + j\sin(k\omega t)\big) + \tfrac{1}{2}(a_k + j b_k)\big(\cos(k\omega t) - j\sin(k\omega t)\big) \\[2pt]
-&amp;= a_k \cos(k\omega t) + b_k \sin(k\omega t) .
-\end{aligned}
-</span></p>
-<p>So we have an alternative form for the Fourier series of a real function <span class="math inline">u</span>:</p>
-<p><span class="math display">
-\boxed{\;u(t) = a_0 + \sum_{k=1}^{\infty} a_k \cos(k\omega t) + b_k \sin(k\omega t),\;}
-</span></p>
-<p>where</p>
-<p><span class="math display">
-\begin{aligned}
-a_0 &amp;= c_0 \\[4pt]
-a_k &amp;= 2\operatorname{Re}(c_k) = \frac{2}{T}\int_0^T u(t)\cos(k\omega t)\,\mathrm{d}t \\[4pt]
-b_k &amp;= -2\operatorname{Im}(c_k) = \frac{2}{T}\int_0^T u(t)\sin(k\omega t)\,\mathrm{d}t .
-\end{aligned}
-</span></p>
-</section>
-<section id="example-the-bridge-rectifier" class="level2">
-<h2 class="anchored" data-anchor-id="example-the-bridge-rectifier">Example: the bridge rectifier</h2>
-<p><strong>Example:</strong> Compute the Fourier series of the output of a bridge rectifier driven by a <span class="math inline">1000\,</span>Hz sinusoid,</p>
-<p><span class="math display"> u(t) = \left|\sin(2000\pi t)\right| . </span></p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/rectifier-wave.svg" class="img-fluid figure-img" width="640"></p>
-<figcaption>The rectifier output <span class="math inline">u(t) = |\sin(2000\pi t)|</span>. Rectification folds the negative half-cycles up, so the period is half that of the input.</figcaption>
-</figure>
-</div>
-</div>
-<p>The input frequency is <span class="math inline">1000\,\text{Hz} = 2000\pi\,</span>rad/s. Rectification doubles this, so the fundamental frequency of <span class="math inline">u</span> is</p>
-<p><span class="math display"> \omega_0 = 4000\pi \;\text{rad/s}, \qquad T = \frac{2\pi}{\omega_0} = \frac{1}{2000}\,\text{s}. </span></p>
-<p>On <span class="math inline">[0,T]</span> the argument <span class="math inline">2000\pi t</span> runs from <span class="math inline">0</span> to <span class="math inline">\pi</span>, where the sine is non-negative, so <span class="math inline">u(t) = \sin\!\left(\tfrac{\omega_0}{2}t\right)</span> there and the absolute value can be dropped.</p>
-<p>Start with the DC term:</p>
-<p><span class="math display">
-\begin{aligned}
-c_0 = \frac{1}{T}\int_0^T u(t)\,\mathrm{d}t
-&amp;= 2000\int_0^{1/2000} \sin(2000\pi t)\,\mathrm{d}t \\[6pt]
-&amp;= 2000\left[\frac{-\cos(2000\pi t)}{2000\pi}\right]_0^{1/2000} \\[6pt]
-&amp;= \frac{1}{\pi}\Big(\cos(0) - \cos(\pi)\Big) = \frac{2}{\pi} .
-\end{aligned}
-</span></p>
-<p>Now the general coefficient:</p>
-<p><span class="math display">
-\begin{aligned}
-c_k = \frac{1}{T}\int_0^T u(t)\,e^{-jk\omega_0 t}\,\mathrm{d}t
-&amp;= \frac{\omega_0}{2\pi}\int_0^{2\pi/\omega_0} \sin\!\left(\frac{\omega_0}{2}t\right) e^{-jk\omega_0 t}\,\mathrm{d}t \\[6pt]
-&amp;= \frac{\omega_0}{2\pi}\int_0^{2\pi/\omega_0} \frac{1}{2j}\left(e^{\,j\frac{\omega_0}{2}t} - e^{-j\frac{\omega_0}{2}t}\right) e^{-jk\omega_0 t}\,\mathrm{d}t \\[6pt]
-&amp;= \frac{\omega_0}{4\pi j}\int_0^{2\pi/\omega_0} \left(e^{\,j\frac{\omega_0}{2}(1-2k)t} - e^{-j\frac{\omega_0}{2}(1+2k)t}\right)\mathrm{d}t \\[6pt]
-&amp;= \frac{\omega_0}{4\pi j}\left[\frac{2\,e^{\,j\frac{\omega_0}{2}(1-2k)t}}{j\omega_0(1-2k)} + \frac{2\,e^{-j\frac{\omega_0}{2}(1+2k)t}}{j\omega_0(1+2k)}\right]_0^{2\pi/\omega_0} .
-\end{aligned}
-</span></p>
-<p>At <span class="math inline">t = 2\pi/\omega_0</span> the two exponentials are <span class="math inline">e^{\,j\pi(1-2k)}</span> and <span class="math inline">e^{-j\pi(1+2k)}</span>. Both <span class="math inline">1-2k</span> and <span class="math inline">1+2k</span> are odd, so both exponentials equal <span class="math inline">-1</span>:</p>
-<p><span class="math display">
-\begin{aligned}
-c_k &amp;= \frac{\omega_0}{4\pi j}\left(-\frac{4}{j\omega_0}\right)\left(\frac{1}{1-2k} + \frac{1}{1+2k}\right) \\[6pt]
-&amp;= -\frac{1}{\pi j^2}\cdot\frac{(1+2k) + (1-2k)}{(1-2k)(1+2k)} \\[6pt]
-&amp;= \boxed{\;\frac{2}{\pi\left(1-4k^2\right)}\;}
-\end{aligned}
-</span></p>
-<p>Setting <span class="math inline">k=0</span> recovers <span class="math inline">c_0 = 2/\pi</span>.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/rectifier-stem.svg" class="img-fluid figure-img" width="600"></p>
-<figcaption>The Fourier coefficients <span class="math inline">c_k = \dfrac{2}{\pi(1-4k^2)}</span> of the rectifier output, with the phase below. Every coefficient with <span class="math inline">|k|\geq 1</span> is negative, so its phase is <span class="math inline">\pi</span>; the phase is drawn as an odd function of <span class="math inline">k</span>, taking <span class="math inline">-\pi</span> for <span class="math inline">k &gt; 0</span> and <span class="math inline">+\pi</span> for <span class="math inline">k &lt; 0</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>In sine–cosine form, <span class="math inline">b_k = -2\operatorname{Im}(c_k) = 0</span> and <span class="math inline">a_k = 2\operatorname{Re}(c_k)</span>, so</p>
-<p><span class="math display"> u(t) = \frac{2}{\pi} + \sum_{k=1}^{\infty} \frac{4}{\pi\left(1-4k^2\right)}\cos(k\omega_0 t) . </span></p>
-<p>It turns out that the fact the sine series is zero is something we can see straight away from the symmetry of the signal.</p>
-<div id="w-rect" class="widget"></div>
-</section>
-<section id="symmetry-properties-of-the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="symmetry-properties-of-the-fourier-series">Symmetry properties of the Fourier series</h2>
-<p><strong>★ Odd functions:</strong> <span class="math inline">\;f(-x) = -f(x)</span>. Rotational symmetry <span class="math inline">(180^\circ)</span>.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/odd-sym.svg" class="img-fluid figure-img" width="280"></p>
-<figcaption>An odd function: rotational (<span class="math inline">180^\circ</span>) symmetry about the origin.</figcaption>
-</figure>
-</div>
-</div>
-<p><strong>★ Even functions:</strong> <span class="math inline">\;f(-x) = f(x)</span>. Symmetry about <span class="math inline">y</span>-axis.</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/even-sym.svg" class="img-fluid figure-img" width="280"></p>
-<figcaption>An even function: symmetry about the <span class="math inline">y</span>-axis.</figcaption>
-</figure>
-</div>
-</div>
-<p>The Fourier series simplifies for even and odd functions.</p>
-<p><strong>① Odd <span class="math inline">u(t)</span>: calculate <span class="math inline">a_k</span>.</strong></p>
-<p><span class="math display"> a_k = \frac{2}{T}\int_0^T u(t)\cos(k\omega t)\,\mathrm{d}t . </span></p>
-<p><span class="math display"> u(-t)\cos(-k\omega t) = -u(t)\cos(k\omega t) \quad(\text{odd}). </span></p>
-<p>Since <span class="math inline">u(t)</span> &amp; <span class="math inline">\cos(k\omega t)</span> are <span class="math inline">T</span>-periodic, we can shift the limits of integration:</p>
-<p><span class="math display">
-\begin{aligned}
-a_k &amp;= \frac{2}{T}\int_{-T/2}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
-&amp;= \frac{2}{T}\int_{-T/2}^{0} u(t)\cos(k\omega t)\,\mathrm{d}t + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
-&amp;= -\frac{2}{T}\int_{0}^{-T/2} u(t)\cos(k\omega t)\,\mathrm{d}t + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t .
-\end{aligned}
-</span></p>
-<p>Let <span class="math inline">\tau = -t</span>. <span class="math inline">\;\mathrm{d}\tau = -\mathrm{d}t</span>.</p>
-<p><span class="math display">
-\begin{aligned}
-&amp;= +\frac{2}{T}\int_{0}^{T/2} u(-\tau)\cos(-k\omega\tau)\,\mathrm{d}\tau + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t \\[6pt]
-&amp;= -\frac{2}{T}\int_{0}^{T/2} u(\tau)\cos(k\omega\tau)\,\mathrm{d}\tau + \frac{2}{T}\int_{0}^{T/2} u(t)\cos(k\omega t)\,\mathrm{d}t = 0 \\
-&amp;\hphantom{=} \quad (\text{as } u(\tau)\cos(k\omega\tau) \text{ is odd}),
-\end{aligned}
-</span></p>
-<p>So for odd functions, <span class="math inline">\boxed{a_k = 0}</span>. Similarly, <span class="math inline">a_0 = 0</span>, so we get a pure sine series.</p>
-<p>For even functions, a similar argument shows that <span class="math inline">\boxed{b_k = 0}</span> and we get a cosine series <span class="math inline">+</span> DC term.</p>
-</section>
-<section id="example-fourier-series-of-a-square-wave" class="level2">
-<h2 class="anchored" data-anchor-id="example-fourier-series-of-a-square-wave">Example: Fourier series of a square wave</h2>
-<p><strong>Example:</strong> Compute the Fourier series of the square wave illustrated below:</p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/square-wave.svg" class="img-fluid figure-img" width="680"></p>
-<figcaption>The square wave <span class="math inline">u(t)</span> (period <span class="math inline">2\pi</span>, amplitude <span class="math inline">\pm 1</span>). The red bracket marks one period, <span class="math inline">[\tfrac{\pi}{2}, \tfrac{5\pi}{2}]</span>, used for the coefficient integral.</figcaption>
-</figure>
-</div>
-</div>
-<p>The wave is <u>even</u>, so we only need to compute the cosine terms. Here the period is <span class="math inline">T = 2\pi</span>, so <span class="math inline">\omega = \tfrac{2\pi}{T} = 1</span>, giving <span class="math inline">\cos(k\omega t) = \cos(kt)</span> and <span class="math inline">\tfrac{2}{T} = \tfrac{1}{\pi}</span>.</p>
-<p><span class="math display"> a_0 = \frac{1}{2\pi}\int_0^{2\pi} u(t)\,\mathrm{d}t = 0. \qquad \text{No DC offset!} \iff \text{mean is zero.} </span></p>
-<p>Compute the coefficients over the red interval in the figure:</p>
-<p><span class="math display">
-\begin{aligned}
-a_k &amp;= \frac{1}{\pi}\int_{\pi/2}^{5\pi/2} u(t)\cos(kt)\,\mathrm{d}t \\[6pt]
-&amp;= \frac{1}{\pi}\int_{\pi/2}^{3\pi/2} -\cos(kt)\,\mathrm{d}t + \frac{1}{\pi}\int_{3\pi/2}^{5\pi/2} \cos(kt)\,\mathrm{d}t .
-\end{aligned}
-</span></p>
-<p><span class="math display">
-\begin{aligned}
-&amp;= \frac{1}{\pi}\left[-\frac{1}{k}\sin(kt)\right]_{\pi/2}^{3\pi/2} + \frac{1}{\pi}\left[\frac{1}{k}\sin(kt)\right]_{3\pi/2}^{5\pi/2} \\[8pt]
-&amp;= \frac{1}{\pi k}\left(\sin\!\left(\frac{k\pi}{2}\right) + \sin\!\left(\frac{5k\pi}{2}\right) - 2\sin\!\left(\frac{3k\pi}{2}\right)\right) \\[8pt]
-&amp;= \frac{2}{\pi k}\left(\sin\!\left(\frac{k\pi}{2}\right) - \sin\!\left(\frac{3k\pi}{2}\right)\right) .
-\end{aligned}
-</span></p>
-<p>Now,</p>
-<p><span class="math display">
-\begin{aligned}
-\sin\!\left(\frac{3k\pi}{2}\right) &amp;= \sin\!\left(\frac{k\pi}{2} + k\pi\right) \\[4pt]
-&amp;= (-1)^k \sin\!\left(\frac{k\pi}{2}\right) .
-\end{aligned}
-</span></p>
-<p>So if <span class="math inline">k</span> is even, <span class="math inline">a_k = 0</span>.</p>
-<p>If <span class="math inline">k</span> is odd,</p>
-<p><span class="math display"> a_k = \frac{4}{\pi k}\sin\!\left(\frac{k\pi}{2}\right) = 2\operatorname{sinc}\!\left(\frac{k}{2}\right), \qquad \text{where } \operatorname{sinc}(x) := \frac{\sin(\pi x)}{\pi x} . </span></p>
-<p>Let <span class="math inline">k = 2\ell + 1</span> for <span class="math inline">\ell \in \mathbb{Z}</span>.</p>
-<p>Then we have the Fourier series</p>
-<p><span class="math display"> u(t) = \sum_{k\;\text{odd}} 2\operatorname{sinc}\!\left(\frac{k}{2}\right)\cos(kt) . </span></p>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/sinc-stem.svg" class="img-fluid figure-img" width="560"></p>
-<figcaption>The Fourier coefficients <span class="math inline">a_k = 2\operatorname{sinc}(k/2)</span> for the odd harmonics <span class="math inline">k = 2\ell + 1</span>, <span class="math inline">\ell = -6,\dots,6</span>.</figcaption>
-</figure>
-</div>
-</div>
-<div style="text-align:center">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="fig/sinc-phase.svg" class="img-fluid figure-img" width="560"></p>
-<figcaption>The phase of the same coefficients. Each <span class="math inline">a_k</span> is real, so the phase is <span class="math inline">0</span> where <span class="math inline">a_k &gt; 0</span> and <span class="math inline">\pi</span> where <span class="math inline">a_k &lt; 0</span>. It is drawn as an odd function of <span class="math inline">k</span>, taking <span class="math inline">-\pi</span> for <span class="math inline">k&gt;0</span> and <span class="math inline">+\pi</span> for <span class="math inline">k&lt;0</span>.</figcaption>
-</figure>
-</div>
-</div>
-<p>Below is the square-wave builder for the square wave of this example — drag the slider to add harmonics and watch the Gibbs overshoot near the jumps (the red dot marks the persistent overshoot peak).</p>
-<div id="w-square" class="widget"></div>
-<!-- NOTE: the reused square-wave builder renders the ODD (sine-series) square wave, (4/π)Σ sin((2n−1)x)/(2n−1), whereas this worked example is the EVEN (cosine-series) square wave — a quarter-period shift. The Gibbs behaviour illustrated is identical. Flagged in case you want the widget's phase matched to the even wave. -->
-</section>
-<section id="properties-of-the-fourier-series" class="level2">
-<h2 class="anchored" data-anchor-id="properties-of-the-fourier-series">Properties of the Fourier series</h2>
-<p><strong>1. Coefficients depend linearly on signal:</strong></p>
-<p><span class="math display"> c_{1,k} = \frac{1}{T}\int_0^T u_1(t)\,\overline{\phi}_k(t)\,\mathrm{d}t, \qquad c_{2,k} = \frac{1}{T}\int_0^T u_2(t)\,\overline{\phi}_k(t)\,\mathrm{d}t . </span></p>
-<p>The Fourier coefficient of <span class="math inline">\alpha u_1 + \beta u_2</span> is</p>
-<p><span class="math display">
-\begin{aligned}
-&amp;\frac{1}{T}\int_0^T \alpha u_1(t)\,\overline{\phi}_k(t)\,\mathrm{d}t + \frac{1}{T}\int_0^T \beta u_2(t)\,\overline{\phi}_k(t)\,\mathrm{d}t \\[4pt]
-&amp;= \alpha c_{1,k} + \beta c_{2,k} .
-\end{aligned}
-</span></p>
+<p>This only works when the Fourier transform integral converges, but we saw last week for the Laplace transform:</p>
+<p><span class="math display"> y(t) = h(t) * u(t) \;\rightsquigarrow\; Y(s) = H(s)\,U(s). </span></p>
+<p>So we can reuse our definition of the transfer function:</p>
 <div class="note">
-<p>Add and scale signals <span class="math inline">\longrightarrow</span> add and scale Fourier coefficients.</p>
+<p>The transfer function of a system is the Laplace transform of its impulse response.</p>
 </div>
-<p><strong>2. Time shift <span class="math inline">\rightsquigarrow</span> rotation.</strong> (Remember the pure delay!)</p>
-<p>If <span class="math inline">c_k = \dfrac{1}{T}\displaystyle\int_0^T u(t)\,\overline{\phi}_k(t)\,\mathrm{d}t</span>, then</p>
-<p><span class="math display">
-\begin{aligned}
-\frac{1}{T}\int_0^T u(t-\tau)\,\overline{\phi}_k(t)\,\mathrm{d}t
-&amp;= \frac{1}{T}\int_{-\tau}^{T-\tau} u(\mu)\,\overline{\phi}_k(\mu+\tau)\,\mathrm{d}\mu
-&amp;&amp; \left[\text{let } \mu = t-\tau,\; \mathrm{d}\mu = \mathrm{d}t,\; t = \mu+\tau\right] \\[6pt]
-&amp;= \frac{1}{T}\int_{-\tau}^{T-\tau} u(\mu)\,e^{-jk\omega(\mu+\tau)}\,\mathrm{d}\mu \\[6pt]
-&amp;= e^{-jk\omega\tau}\,c_k .
-\end{aligned}
-</span></p>
-<div class="note">
-<p>Rotates the vector <span class="math inline">c_k</span> by <span class="math inline">e^{-jk\omega\tau}</span>.</p>
-</div>
-<p><strong>3. Parseval’s theorem.</strong></p>
-<p>Can we calculate <span class="math inline">\|u\|_P</span> directly from the Fourier coefficients of <span class="math inline">u</span>?</p>
-<p><span class="math display">
-\begin{aligned}
-\|u\|_P^2 &amp;= \frac{1}{T}\int_0^T |u(t)|^2\,\mathrm{d}t \\[6pt]
-&amp;= \frac{1}{T}\int_0^T \left(\sum_k c_k \phi_k(t)\right)\overline{\left(\sum_\ell c_\ell \phi_\ell(t)\right)}\,\mathrm{d}t \\[6pt]
-&amp;= \sum_k \sum_\ell c_k \bar{c}_\ell\, \underbrace{\frac{1}{T}\int_0^T \phi_k(t)\,\overline{\phi_\ell(t)}\,\mathrm{d}t}_{=\,\langle \phi_k, \phi_\ell\rangle\, =\, 0 \text{ for } k \neq \ell} \\[6pt]
-&amp;= \sum_k |c_k|^2\, \underbrace{\langle \phi_k, \phi_k\rangle}_{=\,1} \\[6pt]
-&amp;= \sum_k |c_k|^2 .
-\end{aligned}
-</span></p>
-<p>This is Parseval’s theorem:</p>
-<p><span class="math display"> \boxed{\;\|u\|_P^2 = \sum_{k=-\infty}^{\infty} |c_k|^2\;} </span></p>
+<p>Our previous definition of a transfer function, the Fourier transform of the impulse response, is usually known as the <u>frequency response</u>.</p>
+<p>The Laplace version lets us calculate the transfer function of an unstable system, whose impulse response grows exponentially:</p>
+<p><span class="math display"> \mathcal{L}\left(e^{pt}\right)(s) = \frac{1}{s - p}, \qquad p &gt; 0. </span></p>
+<p>An unstable impulse response gives a right half plane pole.</p>
+<p>We can now complete our stability catalogue:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
+<tbody>
+<tr class="odd">
+<td>Exponentially stable:</td>
+<td>poles in the open left half plane</td>
+</tr>
+<tr class="even">
+<td>Marginally stable:</td>
+<td>poles in the closed left half plane, at least one pole on the imaginary axis, no repeated poles on the imaginary axis.</td>
+</tr>
+<tr class="odd">
+<td>Unstable:</td>
+<td>at least one pole in the right half plane.</td>
+</tr>
+<tr class="even">
+<td>BIBO stable:</td>
+<td><span class="math inline">\displaystyle\int_{-\infty}^{\infty}\lvert h(t)\rvert\,\mathrm{d}t &lt; \infty</span></td>
+</tr>
+<tr class="odd">
+<td colspan="2">Exponential stability <span class="math inline">\Rightarrow</span> BIBO stability.</td>
+</tr>
+<tr class="even">
+<td colspan="2">BIBO stable &amp; no pole/zero cancellations <span class="math inline">\Rightarrow</span> exponential stability.</td>
+</tr>
+</tbody>
+</table>
+<p>We can check pole locations by factorising the denominator of the transfer function:</p>
+<p><span class="math display"> \frac{s - 1}{\underbrace{(s + 1)}_{\text{stable}}\underbrace{(s^2 + s + 1)}_{\text{stable}}\underbrace{(s - 2)}_{\text{unstable}}} </span></p>
+<p>To calculate the corresponding time domain response, however, we need to separate into components in the transform table. This is called Partial Fraction Expansion.</p>
+<!-- CHECK: section heading below is not in the handwriting. It is the second item of the
+"This week" list on page 1, added so the table of contents has an entry for pages 4–8.
+Delete it if unwanted. -->
 </section>
-<section id="example-the-rlc-circuit" class="level2">
-<h2 class="anchored" data-anchor-id="example-the-rlc-circuit">Example: the RLC circuit</h2>
-<p><strong>Example:</strong> Consider the RLC circuit from Lecture 1.</p>
-<p><span class="math display"> v(t) = R\,i(t) + L\frac{\mathrm{d}i(t)}{\mathrm{d}t} + \frac{1}{C}\int_{-\infty}^{t} i(\tau)\,\mathrm{d}\tau </span></p>
-<p>First, let’s see how a single harmonic voltage maps through the system. Let <span class="math inline">v(t) = e^{\,jk\omega t} = \phi_k(t)</span> and search for <span class="math inline">i(t) = I_k e^{\,jk\omega t}</span>.</p>
-<p><span class="math display"> e^{\,jk\omega t} = R I_k e^{\,jk\omega t} + I_k\,jk\omega L\,e^{\,jk\omega t} + \frac{1}{C}\frac{I_k}{jk\omega}\,e^{\,jk\omega t} . </span></p>
-<p><span class="math display"> 1 = I_k \underbrace{\left(R + jk\omega L + \frac{1}{C\,jk\omega}\right)}_{Z(jk\omega)} </span></p>
-<p><span class="math display"> I_k = \frac{1}{Z(jk\omega)} . \qquad\text{So}\qquad \phi_k \;\longmapsto\; \frac{\phi_k}{Z(j\omega k)} . </span></p>
-<p>Now, let’s use this result to solve for <span class="math inline">i(t)</span> when <span class="math inline">v(t)</span> is the square wave from the previous example.</p>
-<p><span class="math display"> v(t) = \sum_{k\;\text{odd}} 2\operatorname{sinc}\!\left(\frac{k}{2}\right)\cos(kt) </span></p>
+<section id="inverse-laplace-transforms-using-partial-fractions" class="level2">
+<h2 class="anchored" data-anchor-id="inverse-laplace-transforms-using-partial-fractions">Inverse Laplace transforms using partial fractions</h2>
+<section id="example-1-simple-poles" class="level3">
+<h3 class="anchored" data-anchor-id="example-1-simple-poles">Example 1: simple poles</h3>
+<!-- CHECK: p4 and p5 write the denominator as s^2 + 2s + 3, but (s+1)(s+2) = s^2 + 3s + 2,
+and s^2 + 2s + 3 has complex roots -1 ± j√2. Everything after the first line uses (s+1)(s+2).
+Typeset as s^2 + 3s + 2 in both places. -->
+<p><span class="math display"> \frac{1}{s^2 + 3s + 2} = \frac{1}{(s + 1)(s + 2)}. </span></p>
+<p>The residue or cover-up method splits this into two terms:</p>
+<p><span class="math display"> \frac{A}{s + 1} + \frac{B}{s + 2}. </span></p>
+<p>To find <span class="math inline">A</span>: cover up the <span class="math inline">s + 1</span> part:</p>
+<p><span class="math display"> \frac{1}{\colorbox{#555555}{\(\color{white}s+1\)}\,(s + 2)} </span></p>
+<p>and plug in the value of the covered pole: <span class="math inline">s = -1</span>.</p>
+<p>This gives <span class="math inline">A = \dfrac{1}{1} = 1</span>. (This is called a residue in complex analysis).</p>
+<p>To find <span class="math inline">B</span>: repeat with the <span class="math inline">s + 2</span> pole:</p>
+<p><span class="math display"> \frac{1}{(s + 1)\,\colorbox{#555555}{\(\color{white}s+2\)}} </span></p>
+<p>Plug in <span class="math inline">s = -2</span> to get <span class="math inline">B = \dfrac{1}{-1} = -1</span>.</p>
+<p>So we have</p>
+<p><span class="math display"> \frac{1}{s + 1} - \frac{1}{s + 2}. </span></p>
+<p>Let’s check this is correct:</p>
+<!-- CHECK: p4 writes the numerator as "s+2 − s+1". Typeset with brackets, (s+2) − (s+1),
+which gives the 1 on the right. -->
+<p><span class="math display"> \frac{(s + 2) - (s + 1)}{(s + 1)(s + 2)} = \frac{1}{(s + 1)(s + 2)}, </span></p>
+<p>which is what we started with.</p>
+<p>We can now calculate the inverse Laplace transform by matching with table entries: in this case,</p>
+<p><span class="math display"> \frac{1}{s + p} \;\rightsquigarrow\; e^{-pt}. </span></p>
+<p>So the time domain signal corresponding to</p>
+<p><span class="math display"> \frac{1}{s^2 + 3s + 2} = Y(s) </span></p>
+<p>is</p>
+<p><span class="math display"> y(t) = e^{-t} - e^{-2t}, \qquad t \ge 0. </span></p>
+</section>
+<section id="example-2-repeated-pole" class="level3">
+<h3 class="anchored" data-anchor-id="example-2-repeated-pole">Example 2: repeated pole</h3>
+<!-- CHECK: the handwriting labels the source v(t) and the output v_c(t). The text uses
+U(s) and Y(s), so the figure is labelled u(t) and y(t) under the course notation. The same
+applies to Example 3. -->
+<div style="text-align:center">
+<p><img src="circuit-rlc-ex2.svg" class="img-fluid" alt="Series RLC circuit: 10 ohm, 1 H, 40 mF, input u(t), output y(t) across the capacitor." width="420"></p>
+</div>
+<p>Transfer function is</p>
+<p><span class="math display"> G(s) = \frac{25}{s^2 + 10s + 25}. </span></p>
+<p>Input is a step, so <span class="math inline">U(s) = \dfrac{1}{s}</span>.</p>
 <p><span class="math display">
-\left.\begin{aligned}
-a_k &amp;= 2\operatorname{Re}(c_k) \\
-b_k &amp;= -2\operatorname{Im}(c_k)
-\end{aligned}\right\}
-\implies c_k = \tfrac{1}{2}\left(a_k - j b_k\right) .
+\begin{aligned}
+Y(s) &amp;= G(s)\,U(s) \\[6pt]
+     &amp;= \frac{25}{s(s + 5)^2} = \frac{A}{s} + \frac{B}{s + 5} + \frac{C}{(s + 5)^2}.
+\end{aligned}
+\qquad(1)
 </span></p>
-<p>So</p>
-<p><span class="math display"> v(t) = \sum_{k\;\text{odd}} \operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t} . </span></p>
-<p>Then we have, by superposition,</p>
-<p><span class="math display"> i(t) = \sum_{k\;\text{odd}} \frac{\operatorname{sinc}\!\left(\frac{k}{2}\right) e^{\,jk\omega t}}{Z(jk\omega)} . </span></p>
-<p>The widget below builds this output current harmonic by harmonic. The component values put the natural frequency at <span class="math inline">\omega_n = 1/\sqrt{LC} = 2</span> rad/s, between the first and third harmonics, so the first few odd harmonics pass with decreasing weight. Drag the slider to add harmonics and watch both waveforms build up: the input (navy) sharpens towards the square wave (with Gibbs overshoot), while the output (brick) — each harmonic scaled by <span class="math inline">1/Z(jk\omega)</span> — grows into a smooth, filtered wave that never develops the sharp edges.</p>
-<div id="w-rlc-out" class="widget"></div>
-<script src="phasor-widgets.js"></script>
+<p>We can find <span class="math inline">A</span> &amp; <span class="math inline">C</span> using cover-up:</p>
+<p><span class="math display"> A = \left.\frac{25}{(s + 5)^2}\right|_{s = 0} = 1 </span></p>
+<p><span class="math display"> C = \left.\frac{25}{s}\right|_{s = -5} = -5. </span></p>
+<p>For <span class="math inline">B</span>, from (1) we have</p>
+<p><span class="math display"> 25 = A(s + 5)^2 + Bs(s + 5) + Cs. </span></p>
+<p>The <span class="math inline">s^2</span> coefficient is <span class="math inline">A + B = 0</span>, so <span class="math inline">B = -1</span>.</p>
+<p>So we have</p>
+<p><span class="math display"> Y(s) = \frac{1}{s} - \frac{1}{s + 5} - \frac{5}{(s + 5)^2}. </span></p>
+<p>Using the transform table,</p>
+<p><span class="math display"> y(t) = 1 - e^{-5t} - 5te^{-5t}, \qquad t \ge 0. </span></p>
+</section>
+<section id="example-3-complex-pair" class="level3">
+<h3 class="anchored" data-anchor-id="example-3-complex-pair">Example 3: complex pair</h3>
+<div style="text-align:center">
+<p><img src="circuit-rlc-ex3.svg" class="img-fluid" alt="Series RLC circuit: 6 ohm, 1 H, 40 mF, input u(t), output y(t) across the capacitor." width="420"></p>
+</div>
+<p>Transfer function is</p>
+<p><span class="math display"> G(s) = \frac{25}{s^2 + 6s + 25}. </span></p>
+<p>Input is a step, so <span class="math inline">U(s) = \dfrac{1}{s}</span>.</p>
+<p><span class="math display"> Y(s) = \frac{25}{s\underbrace{(s^2 + 6s + 25)}}. </span></p>
+<p><span class="math display"> b^2 - 4ac = 36 - 100 &lt; 0. </span></p>
+<p>Underdamped, so the expansion is</p>
+<p><span class="math display"> Y(s) = \frac{A}{s} + \frac{Bs + C}{s^2 + 6s + 25}. </span></p>
+<p>Use cover-up to find <span class="math inline">A</span>:</p>
+<p><span class="math display"> A = \left.\frac{25}{s^2 + 6s + 25}\right|_{s = 0} = 1. </span></p>
+<p>Coefficient matching:</p>
+<p><span class="math display"> 25 = (s^2 + 6s + 25) + s(Bs + C) </span></p>
+<p><span class="math display">
+\begin{aligned}
+s^2 \text{ coefficient:} &amp;\quad 0 = 1 + B. &amp;\quad B &amp;= -1 \\[4pt]
+s \text{ coefficient:}   &amp;\quad 0 = 6 + C. &amp;\quad C &amp;= -6.
+\end{aligned}
+</span></p>
+<p><span class="math display"> Y(s) = \frac{1}{s} - \frac{(s + 6)}{s^2 + 6s + 25}. </span></p>
+<p>Now complete the square:</p>
+<p><span class="math display">
+\begin{aligned}
+Y(s) &amp;= \frac{1}{s} - \frac{s + 6}{(s + 3)^2 + 16} \\[8pt]
+     &amp;= \frac{1}{s} - \frac{s + 3}{(s + 3)^2 + 16} - \frac{3}{(s + 3)^2 + 16} \\[8pt]
+     &amp;= \frac{1}{s} - \frac{s + 3}{(s + 3)^2 + 16} - \frac{3}{4}\,\frac{4}{(s + 3)^2 + 16}.
+\end{aligned}
+</span></p>
+<p>Now match with the table:</p>
+<p><span class="math display"> y(t) = \left(1 - e^{-3t}\left(\cos 4t + 0.75\sin 4t\right)\right), \qquad t \ge 0 </span></p>
+</section>
+<section id="example-4" class="level3">
+<h3 class="anchored" data-anchor-id="example-4">Example 4</h3>
+<p><span class="math display"> Y(s) = \frac{2s}{(s + 2)(s^2 + 4)} = \frac{A}{s + 2} + \frac{Bs + C}{s^2 + 4}. </span></p>
+<p>Cover-up gives</p>
+<p><span class="math display"> A = \left.\frac{2s}{(s^2 + 4)}\right|_{s = -2} = \frac{-4}{8} = -\frac{1}{2}. </span></p>
+<p>Coefficient matching:</p>
+<p><span class="math display"> 2s = A(s^2 + 4) + (Bs + C)(s + 2). </span></p>
+<p><span class="math display">
+\begin{aligned}
+s^2 \text{ coefficient:} &amp;\quad 0 = A + B. &amp;\quad B &amp;= \tfrac{1}{2}. \\[4pt]
+s^0 \text{ coefficient:} &amp;\quad 0 = 4A + 2C. &amp;\quad C &amp;= 1.
+\end{aligned}
+</span></p>
+<p><span class="math display"> Y(s) = \frac{-\tfrac{1}{2}}{s + 2} + \frac{\tfrac{1}{2}s + 1}{s^2 + 4} </span></p>
+<p><span class="math display"> y(t) = -\frac{1}{2}e^{-2t} + \frac{1}{2}\cos 2t + \frac{1}{2}\sin 2t, \qquad t \ge 0. </span></p>
+</section>
+<section id="example-5" class="level3">
+<h3 class="anchored" data-anchor-id="example-5">Example 5</h3>
+<p><span class="math display"> Y(s) = \frac{s^2}{s^2 + 6s + 25} </span></p>
+<p><span class="math display">
+\begin{aligned}
+Y(s) &amp;= \frac{s^2 + 6s + 25}{s^2 + 6s + 25} - \frac{(6s + 25)}{s^2 + 6s + 25} \\[8pt]
+     &amp;= 1 - \frac{6(s + 3) + 7}{(s + 3)^2 + 16} \\[8pt]
+     &amp;= 1 - 6\,\frac{s + 3}{(s + 3)^2 + 16} - \frac{7}{4}\,\frac{4}{(s + 3)^2 + 16}
+\end{aligned}
+</span></p>
+<p><span class="math display"> y(t) = \delta(t) - e^{-3t}\left(6\cos 4t + \frac{7}{4}\sin 4t\right), \qquad t \ge 0. </span></p>
+</section>
+<section id="summary-table-of-decompositions" class="level3">
+<h3 class="anchored" data-anchor-id="summary-table-of-decompositions">Summary table of decompositions</h3>
+<p><span class="math display">
+\begin{aligned}
+\frac{1}{(s + 1)(s + 2)} &amp;= \frac{A}{s + 1} + \frac{B}{s + 2}. \\[10pt]
+\frac{25}{s(s + 5)^2} &amp;= \frac{A}{s} + \frac{B}{s + 5} + \frac{C}{(s + 5)^2}. \\[10pt]
+\frac{25}{s(s^2 + 6s + 25)} &amp;= \frac{A}{s} + \frac{Bs + C}{s^2 + 6s + 25}. \\[10pt]
+\frac{2s}{(s + 2)(s^2 + 4)} &amp;= \frac{A}{s + 2} + \frac{Bs + C}{s^2 + 4}. \\[10pt]
+\frac{s^2}{s^2 + 6s + 25} &amp;= 1 + \frac{As + B}{s^2 + 6s + 25}.
+\end{aligned}
+</span></p>
+</section>
+</section>
+<section id="system-zeros" class="level2">
+<h2 class="anchored" data-anchor-id="system-zeros">System zeros</h2>
+<p>So far, we have only looked at the poles of the transfer function (the roots of the denominator). In the time domain, these give decaying or growing exponentials.</p>
+<!-- CHECK: p9 leaves about a third of the page blank at this point. Nothing is typeset
+here. If a sketch was meant to go in the gap, it is missing from the source. -->
+<p>What about the <u>roots of the numerator</u>? These are called the <u>zeros</u> of the system.</p>
+<p>Intuitively, zeros tell us certain inputs are blocked by the system and don’t appear at the output. Let’s see how this works with a couple of examples. We’ll use mechanical examples as they are a lot easier to visualise in this case, but a good exercise is to find equivalent RLC circuit examples.</p>
+<section id="example-6" class="level3">
+<h3 class="anchored" data-anchor-id="example-6">Example 6</h3>
+<div style="text-align:center">
+<p><img src="fig-mech-plate.svg" class="img-fluid" alt="Mass m joined to a moving plate by a spring and a damper in parallel. The mass position is y(t) and the plate position is u(t)." width="420"></p>
+</div>
+<p>Damper force is proportional to velocity:</p>
+<p><span class="math display"> f_d = k_d(\dot{u} - \dot{y}). </span></p>
+<p>Spring force is proportional to <span class="math inline">y - u</span>:</p>
+<p><span class="math display"> f_s = k_s(u - y). </span></p>
+<p>Newton’s 2nd law:</p>
+<p><span class="math display">
+\begin{aligned}
+\ddot{y}m &amp;= f_d + f_s \\[6pt]
+          &amp;= k_d(\dot{u} - \dot{y}) + k_s(u - y).
+\end{aligned}
+</span></p>
+<p>Question: can we move the plate so that the damper force and spring force cancel and the mass stays still?</p>
+<p>Intuitively: if the spring is one unit away from rest, the spring pulls it back and the damper resists this motion. For the forces to match, the closer the plate, the slower it must move.</p>
+<p>Let’s try and find this input using the Laplace transform.</p>
+<!-- CHECK: p10 has no sign between m ÿ and k_d ẏ. Typeset with +, which follows from
+Newton's law on the line above and from the transformed equation below. -->
+<p><span class="math display"> m\ddot{y} + k_d\dot{y} + k_s y = k_d\dot{u} + k_s u </span></p>
+<p><span class="math display">
+\begin{aligned}
+m\left(s^2Y(s) - \dot{y}(0) - sy(0)\right) &amp;+ k_d\left(sY(s) - y(0)\right) + k_sY(s) \\[6pt]
+&amp;= k_d\left(sU(s) - u(0)\right) + k_sU(s).
+\end{aligned}
+</span></p>
+<p>Let’s assume <span class="math inline">\dot{y}(0) = y(0) = 0</span>. Then we have:</p>
+<p><span class="math display"> Y(s) = \frac{(k_ds + k_s)U(s) - k_du(0)}{ms^2 + k_ds + k_s}
+   \qquad \left(\text{note the zero at } s = \frac{-k_s}{k_d}\right). </span></p>
+<p>So if</p>
+<p><span class="math display"> U(s) = \frac{k_du(0)}{k_ds + k_s} = \frac{u(0)}{s + \dfrac{k_s}{k_d}}, \qquad Y(s) = 0. </span></p>
+<p>In the time domain, this is</p>
+<p><span class="math display"> u(t) = u(0)e^{-\frac{k_s}{k_d}t}. </span></p>
+</section>
+<section id="example-7" class="level3">
+<h3 class="anchored" data-anchor-id="example-7">Example 7</h3>
+<div style="text-align:center">
+<p><img src="fig-mech-absorber.svg" class="img-fluid" alt="Mass m1 attached to a wall by spring k1 and damper kd in parallel, driven by force F, with a second mass m2 attached to m1 by spring k2. Positions x1 and x2." width="520"></p>
+</div>
+<p><span class="math display"> m_1\ddot{x}_1 + k_d\dot{x}_1 + k_1x_1 + k_2(x_1 - x_2) = F \qquad(2) </span></p>
+<p><span class="math display"> m_2\ddot{x}_2 + k_2(x_2 - x_1) = 0 \qquad(3) </span></p>
+<p>Suppose <span class="math inline">x_1(0) = \dot{x}_1(0) = \dot{x}_2(0) = 0</span>. Is there a combination of <span class="math inline">F \ne 0</span> and <span class="math inline">x_2(0)</span> such that <span class="math inline">x_1(t) = 0</span> for <span class="math inline">t \ge 0</span>?</p>
+<p>Taking the Laplace transform of (3), we have</p>
+<p><span class="math display"> m_2\Big(s^2X_2(s) - \underbrace{\cancel{\dot{x}_2(0)}}_{=0} - sx_2(0)\Big) + k_2X_2(s) = k_2X_1(s). </span></p>
+<p>The Laplace transform of (2) with zero initial conditions is</p>
+<p><span class="math display"> m_1s^2X_1(s) + k_dsX_1(s) + k_1X_1(s) + k_2X_1(s) = F(s) + k_2X_2(s). </span></p>
+<p>If we set <span class="math inline">X_1(s) = 0</span> in both equations, we have</p>
+<p><span class="math display"> m_2\left(s^2X_2(s) - sx_2(0)\right) + k_2X_2(s) = 0 </span></p>
+<!-- CHECK: p12 writes k_2/m in the denominator of X_2(s) and of F(s). Typeset as k_2/m_2,
+which is what the line above gives and what the cosine frequency uses. -->
+<p><span class="math display"> X_2(s) = \frac{sx_2(0)}{s^2 + \dfrac{k_2}{m_2}} </span></p>
+<p>from (3) and</p>
+<p><span class="math display"> X_2(s) = \frac{-1}{k_2}F(s). </span></p>
+<p>Combining, we have</p>
+<p><span class="math display"> F(s) = \frac{-sk_2x_2(0)}{s^2 + \dfrac{k_2}{m_2}}. </span></p>
+<p>Taking the inverse transform,</p>
+<p><span class="math display"> F(t) = -k_2x_2(0)\cos\left(\sqrt{\frac{k_2}{m_2}}\,t\right). </span></p>
+<!-- CHECK: "the frequency depends only on m_2". The frequency is sqrt(k_2/m_2), so it
+also depends on k_2 (it is independent of m_1, k_1 and k_d). Wording left as written. -->
+<p>The extra mass completely rejects the sinusoidal input <span class="math inline">F</span>, and the frequency depends only on <span class="math inline">m_2</span>, so it can be designed independently of <span class="math inline">m_1</span>. This idea is used in vibration damping, for example tuned mass dampers for earthquake protection in buildings and Stockbridge dampers on power lines.</p>
+</section>
+</section>
+<section id="zeros-in-the-frequency-domain" class="level2">
+<h2 class="anchored" data-anchor-id="zeros-in-the-frequency-domain">Zeros in the frequency domain</h2>
+<p>In the frequency domain, zeros are the opposite of poles.</p>
+<p>Poles give <span class="math inline">-20</span> dB/dec gain after the break frequency, and <span class="math inline">-\frac{\pi}{2}</span> total phase lag.</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/bode-pole-gain.svg" class="img-fluid" alt="Gain of 1/(s+p): flat at 0 dB, then falling at 20 dB per decade after p."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/bode-pole-phase.svg" class="img-fluid" alt="Phase of 1/(s+p): from 0 to −90 degrees, centred on p."></p>
+</div><div class="column" style="width:16%;">
+<p><span class="math display"> \frac{1}{s + p} </span></p>
+</div>
+</div>
+<!-- CHECK: "+π/2 total phase lag". A +π/2 change is a phase lead. Wording left as
+written. -->
+<p>Zeros give <span class="math inline">+20</span> dB/dec after the break frequency, and <span class="math inline">+\frac{\pi}{2}</span> total phase lead.</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/bode-zero-gain.svg" class="img-fluid" alt="Gain of a zero: flat, then rising at 20 dB per decade after p."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/bode-zero-phase.svg" class="img-fluid" alt="Phase of a zero: from 0 to 90 degrees, centred on p."></p>
+</div>
+</div>
+<p>Complex zeros give the opposite behaviour to complex poles.</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/bode-czero-gain.svg" class="img-fluid" alt="Gain of a complex zero pair: flat, a dip near omega_n, then rising at 40 dB per decade."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/bode-czero-phase.svg" class="img-fluid" alt="Phase of a complex zero pair: from 0 to 180 degrees, centred on omega_n."></p>
+</div>
+</div>
+<p>What about poles &amp; zeros on the imaginary axis?</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/bode-int-gain.svg" class="img-fluid" alt="Gain of 1/s: a straight line falling at 20 dB per decade."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/bode-int-phase.svg" class="img-fluid" alt="Phase of 1/s: constant at −90 degrees."></p>
+</div><div class="column" style="width:16%;">
+<p><span class="math display"> \frac{1}{s} </span> (integrator)</p>
+</div>
+</div>
+<!-- CHECK: p14 gives no transfer function beside the second row (+20 dB/dec, constant
+90°). It is the plot of s. No label typeset. -->
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/bode-diff-gain.svg" class="img-fluid" alt="Gain rising in a straight line at 20 dB per decade."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/bode-diff-phase.svg" class="img-fluid" alt="Phase constant at 90 degrees."></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/bode-impole-gain.svg" class="img-fluid" alt="Gain of 1/((jω)^2+α^2): flat, an infinite peak at α, then falling at 40 dB per decade."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/bode-impole-phase.svg" class="img-fluid" alt="Phase of 1/((jω)^2+α^2): 0 below α, jumping to −180 degrees at α."></p>
+</div><div class="column" style="width:16%;">
+<p><span class="math display"> \frac{1}{(j\omega)^2 + \alpha^2} </span></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/bode-imzero-gain.svg" class="img-fluid" alt="Gain of (jω)^2+α^2: flat, a notch to minus infinity at α, then rising at 40 dB per decade."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/bode-imzero-phase.svg" class="img-fluid" alt="Phase of (jω)^2+α^2: 0 below α, jumping to 180 degrees at α."></p>
+</div><div class="column" style="width:16%;">
+<p><span class="math display"> (j\omega)^2 + \alpha^2. </span></p>
+</div>
+</div>
+<p>We can use these to estimate the Bode diagrams of arbitrary transfer functions.</p>
+<section id="example-8" class="level3">
+<h3 class="anchored" data-anchor-id="example-8">Example 8</h3>
+<!-- CHECK: the handwriting labels the output v(t). Labelled y(t) under the course
+notation. -->
+<div style="text-align:center">
+<p><img src="circuit-rlc-notch.svg" class="img-fluid" alt="Series RLC circuit with input u(t) and output y(t) taken across the series inductor and capacitor." width="340"></p>
+</div>
+<p>The frequency response of the series RLC with the output taken as the voltage across the capacitor and inductor is given by</p>
+<p><span class="math display"> G(j\omega) = \frac{(j\omega)^2LC + 1}{(j\omega)^2LC + j\omega RC + 1} </span></p>
+<p>If we have <span class="math inline">R = 6\,\Omega</span>, <span class="math inline">L = 1\,\mathrm{H}</span>, <span class="math inline">C = 40\,\mathrm{mF}</span>, the transfer function is</p>
+<p><span class="math display"> G(j\omega) = \frac{(j\omega)^2 + 25}{(j\omega)^2 + 6j\omega + 25} </span></p>
+<p>Numerator:</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/ex8-num-gain.svg" class="img-fluid" alt="Gain of the numerator: flat, a notch to minus infinity at 5 rad/s, then rising at 40 dB per decade."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/ex8-num-phase.svg" class="img-fluid" alt="Phase of the numerator: 0 below 5 rad/s, 180 degrees above."></p>
+</div><div class="column" style="width:16%;">
+<p><span class="math display"> (j\omega)^2 + 5^2. </span></p>
+</div>
+</div>
+<p>Denominator:</p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/ex8-den-gain.svg" class="img-fluid" alt="Gain contributed by the denominator: flat with a small peak near 5 rad/s, then falling at 40 dB per decade."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/ex8-den-phase.svg" class="img-fluid" alt="Phase contributed by the denominator: falling from 0 to −180 degrees, centred on 5 rad/s."></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><span class="math display"> (j\omega)^2 + 6j\omega + 25 </span></p>
+</div><div class="column" style="width:55%;">
+<p><span class="math display">
+\begin{aligned}
+\omega_n &amp;= 5\ \text{rad/s}, \\[4pt]
+2\zeta\omega_n &amp;= 6 \\[4pt]
+\zeta &amp;= \frac{6}{10} = 0.6.
+\end{aligned}
+</span></p>
+</div>
+</div>
+<p><u>Add together:</u></p>
+<div class="columns">
+<div class="column" style="width:42%;">
+<p><img src="fig/ex8-sum-gain.svg" class="img-fluid" alt="Gain of G: 0 dB except for a deep notch at 5 rad/s."></p>
+</div><div class="column" style="width:42%;">
+<p><img src="fig/ex8-sum-phase.svg" class="img-fluid" alt="Phase of G: falling towards −90 degrees just below 5 rad/s, jumping to +90 degrees and returning to 0 above it."></p>
+</div>
+</div>
+<p>This is a notch filter – it excludes a narrow range of frequencies around 5 rad/s.</p>
+<p>More on this next week when we look at filter design!</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1257,13 +1290,13 @@ b_k &amp;= -2\operatorname{Im}(c_k)
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../weeks/week03/tutorial2-solutions.pdf" class="pagination-link" aria-label="Tutorial solutions">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial solutions</span>
+      <a href="../../weeks/week08/lab2.pdf" class="pagination-link" aria-label="Lab 2">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Lab 2</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../weeks/week04/tutorial3.pdf" class="pagination-link" aria-label="Tutorial">
-        <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../concepts.html" class="pagination-link" aria-label="Course index">
+        <span class="nav-page-text">Course index</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
