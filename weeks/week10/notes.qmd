@@ -486,7 +486,7 @@ the mains voltage at 100 Hz.
 
 <u>LF interference:</u> breathing adds $\approx 0.2$ Hz oscillation.
 
-[How common noise and error sources affect optical biosensing](https://www.analog.com/en/resources/design-notes/how-common-noise-and-error-sources-affect-optical-biosensing.html)
+For more info, have a look at this artice: [how common noise and error sources affect optical biosensing.](https://www.analog.com/en/resources/design-notes/how-common-noise-and-error-sources-affect-optical-biosensing.html)
 
 To deal with these constraints, we have the following filter specification:
 
@@ -526,7 +526,7 @@ n = 3 &\qquad G(s) = \frac{\omega_h^3}{\left(\dfrac{\omega_h^2}{s} + \omega_h\ri
 \end{aligned}
 $$
 
-[Analog Devices MAX30112](https://www.analog.com/en/products/max30112.html)
+For a real example of a heart rate monitor filter, check out this chip: [Analog Devices MAX30112](https://www.analog.com/en/products/max30112.html)
 
 ```{=html}
 <script src="filter-widgets.js"></script>
