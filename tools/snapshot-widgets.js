@@ -32,7 +32,8 @@ const WEEK = process.argv[2] || "week01";
 // Most weeks keep their widgets in phasor-widgets.js; the ones that do not are
 // listed here.
 const SRC_FILE = { week05: "fourier-widgets.js", week06: "bode-widgets.js",
-                   week07: "stability-widgets.js", week08: "laplace-widgets.js" };
+                   week07: "stability-widgets.js", week08: "laplace-widgets.js",
+                   week10: "filter-widgets.js" };
 const SRC = path.join(ROOT, `weeks/${WEEK}/${SRC_FILE[WEEK] || "phasor-widgets.js"}`);
 const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
@@ -144,6 +145,18 @@ const WIDGETS_BY_WEEK = {
       // N is raised from its default 40 so that all three basis curves the top
       // panel labels (w = 1, 3, 6 rad/s) are inside |w| <= N dw and get drawn.
       state: ({ slider }) => { slider(1, 130); }        // slider 1 is N
+    }
+  ],
+  week10: [
+    {
+      id: "w-lp2",
+      caption: "100 Hz square wave through the resonant low-pass at f_n = 500 Hz, zeta = 0.71",
+      state: () => {}                                   // defaults are fine
+    },
+    {
+      id: "w-lphp",
+      caption: "w_h = 1 rad/s, w_l = 10 rad/s: low-pass and high-pass, cascade, sum",
+      state: () => {}                                   // defaults are fine
     }
   ]
 };

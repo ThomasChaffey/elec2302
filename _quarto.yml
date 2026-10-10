@@ -99,6 +99,13 @@ website:
         contents:
           - text: "Notes"
             href: weeks/week09/notes.qmd
+      - section: "Week 10 — Filter design"
+        contents:
+          - text: "Notes"
+            href: weeks/week10/notes.qmd
+          - text: "Tutorial"
+            href: weeks/week10/tutorial7.pdf
+            target: _blank
       - text: "Course index"
         href: concepts.qmd
       - text: "Quiz 1 formula sheet"
