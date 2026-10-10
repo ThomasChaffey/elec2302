@@ -28,13 +28,12 @@ the updated widget is in the first and second order filters section. ": low pass
 types" is typeset as a sub-item of Cascaded filters. -->
 
 1. Intro, motivation
-2. Ideal filters: lowpass, high pass, band pass, band stop, all pass.
+2. Ideal filters: lowpass, highpass, bandpass, bandstop, allpass.
 3. Realisable filter specifications
 4. 1^st^ &amp; 2^nd^ order filters
 5. Audio example.
-6. Cascaded filters: Phono preamp. (Design example 1).
-    * low pass to other types.
-7. Higher order filters: Butterworth. 2^nd^ order: $\zeta = \dfrac{1}{\sqrt{2}}$
+6. Building bandpass and bandstop filters.
+7. Butterworth filters.
 8. Design example 2.
 
 ```{=html}
