@@ -810,7 +810,7 @@ n \text{ odd}  &amp;\qquad G(s) = \frac{\omega_c}{s + \omega_c}\prod_{k=1}^{(n-1
 <p><u>Passband:</u> 30–240 bpm = 0.5 Hz to 4 Hz.</p>
 <p><u>HF interference:</u> mains power oscillates at 50 Hz, ambient light follows the square of the mains voltage at 100 Hz.</p>
 <p><u>LF interference:</u> breathing adds <span class="math inline">\approx 0.2</span> Hz oscillation.</p>
-<p><a href="https://www.analog.com/en/resources/design-notes/how-common-noise-and-error-sources-affect-optical-biosensing.html">How common noise and error sources affect optical biosensing</a></p>
+<p>For more info, have a look at this artice: <a href="https://www.analog.com/en/resources/design-notes/how-common-noise-and-error-sources-affect-optical-biosensing.html">how common noise and error sources affect optical biosensing.</a></p>
 <p>To deal with these constraints, we have the following filter specification:</p>
 <ul>
 <li>At most 3 dB loss at 0.5 Hz and 4 Hz.</li>
@@ -839,7 +839,7 @@ n = 3 &amp;\qquad G(s) = \frac{\omega_h^3}{\left(\dfrac{\omega_h^2}{s} + \omega_
       &amp;\qquad\phantom{G(s)} = \frac{s^3}{(\omega_h + s)(\omega_h^2 + \omega_h s + s^2)}
 \end{aligned}
 </span></p>
-<p><a href="https://www.analog.com/en/products/max30112.html">Analog Devices MAX30112</a></p>
+<p>For a real example of a heart rate monitor filter, check out this chip: <a href="https://www.analog.com/en/products/max30112.html">Analog Devices MAX30112</a></p>
 <script src="filter-widgets.js"></script>
 
 
