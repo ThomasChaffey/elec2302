@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 10 — Lecture notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../weeks/week10/tutorial7.pdf" rel="next">
+<link href="../../weeks/week09/notes.html" rel="prev">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-cf7b1e44051da7d0e5a312b6fd1bb530.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<!--
+  Cookieless, privacy-preserving analytics (GoatCounter).
+
+  SETUP: sign up at https://www.goatcounter.com, pick a site code, and replace
+  YOURCODE below with it. Until you do, this script 404s harmlessly and no
+  counting happens. Free for non-commercial use, which covers a course site.
+
+  What it collects: page path, referrer, browser/OS/screen size, country.
+  No cookies, no cross-site tracking, no personal data stored. Visitors are
+  distinguished by an in-memory hash of IP + User-Agent that is discarded
+  after 8 hours and never written to disk.
+
+  Widget interactions arrive as events named widget-week1-euler,
+  widget-week2-sample and similar, fired from each week's own
+  weeks/<week>/phasor-widgets.js (week 3 uses convolution-widgets.js, giving
+  widget-week3-comb and widget-week3-conv; week 4 gives widget-week4-square,
+  widget-week4-rect and widget-week4-rlc-out; week 5 uses fourier-widgets.js,
+  giving widget-week5-sample and widget-week5-tau; week 6 uses bode-widgets.js,
+  giving widget-week6-pulse-rlc, widget-week6-bode-probe and
+  widget-week6-resonant-peak; week 7 uses stability-widgets.js, giving
+  widget-week7-population and widget-week7-pendulum-undamped; week 8 uses
+  laplace-widgets.js, giving widget-week8-growing; week 9 has no widgets;
+  week 10 uses filter-widgets.js, giving widget-week10-lp2 and
+  widget-week10-lphp). See the "usage tracking" comment block at the top
+  of any of those files for how to read them and what the numbers do and do
+  not mean.
+
+  A PDF cannot report on itself: nothing runs when a reader opens one. Two
+  proxies stand in for it. Clicking the "PDF" link on a notes page fires a
+  click event, named pdf-week3 and so on, via the data-goatcounter-click
+  attribute count.js looks for (pdf-week5 to pdf-week10 for the week 5 to week 10
+  notes). And the site address printed inside each PDF
+  carries ?ref=notes-pdf-week3, so a reader who types it in or follows it back
+  shows up under that referrer. The first counts opening the file, the second
+  counts returning to the site from it; neither counts reading it. The primer
+  page does the same, under pdf-primer and ?ref=notes-pdf-primer.
+
+  To stop your own visits being counted, open the dashboard and use
+  Settings -> "Ignore this browser", or set the ignore-IP option.
+-->
+<script data-goatcounter="https://thomaschaffey.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week10/notes.html">Week 10 — Filter design</a></li><li class="breadcrumb-item"><a href="../../weeks/week10/notes.html">Notes</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1 — Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/slides.html" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2 — Signals as vectors, systems as maps</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/tutorial1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/tutorial1-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3 — Linear, time-invariant systems</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/tutorial2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/tutorial2-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4 — Periodic signals and the Fourier series</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/tutorial3.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/tutorial3-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5 — Aperiodic signals and the Fourier transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/tutorial4.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/tutorial4-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 6 — Transfer functions, Bode diagrams and resonance</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/tutorial5.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/tutorial5-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/lab1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Lab 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7 — System response and stability</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8 — The Laplace transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/tutorial6.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/lab2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Lab 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 9 — System analysis with the Laplace transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 10 — Filter design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/notes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/tutorial7.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course index</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 1 formula sheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/formula-sheet-quiz2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 formula sheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/quiz2-practice-questions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 question bank</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/quiz2-practice-feedback.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 answers and feedback</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/primer/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Primer on RLC circuits</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week10/notes.html">Week 10 — Filter design</a></li><li class="breadcrumb-item"><a href="../../weeks/week10/notes.html">Notes</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 10 — Lecture notes</h1>
+<p class="subtitle lead">Filter design</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="format-links">
+<p><span class="label">Other formats:</span></p>
+<a href="notes.pdf" title="Week 10 lecture notes as a PDF" data-goatcounter-click="pdf-week10" data-goatcounter-title="Week 10 notes PDF opened">📄&nbsp;PDF</a>
+</div>
+<section id="lecture-outline" class="level2">
+<h2 class="anchored" data-anchor-id="lecture-outline">Lecture outline</h2>
+<!-- CHECK: page 1 numbers two items "5." (Audio example, and Cascaded filters). Renumbered
+1–8. "(update week 1 widget)" after "Audio example" is an instruction and is not typeset;
+the updated widget is in the first and second order filters section. ": low pass to other
+types" is typeset as a sub-item of Cascaded filters. -->
+<ol type="1">
+<li>Intro, motivation</li>
+<li>Ideal filters: lowpass, high pass, band pass, band stop, all pass.</li>
+<li>Realisable filter specifications</li>
+<li>1<sup>st</sup> &amp; 2<sup>nd</sup> order filters</li>
+<li>Audio example.</li>
+<li>Cascaded filters: Phono preamp. (Design example 1).
+<ul>
+<li>low pass to other types.</li>
+</ul></li>
+<li>Higher order filters: Butterworth. 2<sup>nd</sup> order: <span class="math inline">\zeta = \dfrac{1}{\sqrt{2}}</span></li>
+<li>Design example 2.</li>
+</ol>
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
+<p>“Filtering” a signal means removing unwanted parts of its frequency spectrum. For example:</p>
+<ul>
+<li>Ferrite beads on cables remove radio frequency interference</li>
+<li>Ripple filters on power supplies smooth converted AC signals</li>
+<li>Suspension filters out road noise/bumps.</li>
+<li>Rumble filters reject slow oscillations caused by warped vinyl records.</li>
+<li>Earthquake vibration suppression that we saw last week</li>
+<li>Anti-aliasing filters before converting analogue to digital.</li>
+<li>And <u>many</u> more. Any piece of electronics is full of filters.</li>
+</ul>
+<p>This lecture will give an introduction to how we design filters from given specifications. This is a broad topic, there is much more to learn!</p>
+</section>
+<section id="ideal-filters" class="level2">
+<h2 class="anchored" data-anchor-id="ideal-filters">Ideal filters</h2>
+<p>An ideal filter has two characteristics:</p>
+<ol type="1">
+<li>Perfect transmission (no distortion) of the signals we want (the “passband”).</li>
+<li>Perfect rejection of the signals we don’t want (the “stopband”).</li>
+</ol>
+<p>There are four ideal filter types:</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img src="fig/ideal-lowpass.svg" class="img-fluid" alt="Ideal lowpass: gain 1 below omega_c, 0 above."></p>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<p><img src="fig/ideal-highpass.svg" class="img-fluid" alt="Ideal highpass: gain 0 below omega_c, 1 above."></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img src="fig/ideal-bandpass.svg" class="img-fluid" alt="Ideal bandpass: gain 1 between omega_1 and omega_2, 0 elsewhere."></p>
+</div><div class="column" style="width:10%;">
+
+</div><div class="column" style="width:45%;">
+<p><img src="fig/ideal-bandstop.svg" class="img-fluid" alt="Ideal bandstop: gain 0 between omega_1 and omega_2, 1 elsewhere."></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:55%;">
+
+</div><div class="column" style="width:45%;">
+<p><img src="fig/ideal-allpass.svg" class="img-fluid" alt="Ideal allpass (buffer): gain 1 at all frequencies."></p>
+</div>
+</div>
+<p>Can we build an ideal filter?</p>
+<p>Let’s look more closely at the ideal lowpass filter. If we consider negative frequencies as well, we have</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span class="math display">
+\begin{aligned}
+G(j\omega) &amp;= \begin{cases} 1, &amp; \lvert\omega\rvert &lt; \omega_c \\ 0, &amp; \lvert\omega\rvert &gt; \omega_c. \end{cases} \\[10pt]
+           &amp;= p_{2\omega_c}(\omega)
+\end{aligned}
+</span></p>
+</div><div class="column" style="width:50%;">
+<p><img src="fig/ideal-lp-twosided.svg" class="img-fluid" alt="G(j omega) equal to 1 between minus omega_c and omega_c, 0 outside."></p>
+</div>
+</div>
+<p>We can find the impulse response of this filter by finding the inverse Fourier transform in our table of transforms:</p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<p><span class="math display">
+\begin{aligned}
+g(t) &amp;= \frac{\sin(\omega_c t)}{\pi t} \\[10pt]
+     &amp;= \frac{\omega_c}{\pi}\,\frac{\sin(\pi T)}{\pi T} \qquad \text{where } T = \frac{\omega_c t}{\pi}. \\[10pt]
+     &amp;= \frac{\omega_c}{\pi}\operatorname{sinc}(T) = \frac{\omega_c}{\pi}\operatorname{sinc}\!\left(\frac{\omega_c t}{\pi}\right).
+\end{aligned}
+</span></p>
+</div><div class="column" style="width:45%;">
+<p><span class="math display">
+\begin{aligned}
+\pi T &amp;= \omega_c t \\[4pt]
+T &amp;= \frac{\omega_c t}{\pi}, \qquad t = \frac{\pi T}{\omega_c}
+\end{aligned}
+</span></p>
+<p><span class="math display"> \text{So } \frac{1}{\pi t} = \frac{\omega_c}{\pi^2 T} = \frac{\omega_c}{\pi}\,\frac{1}{\pi T} </span></p>
+</div>
+</div>
+<!-- CHECK: the axis of the sketch on p4 is labelled h(t), while the equations above use
+g(t). Labelled g(t). Tick labels at multiples of π/ω_c and the peak value ω_c/π are added;
+the handwritten sketch has none. -->
+<div style="text-align:center">
+<p><img src="fig/sinc-impulse.svg" class="img-fluid" alt="The impulse response g(t), a sinc centred on t = 0 with peak omega_c over pi, nonzero for negative and positive time." width="540"></p>
+</div>
+<p>The impulse response goes backwards in time as well as forwards! No surprise, this can’t be built (unless you record the whole signal first then filter it).</p>
+<!-- CHECK: section heading below is not in the handwriting. It is item 3 of the outline on
+page 1, added so the table of contents has an entry for pages 5–6. Delete it if unwanted. -->
+</section>
+<section id="realisable-filter-specifications" class="level2">
+<h2 class="anchored" data-anchor-id="realisable-filter-specifications">Realisable filter specifications</h2>
+<p>So in practice, we need to compromise on the ideal filter characteristics of perfect transmission of the passband and perfect rejection of the stopband. A real low pass filter has an amplitude response in an allowable region:</p>
+<div style="text-align:center">
+<p><img src="fig/spec-region.svg" class="img-fluid" alt="Allowable region for a lowpass gain: hatched forbidden regions above and below the passband up to omega_c, and above the stopband level beyond the transition band. The passband, transition band and stopband are marked on the frequency axis." width="540"></p>
+</div>
+<p>The width of the passband is also known as the bandwidth for a low pass filter. Its precise definition depends on the specification, but commonly it is the frequency where the gain first drops below <span class="math inline">-3</span> dB.</p>
+<p>We have already seen many low pass filters in this course:</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img src="fig/lp1-gain.svg" class="img-fluid" alt="Gain of a first order lowpass: flat, then falling, with the minus 3 dB cutoff at omega_c."></p>
+</div><div class="column" style="width:55%;">
+<p><span class="math display"> \frac{1}{j\omega + \omega_c} </span></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img src="fig/lp2-gain.svg" class="img-fluid" alt="Gain of a second order lowpass: flat, a small peak near omega_n, the minus 3 dB cutoff just above it, then falling."></p>
+</div><div class="column" style="width:55%;">
+<p><span class="math display"> \frac{\omega_n^2}{(j\omega)^2 + 2\omega_n\zeta j\omega + \omega_n^2} </span></p>
+<!-- CHECK: the circuit on p6 labels the input v_in and the output v_out. Labelled u(t) and
+y(t) under the course notation. No component values are given. -->
+<p><img src="circuit-rlc-lowpass.svg" class="img-fluid" alt="Series RLC circuit with input u(t) and output y(t) across the capacitor." width="300"></p>
+</div>
+</div>
+<!-- NEW WIDGET: w-lp2 in filter-widgets.js. The week 1 resonant low-pass widget
+(lecture 1/resonant-lowpass.html) ported into the notes, with the Q slider replaced by a
+damping ratio slider (ζ from 0.025 to 2.5, log scale, start 1/√2) and f_0 renamed f_n. -->
+<div id="w-lp2" class="widget"></div>
+<p>We’ve also seen high pass filters (although they have infinite gain at high frequency, which of course can’t actually be built).</p>
+<!-- CHECK: jω + ω_c and ((jω)^2 + 2ω_nζjω + ω_n^2)/ω_n^2 are typeset as written. Neither
+is proper: their gains rise without bound, as the sketches show. They are the reciprocals of
+the two lowpass filters above. -->
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img src="fig/hp1-gain.svg" class="img-fluid" alt="Gain of j omega plus omega_c: flat, then rising after omega_c."></p>
+</div><div class="column" style="width:55%;">
+<p><span class="math display"> j\omega + \omega_c </span></p>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<p><img src="fig/hp2-gain.svg" class="img-fluid" alt="Gain of a complex zero pair: flat, a dip, then rising."></p>
+</div><div class="column" style="width:55%;">
+<p><span class="math display"> \frac{(j\omega)^2 + 2\omega_n\zeta j\omega + \omega_n^2}{\omega_n^2} </span></p>
+</div>
+</div>
+</section>
+<section id="design-example-1-riaa-phono-equalisation" class="level2">
+<h2 class="anchored" data-anchor-id="design-example-1-riaa-phono-equalisation">Design example 1: RIAA phono equalisation</h2>
+<p>A turntable converts a mechanical signal cut into a vinyl record into an electrical signal using a stylus and cartridge:</p>
+<div style="text-align:center">
+<p><img src="fig-cartridge.svg" class="img-fluid" alt="Moving magnet cartridge: a magnet on the stylus cantilever sits between two coils inside the cartridge. The stylus tip follows the groove, the signal in the vinyl, as the record moves." width="560"></p>
+</div>
+<p>(A moving magnet style cartridge).</p>
+<p>Low frequencies move slower, so large grooves must be cut to achieve the same stylus velocity. This reduces the length of signal that can be represented on the vinyl. For this reason, it is standard to filter the signal before cutting the vinyl, to reduce the amplitude at low frequencies. At playback, this filtering is reversed, by a <u>phono stage</u>. The most common specification is RIAA (Recording Industry Association of America). This specification also boosts high frequencies at recording, which are then attenuated at playback. This means surface noise (pops, clicks) are also attenuated.</p>
+<!-- CHECK: p8 pastes the Wikipedia RIAA equalisation plot and annotates it by hand. The
+figure here is redrawn from the transfer function below (k = 13197), with the pole, zero and
+−20 dB/dec annotations placed at the exact break frequencies. If you want the Wikipedia
+image itself, it is the first embedded image on p8 of the source PDF. -->
+<div style="text-align:center">
+<p><img src="fig/riaa.svg" class="img-fluid" alt="RIAA playback curve falling from about +19 dB at 20 Hz to about −20 dB at 20 kHz through 0 dB at 1 kHz, with the recording curve its mirror image. Poles marked at 50 Hz and 2122 Hz and a zero at 500 Hz on the playback curve, with a −20 dB per decade slope marked." width="620"></p>
+</div>
+<p>The curve is specified by three first order break frequencies:</p>
+<p><span class="math display">
+\begin{aligned}
+f_1 &amp;= 50.05\ \text{Hz} &amp;&amp;= 314.5\ \text{rad/s} &amp;&amp;(\text{pole}) \\[4pt]
+f_2 &amp;= 500.5\ \text{Hz} &amp;&amp;= 3145\ \text{rad/s}  &amp;&amp;(\text{zero}) \\[4pt]
+f_3 &amp;= 2122\ \text{Hz}  &amp;&amp;= 13333\ \text{rad/s} &amp;&amp;(\text{pole}).
+\end{aligned}
+</span></p>
+<p>It is customary to normalise by setting the gain to 0 dB at <span class="math inline">1\ \text{kHz} = 6283\ \text{rad/s}</span>.</p>
+<p>What is the transfer function of this filter?</p>
+<p>We can read the poles and zeros directly from the specification:</p>
+<p><span class="math display"> G(j\omega) = \frac{(j\omega + 3145)\,k}{(j\omega + 314.5)(j\omega + 13333)} </span></p>
+<p>To find the gain <span class="math inline">k</span>, we substitute <span class="math inline">\omega = 6283</span> and find <span class="math inline">\lvert G(j\omega)\rvert</span>. First, find the gain of each component:</p>
+<p><span class="math display"> \lvert(j\omega + p)\rvert = \sqrt{\omega^2 + p^2} </span></p>
+<!-- CHECK: p9 gives 14740.0 for the pole at 13333. sqrt(6283^2 + 13333^2) = 14739.2.
+Typeset 14739.2. -->
+<p><span class="math display">
+\left\{
+\begin{aligned}
+&amp;\text{pole at } 314.5\text{:} &amp;\quad 6291.0 &amp;= p_1 \\[4pt]
+&amp;\text{pole at } 13333\text{:} &amp;\quad 14739.2 &amp;= p_2 \\[4pt]
+&amp;\text{zero at } 3145\text{:}  &amp;\quad 7026.2 &amp;= z_1.
+\end{aligned}
+\right.
+</span></p>
+<!-- CHECK: p9 writes "0.(7.57?×10^-5) k = 1"; the leading "0." looks like a false start
+and the fourth digit is unclear. 7026.2/(6291.0 × 14739.2) = 7.578×10^-5. Typeset as below.
+k = 13197 is unchanged. -->
+<p><span class="math display"> \text{Total gain} = \frac{k z_1}{p_1 p_2} = \left(7.578\times 10^{-5}\right) k = 1 </span></p>
+<p>So <span class="math inline">k = 13197</span>.</p>
+<!-- CHECK: section heading below is not in the handwriting. It is the sub-item of item 6 of
+the outline on page 1, added so the table of contents has an entry for pages 9–11. Delete
+it if unwanted. -->
+</section>
+<section id="low-pass-to-other-types" class="level2">
+<h2 class="anchored" data-anchor-id="low-pass-to-other-types">Low pass to other types</h2>
+<p>This is a lowpass filter. How do we get the highpass filter that is used before cutting the vinyl? Invert the filter:</p>
+<!-- CHECK: p_1, p_2 and z_1 were defined above as the gains |jω + p| at ω = 6283, but here
+they stand for the pole and zero locations 314.5, 13333 and 3145. The left side is written
+G(s) and the right side in jω. Typeset as written. -->
+<p><span class="math display"> \frac{1}{G(s)} = \frac{(j\omega + p_2)(j\omega + p_1)}{(j\omega + z_1)\,k} </span></p>
+<p>In general, this method of inverting to get a highpass from a lowpass is dangerous – if the lowpass has a right half plane zero, the inverse will be unstable. A better transform is mapping <span class="math inline">s</span> to <span class="math inline">\dfrac{1}{s}</span>:</p>
+<!-- CHECK: p10 gives the right-hand side as k(1 + sz_1)/((1 + sp_1)(1 + sp_2)). Multiplying
+through by s^2 leaves a factor of s in the numerator, k s(1 + sz_1)/((1 + sp_1)(1 + sp_2)).
+Typeset with the s. The extra s is a zero at s = 0 (the lowpass had one more pole than
+zeros), which the next line does not mention. -->
+<p><span class="math display">
+\frac{k(s + z_1)}{(s + p_1)(s + p_2)} \;\mapsto\;
+\frac{k\left(\frac{1}{s} + z_1\right)}{\left(\frac{1}{s} + p_1\right)\left(\frac{1}{s} + p_2\right)}
+= \frac{k\,s\,(1 + sz_1)}{(1 + sp_1)(1 + sp_2)}.
+</span></p>
+<p>Poles and zeros map to <span class="math inline">\dfrac{1}{p}</span>, <span class="math inline">\dfrac{1}{z}</span>.</p>
+<p>So, if we want a highpass filter with a particular corner frequency, we can design a lowpass filter with corner frequency <span class="math inline">\dfrac{1}{\omega_c}</span> and then map <span class="math inline">s \mapsto \dfrac{1}{s}</span>.</p>
+<p>The transform <span class="math inline">s \mapsto \dfrac{1}{s}</span> preserves stability. If <span class="math inline">p</span> is a stable pole, so is <span class="math inline">\dfrac{1}{p}</span>.</p>
+<p>What about bandpass and bandstop filters, how can we build these? We can use a combination of high pass and low pass:</p>
+<!-- CHECK: the p10 sketch joins the highpass and lowpass shapes with "+". The text beside it
+says cascade, where the gains multiply, so the figure uses ×. -->
+<div class="columns">
+<div class="column" style="width:62%;">
+<p><img src="fig/bandpass-cascade.svg" class="img-fluid" alt="A highpass with cutoff omega_h times a lowpass with cutoff omega_l gives a bandpass. The highpass attenuates below the band and the lowpass filter attenuates above it."></p>
+</div><div class="column" style="width:38%;">
+<p>Bandpass = cascade of lowpass and highpass, <span class="math inline">\omega_h &lt; \omega_\ell</span></p>
+</div>
+</div>
+<p>The only signals that pass are those that are in the passband of both filters.</p>
+<p>To get a bandstop, we want the gain in the passband to be reasonably close to 1 (0 dB). Instead of cascading, where gains multiply, we use a parallel interconnection:</p>
+<div style="text-align:center">
+<p><img src="fig-block-bandstop.svg" class="img-fluid" alt="Parallel interconnection: the input feeds an LPF and an HPF, and their outputs are added at a summing junction." width="400"></p>
+</div>
+<p>The LPF passes low frequencies. The HPF passes high frequencies. Where their stopbands overlap, no signal passes.</p>
+<!-- NEW WIDGET: w-lphp in filter-widgets.js. Gain plots of a second order lowpass and
+highpass (ζ = 1/√2), their cascade and their sum, with sliders for ω_ℓ and ω_h and a sweep
+of ω_h. Starts at ω_h = 1 rad/s, ω_ℓ = 10 rad/s. -->
+<div id="w-lphp" class="widget"></div>
+</section>
+<section id="butterworth-filters" class="level2">
+<h2 class="anchored" data-anchor-id="butterworth-filters">Butterworth filters</h2>
+<div style="text-align:center">
+<p><img src="max7480-datasheet.jpg" class="img-fluid" alt="Header of the MAX7480 datasheet: 8th-order, lowpass, Butterworth, switched-capacitor filter, with the phrase maximally flat passband response underlined." width="640"></p>
+</div>
+<!-- CHECK: the red line on p12 runs through "maximally flat passband response" in the
+datasheet clip. Drawn as an underline. -->
+<p>Butterworth filters are a popular practical filter design. The response is designed to have “maximally flat passband response”,<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> that is, no ripples in the gain response.</p>
+<p>An <span class="math inline">n^{\text{th}}</span> order lowpass Butterworth filter with cutoff frequency <span class="math inline">\omega_c</span> is the stable filter with:</p>
+<ul>
+<li><span class="math inline">n</span> poles</li>
+<li>no zeros</li>
+<li>magnitude response satisfies <span class="math display"> \lvert G(j\omega)\rvert^2 = \frac{1}{1 + \left(\dfrac{\omega}{\omega_c}\right)^{2n}}. </span></li>
+</ul>
+<p>The gain is 1 at DC and <span class="math inline">\dfrac{1}{\sqrt{2}}</span> (<span class="math inline">-3</span> dB) at <span class="math inline">\omega = \omega_c</span>.</p>
+<div style="text-align:center">
+<p><img src="fig/butterworth-orders.svg" class="img-fluid" alt="Butterworth gain in dB against omega for n = 1, 2, 3, 4 and 8. All pass through minus 3 dB at omega_c and fall at 20n dB per decade beyond it." width="600"></p>
+</div>
+<div class="columns">
+<div class="column" style="width:62%;">
+<p>To get the desired magnitude response, we place <span class="math inline">n</span> poles on the semicircle of radius <span class="math inline">\omega_c</span> in the left half plane.</p>
+</div><div class="column" style="width:38%;">
+<p><img src="fig/butterworth-poles-n3.svg" class="img-fluid" alt="Three poles on the left half of the circle of radius omega_c, at angles 2 pi over 3, pi and 4 pi over 3, spaced pi over 3 apart."></p>
+</div>
+</div>
+<p>Let’s see why this works:</p>
+<p><span class="math display"> \lvert G(j\omega)\rvert^2 = G(j\omega)\,G(-j\omega) </span></p>
+<p><span class="math display"> \text{so } G(s)G(-s) = \frac{1}{1 + \left(\dfrac{-s^2}{\omega_c^2}\right)^n} </span></p>
+<p>(note if <span class="math inline">s = j\omega</span>, <span class="math inline">-s^2 = \omega^2</span>).</p>
+<p><span class="math display"> = \frac{\omega_c^{2n}}{\omega_c^{2n} + (-s^2)^n}. </span></p>
+<p>So the poles of <span class="math inline">G(s)G(-s)</span> are the roots of</p>
+<p><span class="math display"> \omega_c^{2n} + (-s^2)^n = 0. </span></p>
+<p><span class="math display"> 1 + \left(\frac{-s^2}{\omega_c^2}\right)^n = 0. </span></p>
+<p>Setting <span class="math inline">s = \omega_c e^{j\theta}</span> (a point on the radius <span class="math inline">\omega_c</span> circle), we have solutions at</p>
+<p><span class="math display"> \theta = \frac{(2k + 1)\pi}{2n} - \frac{\pi}{2}, \qquad k = 0, 1, \ldots, 2n - 1. </span></p>
+<div style="text-align:center">
+<p><img src="fig/butterworth-poles-n2.svg" class="img-fluid" alt="For n = 2, the four roots on the circle of radius omega_c at 45, 135, 225 and 315 degrees." width="260"></p>
+</div>
+<p>We then put all the left-half plane poles in <span class="math inline">G(s)</span>, then <span class="math inline">G(-s)</span> has their reflections in the right half plane, so <span class="math inline">G(s)G(-s)</span> has the right poles.</p>
+<p>The first couple of Butterworth filters have the following transfer functions:</p>
+<!-- CHECK: the n = 2 denominator on p14 (and again on p16) reads s^3 + √2 ω_c s + ω_c^2.
+Typeset s^2, which matches ζ_1 = sin(π/4) = 1/√2 and the order. -->
+<p><span class="math display">
+\begin{aligned}
+n = 1 &amp;\qquad G(s) = \frac{\omega_c}{s + \omega_c} \\[12pt]
+n = 2 &amp;\qquad G(s) = \frac{\omega_c^2}{s^2 + \sqrt{2}\,\omega_c s + \omega_c^2} \\[12pt]
+n = 3 &amp;\qquad G(s) = \frac{\omega_c^3}{(s + \omega_c)(s^2 + \omega_c s + \omega_c^2)}.
+\end{aligned}
+</span></p>
+<p><span class="math display">
+\left.
+\begin{aligned}
+n \text{ even} &amp;\qquad G(s) = \prod_{k=1}^{n/2} \frac{\omega_c^2}{s^2 + 2\zeta_k\omega_c s + \omega_c^2} \\[12pt]
+n \text{ odd}  &amp;\qquad G(s) = \frac{\omega_c}{s + \omega_c}\prod_{k=1}^{(n-1)/2} \frac{\omega_c^2}{s^2 + 2\zeta_k\omega_c s + \omega_c^2}
+\end{aligned}
+\;\right\}
+\quad \zeta_k = \sin\!\left(\frac{(2k - 1)\pi}{2n}\right).
+</span></p>
+<p>To get highpass filters, use the trick above: replace <span class="math inline">\dfrac{s}{\omega_c}</span> with <span class="math inline">\dfrac{\omega_c}{s}</span>.</p>
+</section>
+<section id="design-example-2-heartrate-measurement-on-a-smartwatch" class="level2">
+<h2 class="anchored" data-anchor-id="design-example-2-heartrate-measurement-on-a-smartwatch">Design example 2: heartrate measurement on a smartwatch</h2>
+<p>The heartrate monitor on a running watch or smartwatch uses photoplethysmography (PPG). An LED shines light into the wrist and a photodiode measures the reflection, which pulses with each heartbeat. A passband filter is used to remove both high and low frequency interference.</p>
+<p><u>Passband:</u> 30–240 bpm = 0.5 Hz to 4 Hz.</p>
+<p><u>HF interference:</u> mains power oscillates at 50 Hz, ambient light follows the square of the mains voltage at 100 Hz.</p>
+<p><u>LF interference:</u> breathing adds <span class="math inline">\approx 0.2</span> Hz oscillation.</p>
+<p><a href="https://www.analog.com/en/resources/design-notes/how-common-noise-and-error-sources-affect-optical-biosensing.html">How common noise and error sources affect optical biosensing</a></p>
+<p>To deal with these constraints, we have the following filter specification:</p>
+<ul>
+<li>At most 3 dB loss at 0.5 Hz and 4 Hz.</li>
+<li>At least 20 dB attenuation at 0.2 Hz.</li>
+<li>At least 40 dB attenuation at 50 Hz.</li>
+</ul>
+<p>Let’s draw these on a Bode diagram</p>
+<!-- CHECK: the p16 annotation reads "slightly less than −60 dB/dec" or "−40 dB/dec"; the 4 is
+written like the 4 in the −40 axis label. Typeset −40 dB/dec: the line from 0 dB at 4 Hz to
+−40 dB at 50 Hz has slope −36.5 dB/dec. The axis is labelled Hz, which the handwriting
+leaves unlabelled. The "5" tick next to 4 is kept as written. -->
+<div style="text-align:center">
+<p><img src="fig/ex2-spec.svg" class="img-fluid" alt="Specification on a Bode diagram: 0 dB from 0.5 Hz to 4 Hz, minus 20 dB at 0.2 Hz, minus 40 dB at 50 Hz. The low side needs at least 50 dB per decade, extended dashed to minus 50 dB at 0.05 Hz. The high side is slightly less than minus 40 dB per decade." width="620"></p>
+</div>
+<!-- CHECK: p16 writes ω_h = 0.5 rad/s and ω_ℓ = 4 rad/s, but the specification is 0.5 Hz
+and 4 Hz. Typeset as 2π × 0.5 rad/s and 2π × 4 rad/s. The orders n = 3 and n = 2 depend
+only on the frequency ratios and are unchanged. -->
+<p>If we place Butterworth filters with <span class="math inline">\omega_h = 2\pi\times 0.5</span> rad/s, <span class="math inline">\omega_\ell = 2\pi\times 4</span> rad/s, we know we meet the <span class="math inline">-3</span> dB spec (this is the gain of a Butterworth at <span class="math inline">\omega_c</span>).</p>
+<p>We need <span class="math inline">n = 3</span> for the highpass and <span class="math inline">n = 2</span> for the lowpass.</p>
+<!-- CHECK: p16 substitutes ω_h/s for s in the n = 3 filter. Replacing s/ω_c with ω_c/s
+means s ↦ ω_h^2/s, and that substitution is what gives the final line. Typeset ω_h^2/s. -->
+<p><span class="math display">
+\begin{aligned}
+n = 2 &amp;\qquad G(s) = \frac{\omega_\ell^2}{s^2 + \sqrt{2}\,\omega_\ell s + \omega_\ell^2} \\[16pt]
+n = 3 &amp;\qquad G(s) = \frac{\omega_h^3}{\left(\dfrac{\omega_h^2}{s} + \omega_h\right)\left(\left(\dfrac{\omega_h^2}{s}\right)^2 + \omega_h\left(\dfrac{\omega_h^2}{s}\right) + \omega_h^2\right)} \\[16pt]
+      &amp;\qquad\phantom{G(s)} = \frac{s^3}{(\omega_h + s)(\omega_h^2 + \omega_h s + s^2)}
+\end{aligned}
+</span></p>
+<p><a href="https://www.analog.com/en/products/max30112.html">Analog Devices MAX30112</a></p>
+<script src="filter-widgets.js"></script>
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>The largest possible number of derivatives of <span class="math inline">\lvert G(j\omega)\rvert^2</span> are zero at <span class="math inline">\omega = 0</span>, without any transfer function zeros.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ThomasChaffey\.github\.io\/elec2302\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../weeks/week09/notes.html" class="pagination-link" aria-label="Notes">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Notes</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../weeks/week10/tutorial7.pdf" class="pagination-link" aria-label="Tutorial">
+        <span class="nav-page-text">Tutorial</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney</p>
+</div>
+    <div class="nav-footer-right">
+<p><a href="analytics.qmd">Analytics</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
