@@ -33,7 +33,7 @@ const WEEK = process.argv[2] || "week01";
 // listed here.
 const SRC_FILE = { week05: "fourier-widgets.js", week06: "bode-widgets.js",
                    week07: "stability-widgets.js", week08: "laplace-widgets.js",
-                   week10: "filter-widgets.js" };
+                   week10: "filter-widgets.js", week11: "modulation-widgets.js" };
 const SRC = path.join(ROOT, `weeks/${WEEK}/${SRC_FILE[WEEK] || "phasor-widgets.js"}`);
 const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
@@ -157,6 +157,13 @@ const WIDGETS_BY_WEEK = {
       id: "w-lphp",
       caption: "w_h = 1 rad/s, w_l = 10 rad/s: low-pass and high-pass, cascade, sum",
       state: () => {}                                   // defaults are fine
+    }
+  ],
+  week11: [
+    {
+      id: "w-fm",
+      caption: "FM, u = cos(t), w_c = 12 rad/s, k = 4 rad/s: u and y over one period, line spectrum",
+      state: ({ slider }) => { slider(0, 4); }          // slider 0 is k
     }
   ]
 };

@@ -106,6 +106,10 @@ website:
           - text: "Tutorial"
             href: weeks/week10/tutorial7.pdf
             target: _blank
+      - section: "Week 11 — Modulation"
+        contents:
+          - text: "Notes"
+            href: weeks/week11/notes.qmd
       - text: "Course index"
         href: concepts.qmd
       - text: "Quiz 1 formula sheet"
