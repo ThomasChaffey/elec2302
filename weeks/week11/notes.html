@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Week 11 — Lecture notes</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<link href="../../concepts.html" rel="next">
+<link href="../../weeks/week10/tutorial7.pdf" rel="prev">
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-cf7b1e44051da7d0e5a312b6fd1bb530.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<!--
+  Cookieless, privacy-preserving analytics (GoatCounter).
+
+  SETUP: sign up at https://www.goatcounter.com, pick a site code, and replace
+  YOURCODE below with it. Until you do, this script 404s harmlessly and no
+  counting happens. Free for non-commercial use, which covers a course site.
+
+  What it collects: page path, referrer, browser/OS/screen size, country.
+  No cookies, no cross-site tracking, no personal data stored. Visitors are
+  distinguished by an in-memory hash of IP + User-Agent that is discarded
+  after 8 hours and never written to disk.
+
+  Widget interactions arrive as events named widget-week1-euler,
+  widget-week2-sample and similar, fired from each week's own
+  weeks/<week>/phasor-widgets.js (week 3 uses convolution-widgets.js, giving
+  widget-week3-comb and widget-week3-conv; week 4 gives widget-week4-square,
+  widget-week4-rect and widget-week4-rlc-out; week 5 uses fourier-widgets.js,
+  giving widget-week5-sample and widget-week5-tau; week 6 uses bode-widgets.js,
+  giving widget-week6-pulse-rlc, widget-week6-bode-probe and
+  widget-week6-resonant-peak; week 7 uses stability-widgets.js, giving
+  widget-week7-population and widget-week7-pendulum-undamped; week 8 uses
+  laplace-widgets.js, giving widget-week8-growing; week 9 has no widgets;
+  week 10 uses filter-widgets.js, giving widget-week10-lp2 and
+  widget-week10-lphp; week 11 uses modulation-widgets.js, giving
+  widget-week11-fm). See the "usage tracking" comment block at the top
+  of any of those files for how to read them and what the numbers do and do
+  not mean.
+
+  A PDF cannot report on itself: nothing runs when a reader opens one. Two
+  proxies stand in for it. Clicking the "PDF" link on a notes page fires a
+  click event, named pdf-week3 and so on, via the data-goatcounter-click
+  attribute count.js looks for (pdf-week5 to pdf-week11 for the week 5 to week 11
+  notes). And the site address printed inside each PDF
+  carries ?ref=notes-pdf-week3, so a reader who types it in or follows it back
+  shows up under that referrer. The first counts opening the file, the second
+  counts returning to the site from it; neither counts reading it. The primer
+  page does the same, under pdf-primer and ?ref=notes-pdf-primer.
+
+  To stop your own visits being counted, open the dashboard and use
+  Settings -> "Ignore this browser", or set the ignore-IP option.
+-->
+<script data-goatcounter="https://thomaschaffey.goatcounter.com/count" async="" src="//gc.zgo.at/count.js"></script>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
+  <script>document.addEventListener("DOMContentLoaded", function () {
+ var mathElements = document.getElementsByClassName("math");
+ var macros = [];
+ for (var i = 0; i < mathElements.length; i++) {
+  var texText = mathElements[i].firstChild;
+  if (mathElements[i].tagName == "SPAN") {
+   katex.render(texText.data, mathElements[i], {
+    displayMode: mathElements[i].classList.contains('display'),
+    throwOnError: false,
+    macros: macros,
+    fleqn: false
+   });
+}}});
+  </script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week11/notes.html">Week 11 — Modulation</a></li><li class="breadcrumb-item"><a href="../../weeks/week11/notes.html">Notes</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Home</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 1 — Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/slides.html" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Slides</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week01/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 2 — Signals as vectors, systems as maps</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/tutorial1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week02/tutorial1-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 3 — Linear, time-invariant systems</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/tutorial2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week03/tutorial2-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 4 — Periodic signals and the Fourier series</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/tutorial3.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week04/tutorial3-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 5 — Aperiodic signals and the Fourier transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/tutorial4.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week05/tutorial4-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 6 — Transfer functions, Bode diagrams and resonance</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/tutorial5.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/tutorial5-solutions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial solutions</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week06/lab1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Lab 1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 7 — System response and stability</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week07/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 8 — The Laplace transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/tutorial6.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week08/lab2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Lab 2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 9 — System analysis with the Laplace transform</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-9" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-9" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week09/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 10 — Filter design</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-10" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-10" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week10/tutorial7.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Tutorial</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true">
+ <span class="menu-text">Week 11 — Modulation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-11" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-11" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/week11/notes.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Notes</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../concepts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course index</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/formula-sheet.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 1 formula sheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/formula-sheet-quiz2.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 formula sheet</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/quiz2-practice-questions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 question bank</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/quiz2-practice-feedback.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Quiz 2 answers and feedback</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../weeks/primer/notes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Primer on RLC circuits</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../weeks/week11/notes.html">Week 11 — Modulation</a></li><li class="breadcrumb-item"><a href="../../weeks/week11/notes.html">Notes</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Week 11 — Lecture notes</h1>
+<p class="subtitle lead">Modulation</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="format-links">
+<p><span class="label">Other formats:</span></p>
+<a href="notes.pdf" title="Week 11 lecture notes as a PDF" data-goatcounter-click="pdf-week11" data-goatcounter-title="Week 11 notes PDF opened">📄&nbsp;PDF</a>
+</div>
+<ol type="1">
+<li>Motivation: wireless communication</li>
+<li>Amplitude modulation</li>
+<li>Demodulation</li>
+<li>Frequency division multiplexing</li>
+<li>Frequency modulation</li>
+<li>Phase modulation.</li>
+</ol>
+<div class="note">
+<p>Based on the lectures of Dennis Freeman, MIT.</p>
+</div>
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
+<section id="motivation-wireless-communication" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-wireless-communication">Motivation: wireless communication</h2>
+<!-- CHECK: heading added from item 1 of the outline. Likewise "Demodulation" and "Frequency division multiplexing" below. Delete if unwanted. -->
+<p><u>Example 1</u></p>
+<p>When we transmit audio over a wire, we simply transmit the signal (with some amplification and filtering):</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-wire.svg" class="img-fluid figure-img" width="620"></p>
+<figcaption>Audio over a wire.</figcaption>
+</figure>
+</div>
+</div>
+<p>What about when we transmit wirelessly?</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-wireless.svg" class="img-fluid figure-img" width="620"></p>
+<figcaption>Audio over the air, with an antenna at each end.</figcaption>
+</figure>
+</div>
+</div>
+<p>The length of the antenna has to be proportional to the wavelength of the signal.</p>
+<p>Q: telephone audio contains frequencies from <span class="math inline">200</span>–<span class="math inline">3000\,</span>Hz. What order of magnitude should the antenna length be? <span class="math inline">\;</span> mm, cm, m, km, <span class="math inline">\geq 100\,</span>km?</p>
+<!-- Answer on p2 left out of the typed notes, as marked in the source. -->
+<p>Q: what frequencies of EM are matched to a <span class="math inline">10\,</span>cm antenna?</p>
+<!-- Answer on p3 left out of the typed notes, as marked in the source. -->
+<p>We need a way to shift the signal we <u>want</u> to transmit to the frequencies we <u>can</u> transmit.</p>
+<p><u>Example 2</u>: we saw in the week 5 lecture that there is a tradeoff in radar resolution and bandwidth. A narrow pulse (<span class="math inline">\tau\,</span>s) corresponds to a wider spectrum. For Kurnell, the pulse width is <span class="math inline">1.8\,\mu</span>s. The first null of the spectrum is <span class="math inline">\dfrac{2\pi}{\tau} = 3.5\times10^{6}\,</span>rad/s.</p>
+<!-- CHECK: the source reads "2π/τ = 3.5 MHz". With τ = 1.8 µs, 2π/τ = 3.49×10^6 rad/s, which is 1/τ = 0.556 MHz. Typeset in rad/s. Also, the week 5 notes use τ = 1 µs for Kurnell, here it is 1.8 µs. -->
+<p><a href="https://tchaffey.com/elec2302/weeks/week05/notes.html#w-tau">Week 5: the width-<span class="math inline">\tau</span> pulse and its spectrum (widget)</a></p>
+<!-- CHECK: the source says "[Put link to week 5 widget here]". Linked to the w-tau widget on the week 5 page. URL guessed from the site layout (weeks/week05/notes.qmd), confirm it resolves. -->
+<p>The spectrum of the pulse is centred at zero. However, if you look up the spectrum assignment in the ACMA (Australian Communications &amp; Media Authority) Licence register, the allocated bandwidth is centred at <span class="math inline">5.625\,</span>GHz.</p>
+<p>How do we shift the spectrum there?</p>
+<p>This is the function of <u>modulation</u>: shifting the frequency spectrum. There is a zoo of modulation techniques.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-taxonomy.svg" class="img-fluid figure-img" width="640"></p>
+<figcaption>Modulation techniques, grouped by carrier and by data.</figcaption>
+</figure>
+</div>
+</div>
+<p>In this lecture, we’ll look at the three methods on the left, AM, FM and PM. They are the basis for many of the other methods.</p>
+</section>
+<section id="amplitude-modulation" class="level2">
+<h2 class="anchored" data-anchor-id="amplitude-modulation">Amplitude Modulation</h2>
+<p>This method is already hiding in plain sight on the formula sheet!</p>
+<p><span class="math display">
+u(t)\cos(\omega_0 t) \;\overset{\text{F.T.}}{\rightsquigarrow}\;
+\tfrac{1}{2}U\big(j(\omega-\omega_0)\big) + \tfrac{1}{2}U\big(j(\omega+\omega_0)\big).
+</span></p>
+<!-- CHECK: the source writes both terms as ½U(j(ω−ω₀)). The second term is ½U(j(ω+ω₀)), as in the sketch below it, which has copies at both −ω₀ and ω₀. -->
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/am-spectra.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>Spectra of <span class="math inline">u(t)</span>, <span class="math inline">\cos(\omega_0 t)</span> and <span class="math inline">u(t)\cos(\omega_0 t)</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>This is called <u>Amplitude Modulation (AM)</u>. <span class="math inline">\cos(\omega_0 t)</span> is called the carrier.</p>
+<!-- CHECK: u(t)cos(ω₀t) is what is usually called DSB-SC (double sideband, suppressed carrier). Conventional AM adds the carrier, (1 + m u(t))cos(ω₀t). Left as written. -->
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-modulator.svg" class="img-fluid figure-img" width="300"></p>
+<figcaption>The modulator.</figcaption>
+</figure>
+</div>
+</div>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/am-time.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>The message <span class="math inline">u(t)</span>, the carrier <span class="math inline">\cos(\omega_0 t)</span> and the product <span class="math inline">u(t)\cos(\omega_0 t)</span>, with <span class="math inline">\pm u(t)</span> dashed.</figcaption>
+</figure>
+</div>
+</div>
+<p>The amplitude of the carrier is modulated by the signal.</p>
+</section>
+<section id="demodulation" class="level2">
+<h2 class="anchored" data-anchor-id="demodulation">Demodulation</h2>
+<p>How do we recover the signal at the receiver?</p>
+<p>If we multiply by the carrier again, we get</p>
+<p><span class="math display">
+\begin{aligned}
+z(t) &amp;= y(t)\cos(\omega_0 t) \\[6pt]
+     &amp;= u(t)\big(\cos(\omega_0 t)\big)^2 \\[6pt]
+     &amp;= \tfrac{1}{2}u(t)\big(1 + \cos(2\omega_0 t)\big)
+\end{aligned}
+</span></p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/demod-spectrum.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>Spectrum of <span class="math inline">z(t)</span>: <span class="math inline">\tfrac{1}{2}U</span> at the origin, <span class="math inline">\tfrac{1}{4}U</span> at <span class="math inline">\pm 2\omega_0</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>We can then lowpass filter to get back <span class="math inline">u(t)</span>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/demod-lpf.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>Spectrum of <span class="math inline">z(t)</span>, with the lowpass filter.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="frequency-division-multiplexing" class="level2">
+<h2 class="anchored" data-anchor-id="frequency-division-multiplexing">Frequency division multiplexing</h2>
+<p>What if we want to transmit multiple signals simultaneously? Use separate carrier frequencies: <u>Frequency Division Multiplexing</u>.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-fdm.svg" class="img-fluid figure-img" width="420"></p>
+<figcaption>Three signals on three carriers, summed.</figcaption>
+</figure>
+</div>
+</div>
+<!-- CHECK: the output of the summer is unlabelled in the source. Labelled y(t), the name used for the sum, y = y₁ + y₂ + y₃, on the next page. -->
+<p>How do we demodulate this sum? The receiver can choose which signal to demodulate by multiplying by the corresponding carrier.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/fdm-demod-w2.svg" class="img-fluid figure-img" width="640"></p>
+<figcaption>Demodulating with <span class="math inline">\cos(\omega_2 t)</span>. Black, red and blue are the channels on <span class="math inline">\omega_1</span>, <span class="math inline">\omega_2</span> and <span class="math inline">\omega_3</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>If instead we multiply by <span class="math inline">\cos(\omega_1 t)</span>:</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/fdm-demod-w1.svg" class="img-fluid figure-img" width="640"></p>
+<figcaption>Demodulating with <span class="math inline">\cos(\omega_1 t)</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>This is how the radio station selector on an AM radio works.</p>
+<!-- CHECK: the second FDM sketch labels the carrier ω_L (or a bold ω₁), against the text "cos(ω₁t)" above it. Typeset as ω₁. -->
+</section>
+<section id="frequency-modulation" class="level2">
+<h2 class="anchored" data-anchor-id="frequency-modulation">Frequency modulation</h2>
+<p>There are two other common ways to embed an analog signal in an analog carrier: frequency modulation and phase modulation.</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\text{Amplitude modulation:} &amp;&amp; y(t) = u(t)\cos(\omega_c t) \\[6pt]
+&amp;\text{Frequency modulation:} &amp;&amp; y(t) = \cos\!\Big(\omega_c t + k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau\Big) \\[6pt]
+&amp;\text{Phase modulation:} &amp;&amp; y(t) = \cos\big(\omega_c t + k u(t)\big)
+\end{aligned}
+</span></p>
+<!-- CHECK: the carrier frequency is ω₀ in the AM section and ω_c from here on. Left as written. -->
+<p>For a sinusoid with variable frequency, <span class="math inline">y(t) = \cos\big(\omega(t)\,t\big)</span>, we define the <u>instantaneous frequency</u> to be</p>
+<p><span class="math display"> \omega_i = \frac{\mathrm{d}}{\mathrm{d}t}\big(\omega(t)\,t\big). </span></p>
+<!-- CHECK: the source writes ω_i = d/dt ω(t). For y = cos(ω(t)t) the instantaneous frequency is the derivative of the whole argument, d/dt(ω(t)t), which is what the next two lines use (d/dt ωt = ω, and d/dt of the FM argument). Typeset d/dt(ω(t)t). -->
+<p>For a sinusoid with constant frequency, <span class="math inline">\cos(\omega t)</span>, this is just the usual frequency: <span class="math inline">\;\dfrac{\mathrm{d}}{\mathrm{d}t}\,\omega t = \omega</span>.</p>
+<p>For an FM signal, the instantaneous frequency is</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\frac{\mathrm{d}}{\mathrm{d}t}\Big(\omega_c t + k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau\Big) \\[8pt]
+&amp;= \omega_c + k\,\frac{\mathrm{d}}{\mathrm{d}t}\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau \\[8pt]
+&amp;= \omega_c + k u(t).
+\end{aligned}
+</span></p>
+<!-- CHECK: the source's last line is "ω_c + k u(t) − k u(−∞)", with "assume = 0" under the u(−∞) term. The lower limit −∞ is fixed, so d/dt ∫_{−∞}^t u(τ)dτ = u(t) with no extra term. Typeset without it. -->
+<p>So the signal <span class="math inline">u(t)</span> modulates the instantaneous frequency of the carrier.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/fm-time.svg" class="img-fluid figure-img" width="560"></p>
+<figcaption>The message <span class="math inline">u(t)</span>, the carrier <span class="math inline">\cos(\omega_c t)</span> and the FM signal <span class="math inline">y(t)</span>.</figcaption>
+</figure>
+</div>
+</div>
+<p>What is the bandwidth of FM?</p>
+<p><span class="math display"> y(t) = \cos\!\Big(\omega_c t + k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau\Big) </span></p>
+<p>If we let <span class="math inline">k \to 0</span>, is the spectrum concentrated at <span class="math inline">\omega_c</span>?</p>
+<p><span class="math display">
+y(t) = \cos(\omega_c t)\cos\!\Big(k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau\Big)
+     - \sin(\omega_c t)\sin\!\Big(k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau\Big)
+</span></p>
+<p>As <span class="math inline">k \longrightarrow 0</span>:</p>
+<p><span class="math display">
+\begin{aligned}
+\cos\!\Big(k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau\Big) &amp;\longrightarrow 1 \\[8pt]
+\sin\!\Big(k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau\Big) &amp;\longrightarrow k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau.
+\end{aligned}
+</span></p>
+<p>So</p>
+<p><span class="math display">
+y(t) \approx \cos(\omega_c t)
+\underbrace{- \sin(\omega_c t)\,k\int_{-\infty}^{t} u(\tau)\,\mathrm{d}\tau}_{\substack{\text{same bandwidth as AM} \\ \text{– the bandwidth of } \int u(\tau)\,\mathrm{d}\tau}}.
+</span></p>
+<p>What is the bandwidth for large <span class="math inline">k</span>?</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/fm-spectrum.svg" class="img-fluid figure-img" width="600"></p>
+<figcaption>Spectrum of <span class="math inline">y(t)</span> for the single-tone message <span class="math inline">u(t) = \cos(\omega_m t)</span>, positive frequencies only. For this message <span class="math inline">y(t) = \cos\big(\omega_c t + \tfrac{k}{\omega_m}\sin(\omega_m t)\big)</span>, whose transform has impulses of weight <span class="math inline">\pi J_n(k/\omega_m)</span> at <span class="math inline">\omega_c + n\omega_m</span>. Top: <span class="math inline">k = 0.3\,\omega_m</span>. Bottom: <span class="math inline">k = 8\,\omega_m</span>.</figcaption>
+</figure>
+</div>
+</div>
+<div id="w-fm" class="widget"></div>
+<!-- CHECK: the source says "[insert plot of spectrum for wideband FM]". Inserted the static two-panel figure and the w-fm widget (NEW WIDGET). Both use a single-tone message, so the spectrum is a set of lines with Bessel-function heights. The integral is taken from 0 rather than −∞ for this periodic u. Keep one or both. -->
+<p>So FM spreads the signal all over the spectrum. This makes it very robust to noise.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig/fm-noise-demo.jpg" class="img-fluid figure-img" width="440"></p>
+<figcaption>A 1940s demonstration of FM’s robustness to noise. It reproduces a broadcast despite the 1&nbsp;MV arc in the background. Source: Wikipedia.</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="phase-modulation" class="level2">
+<h2 class="anchored" data-anchor-id="phase-modulation">Phase modulation</h2>
+<p>PM is closely related to FM, but instead of modulating the instantaneous frequency, we modulate phase.</p>
+<p><span class="math display"> y(t) = \cos\big(\omega_c t + u(t)\big). </span></p>
+<p>This is the same as FM with signal <span class="math inline">u'(t)</span>: calculating the instantaneous frequency of the PM signal, we have</p>
+<p><span class="math display"> \frac{\mathrm{d}}{\mathrm{d}t}\big(\omega_c t + u(t)\big) = \omega_c + u'(t). </span></p>
+<!-- CHECK: the summary table above gives PM as cos(ω_c t + k u(t)), this section drops the k (k = 1). Left as written. -->
+</section>
+<section id="example-fm-stereo-multiplexing" class="level2">
+<h2 class="anchored" data-anchor-id="example-fm-stereo-multiplexing">Example: FM Stereo Multiplexing</h2>
+<p>How do we transmit both left and right audio channels over FM?</p>
+<p>We transmit a composite signal that uses AM to carry both channels: <span class="math inline">\qquad \omega_p = 2\pi\cdot 19\,\text{kHz}.</span></p>
+<p><span class="math display">
+u(t) = \underbrace{\big(L(t) + R(t)\big)}_{0\text{–}15\,\text{kHz}}
+     + \underbrace{A_p\cos(\omega_p t)}_{19\,\text{kHz}}
+     + \underbrace{\big(L(t) - R(t)\big)\cos(2\omega_p t)}_{23\text{–}53\,\text{kHz}}.
+</span></p>
+<p>How do we recover <span class="math inline">L(t)</span> &amp; <span class="math inline">R(t)</span> at the receiver?</p>
+<p>There are 4 steps.</p>
+<p><strong>1.</strong> Sum recovery.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-lpf.svg" class="img-fluid figure-img" width="380"></p>
+<figcaption>(mono receiver).</figcaption>
+</figure>
+</div>
+</div>
+<p><strong>2.</strong> Carrier recovery.</p>
+<div style="text-align:center">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig-block-carrier.svg" class="img-fluid figure-img" width="460"></p>
+<figcaption>The carrier recovery filter.</figcaption>
+</figure>
+</div>
+</div>
+<p><span class="math inline">G</span> is a narrow bandpass filter at <span class="math inline">19\,</span>kHz.</p>
+<p>Squaring the output gives</p>
+<p><span class="math display">
+A_p^2\,|G(j\omega_p)|^2\cos(\omega_p t + \theta)^2
+= \tfrac{1}{2}A_p^2\,|G(j\omega_p)|^2\big(1 + \cos(2\omega_p t + 2\theta)\big).
+</span></p>
+<p>Pass this through a narrow bandpass at <span class="math inline">2\omega_p = 2\pi\cdot 38\,\text{kHz}</span> to remove the constant, and normalise amplitude to get <span class="math inline">\cos(2\omega_p t + 2\theta)</span>.</p>
+<!-- CHECK: the source writes "2ω_p = 38 kHz". Typeset 2ω_p = 2π·38 kHz to match ω_p = 2π·19 kHz. -->
+<p><strong>3.</strong> Difference recovery.</p>
+<p>Multiply <span class="math inline">u(t)</span> by <span class="math inline">\cos(2\omega_p t + 2\theta)</span> to get</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;(L+R)\cos(2\omega_p t + 2\theta)
++ \colorbox{lightblue}{$A_p\cos(\omega_p t)\cos(2\omega_p t + 2\theta)$} \\[6pt]
+&amp;\quad + \colorbox{peachpuff}{$(L-R)\cos(2\omega_p t)\cos(2\omega_p t + 2\theta)$}
+\end{aligned}
+</span></p>
+<p>Simplify the 2<sup>nd</sup> &amp; 3<sup>rd</sup> terms using <span class="math inline">\cos a\cos b = \tfrac{1}{2}\big(\cos(a-b) + \cos(a+b)\big)</span>.</p>
+<p><span class="math display">
+\colorbox{lightblue}{$A_p\cos(\omega_p t)\cos(2\omega_p t + 2\theta)$}
+= \tfrac{1}{2}A_p\cos(\omega_p t + 2\theta) + \tfrac{1}{2}A_p\cos(3\omega_p t + 2\theta)
+</span></p>
+<p><span class="math display">
+\colorbox{peachpuff}{$(L-R)\cos(2\omega_p t)\cos(2\omega_p t + 2\theta)$}
+= \tfrac{1}{2}(L-R)\cos(2\theta) + \tfrac{1}{2}(L-R)\cos(4\omega_p t + 2\theta).
+</span></p>
+<p>Putting all the terms together, we get</p>
+<p><span class="math display">
+\begin{aligned}
+&amp;\underbrace{\tfrac{1}{2}(L-R)\cos(2\theta)}_{0\text{–}15\,\text{kHz}}
++ \underbrace{\tfrac{1}{2}A_p\cos(\omega_p t + 2\theta)}_{19\,\text{kHz}}
++ \underbrace{(L+R)\cos(2\omega_p t + 2\theta)}_{23\text{–}53\,\text{kHz}} \\[10pt]
+&amp;+ \underbrace{\tfrac{1}{2}A_p\cos(3\omega_p t + 2\theta)}_{57\,\text{kHz}}
++ \underbrace{\tfrac{1}{2}(L-R)\cos(4\omega_p t + 2\theta)}_{61\text{–}91\,\text{kHz}}.
+\end{aligned}
+</span></p>
+<!-- CHECK: the source writes the 19 kHz term as ½A_p cos(2ω_p t + 2θ). The line above it gives ½A_p cos(ω_p t + 2θ), and only ω_p t sits at 19 kHz. Typeset with ω_p t. -->
+<p>Passing this through a lowpass filter with cutoff <span class="math inline">15\,</span>kHz, we get <span class="math inline">\tfrac{1}{2}(L-R)\cos(2\theta)</span>.</p>
+<p><span class="math inline">\theta</span> is the filter phase, which is part of the design, so we can divide it off to recover <span class="math inline">L-R.</span></p>
+<p><strong>4.</strong> Channel recovery.</p>
+<p>Add: <span class="math inline">\;L-R + L+R\;</span> to get <span class="math inline">2L</span>.</p>
+<p>Subtract: <span class="math inline">\;L-R - (L+R) = -2R</span>.</p>
+<script src="modulation-widgets.js"></script>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ThomasChaffey\.github\.io\/elec2302\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../weeks/week10/tutorial7.pdf" class="pagination-link" aria-label="Tutorial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Tutorial</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../concepts.html" class="pagination-link" aria-label="Course index">
+        <span class="nav-page-text">Course index</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Thomas Chaffey · School of Electrical and Computer Engineering, University of Sydney</p>
+</div>
+    <div class="nav-footer-right">
+<p><a href="analytics.qmd">Analytics</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
