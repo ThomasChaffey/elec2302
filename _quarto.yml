@@ -110,6 +110,9 @@ website:
         contents:
           - text: "Notes"
             href: weeks/week11/notes.qmd
+          - text: "Tutorial"
+            href: weeks/week11/tutorial8.pdf
+            target: _blank
       - text: "Course index"
         href: concepts.qmd
       - text: "Quiz 1 formula sheet"

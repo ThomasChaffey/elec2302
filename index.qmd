@@ -23,7 +23,7 @@ the relevant material.
 | 8 | The Laplace transform | [Notes](weeks/week08/notes.qmd) · [Tutorial](weeks/week08/tutorial6.pdf) · [Lab 2](weeks/week08/lab2.pdf) |
 | 9 | System analysis with the Laplace transform | [Notes](weeks/week09/notes.qmd) |
 | 10 | Filter design | [Notes](weeks/week10/notes.qmd) · [Tutorial](weeks/week10/tutorial7.pdf) |
-| 11 | Modulation | [Notes](weeks/week11/notes.qmd) |
+| 11 | Modulation | [Notes](weeks/week11/notes.qmd) · [Tutorial](weeks/week11/tutorial8.pdf) |
 |  | Quiz 2 resources | [Question bank](weeks/quiz2-practice-questions.pdf) · [Answers and feedback](weeks/quiz2-practice-feedback.pdf) · [Formula sheet](weeks/formula-sheet-quiz2.pdf) |
 
 : {tbl-colwidths="[8,57,35]"}
