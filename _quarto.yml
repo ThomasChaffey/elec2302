@@ -127,6 +127,15 @@ website:
       - text: "Quiz 2 answers and feedback"
         href: weeks/quiz2-practice-feedback.pdf
         target: _blank
+      - text: "Quiz 3 formula sheet"
+        href: weeks/formula-sheet-quiz3.pdf
+        target: _blank
+      - text: "Quiz 3 question bank"
+        href: weeks/quiz3-practice-questions.pdf
+        target: _blank
+      - text: "Quiz 3 answers and feedback"
+        href: weeks/quiz3-practice-feedback.pdf
+        target: _blank
       - text: "Primer on RLC circuits"
         href: weeks/primer/notes.qmd
   page-footer:
