@@ -33,7 +33,8 @@ const WEEK = process.argv[2] || "week01";
 // listed here.
 const SRC_FILE = { week05: "fourier-widgets.js", week06: "bode-widgets.js",
                    week07: "stability-widgets.js", week08: "laplace-widgets.js",
-                   week10: "filter-widgets.js", week11: "modulation-widgets.js" };
+                   week10: "filter-widgets.js", week11: "modulation-widgets.js",
+                   week12: "sysid-widgets.js" };
 const SRC = path.join(ROOT, `weeks/${WEEK}/${SRC_FILE[WEEK] || "phasor-widgets.js"}`);
 const OUTDIR = path.join(ROOT, `weeks/${WEEK}/figs`);
 const SCALE = 2;                    // 2 = retina-sharp in print
@@ -164,6 +165,15 @@ const WIDGETS_BY_WEEK = {
       id: "w-fm",
       caption: "FM, u = cos(t), w_c = 12 rad/s, k = 4 rad/s: u and y over one period, line spectrum",
       state: ({ slider }) => { slider(0, 4); }          // slider 0 is k
+    }
+  ],
+  week12: [
+    {
+      id: "w-avg",
+      caption: "noisy output of 8/(s^2+2s+4) for u = cos(2t), sigma = 2, seeded noise, c from N = 1 period",
+      // Defaults: N = 1, sigma = 2. The noise comes from a fixed seed, so the
+      // picture is the same on every run.
+      state: () => {}
     }
   ]
 };

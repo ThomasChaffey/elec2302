@@ -113,6 +113,13 @@ website:
           - text: "Tutorial"
             href: weeks/week11/tutorial8.pdf
             target: _blank
+      - section: "Week 12 — System identification"
+        contents:
+          - text: "Notes"
+            href: weeks/week12/notes.qmd
+          - text: "Tutorial"
+            href: weeks/week12/tutorial9.pdf
+            target: _blank
       - text: "Course index"
         href: concepts.qmd
       - text: "Quiz 1 formula sheet"

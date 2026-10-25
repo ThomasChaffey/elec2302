@@ -24,6 +24,7 @@ the relevant material.
 | 9 | System analysis with the Laplace transform | [Notes](weeks/week09/notes.qmd) |
 | 10 | Filter design | [Notes](weeks/week10/notes.qmd) · [Tutorial](weeks/week10/tutorial7.pdf) |
 | 11 | Modulation | [Notes](weeks/week11/notes.qmd) · [Tutorial](weeks/week11/tutorial8.pdf) |
+| 12 | System identification | [Notes](weeks/week12/notes.qmd) · [Tutorial](weeks/week12/tutorial9.pdf) |
 |  | Quiz 2 resources | [Question bank](weeks/quiz2-practice-questions.pdf) · [Answers and feedback](weeks/quiz2-practice-feedback.pdf) · [Formula sheet](weeks/formula-sheet-quiz2.pdf) |
 |  | Quiz 3 resources | [Question bank](weeks/quiz3-practice-questions.pdf) · [Answers and feedback](weeks/quiz3-practice-feedback.pdf) · [Formula sheet](weeks/formula-sheet-quiz3.pdf) |
 
