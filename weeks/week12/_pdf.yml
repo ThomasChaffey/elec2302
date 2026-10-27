@@ -25,3 +25,10 @@ papersize: a4
 geometry: margin=2.5cm
 colorlinks: true
 
+
+# The notebook code and its printed output are wider than the text block at the
+# default size. Set both in footnotesize and let long lines wrap.
+header-includes: |
+  \usepackage{fvextra}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\},fontsize=\footnotesize}
+  \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines,fontsize=\footnotesize}
