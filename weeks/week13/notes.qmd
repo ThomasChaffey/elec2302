@@ -1,0 +1,194 @@
+---
+title: "Week 13 — Lecture notes"
+subtitle: "Course review"
+---
+
+::: {.content-visible when-format="html"}
+::: {.format-links}
+[Other formats:]{.label}
+```{=html}
+<a href="notes.pdf" title="Week 13 lecture notes as a PDF"
+   data-goatcounter-click="pdf-week13"
+   data-goatcounter-title="Week 13 notes PDF opened">&#128196;&nbsp;PDF</a>
+```
+:::
+:::
+
+::: {.content-visible when-format="pdf"}
+The web version of these notes is at
+[tchaffey.com/elec2302](https://tchaffey.com/elec2302/?ref=notes-pdf-week13).
+:::
+
+<u>Outline:</u>
+
+1. Course overview (a non-exhaustive recap).
+2. Where next? Survey of applications.
+   * feedback control (X-29 available bandwidth) (quadcopters &amp; grid frequency regulation)
+   * Audio (noise cancellation &amp; echo cancellation)
+   * Graphics (spatial convolution, 2D convolution, 2D Fourier transform, CNNs and paper mill control, MRI).
+   * Filter banks and the Cochlear implant.
+   * Beyond LTI &amp; sinusoids: wavelets, describing functions, SRGs
+3. Follow on courses: DSP, control, power systems, communications, electronics.
+4. The final exam.
+   * structure
+   * practice exam questions.
+
+<!-- CHECK: only item 1 (the course review) is in the handwritten pages. Items 2 and 3 are the slide deck lecture13-examples.qmd, and item 4 has no written material. -->
+
+```{=html}
+<hr style="border:0;border-top:1.5px solid #00468C;margin:1.6em 0;">
+```
+
+## Course review
+
+Four parts:
+
+1. Time domain signals and systems
+2. Frequency domain
+3. Stability &amp; Laplace
+4. Applications: filtering, modulation, system ID.
+
+## 1. Time domain
+
+A system that is linear satisfies superposition: if $u_1 \mapsto y_1$, $u_2 \mapsto y_2$, then
+
+$$ \alpha u_1 + \beta u_2 \;\mapsto\; \alpha y_1 + \beta y_2. $$
+
+If the system is time invariant, then $u(t - \tau) \mapsto y(t - \tau)$.
+
+We also have a special signal $\delta$ such that every input is a sum of $\delta$'s:
+
+$$ u(t) = \int_{-\infty}^{\infty} u(\tau)\,\delta(\tau - t)\,\mathrm{d}\tau. \qquad \text{(The sifting property).} $$
+
+<!-- CHECK: the source writes δ(τ − t). Lectures 2 and 3 write δ(t − τ); the two are equal since δ is even. Left as written. -->
+
+So if we know the response of the system to a $\delta$ (i.e. the impulse response), the
+response to any other input is a <u>weighted sum of shifted impulse responses</u>:
+
+$$ \boxed{\; y(t) = \int_{-\infty}^{\infty} u(t - \tau)\,h(\tau)\,\mathrm{d}\tau. \;} $$
+
+This is <u>the convolution</u>.
+
+It explains a big mystery of the course: we can use exactly the same tools to study
+signals and systems because an LTI system is completely described by a single signal:
+<u>the impulse response</u>.
+
+Pro: only need a single response to characterise the system.
+
+Con: convolution is difficult to calculate.
+
+## 2. Frequency domain
+
+The reason that convolution is difficult is that the response at time $t$ is a
+combination of responses to inputs at every time before. But it turns out we can do a
+change of basis and index by frequency instead of time:
+
+* Any signal is a sum of sinusoids
+* The output at frequency $\omega$ depends only on the input at frequency $\omega$.
+
+This turns convolution into multiplication.
+
+Periodic signals: if the period is $T$, the signal is a sum of sinusoids at frequencies
+$k\dfrac{2\pi}{T}$, $k \in \mathbb{Z}$. This is the Fourier series:
+
+$$ \boxed{\; u(t) = \sum_k c_k\,e^{jk\omega_0 t}, \qquad \omega_0 = \frac{2\pi}{T}. \;} $$
+
+If a signal is aperiodic, the sum becomes an integral and we have a transform:
+
+$$ \boxed{\; u(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} U(j\omega)\,e^{j\omega t}\,\mathrm{d}\omega. \;} $$
+
+<!-- CHECK: the source writes dt and has no 1/2π. Typeset dω with the 1/2π factor, matching the inverse transform in lecture 5. -->
+
+$c_k$ &amp; $U(j\omega)$ are computed by projecting the signal onto a sinusoid of frequency
+$k\omega_0$ / $\omega$:
+
+$$ \boxed{\; U(j\omega) = \int_{-\infty}^{\infty} u(t)\,e^{-j\omega t}\,\mathrm{d}t. \;} $$
+
+The same method can also be used to filter noise out of a sinusoidal signal when doing
+system ID.
+
+The power, above all, of the Fourier transform is that convolution becomes
+multiplication:
+
+$$ u(t) * y(t) \;\longleftrightarrow\; U(j\omega)\,Y(j\omega). $$
+
+<!-- CHECK: the source writes u(t) ∗ y(t) = U(jω)Y(jω), with an equals sign between a time-domain and a frequency-domain quantity. Typeset with ⟷ as in lecture 5. The letters are as written (lecture 5 states it as y = h ∗ u ⟷ Y = HU). -->
+
+This lets us talk about systems as <u>filters</u> that multiply and phase shift their
+input signals. We can design filters to remove unwanted parts of the spectrum, like noise
+and modulation artefacts. A common filter type is Butterworth, which has frequency
+response gain
+
+$$ \frac{1}{1 + \left(\dfrac{\omega}{\omega_c}\right)^{2n}} = \lvert G(j\omega)\rvert^2. $$
+
+<!-- CHECK: the source writes (ω_c/ω)^{2n}, which is the highpass form. Typeset (ω/ω_c)^{2n}, the lowpass form used in lecture 10. -->
+
+Modulation lets us shift the spectrum of a signal:
+
+$$ u(t)\cos(\omega_0 t) \;\xrightarrow{\;\text{F.T.}\;}\; \tfrac{1}{2}U\big(j(\omega - \omega_0)\big) + \tfrac{1}{2}U\big(j(\omega + \omega_0)\big). $$
+
+To <u>demodulate</u> such a signal, multiply again by the carrier:
+
+$$
+\begin{aligned}
+u(t)\cos^2(\omega_0 t) &= \tfrac{1}{2}u(t) + \tfrac{1}{2}u(t)\cos(2\omega_0 t) \\[8pt]
+&\rightsquigarrow\; \tfrac{1}{2}U(j\omega) + \underbrace{\tfrac{1}{4}U\big(j(\omega - 2\omega_0)\big) + \tfrac{1}{4}U\big(j(\omega + 2\omega_0)\big)}_{\text{These terms can be filtered out.}}
+\end{aligned}
+$$
+
+## 3. Stability &amp; Laplace
+
+The Fourier transform exists only when the integral
+
+$$ \int_{-\infty}^{\infty} u(t)\,e^{-j\omega t}\,\mathrm{d}t $$
+
+converges.
+
+If it doesn't converge, for example if $u(t) = e^{\alpha t}$ (the impulse response of an
+unstable system) we can shift the axis of integration:
+
+$$ \int_{-\infty}^{\infty} u(t)\,e^{(-j\omega - \sigma)t}\,\mathrm{d}t = U(s) \quad \text{where } s = j\omega + \sigma. $$
+
+<!-- CHECK: as written. With u(t) = e^{αt} for all t the integral diverges at t → −∞ for every σ; the impulse response of a causal system is e^{αt}H(t), for which it converges when σ > α. -->
+
+The decaying term $e^{-\sigma t}$ cancels growing terms in $u(t)$. This is the
+<u>bilateral Laplace transform</u>.
+
+The unilateral Laplace transform integrates from $t = 0$ and takes into account initial
+conditions.
+
+If we have a differential equation
+
+$$ \ddot{y} + \alpha\dot{y} + \beta y = \gamma u $$
+
+we can take the Laplace transform of each side to get
+
+$$ s^2Y(s) - sy(0) - \dot{y}(0) + \alpha sY(s) - \alpha y(0) + \beta Y(s) = \gamma U(s). $$
+
+If we set all initial conditions to zero, and $u(t) = \delta(t)$, $U(s) = 1$ and we get
+the Laplace transform of the impulse response, which is the transfer function:
+
+$$
+\begin{aligned}
+s^2Y(s) + \alpha sY(s) + \beta Y(s) &= \gamma \\[8pt]
+Y(s) &= \frac{\gamma}{s^2 + \alpha s + \beta}.
+\end{aligned}
+$$
+
+The zeros of the denominator are the poles of the system. If they are in the LHP, the
+system is exponentially stable. A pole in the RHP gives instability.
+
+The coefficients tell us about the behaviour of the system:
+
+$$ \frac{k\omega_n^2}{s^2 + 2\zeta\omega_n s + \omega_n^2} $$
+
+$\omega_n$: natural frequency (frequency of oscillation)
+
+$\zeta$: damping ratio (how much damping)
+
+$k$: DC gain.
+
+Measuring these values allows us to estimate a transfer function from data.
+
+Separating a Laplace transform into partial fractions lets us calculate the inverse
+Laplace transform by matching terms in the table.
