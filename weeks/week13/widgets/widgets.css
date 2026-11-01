@@ -1,0 +1,78 @@
+/* Shared styles for lecture 13 slide widgets */
+.sw {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: #222;
+}
+.sw-row {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  justify-content: center;
+}
+.sw-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sw-label {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 6px;
+  white-space: nowrap;
+}
+.sw-label.in  { color: #00468C; }
+.sw-label.out { color: #C0392B; }
+.sw canvas {
+  border: 1px solid #ccc;
+  display: block;
+}
+.sw canvas.pix {
+  image-rendering: pixelated;
+}
+.sw-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.sw button, .sw select {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  padding: 4px 10px;
+  border: 1px solid #00468C;
+  border-radius: 4px;
+  background: #fff;
+  color: #00468C;
+  cursor: pointer;
+}
+.sw button:hover { background: #e8eef6; }
+.sw input[type=range] { width: 160px; }
+.sw-readout {
+  font-size: 16px;
+  margin-top: 8px;
+  min-height: 1.3em;
+  text-align: center;
+}
+.kgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 38px);
+  grid-auto-rows: 38px;
+  gap: 2px;
+  margin-top: 50px;
+}
+.kgrid div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #999;
+  font-size: 17px;
+  background: #fafafa;
+}
+.kscale {
+  font-size: 15px;
+  margin-top: 6px;
+  min-height: 1.2em;
+}

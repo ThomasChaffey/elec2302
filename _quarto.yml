@@ -122,6 +122,9 @@ website:
             target: _blank
       - section: "Week 13 — Course review"
         contents:
+          - text: "Slides"
+            href: weeks/week13/slides.qmd
+            target: _blank
           - text: "Notes"
             href: weeks/week13/notes.qmd
           - text: "Tutorial"

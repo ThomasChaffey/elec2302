@@ -1,0 +1,165 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 30 620 360" font-family="Arial, Helvetica, sans-serif">
+<defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#555"/></marker></defs>
+<polyline points="10.0,197.6 10.5,194.8 11.0,195.7 11.5,198.0 12.0,198.3 12.5,197.0 13.0,196.9 13.5,197.4 14.0,195.5 14.5,191.5 15.0,189.7 15.5,191.8 16.0,194.4 16.5,195.2 17.0,196.3 17.5,199.5 18.0,201.9 18.5,200.4 19.0,197.2 19.5,197.1 20.0,199.8 20.5,201.7 21.0,202.3 21.5,205.2 22.0,210.4 22.5,212.8 23.0,210.1 23.5,206.5 24.0,206.0 24.5,206.3 25.0,204.3 25.5,202.7 26.0,205.5 26.5,210.2 27.0,210.3 27.5,205.5 28.0,201.4 28.5,199.7 29.0,196.3 29.5,190.0 30.0,187.1 30.5,190.9 31.0,195.7 31.5,195.2 32.0,192.0 32.5,191.5 33.0,191.7 33.5,187.1 34.0,180.4 34.5,180.3 35.0,187.6 35.5,194.2 36.0,196.0 36.5,198.6 37.0,204.6 37.5,207.4 38.0,202.3 38.5,196.4 39.0,198.7 39.5,206.3 40.0,210.6 40.5,212.2 41.0,218.2 41.5,226.4 42.0,226.6 42.5,217.1 43.0,209.0 43.5,208.7 44.0,209.4 44.5,205.7 45.0,204.0 45.5,210.3 46.0,216.8 46.5,212.1 47.0,199.7 47.5,191.6 48.0,189.0 48.5,183.2 49.0,174.7 49.5,174.4 50.0,184.8 50.5,192.7 51.0,189.6 51.5,183.3 52.0,183.0 52.5,183.2 53.0,176.4 53.5,169.8 54.0,176.3 54.5,192.1 55.0,202.5 55.5,204.0 56.0,207.1 56.5,214.3 57.0,214.8 57.5,205.2 58.0,199.0 58.5,206.6 59.0,218.9 59.5,223.7 60.0,224.5 60.5,230.6 61.0,236.7 61.5,230.0 62.0,213.6 62.5,203.8 63.0,205.6 63.5,207.2 64.0,202.9 64.5,202.1 65.0,209.6 65.5,213.1 66.0,202.0 66.5,185.4 67.0,177.8 67.5,177.3 68.0,173.1 68.5,167.8 69.0,173.1 69.5,187.0 70.0,193.7 70.5,187.4 71.0,180.6 71.5,181.6 72.0,182.9 72.5,178.0 73.0,176.6 73.5,188.8 74.0,206.3 74.5,214.0 75.0,212.7 75.5,213.9 76.0,218.2 76.5,215.6 77.0,206.1 77.5,203.6 78.0,213.6 78.5,224.2 79.0,225.6 79.5,223.8 80.0,226.2 80.5,226.5 81.0,216.1 81.5,201.3 82.0,195.9 82.5,199.8 83.0,201.6 83.5,198.4 84.0,198.3 84.5,203.1 85.0,202.3 85.5,190.9 86.0,179.3 86.5,176.9 87.0,179.5 87.5,178.9 88.0,178.4 88.5,185.2 89.0,195.2 89.5,197.3 90.0,191.3 90.5,187.4 91.0,189.7 91.5,191.6 92.0,190.3 92.5,192.6 93.0,202.6 93.5,212.6 94.0,214.4 94.5,211.3 95.0,210.8 95.5,212.0 96.0,209.1 96.5,204.0 97.0,204.6 97.5,211.3 98.0,215.9 98.5,214.4 99.0,211.6 99.5,211.2 100.0,209.2 100.5,202.2 101.0,195.2 101.5,194.5 102.0,197.9 102.5,198.9 103.0,197.1 103.5,197.2 104.0,198.8 104.5,196.9 105.0,190.9 105.5,186.7 106.0,187.7 106.5,190.5 107.0,191.2 107.5,192.1 108.0,196.0 108.5,200.0 109.0,199.6 109.5,196.3 110.0,195.2 110.5,197.1 111.0,198.5 111.5,198.6 112.0,200.7 112.5,205.5 113.0,208.9 113.5,208.1 114.0,205.7 114.5,205.2 115.0,205.4 115.5,203.8 116.0,202.0 116.5,203.2 117.0,206.5 117.5,207.8 118.0,205.9 118.5,203.8 119.0,203.1 119.5,201.4 120.0,197.6" fill="none" stroke="#00468C" stroke-width="1.6"/>
+<text x="65.0" y="262" text-anchor="middle" font-size="15" fill="#00468C">microphone</text>
+<text x="65.0" y="280" text-anchor="middle" font-size="15" fill="#00468C" font-style="italic">u(t)</text>
+<path d="M124,200 C138,200 132,60 148,60" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="150" y="38" width="110" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="205.0" y="56" text-anchor="middle" font-size="14">bandpass</text>
+<text x="205.0" y="74" text-anchor="middle" font-size="13" fill="#444">200–400 Hz</text>
+<line x1="260" y1="60" x2="283" y2="60" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="285" y="38" width="115" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="342.5" y="56" text-anchor="middle" font-size="14">encode as</text>
+<text x="342.5" y="74" text-anchor="middle" font-size="14">pulse train</text>
+<line x1="400" y1="60" x2="414" y2="60" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="420.0" y="54.0" width="2.2" height="6.0" fill="#C0392B"/>
+<rect x="422.2" y="60.0" width="2.2" height="6.0" fill="#C0392B"/>
+<rect x="433.6" y="53.3" width="2.2" height="6.7" fill="#C0392B"/>
+<rect x="435.8" y="60.0" width="2.2" height="6.7" fill="#C0392B"/>
+<rect x="447.1" y="51.4" width="2.2" height="8.6" fill="#C0392B"/>
+<rect x="449.3" y="60.0" width="2.2" height="8.6" fill="#C0392B"/>
+<rect x="460.7" y="48.6" width="2.2" height="11.4" fill="#C0392B"/>
+<rect x="462.9" y="60.0" width="2.2" height="11.4" fill="#C0392B"/>
+<rect x="474.3" y="45.4" width="2.2" height="14.6" fill="#C0392B"/>
+<rect x="476.5" y="60.0" width="2.2" height="14.6" fill="#C0392B"/>
+<rect x="487.9" y="42.6" width="2.2" height="17.4" fill="#C0392B"/>
+<rect x="490.1" y="60.0" width="2.2" height="17.4" fill="#C0392B"/>
+<rect x="501.4" y="40.7" width="2.2" height="19.3" fill="#C0392B"/>
+<rect x="503.6" y="60.0" width="2.2" height="19.3" fill="#C0392B"/>
+<rect x="515.0" y="40.0" width="2.2" height="20.0" fill="#C0392B"/>
+<rect x="517.2" y="60.0" width="2.2" height="20.0" fill="#C0392B"/>
+<rect x="528.6" y="40.7" width="2.2" height="19.3" fill="#C0392B"/>
+<rect x="530.8" y="60.0" width="2.2" height="19.3" fill="#C0392B"/>
+<rect x="542.1" y="42.6" width="2.2" height="17.4" fill="#C0392B"/>
+<rect x="544.3" y="60.0" width="2.2" height="17.4" fill="#C0392B"/>
+<rect x="555.7" y="45.4" width="2.2" height="14.6" fill="#C0392B"/>
+<rect x="557.9" y="60.0" width="2.2" height="14.6" fill="#C0392B"/>
+<rect x="569.3" y="48.6" width="2.2" height="11.4" fill="#C0392B"/>
+<rect x="571.5" y="60.0" width="2.2" height="11.4" fill="#C0392B"/>
+<rect x="582.9" y="51.4" width="2.2" height="8.6" fill="#C0392B"/>
+<rect x="585.1" y="60.0" width="2.2" height="8.6" fill="#C0392B"/>
+<rect x="596.4" y="53.3" width="2.2" height="6.7" fill="#C0392B"/>
+<rect x="598.6" y="60.0" width="2.2" height="6.7" fill="#C0392B"/>
+<line x1="420" y1="60" x2="610" y2="60" stroke="#bbb" stroke-width="0.8"/>
+<text x="515.0" y="98" text-anchor="middle" font-size="13" fill="#C0392B">electrode 1 (apex)</text>
+<path d="M124,200 C138,200 132,145 148,145" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="150" y="123" width="110" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="205.0" y="141" text-anchor="middle" font-size="14">bandpass</text>
+<text x="205.0" y="159" text-anchor="middle" font-size="13" fill="#444">400–800 Hz</text>
+<line x1="260" y1="145" x2="283" y2="145" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="285" y="123" width="115" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="342.5" y="141" text-anchor="middle" font-size="14">encode as</text>
+<text x="342.5" y="159" text-anchor="middle" font-size="14">pulse train</text>
+<line x1="400" y1="145" x2="414" y2="145" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="423.4" y="127.2" width="2.2" height="17.8" fill="#C0392B"/>
+<rect x="425.6" y="145.0" width="2.2" height="17.8" fill="#C0392B"/>
+<rect x="437.0" y="128.1" width="2.2" height="16.9" fill="#C0392B"/>
+<rect x="439.2" y="145.0" width="2.2" height="16.9" fill="#C0392B"/>
+<rect x="450.5" y="128.9" width="2.2" height="16.1" fill="#C0392B"/>
+<rect x="452.7" y="145.0" width="2.2" height="16.1" fill="#C0392B"/>
+<rect x="464.1" y="129.8" width="2.2" height="15.2" fill="#C0392B"/>
+<rect x="466.3" y="145.0" width="2.2" height="15.2" fill="#C0392B"/>
+<rect x="477.7" y="130.6" width="2.2" height="14.4" fill="#C0392B"/>
+<rect x="479.9" y="145.0" width="2.2" height="14.4" fill="#C0392B"/>
+<rect x="491.2" y="131.5" width="2.2" height="13.5" fill="#C0392B"/>
+<rect x="493.4" y="145.0" width="2.2" height="13.5" fill="#C0392B"/>
+<rect x="504.8" y="132.4" width="2.2" height="12.6" fill="#C0392B"/>
+<rect x="507.0" y="145.0" width="2.2" height="12.6" fill="#C0392B"/>
+<rect x="518.4" y="133.2" width="2.2" height="11.8" fill="#C0392B"/>
+<rect x="520.6" y="145.0" width="2.2" height="11.8" fill="#C0392B"/>
+<rect x="532.0" y="134.1" width="2.2" height="10.9" fill="#C0392B"/>
+<rect x="534.2" y="145.0" width="2.2" height="10.9" fill="#C0392B"/>
+<rect x="545.5" y="134.9" width="2.2" height="10.1" fill="#C0392B"/>
+<rect x="547.7" y="145.0" width="2.2" height="10.1" fill="#C0392B"/>
+<rect x="559.1" y="135.8" width="2.2" height="9.2" fill="#C0392B"/>
+<rect x="561.3" y="145.0" width="2.2" height="9.2" fill="#C0392B"/>
+<rect x="572.7" y="136.6" width="2.2" height="8.4" fill="#C0392B"/>
+<rect x="574.9" y="145.0" width="2.2" height="8.4" fill="#C0392B"/>
+<rect x="586.2" y="137.5" width="2.2" height="7.5" fill="#C0392B"/>
+<rect x="588.5" y="145.0" width="2.2" height="7.5" fill="#C0392B"/>
+<rect x="599.8" y="138.4" width="2.2" height="6.6" fill="#C0392B"/>
+<rect x="602.0" y="145.0" width="2.2" height="6.6" fill="#C0392B"/>
+<line x1="420" y1="145" x2="610" y2="145" stroke="#bbb" stroke-width="0.8"/>
+<text x="515.0" y="183" text-anchor="middle" font-size="13" fill="#C0392B">electrode 2</text>
+<path d="M124,200 C138,200 132,230 148,230" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="150" y="208" width="110" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="205.0" y="226" text-anchor="middle" font-size="14">bandpass</text>
+<text x="205.0" y="244" text-anchor="middle" font-size="13" fill="#444">800–1600 Hz</text>
+<line x1="260" y1="230" x2="283" y2="230" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="285" y="208" width="115" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="342.5" y="226" text-anchor="middle" font-size="14">encode as</text>
+<text x="342.5" y="244" text-anchor="middle" font-size="14">pulse train</text>
+<line x1="400" y1="230" x2="414" y2="230" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="426.8" y="226.0" width="2.2" height="4.0" fill="#C0392B"/>
+<rect x="429.0" y="230.0" width="2.2" height="4.0" fill="#C0392B"/>
+<rect x="440.4" y="226.0" width="2.2" height="4.0" fill="#C0392B"/>
+<rect x="442.6" y="230.0" width="2.2" height="4.0" fill="#C0392B"/>
+<rect x="453.9" y="225.9" width="2.2" height="4.1" fill="#C0392B"/>
+<rect x="456.1" y="230.0" width="2.2" height="4.1" fill="#C0392B"/>
+<rect x="467.5" y="225.7" width="2.2" height="4.3" fill="#C0392B"/>
+<rect x="469.7" y="230.0" width="2.2" height="4.3" fill="#C0392B"/>
+<rect x="481.1" y="224.9" width="2.2" height="5.1" fill="#C0392B"/>
+<rect x="483.3" y="230.0" width="2.2" height="5.1" fill="#C0392B"/>
+<rect x="494.6" y="222.9" width="2.2" height="7.1" fill="#C0392B"/>
+<rect x="496.8" y="230.0" width="2.2" height="7.1" fill="#C0392B"/>
+<rect x="508.2" y="219.2" width="2.2" height="10.8" fill="#C0392B"/>
+<rect x="510.4" y="230.0" width="2.2" height="10.8" fill="#C0392B"/>
+<rect x="521.8" y="214.5" width="2.2" height="15.5" fill="#C0392B"/>
+<rect x="524.0" y="230.0" width="2.2" height="15.5" fill="#C0392B"/>
+<rect x="535.4" y="210.7" width="2.2" height="19.3" fill="#C0392B"/>
+<rect x="537.6" y="230.0" width="2.2" height="19.3" fill="#C0392B"/>
+<rect x="548.9" y="210.3" width="2.2" height="19.7" fill="#C0392B"/>
+<rect x="551.1" y="230.0" width="2.2" height="19.7" fill="#C0392B"/>
+<rect x="562.5" y="213.5" width="2.2" height="16.5" fill="#C0392B"/>
+<rect x="564.7" y="230.0" width="2.2" height="16.5" fill="#C0392B"/>
+<rect x="576.1" y="218.3" width="2.2" height="11.7" fill="#C0392B"/>
+<rect x="578.3" y="230.0" width="2.2" height="11.7" fill="#C0392B"/>
+<rect x="589.6" y="222.3" width="2.2" height="7.7" fill="#C0392B"/>
+<rect x="591.8" y="230.0" width="2.2" height="7.7" fill="#C0392B"/>
+<rect x="603.2" y="224.6" width="2.2" height="5.4" fill="#C0392B"/>
+<rect x="605.4" y="230.0" width="2.2" height="5.4" fill="#C0392B"/>
+<line x1="420" y1="230" x2="610" y2="230" stroke="#bbb" stroke-width="0.8"/>
+<text x="515.0" y="268" text-anchor="middle" font-size="13" fill="#C0392B">electrode 3</text>
+<path d="M124,200 C138,200 132,345 148,345" fill="none" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="150" y="323" width="110" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="205.0" y="341" text-anchor="middle" font-size="14">bandpass</text>
+<text x="205.0" y="359" text-anchor="middle" font-size="13" fill="#444">4–8 kHz</text>
+<line x1="260" y1="345" x2="283" y2="345" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="285" y="323" width="115" height="44" rx="4" fill="#fff" stroke="#333" stroke-width="1.3"/>
+<text x="342.5" y="341" text-anchor="middle" font-size="14">encode as</text>
+<text x="342.5" y="359" text-anchor="middle" font-size="14">pulse train</text>
+<line x1="400" y1="345" x2="414" y2="345" stroke="#555" stroke-width="1.2" marker-end="url(#ar)"/>
+<rect x="430.2" y="340.2" width="2.2" height="4.8" fill="#C0392B"/>
+<rect x="432.4" y="345.0" width="2.2" height="4.8" fill="#C0392B"/>
+<rect x="443.8" y="337.0" width="2.2" height="8.0" fill="#C0392B"/>
+<rect x="445.9" y="345.0" width="2.2" height="8.0" fill="#C0392B"/>
+<rect x="457.3" y="333.2" width="2.2" height="11.8" fill="#C0392B"/>
+<rect x="459.5" y="345.0" width="2.2" height="11.8" fill="#C0392B"/>
+<rect x="470.9" y="332.1" width="2.2" height="12.9" fill="#C0392B"/>
+<rect x="473.1" y="345.0" width="2.2" height="12.9" fill="#C0392B"/>
+<rect x="484.5" y="335.0" width="2.2" height="10.0" fill="#C0392B"/>
+<rect x="486.7" y="345.0" width="2.2" height="10.0" fill="#C0392B"/>
+<rect x="498.0" y="338.8" width="2.2" height="6.2" fill="#C0392B"/>
+<rect x="500.2" y="345.0" width="2.2" height="6.2" fill="#C0392B"/>
+<rect x="511.6" y="341.1" width="2.2" height="3.9" fill="#C0392B"/>
+<rect x="513.8" y="345.0" width="2.2" height="3.9" fill="#C0392B"/>
+<rect x="525.2" y="341.8" width="2.2" height="3.2" fill="#C0392B"/>
+<rect x="527.4" y="345.0" width="2.2" height="3.2" fill="#C0392B"/>
+<rect x="538.8" y="342.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="541.0" y="345.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="552.3" y="342.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="554.5" y="345.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="565.9" y="342.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="568.1" y="345.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="579.5" y="342.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="581.7" y="345.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="593.0" y="342.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="595.2" y="345.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="606.6" y="342.0" width="2.2" height="3.0" fill="#C0392B"/>
+<rect x="608.8" y="345.0" width="2.2" height="3.0" fill="#C0392B"/>
+<line x1="420" y1="345" x2="610" y2="345" stroke="#bbb" stroke-width="0.8"/>
+<text x="515.0" y="383" text-anchor="middle" font-size="13" fill="#C0392B">electrode N (base)</text>
+<text x="205.0" y="296" text-anchor="middle" font-size="22" fill="#666">⋮</text>
+<text x="342.5" y="296" text-anchor="middle" font-size="22" fill="#666">⋮</text>
+<text x="515.0" y="296" text-anchor="middle" font-size="22" fill="#666">⋮</text>
+</svg>
