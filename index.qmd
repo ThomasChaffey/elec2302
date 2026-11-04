@@ -20,9 +20,9 @@ the relevant material.
 | 5 | Aperiodic signals and the Fourier transform | [Notes](weeks/week05/notes.qmd) · [Tutorial](weeks/week05/tutorial4.pdf) · [Solutions](weeks/week05/tutorial4-solutions.pdf) |
 | 6 | Frequency response | [Notes](weeks/week06/notes.qmd) · [Tutorial](weeks/week06/tutorial5.pdf) · [Solutions](weeks/week06/tutorial5-solutions.pdf) · [Lab 1](weeks/week06/lab1.pdf) |
 | 7 | System response and stability | [Notes](weeks/week07/notes.qmd) |
-| 8 | The Laplace transform | [Notes](weeks/week08/notes.qmd) · [Tutorial](weeks/week08/tutorial6.pdf) · [Lab 2](weeks/week08/lab2.pdf) |
+| 8 | The Laplace transform | [Notes](weeks/week08/notes.qmd) · [Tutorial](weeks/week08/tutorial6.pdf) · [Solutions](weeks/week08/tutorial6-solutions.pdf) · [Lab 2](weeks/week08/lab2.pdf) |
 | 9 | System analysis with the Laplace transform | [Notes](weeks/week09/notes.qmd) |
-| 10 | Filter design | [Notes](weeks/week10/notes.qmd) · [Tutorial](weeks/week10/tutorial7.pdf) |
+| 10 | Filter design | [Notes](weeks/week10/notes.qmd) · [Tutorial](weeks/week10/tutorial7.pdf) · [Solutions](weeks/week10/tutorial7-solutions.pdf) |
 | 11 | Modulation | [Notes](weeks/week11/notes.qmd) · [Tutorial](weeks/week11/tutorial8.pdf) |
 | 12 | System identification | [Notes](weeks/week12/notes.qmd) · [Tutorial](weeks/week12/tutorial9.pdf) |
 | 13 | Course review | [Notes](weeks/week13/notes.qmd) · [Tutorial](weeks/week13/tutorial10.pdf) |

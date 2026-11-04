@@ -92,6 +92,9 @@ website:
           - text: "Tutorial"
             href: weeks/week08/tutorial6.pdf
             target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week08/tutorial6-solutions.pdf
+            target: _blank
           - text: "Lab 2"
             href: weeks/week08/lab2.pdf
             target: _blank
@@ -105,6 +108,9 @@ website:
             href: weeks/week10/notes.qmd
           - text: "Tutorial"
             href: weeks/week10/tutorial7.pdf
+            target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week10/tutorial7-solutions.pdf
             target: _blank
       - section: "Week 11 — Modulation"
         contents:
