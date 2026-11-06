@@ -28,5 +28,7 @@ the relevant material.
 | 13 | Course review | [Notes](weeks/week13/notes.qmd) · [Tutorial](weeks/week13/tutorial10.pdf) |
 |  | Quiz 2 resources | [Question bank](weeks/quiz2-practice-questions.pdf) · [Answers and feedback](weeks/quiz2-practice-feedback.pdf) · [Formula sheet](weeks/formula-sheet-quiz2.pdf) |
 |  | Quiz 3 resources | [Question bank](weeks/quiz3-practice-questions.pdf) · [Answers and feedback](weeks/quiz3-practice-feedback.pdf) · [Formula sheet](weeks/formula-sheet-quiz3.pdf) |
+|  | Final exam resources | [Formula sheet](weeks/formula-sheet-exam.pdf) |
+|  | Bonus quizzes | [Bonus quiz 1](weeks/bonus-quiz1.pdf) · [Bonus quiz 2](weeks/bonus-quiz2.pdf) · [Bonus quiz 3](weeks/bonus-quiz3.pdf) |
 
 : {tbl-colwidths="[8,57,35]"}
