@@ -126,6 +126,9 @@ website:
           - text: "Tutorial"
             href: weeks/week12/tutorial9.pdf
             target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week12/tutorial9-solutions.pdf
+            target: _blank
       - section: "Week 13 — Course review"
         contents:
           - text: "Slides"
@@ -135,6 +138,9 @@ website:
             href: weeks/week13/notes.qmd
           - text: "Tutorial"
             href: weeks/week13/tutorial10.pdf
+            target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week13/tutorial10-solutions.pdf
             target: _blank
       - text: "Course index"
         href: concepts.qmd
