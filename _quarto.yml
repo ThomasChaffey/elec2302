@@ -119,6 +119,9 @@ website:
           - text: "Tutorial"
             href: weeks/week11/tutorial8.pdf
             target: _blank
+          - text: "Tutorial solutions"
+            href: weeks/week11/tutorial8-solutions.pdf
+            target: _blank
       - section: "Week 12 — System identification"
         contents:
           - text: "Notes"
