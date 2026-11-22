@@ -78,9 +78,9 @@ We now have three parameters to estimate.
 
 $k$ is the DC gain, so can be read off as the final value as for the first order system.
 
-We can measure the damped oscillation frequency $\omega_r$ from the time of the first peak:
+We can measure the damped oscillation frequency $\omega_d$ from the time of the first peak:
 
-$$ \boxed{\frac{\pi}{\omega_r} = t_p} = 1.814, \quad \text{so } \omega_r = 1.732. $$
+$$ \boxed{\frac{\pi}{\omega_r} = t_p} = 1.814, \quad \text{so } \omega_d = 1.732. $$
 
 <!-- CHECK: ω_r here is the damped oscillation frequency, ω_n√(1−ζ²). In the Bode section below, and in the lecture 6 notes, ω_r = ω_n√(1−2ζ²) is the resonant peak frequency. Left as written; consider ω_d here. -->
 
@@ -92,7 +92,7 @@ $$ M_p = \frac{\text{peak} - k}{k} = \frac{0.326}{2} = 16.3\%. $$
 
 The table in the formula sheet then gives $\zeta = 0.5$.
 
-We can then find $\omega_n = \dfrac{\omega_r}{\sqrt{1 - \zeta^2}} = 2\,$rad/s.
+We can then find $\omega_n = \dfrac{\omega_d}{\sqrt{1 - \zeta^2}} = 2\,$rad/s.
 
 Combining, we have
 
