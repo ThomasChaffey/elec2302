@@ -171,6 +171,9 @@ website:
       - text: "Final exam formula sheet"
         href: weeks/formula-sheet-exam.pdf
         target: _blank
+      - text: "Final exam crash course questions"
+        href: weeks/exam-crash-course-questions.pdf
+        target: _blank
       - text: "Bonus quiz 1"
         href: weeks/bonus-quiz1.pdf
         target: _blank
