@@ -629,6 +629,12 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../weeks/exam-crash-course-questions.pdf" class="sidebar-item-text sidebar-link" target="_blank">
+ <span class="menu-text">Final exam crash course questions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../weeks/bonus-quiz1.pdf" class="sidebar-item-text sidebar-link" target="_blank">
  <span class="menu-text">Bonus quiz 1</span></a>
   </div>
@@ -737,14 +743,14 @@ window.Quarto = {
 </div>
 <p>We now have three parameters to estimate.</p>
 <p><span class="math inline">k</span> is the DC gain, so can be read off as the final value as for the first order system.</p>
-<p>We can measure the damped oscillation frequency <span class="math inline">\omega_r</span> from the time of the first peak:</p>
-<p><span class="math display"> \boxed{\frac{\pi}{\omega_r} = t_p} = 1.814, \quad \text{so } \omega_r = 1.732. </span></p>
+<p>We can measure the damped oscillation frequency <span class="math inline">\omega_d</span> from the time of the first peak:</p>
+<p><span class="math display"> \boxed{\frac{\pi}{\omega_r} = t_p} = 1.814, \quad \text{so } \omega_d = 1.732. </span></p>
 <!-- CHECK: ω_r here is the damped oscillation frequency, ω_n√(1−ζ²). In the Bode section below, and in the lecture 6 notes, ω_r = ω_n√(1−2ζ²) is the resonant peak frequency. Left as written; consider ω_d here. -->
 <p>We can measure the percentage overshoot by</p>
 <p><span class="math display"> M_p = \frac{\text{peak} - k}{k} = \frac{0.326}{2} = 16.3\%. </span></p>
 <!-- CHECK: the source writes (k − peak)/k, which is negative. Typeset (peak − k)/k, which gives the +0.326 used. -->
 <p>The table in the formula sheet then gives <span class="math inline">\zeta = 0.5</span>.</p>
-<p>We can then find <span class="math inline">\omega_n = \dfrac{\omega_r}{\sqrt{1 - \zeta^2}} = 2\,</span>rad/s.</p>
+<p>We can then find <span class="math inline">\omega_n = \dfrac{\omega_d}{\sqrt{1 - \zeta^2}} = 2\,</span>rad/s.</p>
 <p>Combining, we have</p>
 <p><span class="math display"> G(s) = \frac{8}{s^2 + 2s + 4}. </span></p>
 <p><u>Example 2:</u></p>
